@@ -19,7 +19,6 @@ class Program {
         if (!File.Exists(Config.configPath)) {
             Console.WriteLine("info:configファイルがないのでconfigファイルを作成します");
             Config.MakeConfig();
-            Config.Load();
         }
         else {
             Config.Load();
@@ -213,8 +212,10 @@ class WorldListForm :Form {
         Console.WriteLine("info:push ok");
         List<string[]> configs = worldListView.GetWorldListView();
         foreach (var config in configs) {
-            Config.Change(config[0], config[1], config[2]);
+            Console.WriteLine($"{config[0]}, {config[1]}, {config[2]}");
+            Config.Change(config[1], config[2], config[0]);
         }
+        Config.Write();
         this.Close();
         //Application.Exit();
     }
@@ -752,12 +753,15 @@ public class Config {
 
     public static void MakeConfig() {
         Console.WriteLine("call:MakeConfig");
-        //File.Create(configPath);
+        if (!Directory.Exists(Path.GetDirectoryName(configPath))) {
+            Directory.CreateDirectory(Path.GetDirectoryName(configPath));
+        }
         Console.WriteLine($"info:configファイル[{configPath}]生成完了");
         List<world> worlds = GetWorldDataFromPC();
         foreach (var world in worlds) {
             Console.WriteLine($"info:world[{world.WName}]を発見しました");
             configs.Add(world);
+            Write();
         }
     }
 
@@ -767,14 +771,15 @@ public class Config {
     public static void Load() {
         Console.WriteLine("call:LoadConfigToApp");
         List<string> texts = new List<string>();
-        StreamReader reader = new StreamReader(configPath, Encoding.GetEncoding("utf-8"));
-        while (reader.Peek() >= 0) {
-            List<string> datas = reader.ReadLine().Split(',').ToList();
-            datas = datas.Select(x => Util.TrimDoubleQuotationMarks(x)).ToList();
-            configs.Add(new world(datas[2], datas[0] == "1" ? true : false));
+        using (StreamReader reader = new StreamReader(configPath, Encoding.GetEncoding("utf-8"))) {
+            while (reader.Peek() >= 0) {
+                List<string> datas = reader.ReadLine().Split(',').ToList();
+                datas = datas.Select(x => Util.TrimDoubleQuotationMarks(x)).ToList();
+                configs.Add(new world(datas[2], Convert.ToBoolean(datas[0])));
+            }
+            Console.WriteLine($"info:Configから{configs.Count()}件のワールドを読み込みました");
         }
-        Console.WriteLine($"info:Configから{configs.Count()}件のワールドを読み込みました");
-        reader.Close();
+
     }
 
     /// <summary>
@@ -819,11 +824,18 @@ public class Config {
     public static void Change(string worldName, string worldDir, string doBackup) {
         Console.WriteLine("call:Change");
         Console.WriteLine("info:GET  worldName: " + worldName + ",  worldDir: " + worldDir + ",  dobackup: " + doBackup);
+        List<world> _configs = new List<world>();
         foreach(world config in configs) {
             if(config.WName == worldName && config.WDir == worldDir) {
                 config.WDoBackup = bool.Parse(doBackup);
+                _configs.Add(new world(config.WPath, Convert.ToBoolean(doBackup)));
+            }
+            else {
+                _configs.Add(new world(config.WPath, config.WDoBackup));
             }
         }
+        configs = _configs;
+        ConsoleConfig();
     }
 
     /// <summary>
@@ -859,6 +871,14 @@ public class Config {
         //    Console.WriteLine($"info:world[{a.WName}]");
         //}
         return worlds;
+    }
+
+    public static void ConsoleConfig() {
+        Console.WriteLine("----Configs----");
+        foreach(world w in configs) {
+            Console.WriteLine($"[{w.WDoBackup},{w.WName},{w.WPath},{w.WDir},]");
+        }
+        Console.WriteLine("---------------");
     }
 }
 
@@ -1012,16 +1032,15 @@ public class AppConfig {
             File.WriteAllText(appConfigPath, Text);
         }
         List<string> datas = new List<string>();
-        StreamReader reader = new StreamReader(appConfigPath, Encoding.GetEncoding("utf-8"));
-        while (reader.Peek() >= 0) {
-            datas.Add(reader.ReadLine());
+        using(StreamReader reader = new StreamReader(appConfigPath, Encoding.GetEncoding("utf-8"))) {
+            while (reader.Peek() >= 0) {
+                datas.Add(reader.ReadLine());
+            }
+            backupPath = datas[0];
+            font = new Font(datas[1], 11);
+            doZip = datas[2] == "zip" ? true : false;
+            language = datas[3];
         }
-        backupPath = datas[0];
-        font = new Font(datas[1], 11);
-        doZip = datas[2] == "zip" ? true : false;
-        language = datas[3];
-        reader.Close();
-
     }
 
     public static void WriteAppConfig() {
