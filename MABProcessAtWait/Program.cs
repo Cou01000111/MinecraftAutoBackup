@@ -97,9 +97,8 @@ namespace MABProcessAtWait {
         }
 
         void Close_Click(object sender, EventArgs e) {
-            var icon = (NotifyIcon)sender;
-            icon.Visible = false;
-            icon.Dispose();
+            notifyIcon.Visible = false;
+            notifyIcon.Dispose();
             Application.Exit();
         }
         void timer_Tick(object sender, EventArgs e) {
@@ -124,8 +123,6 @@ namespace MABProcessAtWait {
                 timer.Enabled = true;
                 notifyIcon.Icon = new Icon(".\\Image\\app_sub.ico");
                 notifyIcon.Text = "MAB待機モジュール";
-                Thread.Sleep(10000);
-
             }
         }
 
@@ -152,7 +149,7 @@ namespace MABProcessAtWait {
                 string[] datas = reader.ReadLine().Split(',');
                 //Console.WriteLine("datas:" + datas[0]);
                 datas = datas.Select(x => Util.TrimDoubleQuotationMarks(x)).Cast<string>().ToArray();
-                if (datas[0] == "1") {
+                if (Convert.ToBoolean(datas[0])) {
                     worldPasses.Add(datas[2]);
                 }
             }
