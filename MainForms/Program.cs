@@ -109,11 +109,11 @@ class WorldListForm :Form {
         fileMenu.DropDownItems.Add(exitMenu);
 
         //編集
-        ToolStripMenuItem editMenu = new ToolStripMenuItem() {
-            Text = "表示(&V)",
-            Margin = new Padding(0, 0, 0, 0),
-        };
-        menu.Items.Add(editMenu);
+        //ToolStripMenuItem editMenu = new ToolStripMenuItem() {
+        //    Text = "表示(&V)",
+        //    Margin = new Padding(0, 0, 0, 0),
+        //};
+        //menu.Items.Add(editMenu);
 
         //表示
         //ヘルプ
