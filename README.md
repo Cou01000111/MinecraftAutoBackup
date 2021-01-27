@@ -1,7 +1,7 @@
 # MinecraftAutoBackup
 
 ## ダウンロード
-[最新バージョン(alpha)](/owner/Cou01000111/releases/latest/download/asset-name.zip)
+[最新バージョン(alpha)](https://github.com/Cou01000111/MinecraftAutoBackup/releases/download/v0.2.0-alpha/MinecraftAutoBackup.zip)
 
 ## 概要
 minecraftで「普段遊んでいるワールドに違うバージョンで入ってしまった！！」という時に役立つバックアップソフトです
