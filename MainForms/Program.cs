@@ -45,7 +45,7 @@ class WorldListForm :Form {
     private Label description;
     private Button ok;
     private Button cancel;
-    private Panel panel;
+    private Panel buttomPanel;
     private FlowLayoutPanel flowLayoutPanel;
     //バックアップ画面
     private BackupDataPanel backupDataTable;
@@ -57,7 +57,7 @@ class WorldListForm :Form {
         this.Font = new Font(AppConfig.font.Name, 11);
 
         Util.FontStyle = AppConfig.font;
-        this.ClientSize = new Size(600, 600);
+        this.ClientSize = new Size(800, 800);
         this.FormClosing += new FormClosingEventHandler(worldListForm_FormClosing);
         this.Resize += new EventHandler(form_Resize);
         this.yesColor = Color.FromArgb(15, 27, 51);
@@ -141,31 +141,37 @@ class WorldListForm :Form {
             Anchor = AnchorStyles.Left,
             Width = (int)Util.FontStyle.Size * 25,
             Height = (int)Util.FontStyle.Size * 2 + 4,
-            Location = new Point(5, 5),
+            Location = new Point(8, 8),
         };
 
         ok = new Button() {
             Text = "OK",
             UseVisualStyleBackColor = true,
-            Width = (int)Util.FontStyle.Size * 10,
-            Height = (int)Util.FontStyle.Size * 2 + 4,
+            //Width = (int)Util.FontStyle.Size * 10,
+            //Height = (int)Util.FontStyle.Size * 2 + 4,
             ForeColor = yesColor,
+            Width = 96,
+            Height = 28,
+            Margin = new Padding(8, 8, 0, 0),
         };
         ok.Click += new EventHandler(ok_Click);
 
         cancel = new Button() {
             Text = "キャンセル",
             UseVisualStyleBackColor = true,
-            Width = (int)Util.FontStyle.Size * 10,
-            Height = (int)Util.FontStyle.Size * 2 + 4,
+            //Width = (int)Util.FontStyle.Size * 10,
+            //Height = (int)Util.FontStyle.Size * 2 + 4,
             ForeColor = cancelColor,
+            Width = 96,
+            Height = 28,
+            Margin = new Padding(8, 8, 0, 0),
         };
         cancel.Click += new EventHandler(cancel_Click);
 
-        panel = new Panel() {
+        buttomPanel = new Panel() {
             Dock = DockStyle.Bottom,
             //BackColor = Color.Blue,
-            Height = (int)Util.FontStyle.Size * 2 + 6,
+            Height = 40,
         };
 
         flowLayoutPanel = new FlowLayoutPanel() {
@@ -181,11 +187,11 @@ class WorldListForm :Form {
         flowLayoutPanel.Controls.Add(ok);
 
 
-        panel.Controls.Add(description);
-        panel.Controls.Add(flowLayoutPanel);
+        buttomPanel.Controls.Add(description);
+        buttomPanel.Controls.Add(flowLayoutPanel);
 
         tabPageEdit.Controls.Add(worldListView);
-        tabPageEdit.Controls.Add(panel);
+        tabPageEdit.Controls.Add(buttomPanel);
 
         #endregion
 
@@ -196,6 +202,12 @@ class WorldListForm :Form {
 
         this.Controls.Add(tabControl);
         this.Controls.Add(menu);
+        int i = 0;
+        foreach (Control a in this.backupDataTable.Controls) {
+            this.backupDataTable.Controls[i].Width = this.Width - 60;
+            this.backupDataTable.Controls[i].Controls[0].Width = this.Width - 60;
+            i++;
+        }
     }
 
     void form_Resize(object sender, EventArgs e) {
@@ -805,7 +817,6 @@ public class Config {
         Console.WriteLine(worldInPc.Count());
         //configに存在しないpathを追加する
         foreach (world pc in worldInPc) {
-            Console.WriteLine("info:a");
             if (!worldInConfig.Select(x => x.WPath).ToList().Contains(pc.WPath)) {
                 Console.WriteLine($"info:ADD {pc.WName}");
                 configs.Add(pc);
@@ -813,7 +824,6 @@ public class Config {
         }
         //削除されたワールドをconfigから消す
         foreach (world world in worldInConfig) {
-            Console.WriteLine("info:b");
             if (!worldInPc.Select(x => x.WPath).ToList().Contains(world.WPath)) {
                 Console.WriteLine($"info:REMOVE {world.WName}");
                 //configs.Remove(world);
@@ -884,52 +894,56 @@ public class Config {
 
 
 internal class AppConfigForm :Form {
-
+    
     TabControl tab = new TabControl();
     TabPage backupTab = new TabPage();
-    FlowLayoutPanel backupTabF = new FlowLayoutPanel();
     TabPage fontTab = new TabPage();
 
+    FlowLayoutPanel backupTabF = new FlowLayoutPanel();
     Label backupPath = new Label();
     FlowLayoutPanel backupPathPanel = new FlowLayoutPanel();
     TextBox backupPathInput = new TextBox();
     Button refe = new Button();
     CheckBox doZip = new CheckBox();
 
+    FlowLayoutPanel fontTabF = new FlowLayoutPanel();
     Label fontName = new Label();
     Button fontChange = new Button();
 
-    FlowLayoutPanel flowPanel = new FlowLayoutPanel();
+    FlowLayoutPanel okCanselFlowPanel = new FlowLayoutPanel();
     Button ok = new Button();
     Button cansel = new Button();
 
 
     public AppConfigForm() {
-        
+
+        //controls追加
+        backupPathPanel.Controls.AddRange(new Control[] { backupPathInput, refe });
         backupTabF.Controls.AddRange(new Control[] { backupPath, backupPathPanel, doZip });
         backupTab.Controls.Add(backupTabF);
-        backupTabF.Padding = new Padding(8);
-        backupTabF.Dock = DockStyle.Fill;
-        backupTabF.WrapContents = false;
-        backupTabF.FlowDirection = FlowDirection.TopDown;
-        fontTab.Controls.AddRange(new Control[] { fontName, fontChange });
+        fontTabF.Controls.AddRange(new Control[] { fontName, fontChange });
+        fontTab.Controls.Add(fontTabF);
         tab.Controls.AddRange(new Control[] { backupTab, fontTab });
         this.Controls.Add(tab);
-        flowPanel.Controls.AddRange(new Control[] { cansel,ok });
-        this.Controls.Add(flowPanel);
+        okCanselFlowPanel.Controls.AddRange(new Control[] { cansel,ok });
+        this.Controls.Add(okCanselFlowPanel);
+
+        //form設定
         Text = "環境設定";
         Icon = new Icon(".\\Image\\app.ico");
         ClientSize = new Size(500, 300);
         Font = new Font(AppConfig.font.Name, 10);
         Padding = new Padding(8);
 
+        //各種コントロール設定
+
         tab.Dock = DockStyle.Fill;
         tab.Location = new Point(10, 10);
         backupTab.BackColor = SystemColors.Window;
         fontTab.BackColor = SystemColors.Window;
-        flowPanel.Dock = DockStyle.Bottom;
-        flowPanel.Height = 40;
-        flowPanel.FlowDirection = FlowDirection.RightToLeft;
+        okCanselFlowPanel.Dock = DockStyle.Bottom;
+        okCanselFlowPanel.Height = 40;
+        okCanselFlowPanel.FlowDirection = FlowDirection.RightToLeft;
 
         backupTab.Text = AppConfig.language == "ja" ? "バックアップ" : "backup";
         fontTab.Text = AppConfig.language == "ja" ? "フォント" : "font";
@@ -937,13 +951,27 @@ internal class AppConfigForm :Form {
         backupPath.Text = "バックアップの保存先";
         backupPath.AutoSize = true;
 
-        backupPathPanel.Controls.AddRange(new Control[] { backupPathInput, refe });
         backupPathPanel.FlowDirection = FlowDirection.LeftToRight;
         backupPathPanel.Width = 480;
+        backupPathPanel.Height = 32;
+        //backupPathPanel.BackColor = Color.Blue;
+
+        backupTabF.Padding = new Padding(8);
+        backupTabF.Dock = DockStyle.Fill;
+        backupTabF.WrapContents = false;
+        backupTabF.FlowDirection = FlowDirection.TopDown;
+        backupTabF.Height = 20;
+
+        fontTabF.Padding = new Padding(8);
+        fontTabF.Dock = DockStyle.Fill;
+        fontTabF.WrapContents = false;
+        fontTabF.FlowDirection = FlowDirection.TopDown;
+        fontTabF.Height = 20;
 
         backupPathInput.Text = AppConfig.backupPath;
         backupPathInput.Width = 400;
         backupPathInput.Margin = new Padding(5);
+        //backupPathInput.BackColor = Color.Red;
 
         refe.Text = "...";
         refe.Width = 32;
@@ -954,17 +982,20 @@ internal class AppConfigForm :Form {
         doZip.Text = "バックアップデータをZip圧縮する";
         doZip.AutoSize = true;
         doZip.Checked = AppConfig.doZip;
+        //doZip.BackColor = Color.Blue;
 
         fontName.Text = $"フォント名 :  {Util.FontStyle.Name}";
         fontName.AutoSize = true;
 
         fontChange.Text = "フォントを変更する";
         fontChange.AutoSize = true;
+        fontChange.BackColor = SystemColors.Control;
+        fontChange.Click += new EventHandler(fontChange_Click);
 
         ok.Text = "OK";
         ok.Width = 96;
         ok.Height = 28;
-        ok.Margin = new Padding(8,8,0,0);
+        ok.Margin = new Padding(8, 8, 0, 0);
         ok.Click += new EventHandler(ok_Click);
         cansel.Text = "キャンセル";
         cansel.Width = 96;

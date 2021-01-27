@@ -78,6 +78,8 @@ namespace MABProcessAtWait {
             backupDataPath = AppConfig.backupPath;
             this.ShowInTaskbar = false;
             this.Icon = new Icon(".\\Image\\app.ico");
+            this.FormClosing += new FormClosingEventHandler(Form1_Closing);
+
             timer = new System.Windows.Forms.Timer() {
                 Enabled = true
             };
@@ -97,17 +99,32 @@ namespace MABProcessAtWait {
         }
 
         void Close_Click(object sender, EventArgs e) {
+            Console.WriteLine("info:アプリケーションが終了しました");
             notifyIcon.Visible = false;
             notifyIcon.Dispose();
             Application.Exit();
         }
+
+        void Form1_Closing(object sender, EventArgs e) {
+            Console.WriteLine("info:アプリケーションが強制終了しました");
+            notifyIcon.Visible = false;
+            notifyIcon.Dispose();
+        }
+
         void timer_Tick(object sender, EventArgs e) {
             if (Process.GetProcessesByName("MinecraftLauncher").Length > 0) {
                 timer.Enabled = false;
                 Console.WriteLine("Minecraft Lancherの起動を検知しました");
                 notifyIcon.Icon = new Icon(".\\Image\\app_sub_doing.ico");
                 int backupCount = 0;
-                
+                ContextMenuStrip menu = new ContextMenuStrip();
+                ToolStripMenuItem exit = new ToolStripMenuItem() {
+                    Text = "強制終了",
+                };
+                exit.Click += new EventHandler(Close_Click);
+                menu.Items.Add(exit);
+                notifyIcon.ContextMenuStrip = menu;
+
                 List<string> worldPasses = GetWorldPasses();
                 string nowTime = DateTime.Now.ToString("yyyyMMddHHmm");
                 if(worldPasses.Count == 0) {
