@@ -57,7 +57,6 @@ class WorldListForm :Form {
         this.Font = new Font(AppConfig.font.Name, 11);
 
         Util.FontStyle = AppConfig.font;
-        this.ClientSize = new Size(800, 800);
         this.FormClosing += new FormClosingEventHandler(worldListForm_FormClosing);
         this.Resize += new EventHandler(form_Resize);
         this.yesColor = Color.FromArgb(15, 27, 51);
@@ -208,6 +207,12 @@ class WorldListForm :Form {
             this.backupDataTable.Controls[i].Controls[0].Width = this.Width - 60;
             i++;
         }
+        this.Load += new EventHandler(Form_Load);
+    }
+
+    void Form_Load(object sender,EventArgs e) {
+        this.ClientSize = AppConfig.clientSize;
+        this.Location = AppConfig.clientPoint;
     }
 
     void form_Resize(object sender, EventArgs e) {
@@ -216,7 +221,6 @@ class WorldListForm :Form {
         foreach (Control a in this.backupDataTable.Controls) {
             this.backupDataTable.Controls[i].Width = this.Width - 60;
             this.backupDataTable.Controls[i].Controls[0].Width = this.Width - 60;
-
             i++;
         }
     }
@@ -242,6 +246,9 @@ class WorldListForm :Form {
     }
     void worldListForm_FormClosing(object sender, CancelEventArgs e) {
         Console.WriteLine("info:終了時処理を開始します");
+        AppConfig.clientPoint = this.Location;
+        AppConfig.clientSize = this.ClientSize;
+        AppConfig.WriteAppConfig();
         try {
             System.Diagnostics.Process.Start(".\\SubModule\\MABProcessAtWait.exe");
         }
@@ -1054,12 +1061,15 @@ public class AppConfig {
     public static Font font { get; set; }
     public static bool doZip { get; set; }
     public static string language { get; set; }
+    public static Size clientSize { get; set; }
+    public static Point clientPoint { get; set; }
     public static string appConfigPath = ".\\Config\\AppConfig.txt";
 
     public AppConfig() {
         if (!File.Exists(appConfigPath)) {
             //AppConfigファイルがなかった場合
-            string Text = $"{System.Environment.GetFolderPath(Environment.SpecialFolder.Personal)}\\MinecraftAutoBackup\nMeiryo UI\nnormal\nja";
+            string Text = 
+                $"{System.Environment.GetFolderPath(Environment.SpecialFolder.Personal)}\\MinecraftAutoBackup\nMeiryo UI\nnormal\nja\n600\n600\n0\n0";
             File.WriteAllText(appConfigPath, Text);
         }
         List<string> datas = new List<string>();
@@ -1071,11 +1081,16 @@ public class AppConfig {
             font = new Font(datas[1], 11);
             doZip = datas[2] == "zip" ? true : false;
             language = datas[3];
+            clientSize = new Size(int.Parse(datas[4]), int.Parse(datas[5]));
+            clientPoint = new Point(int.Parse(datas[6]), int.Parse(datas[7]));
         }
     }
 
     public static void WriteAppConfig() {
-        string Text = $"{backupPath}\n{font.Name}\n" + (doZip ? "zip" : "normal") + $"\n{language}";
+        string Text =
+            $"{backupPath}\n{font.Name}\n" +
+            (doZip ? "zip" : "normal") +
+            $"\n{language}\n{clientSize.Width}\n{clientSize.Height}\n{clientPoint.X}\n{clientPoint.Y}";
         File.WriteAllText(appConfigPath, Text);
     }
 
