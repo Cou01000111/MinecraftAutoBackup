@@ -1,0 +1,1 @@
+zip .\MinecraftAutoBackup.zip .\MinecraftAutoBackup
