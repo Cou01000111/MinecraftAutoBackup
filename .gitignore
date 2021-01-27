@@ -1,4 +1,5 @@
 syntax:glob
+zipping.bat
 *.obj
 *.exe
 *.exp
