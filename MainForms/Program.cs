@@ -15,7 +15,7 @@ class Program {
     static void Main() {
         //起動時処理
         Console.WriteLine("-----MakeConfig-------");
-        
+
         if (!File.Exists(Config.configPath)) {
             Console.WriteLine("info:configファイルがないのでconfigファイルを作成します");
             Config.MakeConfig();
@@ -24,7 +24,7 @@ class Program {
             Config.Load();
             Config.ReloadConfig();
         }
-        
+
         Console.WriteLine("----------------------");
         Application.EnableVisualStyles();
         new AppConfig();
@@ -210,7 +210,7 @@ class WorldListForm :Form {
         this.Load += new EventHandler(Form_Load);
     }
 
-    void Form_Load(object sender,EventArgs e) {
+    void Form_Load(object sender, EventArgs e) {
         this.ClientSize = AppConfig.clientSize;
         this.Location = AppConfig.clientPoint;
     }
@@ -776,7 +776,32 @@ public class Config {
             Directory.CreateDirectory(Path.GetDirectoryName(configPath));
         }
         Console.WriteLine($"info:configファイル[{configPath}]生成完了");
-        List<world> worlds = GetWorldDataFromPC();
+        List<world> worlds = GetWorldDataFromHDD();
+        // ゲームディレクトリが見つからなかった場合
+        if (worlds.Count <= 0) {
+            DialogResult result = MessageBox.Show(
+                "minecraftのゲームディレクトリが見つかりませんでした。\n手動で設定しますか？",
+                "ゲームディレクトリが見つかりませんでした",
+                MessageBoxButtons.OKCancel,
+                MessageBoxIcon.Error
+                );
+            if (result == DialogResult.Yes) {
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.Title = "バックアップ先フォルダを選択してください";
+                openFileDialog.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\MinecraftAutoBackup";
+                openFileDialog.FileName = "SelectFolder";
+                openFileDialog.Filter = "Folder |.";
+                openFileDialog.CheckFileExists = false;
+                openFileDialog.Multiselect = true;
+                if (openFileDialog.ShowDialog() == DialogResult.OK) {
+                    //OKボタンがクリックされたとき、選択されたファイル名をすべて表示する
+                    worlds.AddRange(GetWorldDataFromHDD(openFileDialog.FileNames.ToList()));
+                }
+            }
+            else if (result == DialogResult.No) {
+                
+            }
+        }
         foreach (var world in worlds) {
             Console.WriteLine($"info:world[{world.WName}]を発見しました");
             configs.Add(world);
@@ -806,7 +831,7 @@ public class Config {
     /// </summary>
     public static void Write() {
         List<string> text = new List<string>();
-        foreach(world config in configs) {
+        foreach (world config in configs) {
             text.Add($"\"{config.WDoBackup}\",\"{config.WName}\",\"{config.WPath}\",\"{config.WDir}\"\n");
         }
         File.WriteAllText(configPath, string.Join("", text), Encoding.GetEncoding("utf-8"));
@@ -818,7 +843,7 @@ public class Config {
     /// </summary>
     public static void ReloadConfig() {
         Console.WriteLine("call:reloadConfig");
-        List<world> worldInPc = GetWorldDataFromPC();
+        List<world> worldInPc = GetWorldDataFromHDD();
         List<world> worldInConfig = GetConfig();
         Console.WriteLine(worldInConfig.Count());
         Console.WriteLine(worldInPc.Count());
@@ -842,8 +867,8 @@ public class Config {
         Console.WriteLine("call:Change");
         Console.WriteLine("info:GET  worldName: " + worldName + ",  worldDir: " + worldDir + ",  dobackup: " + doBackup);
         List<world> _configs = new List<world>();
-        foreach(world config in configs) {
-            if(config.WName == worldName && config.WDir == worldDir) {
+        foreach (world config in configs) {
+            if (config.WName == worldName && config.WDir == worldDir) {
                 config.WDoBackup = bool.Parse(doBackup);
                 _configs.Add(new world(config.WPath, Convert.ToBoolean(doBackup)));
             }
@@ -859,20 +884,14 @@ public class Config {
     /// PCからワールドデータ一覧を取得
     /// </summary>
     /// <returns>取得したList<world></returns>
-    private static List<world> GetWorldDataFromPC() {
+    private static List<world> GetWorldDataFromHDD() {
         Console.WriteLine("call:GetWorldDataFromPC");
         List<world> worlds = new List<world>();
         List<string> _gameDirectory = Directory.GetDirectories(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)).ToList();
-        //foreach(var a in _gameDirectory) {
-        //    Console.WriteLine($"info:_gamedirectory:{a}");
-        //}
         List<string> gameDirectory = new List<string>();
         foreach (string dir in _gameDirectory) {
             List<string> dirsInDir = Directory.GetDirectories(dir).ToList();
             dirsInDir = dirsInDir.Select(x => Path.GetFileName(x)).Cast<string>().ToList();
-            //foreach(var a in dirsInDir) {
-            //    Console.WriteLine($"info:dirsInDir[{a}]");
-            //}
             if (dirsInDir.Contains("logs") && dirsInDir.Contains("resourcepacks") && dirsInDir.Contains("saves")) {
                 Console.WriteLine($"info:ゲームディレクトリ[{dir}]を発見しました");
                 gameDirectory.Add(dir);
@@ -890,9 +909,28 @@ public class Config {
         return worlds;
     }
 
+    /// <summary>
+    /// PCからワールドデータ一覧を取得
+    /// </summary>
+    /// <returns>取得したList<world></returns>
+    private static List<world> GetWorldDataFromHDD(List<string> gameDirectory) {
+        List<world> worlds = new List<world>();
+        Console.WriteLine("call:GetWorldDataFromPC");
+        foreach (string dir in gameDirectory) {
+            List<string> _worlds = Directory.GetDirectories($"{dir}\\saves").ToList();
+            foreach (string worldPath in _worlds) {
+                worlds.Add(new world(Util.TrimDoubleQuotationMarks(worldPath)));
+            }
+        }
+        //foreach(var a in worlds) {
+        //    Console.WriteLine($"info:world[{a.WName}]");
+        //}
+        return worlds;
+    }
+
     public static void ConsoleConfig() {
         Console.WriteLine("----Configs----");
-        foreach(world w in configs) {
+        foreach (world w in configs) {
             Console.WriteLine($"[{w.WDoBackup},{w.WName},{w.WPath},{w.WDir},]");
         }
         Console.WriteLine("---------------");
@@ -900,8 +938,59 @@ public class Config {
 }
 
 
+public class AppConfig {
+    /*
+    アプリ自体の設定を保存するtxtファイル
+    バックアップを保存するpath
+    フォント名
+    フォント大きさ
+    保存形式(zip,normal)
+    言語(jp,en)
+
+    */
+    public static string backupPath { get; set; }
+    public static Font font { get; set; }
+    public static bool doZip { get; set; }
+    public static string language { get; set; }
+    public static Size clientSize { get; set; }
+    public static Point clientPoint { get; set; }
+    public static string appConfigPath = ".\\Config\\AppConfig.txt";
+
+    public AppConfig() {
+        if (!File.Exists(appConfigPath)) {
+            //AppConfigファイルがなかった場合
+            string Text =
+                $"{System.Environment.GetFolderPath(Environment.SpecialFolder.Personal)}\\MinecraftAutoBackup\nMeiryo UI\nnormal\nja\n600\n600\n0\n0";
+            File.WriteAllText(appConfigPath, Text);
+        }
+        List<string> datas = new List<string>();
+        using (StreamReader reader = new StreamReader(appConfigPath, Encoding.GetEncoding("utf-8"))) {
+            while (reader.Peek() >= 0) {
+                datas.Add(reader.ReadLine());
+            }
+            backupPath = datas[0];
+            font = new Font(datas[1], 11);
+            doZip = datas[2] == "zip" ? true : false;
+            language = datas[3];
+            clientSize = new Size(int.Parse(datas[4]), int.Parse(datas[5]));
+            clientPoint = new Point(int.Parse(datas[6]), int.Parse(datas[7]));
+        }
+    }
+
+    public static void WriteAppConfig() {
+        string Text =
+            $"{backupPath}\n{font.Name}\n" +
+            (doZip ? "zip" : "normal") +
+            $"\n{language}\n{clientSize.Width}\n{clientSize.Height}\n{clientPoint.X}\n{clientPoint.Y}";
+        File.WriteAllText(appConfigPath, Text);
+    }
+
+}
+
+//ちょっとFormの書き方変えてみたやつ
+//結局メリットはよくわからなかった
 internal class AppConfigForm :Form {
-    
+
     TabControl tab = new TabControl();
     TabPage backupTab = new TabPage();
     TabPage fontTab = new TabPage();
@@ -932,7 +1021,7 @@ internal class AppConfigForm :Form {
         fontTab.Controls.Add(fontTabF);
         tab.Controls.AddRange(new Control[] { backupTab, fontTab });
         this.Controls.Add(tab);
-        okCanselFlowPanel.Controls.AddRange(new Control[] { cansel,ok });
+        okCanselFlowPanel.Controls.AddRange(new Control[] { cansel, ok });
         this.Controls.Add(okCanselFlowPanel);
 
         //form設定
@@ -1013,7 +1102,7 @@ internal class AppConfigForm :Form {
 
     }
 
-    private void refe_Click(object sender,EventArgs e) {
+    private void refe_Click(object sender, EventArgs e) {
         OpenFileDialog openFileDialog = new OpenFileDialog();
         openFileDialog.Title = "バックアップ先フォルダを選択してください";
         openFileDialog.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\MinecraftAutoBackup";
@@ -1047,54 +1136,7 @@ internal class AppConfigForm :Form {
         this.Close();
     }
 }
-public class AppConfig {
-    /*
-    アプリ自体の設定を保存するtxtファイル
-    バックアップを保存するpath
-    フォント名
-    フォント大きさ
-    保存形式(zip,normal)
-    言語(jp,en)
 
-    */
-    public static string backupPath { get; set; }
-    public static Font font { get; set; }
-    public static bool doZip { get; set; }
-    public static string language { get; set; }
-    public static Size clientSize { get; set; }
-    public static Point clientPoint { get; set; }
-    public static string appConfigPath = ".\\Config\\AppConfig.txt";
-
-    public AppConfig() {
-        if (!File.Exists(appConfigPath)) {
-            //AppConfigファイルがなかった場合
-            string Text = 
-                $"{System.Environment.GetFolderPath(Environment.SpecialFolder.Personal)}\\MinecraftAutoBackup\nMeiryo UI\nnormal\nja\n600\n600\n0\n0";
-            File.WriteAllText(appConfigPath, Text);
-        }
-        List<string> datas = new List<string>();
-        using(StreamReader reader = new StreamReader(appConfigPath, Encoding.GetEncoding("utf-8"))) {
-            while (reader.Peek() >= 0) {
-                datas.Add(reader.ReadLine());
-            }
-            backupPath = datas[0];
-            font = new Font(datas[1], 11);
-            doZip = datas[2] == "zip" ? true : false;
-            language = datas[3];
-            clientSize = new Size(int.Parse(datas[4]), int.Parse(datas[5]));
-            clientPoint = new Point(int.Parse(datas[6]), int.Parse(datas[7]));
-        }
-    }
-
-    public static void WriteAppConfig() {
-        string Text =
-            $"{backupPath}\n{font.Name}\n" +
-            (doZip ? "zip" : "normal") +
-            $"\n{language}\n{clientSize.Width}\n{clientSize.Height}\n{clientPoint.X}\n{clientPoint.Y}";
-        File.WriteAllText(appConfigPath, Text);
-    }
-
-}
 
 public class world {
     public bool WDoBackup { get; set; }
@@ -1112,7 +1154,7 @@ public class world {
         WDir = Path.GetFileName(Path.GetDirectoryName(Path.GetDirectoryName(path)));
     }
 
-    public world(string path,bool doBackup) {
+    public world(string path, bool doBackup) {
         //if (!Directory.Exists(path)) {
         //    Console.WriteLine($"info:不正なpath[{path}]が渡されました");
         //    return;
