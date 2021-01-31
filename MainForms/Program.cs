@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.Linq;
 using Microsoft.VisualBasic.FileIO;
 using System.Threading.Tasks;
+using Microsoft.WindowsAPICodePack.Dialogs;
 class Program {
     [STAThread]
     static void Main() {
@@ -204,7 +205,7 @@ class WorldListForm :Form {
         int i = 0;
         foreach (Control a in this.backupDataTable.Controls) {
             this.backupDataTable.Controls[i].Width = this.Width - 60;
-            this.backupDataTable.Controls[i].Controls[0].Width = this.Width - 60;
+            //this.backupDataTable.Controls[i].Controls[0].Width = this.Width - 60;
             i++;
         }
         this.Load += new EventHandler(Form_Load);
@@ -220,7 +221,7 @@ class WorldListForm :Form {
         int i = 0;
         foreach (Control a in this.backupDataTable.Controls) {
             this.backupDataTable.Controls[i].Width = this.Width - 60;
-            this.backupDataTable.Controls[i].Controls[0].Width = this.Width - 60;
+            //this.backupDataTable.Controls[i].Controls[0].Width = this.Width - 60;
             i++;
         }
     }
@@ -777,25 +778,24 @@ public class Config {
         }
         Console.WriteLine($"info:configファイル[{configPath}]生成完了");
         List<world> worlds = GetWorldDataFromHDD();
+        //List<world> worlds = new List<world>();
         // ゲームディレクトリが見つからなかった場合
         if (worlds.Count <= 0) {
+            Console.WriteLine("info:ゲームディレクトリが一つも見つかりませんでした");
             DialogResult result = MessageBox.Show(
-                "minecraftのゲームディレクトリが見つかりませんでした。\n手動で設定しますか？",
+                "minecraftのゲームディレクトリが見つかりませんでした。手動で設定しますか？",
                 "ゲームディレクトリが見つかりませんでした",
                 MessageBoxButtons.OKCancel,
                 MessageBoxIcon.Error
                 );
-            if (result == DialogResult.Yes) {
-                OpenFileDialog openFileDialog = new OpenFileDialog();
-                openFileDialog.Title = "バックアップ先フォルダを選択してください";
-                openFileDialog.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\MinecraftAutoBackup";
-                openFileDialog.FileName = "SelectFolder";
-                openFileDialog.Filter = "Folder |.";
-                openFileDialog.CheckFileExists = false;
-                openFileDialog.Multiselect = true;
-                if (openFileDialog.ShowDialog() == DialogResult.OK) {
-                    //OKボタンがクリックされたとき、選択されたファイル名をすべて表示する
-                    worlds.AddRange(GetWorldDataFromHDD(openFileDialog.FileNames.ToList()));
+            if (result == DialogResult.OK) {
+                CommonOpenFileDialog copd = new CommonOpenFileDialog();
+                copd.Title = "ゲームディレクトリを選択してください（複数選択可）";
+                copd.IsFolderPicker = true;
+                copd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                copd.Multiselect = true;
+                if (copd.ShowDialog() == CommonFileDialogResult.Ok) {
+                    worlds.AddRange(GetWorldDataFromHDD(copd.FileNames.ToList()));
                 }
             }
             else if (result == DialogResult.No) {
@@ -917,9 +917,11 @@ public class Config {
         List<world> worlds = new List<world>();
         Console.WriteLine("call:GetWorldDataFromPC");
         foreach (string dir in gameDirectory) {
-            List<string> _worlds = Directory.GetDirectories($"{dir}\\saves").ToList();
-            foreach (string worldPath in _worlds) {
-                worlds.Add(new world(Util.TrimDoubleQuotationMarks(worldPath)));
+            if (Directory.Exists($"{dir}\\saves")) {
+                List<string> _worlds = Directory.GetDirectories($"{dir}\\saves").ToList();
+                foreach (string worldPath in _worlds) {
+                    worlds.Add(new world(Util.TrimDoubleQuotationMarks(worldPath)));
+                }
             }
         }
         //foreach(var a in worlds) {
