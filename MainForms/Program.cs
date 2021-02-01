@@ -11,6 +11,7 @@ using System.Linq;
 using Microsoft.VisualBasic.FileIO;
 using System.Threading.Tasks;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using System.IO.Compression;
 class Program {
     [STAThread]
     static void Main() {
@@ -776,7 +777,9 @@ public class Config {
         if (!Directory.Exists(Path.GetDirectoryName(configPath))) {
             Directory.CreateDirectory(Path.GetDirectoryName(configPath));
         }
-        Console.WriteLine($"info:configファイル[{configPath}]生成完了");
+
+        string value = $"info:configファイル[{configPath}]生成完了";
+        Console.WriteLine(value);
         List<world> worlds = GetWorldDataFromHDD();
         //List<world> worlds = new List<world>();
         // ゲームディレクトリが見つからなかった場合
@@ -799,7 +802,7 @@ public class Config {
                 }
             }
             else if (result == DialogResult.No) {
-                
+
             }
         }
         foreach (var world in worlds) {
@@ -1080,6 +1083,7 @@ internal class AppConfigForm :Form {
         doZip.Text = "バックアップデータをZip圧縮する";
         doZip.AutoSize = true;
         doZip.Checked = AppConfig.doZip;
+        Console.WriteLine($"info:dozip[{AppConfig.doZip}]");
         //doZip.BackColor = Color.Blue;
 
         fontName.Text = $"フォント名 :  {Util.FontStyle.Name}";
@@ -1129,7 +1133,35 @@ internal class AppConfigForm :Form {
     }
 
     private void ok_Click(object sender, EventArgs e) {
+        //backupPath
         AppConfig.backupPath = this.backupPathInput.Text;
+        //doZip
+        if (AppConfig.doZip != this.doZip.Checked) {
+            if (AppConfig.doZip) {
+                //設定上はtrue,formのほうはfalseの場合（falseに変更された場合）
+
+            }
+            else if (!AppConfig.doZip) {
+                //設定上はfalse,formのほうはtrueの場合（trueに変更された場合）
+                List<string> backups = new List<string>();
+                foreach (world world in Config.GetConfig()) {
+                    backups.AddRange(BackupDataPanel.GetBackupFiles(world.WName, world.WDir));
+                }
+                if (backups.Count > 0) {
+                    //バックアップが存在している場合
+                    DialogResult r = MessageBox.Show("現在保存されているバックアップをすべてzipにしますか？", "保存方式", MessageBoxButtons.YesNo);
+                    if (r == DialogResult.Yes) {
+                        //既存のバックアップをすべてzipに変える
+                        foreach(string backupPath in backups) {
+                            ZipFile.CreateFromDirectory(backupPath, $"{backupPath}.zip");
+                        }
+                    }
+                }
+            }
+            else {
+                throw new Exception();
+            }
+        }
         AppConfig.doZip = this.doZip.Checked;
         AppConfig.WriteAppConfig();
         this.Close();
