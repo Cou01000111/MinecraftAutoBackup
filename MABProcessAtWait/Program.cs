@@ -177,7 +177,18 @@ namespace MABProcessAtWait {
         void doBackup(string path, string Time) {
             string backupPath = backupDataPath + "\\" + Path.GetFileName(Directory.GetParent(Directory.GetParent(path).ToString()).ToString()) + "\\" + Path.GetFileName(path) + "\\" + Time;
             if (AppConfig.doZip) {
-                ZipFile.CreateFromDirectory(path, $"{backupPath}.zip");
+                try {
+                    Console.WriteLine(path + " を " + backupPath + ".zip へバックアップ中です");
+                    ZipFile.CreateFromDirectory(path, $"{backupPath}.zip");
+                    Console.WriteLine(path + " を " + backupPath + " .zipへバックアップしました");
+                }
+                catch (DirectoryNotFoundException e) {
+                    Console.Error.WriteLine(path + ":DirectoryNotFoundException : " + e.Message);
+                    MessageBox.Show($"バックアップ予定のワールドデータ[{Path.GetFileName(path)}]が見つかりませんでした。バックアップ予定から削除しますか？","Minecraft Auto Backup",MessageBoxButtons.OKCancel);
+                }
+                catch (IOException e) {
+                    Console.Error.WriteLine(backupPath + ":IOException : " + e.Message);
+                }
             }
             else {
                 try {

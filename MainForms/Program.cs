@@ -16,7 +16,7 @@ class Program {
     [STAThread]
     static void Main() {
         //起動時処理
-        Console.WriteLine("-----MakeConfig-------");
+        Console.WriteLine("-----起動時処理-------");
 
         if (!File.Exists(Config.configPath)) {
             Console.WriteLine("info:configファイルがないのでconfigファイルを作成します");
@@ -230,7 +230,7 @@ class WorldListForm :Form {
         Console.WriteLine("info:push ok");
         List<string[]> configs = worldListView.GetWorldListView();
         foreach (var config in configs) {
-            Console.WriteLine($"{config[0]}, {config[1]}, {config[2]}");
+            //Console.WriteLine($"{config[0]}, {config[1]}, {config[2]}");
             Config.Change(config[1], config[2], config[0]);
         }
         Config.Write();
@@ -315,7 +315,7 @@ class WorldListView :ListView {
         int iItemCount = 0;
         foreach (var datas in listDatas) {
             this.Items.Add(new ListViewItem(new string[] { " ", datas.WName, datas.WDir }));
-            Console.WriteLine(datas.WDoBackup);
+            //Console.WriteLine(datas.WDoBackup);
             this.Items[iItemCount].Checked = Convert.ToBoolean(datas.WDoBackup);
             iItemCount++;
         }
@@ -766,7 +766,7 @@ public class Config {
 
     //datasの中にworldName,worldDirに当てはまる要素があるかどうか
     private static bool IsWorldParticular(string worldName, string worldDir, string[] datas) {
-        Console.WriteLine(datas[1] + ",\"" + worldName + "\"と" + datas[3] + ",\"" + worldDir + "\"");
+        //Console.WriteLine(datas[1] + ",\"" + worldName + "\"と" + datas[3] + ",\"" + worldDir + "\"");
         return datas[1] == "\"" + worldName + "\"" && datas[3] == "\"" + worldDir + "\"";
     }
 
@@ -848,8 +848,8 @@ public class Config {
         Console.WriteLine("call:reloadConfig");
         List<world> worldInPc = GetWorldDataFromHDD();
         List<world> worldInConfig = GetConfig();
-        Console.WriteLine(worldInConfig.Count());
-        Console.WriteLine(worldInPc.Count());
+        //Console.WriteLine(worldInConfig.Count());
+        //Console.WriteLine(worldInPc.Count());
         //configに存在しないpathを追加する
         foreach (world pc in worldInPc) {
             if (!worldInConfig.Select(x => x.WPath).ToList().Contains(pc.WPath)) {
@@ -857,11 +857,20 @@ public class Config {
                 configs.Add(pc);
             }
         }
+        List<world> removeWorlds = new List<world>();
         //削除されたワールドをconfigから消す
         foreach (world world in worldInConfig) {
             if (!worldInPc.Select(x => x.WPath).ToList().Contains(world.WPath)) {
                 Console.WriteLine($"info:REMOVE {world.WName}");
-                //configs.Remove(world);
+                removeWorlds.Add(world);
+            }
+        }
+        foreach (world w in removeWorlds) {
+            if (configs.Remove(w)) {
+                Console.WriteLine($"info:REMOVE {w.WName} suc");
+            }
+            else {
+                Console.WriteLine($"info:REMOVE {w.WName} 見つかりませんでした");
             }
         }
     }
@@ -880,7 +889,7 @@ public class Config {
             }
         }
         configs = _configs;
-        ConsoleConfig();
+        //ConsoleConfig();
     }
 
     /// <summary>
@@ -896,7 +905,7 @@ public class Config {
             List<string> dirsInDir = Directory.GetDirectories(dir).ToList();
             dirsInDir = dirsInDir.Select(x => Path.GetFileName(x)).Cast<string>().ToList();
             if (dirsInDir.Contains("logs") && dirsInDir.Contains("resourcepacks") && dirsInDir.Contains("saves")) {
-                Console.WriteLine($"info:ゲームディレクトリ[{dir}]を発見しました");
+                //Console.WriteLine($"info:ゲームディレクトリ[{dir}]を発見しました");
                 gameDirectory.Add(dir);
             }
         }
@@ -1154,6 +1163,8 @@ internal class AppConfigForm :Form {
                         //既存のバックアップをすべてzipに変える
                         foreach(string backupPath in backups) {
                             ZipFile.CreateFromDirectory(backupPath, $"{backupPath}.zip");
+                            Directory.Delete(backupPath);
+                            //Console.WriteLine($"{Path.GetDirectoryName(backupPath)}\\{Path.GetFileName(backupPath)}をzipにします");
                         }
                     }
                 }
