@@ -315,10 +315,13 @@ class WorldListView :ListView {
         List<world> listDatas = Config.GetConfig();
         int iItemCount = 0;
         foreach (var datas in listDatas) {
-            this.Items.Add(new ListViewItem(new string[] { " ", datas.WName, datas.WDir }));
-            //Console.WriteLine(datas.WDoBackup);
-            this.Items[iItemCount].Checked = Convert.ToBoolean(datas.WDoBackup);
-            iItemCount++;
+            if (Config.isBackupAlive(datas)) {
+                this.Items.Add(new ListViewItem(new string[] { " ", datas.WName, datas.WDir }));
+                //Console.WriteLine(datas.WDoBackup);
+                this.Items[iItemCount].Checked = Convert.ToBoolean(datas.WDoBackup);
+                iItemCount++;
+            }
+            
         }
     }
     private void worldEditForm_Closed(object sender, EventArgs e) {
@@ -369,10 +372,21 @@ class BackupDataPanel :FlowLayoutPanel {
         else {
             Console.WriteLine($"{Config.GetConfig().Count()}件のワールドのバックアップを読み込みます");
             foreach (world world in Config.GetConfig()) {
+                bool deadF = !Config.isBackupAlive(world);
 
-                if (GetBackupFiles(world.WName, world.WDir).Count() <= 0) {
-                    continue;
-                }
+                ////バックアップがない場合表示しない
+                ////バックアップがなくかつ、元が死んでいる場合はconfigsから削除
+                //if (GetBackupFiles(world.WName, world.WDir).Count() <= 0) {
+                //    if(world.WPath == "dead") {
+                //        deadF = true;
+                //        if (!Config.configs.Remove(world)) {
+                //            //reloadでバックアップが存在しない削除済みワールドはconfigにないはずなのでエラー
+                //            throw new Exception();
+                //        };
+                //        Config.Write();
+                //    }
+                //    continue;
+                //}
 
                 backupDataDir = new Label() {
                     Text = world.WName + "/" + world.WDir + "",
@@ -381,6 +395,9 @@ class BackupDataPanel :FlowLayoutPanel {
                     Margin = new Padding((int)Util.FontStyle.Size),
                     //BackColor = Color.Yellow
                 };
+                if (deadF) {
+                    backupDataDir.ForeColor = Color.Red;
+                }
                 addInfo = new AddInfoButton(world.WPath) {
 
                     id = iCount,
@@ -847,12 +864,13 @@ public class Config {
     /// <summary>
     /// Configファイルを更新する
     /// </summary>
-    public static void ReloadConfig() {
+    public static List<world> ReloadConfig() {
         Console.WriteLine("call:reloadConfig");
         List<world> worldInPc = GetWorldDataFromHDD();
         List<world> worldInConfig = GetConfig();
         //Console.WriteLine(worldInConfig.Count());
         //Console.WriteLine(worldInPc.Count());
+
         //configに存在しないpathを追加する
         foreach (world pc in worldInPc) {
             if (!worldInConfig.Select(x => x.WPath).ToList().Contains(pc.WPath)) {
@@ -861,21 +879,31 @@ public class Config {
             }
         }
         List<world> removeWorlds = new List<world>();
-        //削除されたワールドをconfigから消す
+
+        //削除されたワールドはconfig.pathの"save"を"dead"とする
+        int wI = 0;
         foreach (world world in worldInConfig) {
             if (!worldInPc.Select(x => x.WPath).ToList().Contains(world.WPath)) {
-                Console.WriteLine($"info:REMOVE {world.WName}");
-                removeWorlds.Add(world);
+                List<string> pasess = Config.configs[wI].WPath.Split('\\').ToList();
+                if(pasess[pasess.Count - 2] == "saves") {
+                    pasess[pasess.Count - 2] = "dead";
+                    Console.WriteLine("info:Kill Success!!");
+                }
+                Config.configs[wI].WPath = string.Join("\\",pasess.ToArray());
             }
+            wI++;
         }
-        foreach (world w in removeWorlds) {
-            if (configs.Remove(w)) {
-                Console.WriteLine($"info:REMOVE {w.WName} suc");
-            }
-            else {
-                Console.WriteLine($"info:REMOVE {w.WName} 見つかりませんでした");
-            }
-        }
+        Write();
+        //foreach (world w in removeWorlds) {
+        //    //if (configs.Remove(w)) {
+        //    //    Console.WriteLine($"info:REMOVE {w.WName} suc");
+        //    //}
+        //    //else {
+        //    //    Console.WriteLine($"info:REMOVE {w.WName} 見つかりませんでした");
+        //    //}
+        //}
+
+        return removeWorlds;
     }
 
     public static void Change(string worldName, string worldDir, string doBackup) {
@@ -927,6 +955,7 @@ public class Config {
     /// <summary>
     /// PCからワールドデータ一覧を取得
     /// </summary>
+    /// <param name="gameDirectory"></param>
     /// <returns>取得したList<world></returns>
     private static List<world> GetWorldDataFromHDD(List<string> gameDirectory) {
         List<world> worlds = new List<world>();
@@ -951,6 +980,21 @@ public class Config {
             Console.WriteLine($"[{w.WDoBackup},{w.WName},{w.WPath},{w.WDir},]");
         }
         Console.WriteLine("---------------");
+    }
+    /// <summary>
+    /// ワールドのバックアップソースが生きているかどうか
+    /// </summary>
+    /// <param name="w"></param>
+    /// <returns></returns>
+    public static bool isBackupAlive(world w) {
+        if((w.WPath.Split('\\').ToArray())[w.WPath.Split('\\').ToArray().Count() - 2] == "dead") {
+            Console.WriteLine("info[DEBUG]:バックアップは死んでいます");
+            return false;
+        }
+        else {
+            Console.WriteLine("info[DEBUG]:バックアップは生きています");
+            return true;
+        }
     }
 }
 
