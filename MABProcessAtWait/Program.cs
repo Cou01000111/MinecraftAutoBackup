@@ -184,7 +184,10 @@ namespace MABProcessAtWait {
                 }
                 catch (DirectoryNotFoundException e) {
                     Console.Error.WriteLine(path + ":DirectoryNotFoundException : " + e.Message);
-                    MessageBox.Show($"バックアップ予定のワールドデータ[{Path.GetFileName(path)}]が見つかりませんでした。バックアップ予定から削除しますか？","Minecraft Auto Backup",MessageBoxButtons.OKCancel);
+                    DialogResult r = MessageBox.Show($"バックアップ予定のワールドデータ[{Path.GetFileName(path)}]が見つかりませんでした。バックアップ予定から削除しますか？","Minecraft Auto Backup",MessageBoxButtons.OKCancel);
+                    if(r == DialogResult.OK) {
+                        DialogResult _r = MessageBox.Show($"バックアップ予定のワールドデータ[{Path.GetFileName(path)}]が見つかりませんでした。バックアップ予定から削除しますか？", "Minecraft Auto Backup", MessageBoxButtons.YesNo);
+                    }
                 }
                 catch (IOException e) {
                     Console.Error.WriteLine(backupPath + ":IOException : " + e.Message);

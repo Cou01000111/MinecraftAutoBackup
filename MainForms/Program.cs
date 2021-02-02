@@ -12,6 +12,7 @@ using Microsoft.VisualBasic.FileIO;
 using System.Threading.Tasks;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System.IO.Compression;
+using System.Text.RegularExpressions;
 class Program {
     [STAThread]
     static void Main() {
@@ -366,6 +367,7 @@ class BackupDataPanel :FlowLayoutPanel {
             this.Controls.Add(notBackupFile);
         }
         else {
+            Console.WriteLine($"{Config.GetConfig().Count()}件のワールドのバックアップを読み込みます");
             foreach (world world in Config.GetConfig()) {
 
                 if (GetBackupFiles(world.WName, world.WDir).Count() <= 0) {
@@ -495,6 +497,7 @@ class BackupDataListView :ListView {
         BorderStyle = BorderStyle.None;
         Dock = DockStyle.Fill;
         Scrollable = false;
+        Sorting = SortOrder.Descending;
 
         cMenu = new ContextMenuStrip();
 
@@ -538,7 +541,7 @@ class BackupDataListView :ListView {
         List<string> backupFolders = new List<string>(Directory.GetDirectories(AppConfig.backupPath + "\\" + worldObj[2] + "\\" + worldObj[0]));
 
         foreach (string backupFolder in backupFolders) {
-            DateTime time = DateTime.ParseExact(Path.GetFileName(backupFolder), "yyyyMMddHHmm", null);
+            DateTime time = DateTime.ParseExact((Path.GetFileName(backupFolder)).Substring(0,12), "yyyyMMddHHmm", null);
             this.Items.Add(new ListViewItem(new string[] { time.ToString("yyyy-MM-dd HH:mm"), worldObj[0], worldObj[2] }));
 
         }
@@ -984,11 +987,18 @@ public class AppConfig {
             }
             backupPath = datas[0];
             font = new Font(datas[1], 11);
-            doZip = datas[2] == "zip" ? true : false;
+            doZip = (datas[2] == "zip") ? true : false;
             language = datas[3];
             clientSize = new Size(int.Parse(datas[4]), int.Parse(datas[5]));
             clientPoint = new Point(int.Parse(datas[6]), int.Parse(datas[7]));
         }
+        Console.WriteLine("-----loaded appConfig-----");
+        Console.WriteLine($"backupPath:{backupPath}");
+        Console.WriteLine($"font:{font}");
+        Console.WriteLine($"dozip:{doZip}");
+        Console.WriteLine($"clientSize:{clientSize.Width},{clientSize.Height}");
+        Console.WriteLine($"clientPoint:{clientPoint.X},{clientPoint.Y}");
+        Console.WriteLine("--------------------------");
     }
 
     public static void WriteAppConfig() {
@@ -1148,7 +1158,25 @@ internal class AppConfigForm :Form {
         if (AppConfig.doZip != this.doZip.Checked) {
             if (AppConfig.doZip) {
                 //設定上はtrue,formのほうはfalseの場合（falseに変更された場合）
-
+                List<string> backups = new List<string>();
+                foreach (world world in Config.GetConfig()) {
+                    backups.AddRange(BackupDataPanel.GetBackupFiles(world.WName, world.WDir));
+                }
+                if (backups.Count > 0) {
+                    //バックアップが存在している場合
+                    DialogResult r = MessageBox.Show("現在保存されているバックアップをすべて解凍にしますか？", "保存方式", MessageBoxButtons.YesNo);
+                    if (r == DialogResult.Yes) {
+                        // 既存のバックアップ.zipをすべて解凍する
+                        foreach (string backupPath in backups) {
+                            if (backupPath.Contains(".zip")) {
+                                //バックアップがzipの場合
+                                ZipFile.ExtractToDirectory($"{backupPath}.zip",backupPath);
+                                Directory.Delete($"{backupPath}.zip");
+                                //Console.WriteLine($"{Path.GetDirectoryName(backupPath)}\\{Path.GetFileName(backupPath)}をzipにします");
+                            }
+                        }
+                    }
+                }
             }
             else if (!AppConfig.doZip) {
                 //設定上はfalse,formのほうはtrueの場合（trueに変更された場合）
@@ -1158,13 +1186,16 @@ internal class AppConfigForm :Form {
                 }
                 if (backups.Count > 0) {
                     //バックアップが存在している場合
-                    DialogResult r = MessageBox.Show("現在保存されているバックアップをすべてzipにしますか？", "保存方式", MessageBoxButtons.YesNo);
+                    DialogResult r = MessageBox.Show("現在保存されているバックアップをすべて圧縮しますか？", "保存方式", MessageBoxButtons.YesNo);
                     if (r == DialogResult.Yes) {
                         //既存のバックアップをすべてzipに変える
-                        foreach(string backupPath in backups) {
-                            ZipFile.CreateFromDirectory(backupPath, $"{backupPath}.zip");
-                            Directory.Delete(backupPath);
-                            //Console.WriteLine($"{Path.GetDirectoryName(backupPath)}\\{Path.GetFileName(backupPath)}をzipにします");
+                        foreach (string backupPath in backups) {
+                            if (!backupPath.Contains(".zip")) {
+                                //バックアップがzipじゃない場合
+                                ZipFile.CreateFromDirectory(backupPath, $"{backupPath}.zip");
+                                Directory.Delete(backupPath);
+                                //Console.WriteLine($"{Path.GetDirectoryName(backupPath)}\\{Path.GetFileName(backupPath)}をzipにします");
+                            }
                         }
                     }
                 }
