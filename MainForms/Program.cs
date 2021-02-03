@@ -396,6 +396,7 @@ class BackupDataPanel :FlowLayoutPanel {
                     //BackColor = Color.Yellow
                 };
                 if (deadF) {
+                    backupDataDir.Text = "(削除済み)" + world.WName + "/" + world.WDir + "";
                     backupDataDir.ForeColor = Color.Red;
                 }
                 addInfo = new AddInfoButton(world.WPath) {
@@ -451,7 +452,7 @@ class BackupDataPanel :FlowLayoutPanel {
         var button = (AddInfoButton)sender;
         int index = button.id;
         Console.WriteLine("call:addListView");
-        backupDataList = new BackupDataListView(new string[] { button.World.WName, button.World.WPath, button.World.WDir });
+        backupDataList = new BackupDataListView(button.World);
         //if (backupDataList.Items.Count == 0) {
         //    Console.WriteLine("info:not backup folder");
         //    return;
@@ -490,7 +491,7 @@ class AddInfoButton :Button {
     public world World { get; set; }
 
     public AddInfoButton(string path) {
-        Console.WriteLine("info[DEBUG]:" + path);
+        //Console.WriteLine("info[DEBUG]:" + path);
         World = new world(Util.TrimDoubleQuotationMarks(path));
         Text = "バックアップ一覧";
         Width = (int)Util.FontStyle.Size * 14;
@@ -504,7 +505,7 @@ class BackupDataListView :ListView {
     private ColumnHeader clmnBackupTime; // 'バックアップ日時' 列ヘッダ
     private ColumnHeader clmnAffiliationWorldName;  // '所属ワールド名' 列ヘッダ
     private ColumnHeader clmnWorldAffiliationDir;  // '所属ディレクトリ' 列ヘッダ
-    public BackupDataListView(string[] worldObj) {
+    public BackupDataListView(world worldObj) {
         FullRowSelect = true;
         MultiSelect = false;
         Anchor = AnchorStyles.Left | AnchorStyles.Right;
@@ -530,8 +531,9 @@ class BackupDataListView :ListView {
         ToolStripMenuItem openInExplorer = new ToolStripMenuItem() {
             Text = "エクスプローラーで開く(&X)"
         };
+
         openInExplorer.Click += new EventHandler(OpenInExplorer_Click);
-        cMenu.Items.Add(openInExplorer);
+        if(Config.isBackupAlive(worldObj))cMenu.Items.Add(openInExplorer);
 
         this.ContextMenuStrip = cMenu;
         #endregion
@@ -552,14 +554,14 @@ class BackupDataListView :ListView {
         //Console.WriteLine("list height:"+(int)((Items.Count+1) * (Util.FontStyle.Size + 4) * 2));
         Height = (int)((Items.Count + 1) * (Util.FontStyle.Size + 4) * 2);
     }
-    void Load(string[] worldObj) {
-        Console.WriteLine("info:" + worldObj[0] + "の一覧をロードします");
+    void Load(world worldObj) {
+        Console.WriteLine("info:" + worldObj.WName + "の一覧をロードします");
         //Console.WriteLine(AppConfig.backupPath);
-        List<string> backupFolders = new List<string>(Directory.GetDirectories(AppConfig.backupPath + "\\" + worldObj[2] + "\\" + worldObj[0]));
+        List<string> backupFolders = new List<string>(Directory.GetDirectories(AppConfig.backupPath + "\\" + worldObj.WDir + "\\" + worldObj.WName));
 
         foreach (string backupFolder in backupFolders) {
             DateTime time = DateTime.ParseExact((Path.GetFileName(backupFolder)).Substring(0,12), "yyyyMMddHHmm", null);
-            this.Items.Add(new ListViewItem(new string[] { time.ToString("yyyy-MM-dd HH:mm"), worldObj[0], worldObj[2] }));
+            this.Items.Add(new ListViewItem(new string[] { time.ToString("yyyy-MM-dd HH:mm"), worldObj.WName, worldObj.WDir }));
 
         }
     }
@@ -625,10 +627,10 @@ class RestoreFromBackupForm :Form {
             Console.WriteLine($"error:バックアップは存在しません");
             return;
         }
-        else if (!Directory.Exists(backupTarget)) {
-            Console.WriteLine("error:そのワールドデータは存在しません");
-            return;
-        }
+        //else if (!Directory.Exists(backupTarget)) {
+        //    Console.WriteLine("error:そのワールドデータは存在しません");
+        //    return;
+        //}
         this.Text = "バックアップから復元します";
         this.Icon = new Icon(".\\Image\\app.ico");
         this.Font = Util.FontStyle;
@@ -988,11 +990,11 @@ public class Config {
     /// <returns></returns>
     public static bool isBackupAlive(world w) {
         if((w.WPath.Split('\\').ToArray())[w.WPath.Split('\\').ToArray().Count() - 2] == "dead") {
-            Console.WriteLine("info[DEBUG]:バックアップは死んでいます");
+            //Console.WriteLine("info[DEBUG]:バックアップは死んでいます");
             return false;
         }
         else {
-            Console.WriteLine("info[DEBUG]:バックアップは生きています");
+            //Console.WriteLine("info[DEBUG]:バックアップは生きています");
             return true;
         }
     }
