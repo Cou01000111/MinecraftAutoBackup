@@ -315,7 +315,7 @@ class WorldListView :ListView {
         List<world> listDatas = Config.GetConfig();
         int iItemCount = 0;
         foreach (var datas in listDatas) {
-            if (Config.isBackupAlive(datas)) {
+            if (datas.isAlive) {
                 this.Items.Add(new ListViewItem(new string[] { " ", datas.WName, datas.WDir }));
                 //Console.WriteLine(datas.WDoBackup);
                 this.Items[iItemCount].Checked = Convert.ToBoolean(datas.WDoBackup);
@@ -362,17 +362,29 @@ class BackupDataPanel :FlowLayoutPanel {
 
 
         int iCount = 0;
-        if (Config.GetConfig().Count() == 0) {
+        List<string> backups = new List<string>();
+        foreach (var w in Config.GetConfig()) {
+            try {
+                backups.AddRange(Directory.GetDirectories(AppConfig.backupPath + "\\" + w.WDir + "\\" + w.WName));
+            }
+            catch (DirectoryNotFoundException e) {
+                // バックアップがない場合
+                continue;
+            }
+        }
+        if (backups.Count() == 0) {
             Console.WriteLine("info:バックアップが存在しません");
             Label notBackupFile = new Label() {
                 Text = "バックアップが存在しません",
+                Margin = new Padding(10),
             };
             this.Controls.Add(notBackupFile);
         }
         else {
             Console.WriteLine($"{Config.GetConfig().Count()}件のワールドのバックアップを読み込みます");
             foreach (world world in Config.GetConfig()) {
-                bool deadF = !Config.isBackupAlive(world);
+
+                
 
                 ////バックアップがない場合表示しない
                 ////バックアップがなくかつ、元が死んでいる場合はconfigsから削除
@@ -395,7 +407,7 @@ class BackupDataPanel :FlowLayoutPanel {
                     Margin = new Padding((int)Util.FontStyle.Size),
                     //BackColor = Color.Yellow
                 };
-                if (deadF) {
+                if (!world.isAlive) {
                     backupDataDir.Text = "(削除済み)" + world.WName + "/" + world.WDir + "";
                     backupDataDir.ForeColor = Color.Red;
                 }
@@ -426,6 +438,7 @@ class BackupDataPanel :FlowLayoutPanel {
                 this.Controls.Add(panel);
                 iCount++;
             }
+
         }
     }
 
@@ -509,13 +522,14 @@ class BackupDataListView :ListView {
         FullRowSelect = true;
         MultiSelect = false;
         Anchor = AnchorStyles.Left | AnchorStyles.Right;
-        Scrollable = true;
+        Scrollable = false;
         View = View.Details;
         Margin = new Padding(0);
         BorderStyle = BorderStyle.None;
         Dock = DockStyle.Fill;
         Scrollable = false;
         Sorting = SortOrder.Descending;
+        
 
         cMenu = new ContextMenuStrip();
 
@@ -533,7 +547,7 @@ class BackupDataListView :ListView {
         };
 
         openInExplorer.Click += new EventHandler(OpenInExplorer_Click);
-        if(Config.isBackupAlive(worldObj))cMenu.Items.Add(openInExplorer);
+        if(!worldObj.isAlive)cMenu.Items.Add(openInExplorer);
 
         this.ContextMenuStrip = cMenu;
         #endregion
@@ -552,7 +566,8 @@ class BackupDataListView :ListView {
 
         Load(worldObj);
         //Console.WriteLine("list height:"+(int)((Items.Count+1) * (Util.FontStyle.Size + 4) * 2));
-        Height = (int)((Items.Count + 1) * (Util.FontStyle.Size + 4) * 2);
+        var rect = this.GetItemRect(this.Items.Count - 1);
+        Height =  rect.Top + rect.Height;
     }
     void Load(world worldObj) {
         Console.WriteLine("info:" + worldObj.WName + "の一覧をロードします");
@@ -882,16 +897,13 @@ public class Config {
         }
         List<world> removeWorlds = new List<world>();
 
-        //削除されたワールドはconfig.pathの"save"を"dead"とする
+        //configに存在するがhddに存在しない(削除されたワールド)pathをconfigで死亡扱いにする
+        //- 削除されたワールドはconfig.pathの"save"を"dead"とする
+        //+ 【変更】isAliveプロパティを追加したので、そちらで管理
         int wI = 0;
         foreach (world world in worldInConfig) {
             if (!worldInPc.Select(x => x.WPath).ToList().Contains(world.WPath)) {
-                List<string> pasess = Config.configs[wI].WPath.Split('\\').ToList();
-                if(pasess[pasess.Count - 2] == "saves") {
-                    pasess[pasess.Count - 2] = "dead";
-                    Console.WriteLine("info:Kill Success!!");
-                }
-                Config.configs[wI].WPath = string.Join("\\",pasess.ToArray());
+                Config.configs[wI].isAlive = false;
             }
             wI++;
         }
@@ -989,7 +1001,7 @@ public class Config {
     /// <param name="w"></param>
     /// <returns></returns>
     public static bool isBackupAlive(world w) {
-        if((w.WPath.Split('\\').ToArray())[w.WPath.Split('\\').ToArray().Count() - 2] == "dead") {
+        if(w.isAlive) {
             //Console.WriteLine("info[DEBUG]:バックアップは死んでいます");
             return false;
         }
@@ -1265,6 +1277,7 @@ public class world {
     public string WPath { get; set; }
     public string WName { get; set; }
     public string WDir { get; set; }
+    public bool isAlive { get; set; }
     public world(string path) {
         //if (!Directory.Exists(path)) {
         //    Console.WriteLine($"info:不正なpath[{path}]が渡されました");
@@ -1274,6 +1287,7 @@ public class world {
         WPath = path;
         WName = Path.GetFileName(path);
         WDir = Path.GetFileName(Path.GetDirectoryName(Path.GetDirectoryName(path)));
+        isAlive = true;
     }
 
     public world(string path, bool doBackup) {
@@ -1285,6 +1299,7 @@ public class world {
         WPath = path;
         WName = Path.GetFileName(path);
         WDir = Path.GetFileName(Path.GetDirectoryName(Path.GetDirectoryName(path)));
+        isAlive = true;
     }
 
 }
