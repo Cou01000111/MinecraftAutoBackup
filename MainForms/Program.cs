@@ -19,6 +19,8 @@ class Program {
         //起動時処理
         Console.WriteLine("-----起動時処理-------");
 
+        new AppConfig();
+
         if (!File.Exists(Config.configPath)) {
             Console.WriteLine("info:configファイルがないのでconfigファイルを作成します");
             Config.MakeConfig();
@@ -30,7 +32,6 @@ class Program {
 
         Console.WriteLine("----------------------");
         Application.EnableVisualStyles();
-        new AppConfig();
         Application.SetCompatibleTextRenderingDefault(false);
         Application.Run(new WorldListForm());
     }
@@ -312,7 +313,7 @@ class WorldListView :ListView {
 
     public void LoadFromConfigToList() {
         this.Items.Clear();
-        List<world> listDatas = Config.GetConfig();
+        List<World> listDatas = Config.GetConfig();
         int iItemCount = 0;
         foreach (var datas in listDatas) {
             if (datas.isAlive) {
@@ -321,7 +322,7 @@ class WorldListView :ListView {
                 this.Items[iItemCount].Checked = Convert.ToBoolean(datas.WDoBackup);
                 iItemCount++;
             }
-            
+
         }
     }
     private void worldEditForm_Closed(object sender, EventArgs e) {
@@ -367,7 +368,7 @@ class BackupDataPanel :FlowLayoutPanel {
             try {
                 backups.AddRange(Directory.GetDirectories(AppConfig.backupPath + "\\" + w.WDir + "\\" + w.WName));
             }
-            catch (DirectoryNotFoundException e) {
+            catch (DirectoryNotFoundException) {
                 // バックアップがない場合
                 continue;
             }
@@ -382,10 +383,7 @@ class BackupDataPanel :FlowLayoutPanel {
         }
         else {
             Console.WriteLine($"{Config.GetConfig().Count()}件のワールドのバックアップを読み込みます");
-            foreach (world world in Config.GetConfig()) {
-
-                
-
+            foreach (World world in Config.GetConfig()) {
                 ////バックアップがない場合表示しない
                 ////バックアップがなくかつ、元が死んでいる場合はconfigsから削除
                 //if (GetBackupFiles(world.WName, world.WDir).Count() <= 0) {
@@ -501,11 +499,11 @@ class BackupDataPanel :FlowLayoutPanel {
 class AddInfoButton :Button {
     public int id { get; set; }
 
-    public world World { get; set; }
+    public World World { get; set; }
 
     public AddInfoButton(string path) {
         //Console.WriteLine("info[DEBUG]:" + path);
-        World = new world(Util.TrimDoubleQuotationMarks(path));
+        World = new World(Util.TrimDoubleQuotationMarks(path));
         Text = "バックアップ一覧";
         Width = (int)Util.FontStyle.Size * 14;
         Height = (int)Util.FontStyle.Size * 3;
@@ -514,11 +512,11 @@ class AddInfoButton :Button {
 }
 class BackupDataListView :ListView {
     private ContextMenuStrip cMenu;
-    ListViewItem selectedItem = null;
+    private BackupDataListViewItem selectedItem = null;
     private ColumnHeader clmnBackupTime; // 'バックアップ日時' 列ヘッダ
     private ColumnHeader clmnAffiliationWorldName;  // '所属ワールド名' 列ヘッダ
     private ColumnHeader clmnWorldAffiliationDir;  // '所属ディレクトリ' 列ヘッダ
-    public BackupDataListView(world worldObj) {
+    public BackupDataListView(World worldObj) {
         FullRowSelect = true;
         MultiSelect = false;
         Anchor = AnchorStyles.Left | AnchorStyles.Right;
@@ -529,7 +527,7 @@ class BackupDataListView :ListView {
         Dock = DockStyle.Fill;
         Scrollable = false;
         Sorting = SortOrder.Descending;
-        
+
 
         cMenu = new ContextMenuStrip();
 
@@ -547,7 +545,8 @@ class BackupDataListView :ListView {
         };
 
         openInExplorer.Click += new EventHandler(OpenInExplorer_Click);
-        if(!worldObj.isAlive)cMenu.Items.Add(openInExplorer);
+        if (!worldObj.isAlive)
+            cMenu.Items.Add(openInExplorer);
 
         this.ContextMenuStrip = cMenu;
         #endregion
@@ -566,24 +565,33 @@ class BackupDataListView :ListView {
 
         Load(worldObj);
         //Console.WriteLine("list height:"+(int)((Items.Count+1) * (Util.FontStyle.Size + 4) * 2));
-        var rect = this.GetItemRect(this.Items.Count - 1);
-        Height =  rect.Top + rect.Height;
+        if (Items.Count > 0) {
+            var rect = this.GetItemRect(this.Items.Count-1);
+            Height = rect.Top + rect.Height + 10;
+        }
     }
-    void Load(world worldObj) {
+    void Load(World worldObj) {
         Console.WriteLine("info:" + worldObj.WName + "の一覧をロードします");
         //Console.WriteLine(AppConfig.backupPath);
-        List<string> backupFolders = new List<string>(Directory.GetDirectories(AppConfig.backupPath + "\\" + worldObj.WDir + "\\" + worldObj.WName));
-
-        foreach (string backupFolder in backupFolders) {
-            DateTime time = DateTime.ParseExact((Path.GetFileName(backupFolder)).Substring(0,12), "yyyyMMddHHmm", null);
-            this.Items.Add(new ListViewItem(new string[] { time.ToString("yyyy-MM-dd HH:mm"), worldObj.WName, worldObj.WDir }));
-
+        try {
+            List<string> backupFolders = new List<string>(GetBackups(worldObj));
+            foreach (string backupFolder in backupFolders) {
+                DateTime time = DateTime.ParseExact((Path.GetFileName(backupFolder)).Substring(0, 12), "yyyyMMddHHmm", null);
+                this.Items.Add(new BackupDataListViewItem(new string[] { time.ToString("yyyy-MM-dd HH:mm"), worldObj.WName, worldObj.WDir },worldObj));
+            }
         }
+        catch (DirectoryNotFoundException) {
+            Console.WriteLine("info:バックアップが存在しません");
+        }
+    }
+
+    private List<string> GetBackups(World w) {
+        return Directory.GetDirectories(AppConfig.backupPath + "\\" + w.WDir + "\\" + w.WName).ToList();
     }
 
     void menu_Opening(object sender, CancelEventArgs e) {
         Point p = this.PointToClient(Cursor.Position);
-        ListViewItem item = this.HitTest(p).Item;
+        BackupDataListViewItem item = this.HitTest(p).Item as BackupDataListViewItem;
         if (item == null) {
             e.Cancel = true;
         }
@@ -603,8 +611,8 @@ class BackupDataListView :ListView {
         if (selectedItem != null) {
             DateTime dt = DateTime.ParseExact(selectedItem.SubItems[0].Text, "yyyy-MM-dd HH:mm", null);
             string fileName = dt.ToString("yyyyMMddHHmm");
-            string src = $"{AppConfig.backupPath}\\{selectedItem.SubItems[2].Text}\\{selectedItem.SubItems[1].Text}\\{fileName}";
-            string tar = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\{selectedItem.SubItems[2].Text}\\saves\\{selectedItem.SubItems[1].Text}";
+            string src = $"{AppConfig.backupPath}\\{selectedItem.SubItems[2].Text}\\{selectedItem.world}\\{fileName}";
+            World tar = selectedItem.world;
             RestoreFromBackupForm restoreFrom = new RestoreFromBackupForm(src, tar);
             restoreFrom.Show();
         }
@@ -618,6 +626,14 @@ class BackupDataListView :ListView {
 }
 
 #endregion
+
+class BackupDataListViewItem :ListViewItem {
+    public BackupDataListViewItem(string[] items,World w) : base(items) {
+        world = w;
+    }
+
+    public World world { get; set; }
+}
 
 class RestoreFromBackupForm :Form {
     FlowLayoutPanel panel;
@@ -633,11 +649,11 @@ class RestoreFromBackupForm :Form {
     １．バックアップ元を消す
     ２．バックアップ先を上書きしない(別名で新規作成する)
     */
-    public RestoreFromBackupForm(string backupSourcePath, string backupTarget) {
+    public RestoreFromBackupForm(string backupSourcePath, World backupTarget) {
         Console.WriteLine($"info: src[{backupSourcePath}]");
-        Console.WriteLine($"info: tar[{backupTarget}]");
+        Console.WriteLine($"info: tar[{backupTarget.WPath}]");
         pathSrc = backupSourcePath;
-        pathTar = backupTarget;
+        pathTar = backupTarget.WPath;
         if (!Directory.Exists(backupSourcePath)) {
             Console.WriteLine($"error:バックアップは存在しません");
             return;
@@ -662,7 +678,7 @@ class RestoreFromBackupForm :Form {
             WrapContents = false,
             FlowDirection = FlowDirection.TopDown
         };
-        DateTime time = DateTime.ParseExact(Path.GetFileName(backupSourcePath), "yyyyMMddHHmm", null);
+        DateTime time = DateTime.ParseExact(Path.GetFileName(pathSrc), "yyyyMMddHHmm", null);
         ;
 
         Font lFont = (Util.FontStyle);
@@ -677,17 +693,15 @@ class RestoreFromBackupForm :Form {
         };
 
         removeBackup = new CheckBox() {
-            Text = $"バックアップ元（{Path.GetFileName(backupSourcePath)}）を削除する",
+            Text = $"バックアップ元（{Path.GetFileName(pathSrc)}）を削除する",
             Width = this.Width - this.Padding.Left * 2 - this.panel.Padding.Left * 2 - 10,
             Height = (int)Util.FontStyle.Height * 2 + 2,
             //BackColor = Color.Blue,
             //AutoSize = true,
         };
 
-        Console.WriteLine("a" + Path.GetFileName(Path.GetDirectoryName(Path.GetDirectoryName(backupTarget))));
-        Console.WriteLine("b" + Path.GetFileName(backupTarget));
         dontOverwriting = new CheckBox() {
-            Text = $"バックアップ先（{Path.GetFileName(Path.GetDirectoryName(Path.GetDirectoryName(backupTarget)))}\\saves\\{Path.GetFileName(backupTarget)}）を上書きしない\n(別名で新規作成する)",
+            Text = $"バックアップ先（{Path.GetFileName(Path.GetDirectoryName(Path.GetDirectoryName(pathTar)))}\\saves\\{Path.GetFileName(pathTar)}）を上書きしない\n(別名で新規作成する)",
             Width = this.Width - this.Padding.Left * 2 - this.panel.Padding.Left * 2 - 10,
             Height = (int)Util.FontStyle.Height * 6,
             //BackColor = Color.Blue,
@@ -703,10 +717,13 @@ class RestoreFromBackupForm :Form {
         };
         doRestore.Click += new EventHandler(doRestore_Click);
 
-        Console.WriteLine($"info:{backupSourcePath}を{backupTarget}に上書きします");
+        Console.WriteLine($"info:{pathSrc}を{pathTar}に上書きします");
         panel.Controls.Add(description);
         panel.Controls.Add(removeBackup);
-        panel.Controls.Add(dontOverwriting);
+        if(!backupTarget.isAlive){
+            //バックアップ先ワールドが生きている場合
+            panel.Controls.Add(dontOverwriting);
+        }
         panel.Controls.Add(doRestore);
         this.Controls.Add(panel);
 
@@ -797,7 +814,7 @@ public class Config {
     "バックアップの可否","ワールド名","ワールドへのパス","ワールドの所属するディレクトリ"
     が入っている
     */
-    public static List<world> configs = new List<world>();
+    public static List<World> configs = new List<World>();
 
     public static string configPath = @".\Config\config.txt";
 
@@ -807,7 +824,7 @@ public class Config {
         return datas[1] == "\"" + worldName + "\"" && datas[3] == "\"" + worldDir + "\"";
     }
 
-    public static List<world> GetConfig() => configs;
+    public static List<World> GetConfig() => configs;
 
     public static void MakeConfig() {
         Console.WriteLine("call:MakeConfig");
@@ -817,7 +834,7 @@ public class Config {
 
         string value = $"info:configファイル[{configPath}]生成完了";
         Console.WriteLine(value);
-        List<world> worlds = GetWorldDataFromHDD();
+        List<World> worlds = GetWorldDataFromHDD();
         //List<world> worlds = new List<world>();
         // ゲームディレクトリが見つからなかった場合
         if (worlds.Count <= 0) {
@@ -859,7 +876,7 @@ public class Config {
             while (reader.Peek() >= 0) {
                 List<string> datas = reader.ReadLine().Split(',').ToList();
                 datas = datas.Select(x => Util.TrimDoubleQuotationMarks(x)).ToList();
-                configs.Add(new world(datas[2], Convert.ToBoolean(datas[0])));
+                configs.Add(new World(datas[2], Convert.ToBoolean(datas[0]), Convert.ToBoolean(datas[4])));
             }
             Console.WriteLine($"info:Configから{configs.Count()}件のワールドを読み込みました");
         }
@@ -871,8 +888,8 @@ public class Config {
     /// </summary>
     public static void Write() {
         List<string> text = new List<string>();
-        foreach (world config in configs) {
-            text.Add($"\"{config.WDoBackup}\",\"{config.WName}\",\"{config.WPath}\",\"{config.WDir}\"\n");
+        foreach (World config in configs) {
+            text.Add($"\"{config.WDoBackup}\",\"{config.WName}\",\"{config.WPath}\",\"{config.WDir}\",\"{config.isAlive}\"\n");
         }
         File.WriteAllText(configPath, string.Join("", text), Encoding.GetEncoding("utf-8"));
     }
@@ -881,56 +898,76 @@ public class Config {
     /// <summary>
     /// Configファイルを更新する
     /// </summary>
-    public static List<world> ReloadConfig() {
+    public static List<World> ReloadConfig() {
         Console.WriteLine("call:reloadConfig");
-        List<world> worldInPc = GetWorldDataFromHDD();
-        List<world> worldInConfig = GetConfig();
+        List<World> worldInPc = GetWorldDataFromHDD();
+        List<World> worldInConfig = GetConfig();
         //Console.WriteLine(worldInConfig.Count());
         //Console.WriteLine(worldInPc.Count());
 
         //configに存在しないpathを追加する
-        foreach (world pc in worldInPc) {
+        foreach (World pc in worldInPc) {
             if (!worldInConfig.Select(x => x.WPath).ToList().Contains(pc.WPath)) {
                 Console.WriteLine($"info:ADD {pc.WName}");
                 configs.Add(pc);
             }
         }
-        List<world> removeWorlds = new List<world>();
+        List<World> removeWorlds = new List<World>();
 
         //configに存在するがhddに存在しない(削除されたワールド)pathをconfigで死亡扱いにする
         //- 削除されたワールドはconfig.pathの"save"を"dead"とする
         //+ 【変更】isAliveプロパティを追加したので、そちらで管理
         int wI = 0;
-        foreach (world world in worldInConfig) {
+        foreach (World world in worldInConfig) {
             if (!worldInPc.Select(x => x.WPath).ToList().Contains(world.WPath)) {
-                Config.configs[wI].isAlive = false;
+                if (GetBackups(world).Count() == 0) {
+                    // バックアップが一つもない場合はconfigから削除
+                    Console.WriteLine($"info:バックアップが一つもないのでRemoveWorldsに{world.WName}を追加");
+                    removeWorlds.Add(world);
+                }
+                else {
+                    //バックアップが一つでもある場合は、backup一覧に表示するために殺すだけにする
+                    Console.WriteLine($"info:{world.WName}のバックアップが残っているため殺害");
+                    Config.configs[wI].isAlive = false;
+                }
             }
             wI++;
         }
+        
+        foreach (World w in removeWorlds) {
+            if (configs.Remove(w)) {
+                Console.WriteLine($"info:REMOVE {w.WName} suc");
+            }
+            else {
+                Console.WriteLine($"info:REMOVE {w.WName} 見つかりませんでした");
+            }
+        }
+
         Write();
-        //foreach (world w in removeWorlds) {
-        //    //if (configs.Remove(w)) {
-        //    //    Console.WriteLine($"info:REMOVE {w.WName} suc");
-        //    //}
-        //    //else {
-        //    //    Console.WriteLine($"info:REMOVE {w.WName} 見つかりませんでした");
-        //    //}
-        //}
 
         return removeWorlds;
+    }
+    private static List<string> GetBackups(World w) {
+        try {
+            return Directory.GetDirectories(AppConfig.backupPath + "\\" + w.WDir + "\\" + w.WName).ToList();
+        }
+        catch (DirectoryNotFoundException) {
+            Console.WriteLine($"{AppConfig.backupPath}\\{w.WDir}\\{w.WName} にアクセスできませんでした");
+            return new List<string>();
+        }
     }
 
     public static void Change(string worldName, string worldDir, string doBackup) {
         Console.WriteLine("call:Change");
         Console.WriteLine("info:GET  worldName: " + worldName + ",  worldDir: " + worldDir + ",  dobackup: " + doBackup);
-        List<world> _configs = new List<world>();
-        foreach (world config in configs) {
+        List<World> _configs = new List<World>();
+        foreach (World config in configs) {
             if (config.WName == worldName && config.WDir == worldDir) {
                 config.WDoBackup = bool.Parse(doBackup);
-                _configs.Add(new world(config.WPath, Convert.ToBoolean(doBackup)));
+                _configs.Add(new World(config.WPath, Convert.ToBoolean(doBackup), config.isAlive));
             }
             else {
-                _configs.Add(new world(config.WPath, config.WDoBackup));
+                _configs.Add(new World(config.WPath, config.WDoBackup, config.isAlive));
             }
         }
         configs = _configs;
@@ -941,9 +978,9 @@ public class Config {
     /// PCからワールドデータ一覧を取得
     /// </summary>
     /// <returns>取得したList<world></returns>
-    private static List<world> GetWorldDataFromHDD() {
+    private static List<World> GetWorldDataFromHDD() {
         Console.WriteLine("call:GetWorldDataFromPC");
-        List<world> worlds = new List<world>();
+        List<World> worlds = new List<World>();
         List<string> _gameDirectory = Directory.GetDirectories(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)).ToList();
         List<string> gameDirectory = new List<string>();
         foreach (string dir in _gameDirectory) {
@@ -957,7 +994,7 @@ public class Config {
         foreach (string dir in gameDirectory) {
             List<string> _worlds = Directory.GetDirectories($"{dir}\\saves").ToList();
             foreach (string worldPath in _worlds) {
-                worlds.Add(new world(Util.TrimDoubleQuotationMarks(worldPath)));
+                worlds.Add(new World(Util.TrimDoubleQuotationMarks(worldPath)));
             }
         }
         //foreach(var a in worlds) {
@@ -971,14 +1008,14 @@ public class Config {
     /// </summary>
     /// <param name="gameDirectory"></param>
     /// <returns>取得したList<world></returns>
-    private static List<world> GetWorldDataFromHDD(List<string> gameDirectory) {
-        List<world> worlds = new List<world>();
+    private static List<World> GetWorldDataFromHDD(List<string> gameDirectory) {
+        List<World> worlds = new List<World>();
         Console.WriteLine("call:GetWorldDataFromPC");
         foreach (string dir in gameDirectory) {
             if (Directory.Exists($"{dir}\\saves")) {
                 List<string> _worlds = Directory.GetDirectories($"{dir}\\saves").ToList();
                 foreach (string worldPath in _worlds) {
-                    worlds.Add(new world(Util.TrimDoubleQuotationMarks(worldPath)));
+                    worlds.Add(new World(Util.TrimDoubleQuotationMarks(worldPath)));
                 }
             }
         }
@@ -990,7 +1027,7 @@ public class Config {
 
     public static void ConsoleConfig() {
         Console.WriteLine("----Configs----");
-        foreach (world w in configs) {
+        foreach (World w in configs) {
             Console.WriteLine($"[{w.WDoBackup},{w.WName},{w.WPath},{w.WDir},]");
         }
         Console.WriteLine("---------------");
@@ -1000,8 +1037,8 @@ public class Config {
     /// </summary>
     /// <param name="w"></param>
     /// <returns></returns>
-    public static bool isBackupAlive(world w) {
-        if(w.isAlive) {
+    public static bool isBackupAlive(World w) {
+        if (w.isAlive) {
             //Console.WriteLine("info[DEBUG]:バックアップは死んでいます");
             return false;
         }
@@ -1010,63 +1047,6 @@ public class Config {
             return true;
         }
     }
-}
-
-
-public class AppConfig {
-    /*
-    アプリ自体の設定を保存するtxtファイル
-    バックアップを保存するpath
-    フォント名
-    フォント大きさ
-    保存形式(zip,normal)
-    言語(jp,en)
-
-    */
-    public static string backupPath { get; set; }
-    public static Font font { get; set; }
-    public static bool doZip { get; set; }
-    public static string language { get; set; }
-    public static Size clientSize { get; set; }
-    public static Point clientPoint { get; set; }
-    public static string appConfigPath = ".\\Config\\AppConfig.txt";
-
-    public AppConfig() {
-        if (!File.Exists(appConfigPath)) {
-            //AppConfigファイルがなかった場合
-            string Text =
-                $"{System.Environment.GetFolderPath(Environment.SpecialFolder.Personal)}\\MinecraftAutoBackup\nMeiryo UI\nnormal\nja\n600\n600\n0\n0";
-            File.WriteAllText(appConfigPath, Text);
-        }
-        List<string> datas = new List<string>();
-        using (StreamReader reader = new StreamReader(appConfigPath, Encoding.GetEncoding("utf-8"))) {
-            while (reader.Peek() >= 0) {
-                datas.Add(reader.ReadLine());
-            }
-            backupPath = datas[0];
-            font = new Font(datas[1], 11);
-            doZip = (datas[2] == "zip") ? true : false;
-            language = datas[3];
-            clientSize = new Size(int.Parse(datas[4]), int.Parse(datas[5]));
-            clientPoint = new Point(int.Parse(datas[6]), int.Parse(datas[7]));
-        }
-        Console.WriteLine("-----loaded appConfig-----");
-        Console.WriteLine($"backupPath:{backupPath}");
-        Console.WriteLine($"font:{font}");
-        Console.WriteLine($"dozip:{doZip}");
-        Console.WriteLine($"clientSize:{clientSize.Width},{clientSize.Height}");
-        Console.WriteLine($"clientPoint:{clientPoint.X},{clientPoint.Y}");
-        Console.WriteLine("--------------------------");
-    }
-
-    public static void WriteAppConfig() {
-        string Text =
-            $"{backupPath}\n{font.Name}\n" +
-            (doZip ? "zip" : "normal") +
-            $"\n{language}\n{clientSize.Width}\n{clientSize.Height}\n{clientPoint.X}\n{clientPoint.Y}";
-        File.WriteAllText(appConfigPath, Text);
-    }
-
 }
 
 //ちょっとFormの書き方変えてみたやつ
@@ -1217,7 +1197,7 @@ internal class AppConfigForm :Form {
             if (AppConfig.doZip) {
                 //設定上はtrue,formのほうはfalseの場合（falseに変更された場合）
                 List<string> backups = new List<string>();
-                foreach (world world in Config.GetConfig()) {
+                foreach (World world in Config.GetConfig()) {
                     backups.AddRange(BackupDataPanel.GetBackupFiles(world.WName, world.WDir));
                 }
                 if (backups.Count > 0) {
@@ -1228,7 +1208,7 @@ internal class AppConfigForm :Form {
                         foreach (string backupPath in backups) {
                             if (backupPath.Contains(".zip")) {
                                 //バックアップがzipの場合
-                                ZipFile.ExtractToDirectory($"{backupPath}.zip",backupPath);
+                                ZipFile.ExtractToDirectory($"{backupPath}.zip", backupPath);
                                 Directory.Delete($"{backupPath}.zip");
                                 //Console.WriteLine($"{Path.GetDirectoryName(backupPath)}\\{Path.GetFileName(backupPath)}をzipにします");
                             }
@@ -1239,7 +1219,7 @@ internal class AppConfigForm :Form {
             else if (!AppConfig.doZip) {
                 //設定上はfalse,formのほうはtrueの場合（trueに変更された場合）
                 List<string> backups = new List<string>();
-                foreach (world world in Config.GetConfig()) {
+                foreach (World world in Config.GetConfig()) {
                     backups.AddRange(BackupDataPanel.GetBackupFiles(world.WName, world.WDir));
                 }
                 if (backups.Count > 0) {
@@ -1269,37 +1249,4 @@ internal class AppConfigForm :Form {
     private void cansel_Click(object sender, EventArgs e) {
         this.Close();
     }
-}
-
-
-public class world {
-    public bool WDoBackup { get; set; }
-    public string WPath { get; set; }
-    public string WName { get; set; }
-    public string WDir { get; set; }
-    public bool isAlive { get; set; }
-    public world(string path) {
-        //if (!Directory.Exists(path)) {
-        //    Console.WriteLine($"info:不正なpath[{path}]が渡されました");
-        //    return;
-        //}
-        WDoBackup = true;
-        WPath = path;
-        WName = Path.GetFileName(path);
-        WDir = Path.GetFileName(Path.GetDirectoryName(Path.GetDirectoryName(path)));
-        isAlive = true;
-    }
-
-    public world(string path, bool doBackup) {
-        //if (!Directory.Exists(path)) {
-        //    Console.WriteLine($"info:不正なpath[{path}]が渡されました");
-        //    return;
-        //}
-        WDoBackup = doBackup;
-        WPath = path;
-        WName = Path.GetFileName(path);
-        WDir = Path.GetFileName(Path.GetDirectoryName(Path.GetDirectoryName(path)));
-        isAlive = true;
-    }
-
 }

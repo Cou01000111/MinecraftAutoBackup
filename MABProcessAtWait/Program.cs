@@ -74,6 +74,7 @@ namespace MABProcessAtWait {
         System.Windows.Forms.Timer timer;
         string backupDataPath;
         NotifyIcon notifyIcon;
+        bool isRunning = false;
 
         public Form1() {
             backupDataPath = AppConfig.backupPath;
@@ -84,7 +85,7 @@ namespace MABProcessAtWait {
             timer = new System.Windows.Forms.Timer() {
                 Enabled = true
             };
-            timer.Interval = 2000;
+            timer.Interval = 1000;
             timer.Tick += new EventHandler(timer_Tick);
 
             notifyIcon = new NotifyIcon();
@@ -113,9 +114,15 @@ namespace MABProcessAtWait {
         }
 
         void timer_Tick(object sender, EventArgs e) {
-            if (Process.GetProcessesByName("MinecraftLauncher").Length > 0) {
-                timer.Enabled = false;
-                Console.WriteLine("Minecraft Lancherの起動を検知しました");
+            // lancherが起動してない場合 => 何もしない
+            // lancherが起動していてflagがfalse => flagをtrueにしてバックアップ動作
+            // lancherが起動していてflagがtrue => 何もしない
+            // lancherが起動していなくてflagがtrue => flagをfalseにする
+            if (Process.GetProcessesByName("MinecraftLauncher").Length > 0 && !isRunning) {
+                isRunning = true;
+                Console.WriteLine("info:Minecraft Lancherの起動を検知しました");
+                Console.WriteLine("info:isRunningがfalseに設定されていました");
+                Console.WriteLine("info:バックアッププロセスを始めます");
                 notifyIcon.Icon = new Icon(".\\Image\\app_sub_doing.ico");
                 int backupCount = 0;
                 ContextMenuStrip menu = new ContextMenuStrip();
@@ -166,6 +173,10 @@ namespace MABProcessAtWait {
                 timer.Enabled = true;
                 notifyIcon.Icon = new Icon(".\\Image\\app_sub.ico");
                 notifyIcon.Text = "MAB待機モジュール";
+            }else if(!(Process.GetProcessesByName("MinecraftLauncher").Length > 0) && isRunning) {
+                Console.WriteLine("info:ランチャーの停止を検知しました");
+                Console.WriteLine("info:isRunningにfalseを設定します");
+                isRunning = false;
             }
         }
 
