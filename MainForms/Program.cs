@@ -566,7 +566,7 @@ class BackupDataListView :ListView {
         Load(worldObj);
         //Console.WriteLine("list height:"+(int)((Items.Count+1) * (Util.FontStyle.Size + 4) * 2));
         if (Items.Count > 0) {
-            var rect = this.GetItemRect(this.Items.Count-1);
+            var rect = this.GetItemRect(this.Items.Count - 1);
             Height = rect.Top + rect.Height + 10;
         }
     }
@@ -577,7 +577,7 @@ class BackupDataListView :ListView {
             List<string> backupFolders = new List<string>(GetBackups(worldObj));
             foreach (string backupFolder in backupFolders) {
                 DateTime time = DateTime.ParseExact((Path.GetFileName(backupFolder)).Substring(0, 12), "yyyyMMddHHmm", null);
-                this.Items.Add(new BackupDataListViewItem(new string[] { time.ToString("yyyy-MM-dd HH:mm"), worldObj.WName, worldObj.WDir },worldObj));
+                this.Items.Add(new BackupDataListViewItem(new string[] { time.ToString("yyyy-MM-dd HH:mm"), worldObj.WName, worldObj.WDir }, worldObj));
             }
         }
         catch (DirectoryNotFoundException) {
@@ -628,7 +628,7 @@ class BackupDataListView :ListView {
 #endregion
 
 class BackupDataListViewItem :ListViewItem {
-    public BackupDataListViewItem(string[] items,World w) : base(items) {
+    public BackupDataListViewItem(string[] items, World w) : base(items) {
         world = w;
     }
 
@@ -720,7 +720,7 @@ class RestoreFromBackupForm :Form {
         Console.WriteLine($"info:{pathSrc}を{pathTar}に上書きします");
         panel.Controls.Add(description);
         panel.Controls.Add(removeBackup);
-        if(!backupTarget.isAlive){
+        if (!backupTarget.isAlive) {
             //バックアップ先ワールドが生きている場合
             panel.Controls.Add(dontOverwriting);
         }
@@ -900,40 +900,62 @@ public class Config {
     /// </summary>
     public static List<World> ReloadConfig() {
         Console.WriteLine("call:reloadConfig");
-        List<World> worldInPc = GetWorldDataFromHDD();
+        List<World> worldInHdd = GetWorldDataFromHDD();
         List<World> worldInConfig = GetConfig();
-        //Console.WriteLine(worldInConfig.Count());
-        //Console.WriteLine(worldInPc.Count());
+        Console.WriteLine($"config: {worldInConfig.Count()}");
+        Console.WriteLine($"HDD   : {worldInHdd.Count()}");
 
-        //configに存在しないpathを追加する
-        foreach (World pc in worldInPc) {
-            if (!worldInConfig.Select(x => x.WPath).ToList().Contains(pc.WPath)) {
+        int i = 0;
+        //configに存在しないpathをconfigに追加する
+        foreach (World pc in worldInHdd) {
+            Console.WriteLine($"pc:{i}回目");
+            //dobackup以外を比較して判定
+            //List<WorldForComparison> _comp = worldInConfig.Select(x => new WorldForComparison(x)).ToList();
+            if (!worldInConfig.Select(x => $"{x.WPath}_{x.isAlive}").ToList().Contains($"{pc.WPath}_{pc.isAlive}")) {
                 Console.WriteLine($"info:ADD {pc.WName}");
                 configs.Add(pc);
             }
+            i++;
         }
         List<World> removeWorlds = new List<World>();
+        Console.WriteLine($"config: {worldInConfig.Count()}");
+        Console.WriteLine($"HDD   : {worldInHdd.Count()}");
 
+        i = 0;
         //configに存在するがhddに存在しない(削除されたワールド)pathをconfigで死亡扱いにする
-        //- 削除されたワールドはconfig.pathの"save"を"dead"とする
-        //+ 【変更】isAliveプロパティを追加したので、そちらで管理
+        //isAliveプロパティを追加したので、そちらで管理
         int wI = 0;
+        //Console.WriteLine("-----config一覧-----");
+        //foreach(var a in worldInHdd.Select(x => new WorldForComparison(x)).ToList()) {
+        //    Console.WriteLine($"pc : {a.path}/{a.isAlive.ToString()}");
+        //}
+        //Console.WriteLine("--------------------");
         foreach (World world in worldInConfig) {
-            if (!worldInPc.Select(x => x.WPath).ToList().Contains(world.WPath)) {
+            WorldForComparison cf = new WorldForComparison(world);
+            Console.WriteLine($"config:{i}回目");
+            //dobackup以外を比較して判定
+            if (!worldInHdd.Select( x => $"{x.WPath}_{x.isAlive}").ToList().Contains($"{world.WPath}_{world.isAlive}")) {
+                //config内のworldがHDDになかった場合
                 if (GetBackups(world).Count() == 0) {
                     // バックアップが一つもない場合はconfigから削除
                     Console.WriteLine($"info:バックアップが一つもないのでRemoveWorldsに{world.WName}を追加");
                     removeWorlds.Add(world);
                 }
                 else {
-                    //バックアップが一つでもある場合は、backup一覧に表示するために殺すだけにする
-                    Console.WriteLine($"info:{world.WName}のバックアップが残っているため殺害");
-                    Config.configs[wI].isAlive = false;
+                    //if (world.isAlive) {
+                        //バックアップが一つでもある場合は、backup一覧に表示するために殺すだけにする
+                        Console.WriteLine($"info:{world.WName}のバックアップが残っているため殺害");
+                        Config.configs[wI].isAlive = false;
+                    //}
                 }
             }
             wI++;
+            i++;
         }
-        
+
+        Console.WriteLine($"config: {worldInConfig.Count()}");
+        Console.WriteLine($"HDD   : {worldInHdd.Count()}");
+
         foreach (World w in removeWorlds) {
             if (configs.Remove(w)) {
                 Console.WriteLine($"info:REMOVE {w.WName} suc");
@@ -944,6 +966,9 @@ public class Config {
         }
 
         Write();
+
+        Console.WriteLine($"config: {worldInConfig.Count()}");
+        Console.WriteLine($"HDD   : {worldInHdd.Count()}");
 
         return removeWorlds;
     }
@@ -1248,5 +1273,15 @@ internal class AppConfigForm :Form {
     }
     private void cansel_Click(object sender, EventArgs e) {
         this.Close();
+    }
+}
+
+public class WorldForComparison {
+    public string path { get; set; }
+    public bool isAlive { get; set; }
+
+    public WorldForComparison(World w) {
+        path = w.WPath;
+        isAlive = w.isAlive;
     }
 }
