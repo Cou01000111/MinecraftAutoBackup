@@ -406,7 +406,6 @@ class BackupDataPanel :FlowLayoutPanel {
                     //BackColor = Color.Yellow
                 };
                 if (!world.isAlive) {
-                    backupDataDir.Text = "(削除済み)" + world.WName + "/" + world.WDir + "";
                     backupDataDir.ForeColor = Color.Red;
                 }
                 addInfo = new AddInfoButton(world.WPath) {
@@ -942,11 +941,21 @@ public class Config {
                     removeWorlds.Add(world);
                 }
                 else {
-                    //if (world.isAlive) {
+                    if (world.isAlive) {
                         //バックアップが一つでもある場合は、backup一覧に表示するために殺すだけにする
                         Console.WriteLine($"info:{world.WName}のバックアップが残っているため殺害");
                         Config.configs[wI].isAlive = false;
-                    //}
+                        int count = 1;
+                        while (Directory.Exists($"{AppConfig.backupPath}\\{Config.configs[wI].WDir}\\{Config.configs[wI].WName}_(削除済み)_{count}")) {
+                            Console.WriteLine($"info: path[ {AppConfig.backupPath}\\{Config.configs[wI].WDir}\\{Config.configs[wI].WName}_(削除済み)_{count} ]");
+                            count++;
+                        }
+                        
+                        Directory.Move($"{AppConfig.backupPath}\\{ Config.configs[wI].WDir}\\{ Config.configs[wI].WName}",
+                            $"{AppConfig.backupPath}\\{ Config.configs[wI].WDir}\\{ Config.configs[wI].WName}_(削除済み)_{count}");
+                        Config.configs[wI].WPath += "_(削除済み)_" + count;
+                        Config.configs[wI].WName += "_(削除済み)_" + count;
+                    }
                 }
             }
             wI++;
