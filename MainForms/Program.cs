@@ -1324,7 +1324,7 @@ internal class AppConfigForm :Form {
                             if (!backupPath.Contains(".zip")) {
                                 //バックアップがzipじゃない場合
                                 ZipFile.CreateFromDirectory(backupPath, $"{backupPath}.zip");
-                                Directory.Delete(backupPath);
+                                Directory.Delete(backupPath,true);
                                 //Console.WriteLine($"{Path.GetDirectoryName(backupPath)}\\{Path.GetFileName(backupPath)}をzipにします");
                             }
                         }
