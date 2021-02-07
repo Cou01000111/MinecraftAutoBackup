@@ -368,8 +368,9 @@ class BackupDataPanel :FlowLayoutPanel {
             try {
                 backups.AddRange(Directory.GetDirectories(AppConfig.BackupPath + "\\" + w.WDir + "\\" + w.WName));
             }
-            catch (DirectoryNotFoundException) {
+            catch (DirectoryNotFoundException e) {
                 // バックアップがない場合
+                Console.WriteLine(e.Message);
                 continue;
             }
         }
@@ -1321,12 +1322,18 @@ internal class AppConfigForm :Form {
                     if (r == DialogResult.Yes) {
                         //既存のバックアップをすべてzipに変える
                         foreach (string backupPath in backups) {
-                            if (!backupPath.Contains(".zip")) {
-                                //バックアップがzipじゃない場合
-                                ZipFile.CreateFromDirectory(backupPath, $"{backupPath}.zip");
-                                Directory.Delete(backupPath,true);
-                                //Console.WriteLine($"{Path.GetDirectoryName(backupPath)}\\{Path.GetFileName(backupPath)}をzipにします");
-                            }
+                            Task t = Task.Run(() => {
+                                // バックアップをzipにして、元バックアップを消すのは非同期で
+                                if (!backupPath.Contains(".zip")) {
+                                    //バックアップがzipじゃない場合
+                                    ZipFile.CreateFromDirectory(backupPath, $"{backupPath}.zip");
+                                    Console.WriteLine($"info: [{backupPath}]zip化完了");
+                                    Directory.Delete(backupPath, true);
+                                    Console.WriteLine($"info: [{backupPath}]削除完了");
+                                    //Console.WriteLine($"{Path.GetDirectoryName(backupPath)}\\{Path.GetFileName(backupPath)}をzipにします");
+                                }
+                                
+                            });
                         }
                     }
                 }
