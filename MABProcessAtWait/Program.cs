@@ -73,7 +73,7 @@ namespace MABProcessAtWait {
         bool isRunning = false;
 
         public Form1() {
-            backupDataPath = AppConfig.backupPath;
+            backupDataPath = AppConfig.BackupPath;
             this.ShowInTaskbar = false;
             this.Icon = new Icon(".\\Image\\app.ico");
             this.FormClosing += new FormClosingEventHandler(Form1_Closing);
@@ -129,39 +129,31 @@ namespace MABProcessAtWait {
                 menu.Items.Add(exit);
                 notifyIcon.ContextMenuStrip = menu;
 
-                List<string> worldPasses = GetWorldPasses();
+                List<string> worldPasses = GetWorldPasses();// バックアップをするワールドへのパス一覧
                 string nowTime = DateTime.Now.ToString("yyyyMMddHHmm");
                 if (worldPasses.Count == 0) {
                     Console.WriteLine("info:どうやらバックアップ予定のデータはないようです");
                 }
+
                 notifyIcon.Text = $"{backupCount}/{worldPasses.Count}";
+
                 foreach (string worldPath in worldPasses) {
                     notifyIcon.Text = $"{backupCount++}/{worldPasses.Count}";
-                    if (worldPath != "dead") {
-                        //前回のリロードとバックアップまでの間にワールドが消された場合
-                        try { doBackup(worldPath, nowTime); }
-                        catch (DirectoryNotFoundException dnfe) {
-                            string backupPath = backupDataPath + "\\" + Path.GetFileName(Directory.GetParent(Directory.GetParent(worldPath).ToString()).ToString()) + "\\" + Path.GetFileName(worldPath) + "\\" + nowTime;
-                            string worldBackupPath = backupDataPath + "\\" + Path.GetFileName(Directory.GetParent(Directory.GetParent(worldPath).ToString()).ToString()) + "\\" + Path.GetFileName(worldPath);
-                            Console.Error.WriteLine(worldPath + ":DirectoryNotFoundException : " + dnfe.Message);
-                            //if (Directory.GetDirectories(worldBackupPath).Count() != 0) {
-                                DialogResult r = MessageBox.Show(
-                                $"バックアップ予定のワールドデータ[{Path.GetFileName(worldPath)}]が見つかりませんでした。",
-                                "Minecraft Auto Backup",
-                                MessageBoxButtons.YesNo);
-                                //if (r == DialogResult.Yes) {
-                                //    DialogResult _r = MessageBox.Show(
-                                //        $"この操作は取り消せません。本当によろしいでしょうか？",
-                                //        "Minecraft Auto Backup",
-                                //        MessageBoxButtons.YesNo);
-                                //    if (_r == DialogResult.Yes) {
-                                //        //現在存在していないワールドデータのバックあぱっぷを削除する
-                                //        Directory.Delete(worldBackupPath);
-                                //    }
-                                //}
-                            //}
+                    //前回のリロードとバックアップまでの間にワールドが消された場合
+                    try { doBackup(worldPath, nowTime); }
+                    catch (DirectoryNotFoundException dnfe) {
+                        string backupPath = backupDataPath + "\\" + Path.GetFileName(Directory.GetParent(Directory.GetParent(worldPath).ToString()).ToString()) + "\\" + Path.GetFileName(worldPath) + "\\" + nowTime;
+                        string worldBackupPath = backupDataPath + "\\" + Path.GetFileName(Directory.GetParent(Directory.GetParent(worldPath).ToString()).ToString()) + "\\" + Path.GetFileName(worldPath);
+                        Console.Error.WriteLine(worldPath + ":DirectoryNotFoundException : " + dnfe.Message);
+                        if (!Directory.Exists(worldPath)) {
+                            DialogResult r = MessageBox.Show(
+                            $"バックアップ予定のワールドデータ[{Path.GetFileName(worldPath)}]が見つかりませんでした。",
+                            "Minecraft Auto Backup",
+                            MessageBoxButtons.OK);
                         }
                     }
+                    //バックアップ保持数を調整
+
                 }
                 Config.ReloadConfig();
                 Console.WriteLine("全バックアップが完了しました ");
@@ -169,7 +161,8 @@ namespace MABProcessAtWait {
                 timer.Enabled = true;
                 notifyIcon.Icon = new Icon(".\\Image\\app_sub.ico");
                 notifyIcon.Text = "MAB待機モジュール";
-            } else if (!(Process.GetProcessesByName("MinecraftLauncher").Length > 0) && isRunning) {
+            }
+            else if (!(Process.GetProcessesByName("MinecraftLauncher").Length > 0) && isRunning) {
                 Console.WriteLine("info:ランチャーの停止を検知しました");
                 Console.WriteLine("info:isRunningにfalseを設定します");
                 isRunning = false;
@@ -183,6 +176,7 @@ namespace MABProcessAtWait {
             _worldPasses = Config.GetConfig();
             foreach (World w in _worldPasses) {
                 if (w.WDoBackup && w.isAlive) {
+                    //バックアップをする予定でかつ、バックアップ元が生きているワールドのみ追加
                     worldPasses.Add(w.WPath);
                 }
             }
@@ -195,7 +189,7 @@ namespace MABProcessAtWait {
             if (!Directory.Exists(worldBackupPath)) {
                 Directory.CreateDirectory(worldBackupPath);
             }
-            if (AppConfig.doZip) {
+            if (AppConfig.DoZip) {
                 Console.WriteLine(path + " を " + backupPath + ".zip へバックアップ中です");
                 ZipFile.CreateFromDirectory(path, $"{backupPath}.zip");
                 Console.WriteLine(path + " を " + backupPath + " .zipへバックアップしました");
@@ -342,13 +336,13 @@ namespace MABProcessAtWait {
                             Console.WriteLine($"info:{world.WName}のバックアップが残っているため殺害");
                             Config.configs[wI].isAlive = false;
                             int count = 1;
-                            while (Directory.Exists($"{AppConfig.backupPath}\\{Config.configs[wI].WDir}\\{Config.configs[wI].WName}_(削除済み)_{count}")) {
-                                Console.WriteLine($"info: path[ {AppConfig.backupPath}\\{Config.configs[wI].WDir}\\{Config.configs[wI].WName}_(削除済み)_{count} ]");
+                            while (Directory.Exists($"{AppConfig.BackupPath}\\{Config.configs[wI].WDir}\\{Config.configs[wI].WName}_(削除済み)_{count}")) {
+                                Console.WriteLine($"info: path[ {AppConfig.BackupPath}\\{Config.configs[wI].WDir}\\{Config.configs[wI].WName}_(削除済み)_{count} ]");
                                 count++;
                             }
 
-                            Directory.Move($"{AppConfig.backupPath}\\{ Config.configs[wI].WDir}\\{ Config.configs[wI].WName}",
-                                $"{AppConfig.backupPath}\\{ Config.configs[wI].WDir}\\{ Config.configs[wI].WName}_(削除済み)_{count}");
+                            Directory.Move($"{AppConfig.BackupPath}\\{ Config.configs[wI].WDir}\\{ Config.configs[wI].WName}",
+                                $"{AppConfig.BackupPath}\\{ Config.configs[wI].WDir}\\{ Config.configs[wI].WName}_(削除済み)_{count}");
                             Config.configs[wI].WPath += "_(削除済み)_" + count;
                             Config.configs[wI].WName += "_(削除済み)_" + count;
                         }
@@ -379,10 +373,10 @@ namespace MABProcessAtWait {
         }
         private static List<string> GetBackups(World w) {
             try {
-                return Directory.GetDirectories(AppConfig.backupPath + "\\" + w.WDir + "\\" + w.WName).ToList();
+                return Directory.GetDirectories(AppConfig.BackupPath + "\\" + w.WDir + "\\" + w.WName).ToList();
             }
             catch (DirectoryNotFoundException) {
-                Console.WriteLine($"{AppConfig.backupPath}\\{w.WDir}\\{w.WName} にアクセスできませんでした");
+                Console.WriteLine($"{AppConfig.BackupPath}\\{w.WDir}\\{w.WName} にアクセスできませんでした");
                 return new List<string>();
             }
         }
@@ -480,45 +474,6 @@ namespace MABProcessAtWait {
     }
 
 
-
-    public class AppConfig {
-        /*
-        アプリ自体の設定を保存するtxtファイル
-        バックアップを保存するpath
-        フォント名
-        フォント大きさ
-        保存形式(zip,normal)
-        言語(jp,en)
-
-        */
-        public static string backupPath { get; set; }
-        public static Font font { get; set; }
-        public static bool doZip { get; set; }
-        public static string language { get; set; }
-        public static string appConfigPath = ".\\Config\\AppConfig.txt";
-
-        public AppConfig() {
-            if (!File.Exists(appConfigPath)) {
-                //AppConfigファイルがなかった場合
-                string Text = $"{System.Environment.GetFolderPath(Environment.SpecialFolder.Personal)}\\MinecraftAutoBackup\nMeiryo UI\n12\nnormal\njp";
-                File.WriteAllText(appConfigPath, Text);
-            }
-            List<string> datas = new List<string>();
-            StreamReader reader = new StreamReader(appConfigPath, Encoding.GetEncoding("utf-8"));
-            while (reader.Peek() >= 0) {
-                datas.Add(reader.ReadLine());
-            }
-            backupPath = datas[0];
-            font = new Font(datas[1], 11);
-            doZip = datas[2] == "zip" ? true : false;
-            language = datas[3];
-            reader.Close();
-
-        }
-
-    }
-
-
     public class World {
         public bool WDoBackup { get; set; }
         public string WPath { get; set; }
@@ -548,5 +503,5 @@ namespace MABProcessAtWait {
             WDir = Path.GetFileName(Path.GetDirectoryName(Path.GetDirectoryName(path)));
             isAlive = _isAlive;
         }
-    } 
+    }
 }
