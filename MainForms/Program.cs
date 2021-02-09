@@ -34,6 +34,7 @@ class Program {
         Application.EnableVisualStyles();
         Application.SetCompatibleTextRenderingDefault(false);
         Application.Run(new WorldListForm());
+        
     }
 }
 
@@ -61,8 +62,8 @@ class WorldListForm :Form {
         this.Font = new Font(AppConfig.Font.Name, 11);
 
         Util.FontStyle = AppConfig.Font;
-        this.FormClosing += new FormClosingEventHandler(worldListForm_FormClosing);
-        this.Resize += new EventHandler(form_Resize);
+        this.FormClosing += new FormClosingEventHandler(WorldListForm_FormClosing);
+        this.Resize += new EventHandler(Form_Resize);
         this.yesColor = Color.FromArgb(15, 27, 51);
         this.cancelColor = Color.FromArgb(147, 31, 31);
 
@@ -103,13 +104,13 @@ class WorldListForm :Form {
         ToolStripMenuItem configMenu = new ToolStripMenuItem() {
             Text = "環境設定(P)"
         };
-        configMenu.Click += new EventHandler(config_Click);
+        configMenu.Click += new EventHandler(Config_Click);
         fileMenu.DropDownItems.Add(configMenu);
 
         ToolStripMenuItem exitMenu = new ToolStripMenuItem() {
             Text = "終了(&X)"
         };
-        exitMenu.Click += new EventHandler(exit_Click);
+        exitMenu.Click += new EventHandler(Exit_Click);
         fileMenu.DropDownItems.Add(exitMenu);
 
         //編集
@@ -157,7 +158,7 @@ class WorldListForm :Form {
             Height = 28,
             Margin = new Padding(8, 8, 0, 0),
         };
-        ok.Click += new EventHandler(ok_Click);
+        ok.Click += new EventHandler(Ok_Click);
 
         cancel = new Button() {
             Text = "キャンセル",
@@ -169,7 +170,7 @@ class WorldListForm :Form {
             Height = 28,
             Margin = new Padding(8, 8, 0, 0),
         };
-        cancel.Click += new EventHandler(cancel_Click);
+        cancel.Click += new EventHandler(Cancel_Click);
 
         buttomPanel = new Panel() {
             Dock = DockStyle.Bottom,
@@ -219,7 +220,7 @@ class WorldListForm :Form {
         this.Location = AppConfig.ClientPoint;
     }
 
-    void form_Resize(object sender, EventArgs e) {
+    void Form_Resize(object sender, EventArgs e) {
         //Console.WriteLine("大きさが変更されました大きさが変更されました");
         int i = 0;
         foreach (Control a in this.backupDataTable.Controls) {
@@ -228,7 +229,7 @@ class WorldListForm :Form {
             i++;
         }
     }
-    void ok_Click(object sender, EventArgs e) {
+    void Ok_Click(object sender, EventArgs e) {
         Console.WriteLine("info:push ok");
         List<string[]> configs = worldListView.GetWorldListView();
         foreach (var config in configs) {
@@ -239,7 +240,7 @@ class WorldListForm :Form {
         this.Close();
         //Application.Exit();
     }
-    void cancel_Click(object sender, EventArgs e) {
+    void Cancel_Click(object sender, EventArgs e) {
         string message = "設定を保存しないで終了しますか？";
         string caption = "保存できてないよ？";
         MessageBoxButtons buttons = MessageBoxButtons.YesNo;
@@ -248,29 +249,39 @@ class WorldListForm :Form {
             this.Close();
         }
     }
-    void worldListForm_FormClosing(object sender, CancelEventArgs e) {
+    void WorldListForm_FormClosing(object sender, CancelEventArgs e) {
         Console.WriteLine("info:終了時処理を開始します");
+        
         AppConfig.ClientPoint = this.Location;
         AppConfig.ClientSize = this.ClientSize;
         AppConfig.WriteAppConfig();
-        try {
-            System.Diagnostics.Process.Start(".\\SubModule\\MABProcessAtWait.exe");
-        }
-        catch (Win32Exception w) {
-            Console.WriteLine(w.Message);
-            Console.WriteLine(w.ErrorCode.ToString());
-            Console.WriteLine(w.NativeErrorCode.ToString());
-            Console.WriteLine(w.StackTrace);
-            Console.WriteLine(w.Source);
-            Exception f = w.GetBaseException();
-            Console.WriteLine(f.Message);
+        //try {
+        //    System.Diagnostics.Process.Start(".\\SubModule\\MABProcessAtWait.exe");
+        //}
+        //catch (Win32Exception w) {
+        //    Console.WriteLine(w.Message);
+        //    Console.WriteLine(w.ErrorCode.ToString());
+        //    Console.WriteLine(w.NativeErrorCode.ToString());
+        //    Console.WriteLine(w.StackTrace);
+        //    Console.WriteLine(w.Source);
+        //    Exception f = w.GetBaseException();
+        //    Console.WriteLine(f.Message);
+        //}
+        if ((Util.task != null)) {
+            if (!(Util.task.IsCompleted)) {
+                //非同期で実行しているタスクがまだ終わっていない場合
+                Console.WriteLine("info:タスクが未完了なのでバックグラウンドで処理します");
+                e.Cancel = true;
+                testForm f =  new testForm();
+                f.Show();
+            }
         }
     }
-    void exit_Click(object sender, EventArgs e) {
+    void Exit_Click(object sender, EventArgs e) {
         Console.WriteLine("info:push exit");
         this.Close();
     }
-    void config_Click(object sender, EventArgs e) {
+    void Config_Click(object sender, EventArgs e) {
         AppConfigForm appConfigForm = new AppConfigForm();
         appConfigForm.Show();
     }
@@ -363,17 +374,8 @@ class BackupDataPanel :FlowLayoutPanel {
 
 
         int iCount = 0;
-        List<string> backups = new List<string>();
-        foreach (var w in Config.GetConfig()) {
-            try {
-                backups.AddRange(Directory.GetDirectories(AppConfig.BackupPath + "\\" + w.WDir + "\\" + w.WName));
-            }
-            catch (DirectoryNotFoundException e) {
-                // バックアップがない場合
-                Console.WriteLine(e.Message);
-                continue;
-            }
-        }
+        List<string> backups = Util.GetBackups();
+
         if (backups.Count() == 0) {
             Console.WriteLine("info:バックアップが存在しません");
             Label notBackupFile = new Label() {
@@ -398,6 +400,10 @@ class BackupDataPanel :FlowLayoutPanel {
                 //    }
                 //    continue;
                 //}
+                if(Util.GetBackup(world).Count() == 0) {
+                    //バックアップが一つもない場合continue
+                    continue ;
+                }
 
                 backupDataDir = new Label() {
                     Text = world.WName + "/" + world.WDir + "",
@@ -643,7 +649,7 @@ class BackupDataListView :ListView {
                 // バックアップがzipじゃなかった場合
                 src = $"{AppConfig.BackupPath}\\{selectedItem.SubItems[2].Text}\\{selectedItem.world.WName}\\{fileName}";
             }
-            
+
             World tar = selectedItem.world;
             RestoreFromBackupForm restoreFrom = new RestoreFromBackupForm(src, tar);
             restoreFrom.Show();
@@ -719,9 +725,9 @@ class RestoreFromBackupForm :Form {
         catch (FormatException) {
             //zipファイルの場合FormatExceptionが発生するため
             time = DateTime.ParseExact(Path.GetFileName(pathSrc.Substring(0, pathSrc.Length - 4)), "yyyyMMddHHmm", null);
-            
+
         }
-        
+
 
         Font lFont = (Util.FontStyle);
 
@@ -810,8 +816,15 @@ class RestoreFromBackupForm :Form {
     }
 }
 
+class testForm :Form {
+    public testForm() {
+        Text = "a";
+    }
+}
 
 public class Util {
+    public static Task task;
+
     private static Font fontStyle;
 
     public static Font FontStyle {
@@ -825,6 +838,33 @@ public class Util {
 
     public static string makePathToWorld(string name, string dir) {
         return $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\{dir}\\saves\\{name}";
+    }
+
+    //現在存在しているバックアップへのパスをListにして返す
+    public static List<string> GetBackups() {
+        List<string> backups = new List<string>();
+        List<string> dirs = Directory.GetDirectories(AppConfig.BackupPath).ToList();
+        List<string> worlds = new List<string>();
+        foreach(string dir in dirs) {
+            worlds.AddRange(Directory.GetDirectories(dir));
+        }
+        foreach(var w in worlds) {
+            backups.AddRange(Directory.GetDirectories(w));
+            backups.AddRange(Directory.GetFiles(w));
+        }
+        Console.WriteLine($"dir:{dirs.Count()}, worlds:{worlds.Count()}, backups:{backups.Count()}");
+        return backups;
+    }
+
+    //渡されたworldの現在存在するバックアップをListにして返す
+    public static List<string> GetBackup(World w) {
+        List<string> backups = new List<string>();
+        if (Directory.Exists($"{AppConfig.BackupPath}\\{w.WDir}\\{w.WName}")) {
+            //バックアップフォルダがある場合のみ実行
+            backups.AddRange(Directory.GetDirectories($"{AppConfig.BackupPath}\\{w.WDir}\\{w.WName}"));
+            backups.AddRange(Directory.GetFiles($"{AppConfig.BackupPath}\\{w.WDir}\\{w.WName}"));
+        }
+        return backups;
     }
 
 }
@@ -841,9 +881,9 @@ public class Config {
      ハードディスクの内容をワールドオブジェクトのListにして返す
     与えられたワールドオブジェクトをコンフィグファイルに書き加える
     与えられたワールドオブジェクトをコンフィグファイルから消す
-    
+
     必要な関数:改良案
-    
+
      コンフィグファイルがないときにコンフィグファイルを作る関数
      コンフィグファイルからメモリに読み込む関数
      メモリの内容をコンフィグファイルに書き込む関数
@@ -978,7 +1018,7 @@ public class Config {
             //dobackup以外を比較して判定
             if (!worldInHdd.Select( x => $"{x.WPath}_{x.isAlive}").ToList().Contains($"{world.WPath}_{world.isAlive}")) {
                 //config内のworldがHDDになかった場合
-                if (GetBackups(world).Count() == 0) {
+                if (Util.GetBackup(world).Count() == 0) {
                     // バックアップが一つもない場合はconfigから削除
                     Console.WriteLine($"info:バックアップが一つもないのでRemoveWorldsに{world.WName}を追加");
                     removeWorlds.Add(world);
@@ -993,7 +1033,7 @@ public class Config {
                             Console.WriteLine($"info: path[ {AppConfig.BackupPath}\\{Config.configs[wI].WDir}\\{Config.configs[wI].WName}_(削除済み)_{count} ]");
                             count++;
                         }
-                        
+
                         Directory.Move($"{AppConfig.BackupPath}\\{ Config.configs[wI].WDir}\\{ Config.configs[wI].WName}",
                             $"{AppConfig.BackupPath}\\{ Config.configs[wI].WDir}\\{ Config.configs[wI].WName}_(削除済み)_{count}");
                         Config.configs[wI].WPath += "_(削除済み)_" + count;
@@ -1023,15 +1063,6 @@ public class Config {
         Console.WriteLine($"HDD   : {worldInHdd.Count()}");
 
         return removeWorlds;
-    }
-    private static List<string> GetBackups(World w) {
-        try {
-            return Directory.GetDirectories(AppConfig.BackupPath + "\\" + w.WDir + "\\" + w.WName).ToList();
-        }
-        catch (DirectoryNotFoundException) {
-            Console.WriteLine($"{AppConfig.BackupPath}\\{w.WDir}\\{w.WName} にアクセスできませんでした");
-            return new List<string>();
-        }
     }
 
     public static void Change(string worldName, string worldDir, string doBackup) {
@@ -1290,29 +1321,22 @@ internal class AppConfigForm :Form {
         if (AppConfig.DoZip != this.doZip.Checked) {
             if (AppConfig.DoZip) {
                 //設定上はtrue,formのほうはfalseの場合（falseに変更された場合）
-                List<string> backups = new List<string>();
-                foreach (World world in Config.GetConfig()) {
-                    backups.AddRange(BackupDataPanel.GetBackupFiles(world.WName, world.WDir));
-                }
+                List<string> backups = Util.GetBackups();
                 if (backups.Count > 0) {
                     //バックアップが存在している場合
                     DialogResult r = MessageBox.Show("現在保存されているバックアップをすべて解凍にしますか？", "保存方式", MessageBoxButtons.YesNo);
                     if (r == DialogResult.Yes) {
                         // 既存のバックアップ.zipをすべて解凍する
-                        foreach (string backupPath in backups) {
-                            if (backupPath.Contains(".zip")) {
-                                //バックアップがzipの場合
-                                ZipFile.ExtractToDirectory($"{backupPath}.zip", backupPath);
-                                Directory.Delete($"{backupPath}.zip");
-                                //Console.WriteLine($"{Path.GetDirectoryName(backupPath)}\\{Path.GetFileName(backupPath)}をzipにします");
-                            }
-                        }
+                        Util.task = Task.Run(() => { Decompression(backups); });
                     }
+                }
+                else {
+                    Console.WriteLine("");
                 }
             }
             else if (!AppConfig.DoZip) {
                 //設定上はfalse,formのほうはtrueの場合（trueに変更された場合）
-                List<string> backups = new List<string>();
+                List<string> backups = Util.GetBackups();
                 foreach (World world in Config.GetConfig()) {
                     backups.AddRange(BackupDataPanel.GetBackupFiles(world.WName, world.WDir));
                 }
@@ -1320,21 +1344,8 @@ internal class AppConfigForm :Form {
                     //バックアップが存在している場合
                     DialogResult r = MessageBox.Show("現在保存されているバックアップをすべて圧縮しますか？", "保存方式", MessageBoxButtons.YesNo);
                     if (r == DialogResult.Yes) {
-                        //既存のバックアップをすべてzipに変える
-                        foreach (string backupPath in backups) {
-                            Task t = Task.Run(() => {
-                                // バックアップをzipにして、元バックアップを消すのは非同期で
-                                if (!backupPath.Contains(".zip")) {
-                                    //バックアップがzipじゃない場合
-                                    ZipFile.CreateFromDirectory(backupPath, $"{backupPath}.zip");
-                                    Console.WriteLine($"info: [{backupPath}]zip化完了");
-                                    Directory.Delete(backupPath, true);
-                                    Console.WriteLine($"info: [{backupPath}]削除完了");
-                                    //Console.WriteLine($"{Path.GetDirectoryName(backupPath)}\\{Path.GetFileName(backupPath)}をzipにします");
-                                }
-                                
-                            });
-                        }
+                        // 既存のバックアップ.zipをすべて解凍する
+                        Util.task = Task.Run(() => { DoZipping(backups); });
                     }
                 }
             }
@@ -1351,6 +1362,39 @@ internal class AppConfigForm :Form {
     }
     private void cansel_Click(object sender, EventArgs e) {
         this.Close();
+    }
+    private void DoZipping(List<string> pasess) {
+        Console.WriteLine("call:DoZipping");
+        Console.WriteLine($"{pasess.Count()}件のバックアップを検討します");
+        try {
+            foreach (string path in pasess) {
+                if (!path.Contains(".zip")) {
+                    //バックアップがzipじゃない場合
+                    Console.WriteLine($"info: [{path}]のスレッド開始");
+                    ZipFile.CreateFromDirectory(path, $"{path}.zip");
+                    Console.WriteLine($" info: [{path}]zip化完了");
+                    Directory.Delete(path, true);
+                    Console.WriteLine($" info: [{path}]削除完了");
+                    //Console.WriteLine($"{Path.GetDirectoryName(backupPath)}\\{Path.GetFileName(backupPath)}をzipにします");
+                }
+            }
+        }
+        catch (Exception) {
+            Console.WriteLine("error");
+        }
+    }
+    
+    private void Decompression(List<string> pasess) {
+        Console.WriteLine("call:Decompression");
+        Console.WriteLine($"{pasess.Count()}件のバックアップを検討します");
+            foreach (var path in pasess) {
+                if (path.Contains(".zip")) {
+                    //バックアップがzipの場合
+                    ZipFile.ExtractToDirectory($"{path}.zip", path);
+                    Directory.Delete($"{path}.zip");
+                    //Console.WriteLine($"{Path.GetDirectoryName(backupPath)}\\{Path.GetFileName(backupPath)}をzipにします");
+                }
+            }
     }
 }
 
