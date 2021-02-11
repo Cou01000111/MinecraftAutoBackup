@@ -3,20 +3,21 @@ using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.IO.Compression;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.VisualBasic.FileIO;
 
 namespace Zipper {
     class Program {
         static void Main(string[] args) {
-
+            Logger log = new Logger(3);
             // © DOBON!.
             //Mutex関係
             // https://dobon.net/vb/dotnet/process/checkprevinstance.html
             //Mutex名を決める（必ずアプリケーション固有の文字列に変更すること！）
             string mutexName = "ZippingProcess";
             //Mutexオブジェクトを作成する
-            System.Threading.Mutex mutex = new System.Threading.Mutex(false, mutexName);
+            Mutex mutex = new System.Threading.Mutex(false, mutexName);
 
             bool hasHandle = false;
             try {
@@ -28,6 +29,7 @@ namespace Zipper {
                     hasHandle = true;
                 }
                 if (hasHandle == false) {
+                    log.Error("二重起動されました");
                     return;
                 }
                 Process.MainProcess(args);
@@ -50,6 +52,7 @@ namespace Zipper {
 
             if (args.ToList().Count() == 0) {
                 log.Error("argsが存在しません");
+                log.Info("\n");
                 return;
             }
 
@@ -136,7 +139,7 @@ namespace Zipper {
                 //}
                 log.Info($"{zippingCount}件圧縮済み,{skipCount}件のスルー,{errorCount}件のエラーが発生しました");
 
-            } else if(args[1] == "1") {
+            } else if(args[0] == "1") {
                 //1番ならdecompressionMode
                 //try {
                 List<string> pasess = args.ToList();
@@ -195,12 +198,16 @@ namespace Zipper {
                     }
                 }
                 log.Info($"{zippingCount}件圧縮済み,{skipCount}件のスルー,{errorCount}件のエラーが発生しました");
+                log.Info("\n");
                 //}
                 //catch (Exception) {
                 //    log.Info("error");
                 //}
-            }else {
+            }
+            else {
                 log.Error("Args Error");
+                log.Info("\n");
+                return;
             }
 
         }

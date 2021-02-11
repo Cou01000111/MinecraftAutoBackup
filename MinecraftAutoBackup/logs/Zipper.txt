@@ -1,128 +1,196 @@
-2021/02/11-11:51:05 [ERROR]:argsが存在しません
-2021/02/11-11:51:20 [ERROR]:Args Error
-2021/02/11-11:54:52 [INFO ]:=========DoZipping=========
-2021/02/11-11:54:52 [INFO ]:18件のバックアップを検討します
-2021/02/11-11:54:52 [INFO ]:-------0 の検討をします-------
-2021/02/11-11:54:52 [INFO ]:zipファイル判定:False
-2021/02/11-11:54:52 [INFO ]:0 の処理を開始します
-2021/02/11-11:54:52 [ERROR]:0: zipping io exception
-2021/02/11-11:54:52 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v12.0.9\202102111058.zip の検討をします-------
-2021/02/11-11:54:52 [INFO ]:zipファイル判定:True
-2021/02/11-11:54:52 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v12.0.9 - コピー\202102111058.zip の検討をします-------
-2021/02/11-11:54:52 [INFO ]:zipファイル判定:True
-2021/02/11-11:54:52 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v9.1.4\202102111058.zip の検討をします-------
-2021/02/11-11:54:52 [INFO ]:zipファイル判定:True
-2021/02/11-11:54:52 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v9.1.4 - コピー\202102111058.zip の検討をします-------
-2021/02/11-11:54:52 [INFO ]:zipファイル判定:True
-2021/02/11-11:54:52 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft\The Water SkyBlock ver2.2.3\202102111058.zip の検討をします-------
-2021/02/11-11:54:52 [INFO ]:zipファイル判定:True
-2021/02/11-11:54:52 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\a\202102111058.zip の検討をします-------
-2021/02/11-11:54:52 [INFO ]:zipファイル判定:True
-2021/02/11-11:54:52 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\The Water SkyBlock ver3.1.2\202102111058.zip の検討をします-------
-2021/02/11-11:54:52 [INFO ]:zipファイル判定:True
-2021/02/11-11:54:52 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\The Water SkyBlock ver3.1.3b\202102111058.zip の検討をします-------
-2021/02/11-11:54:52 [INFO ]:zipファイル判定:True
-2021/02/11-11:54:52 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\新規ワールド\202102111058.zip の検討をします-------
-2021/02/11-11:54:52 [INFO ]:zipファイル判定:True
-2021/02/11-11:54:52 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\検証用ワールド\202102111058.zip の検討をします-------
-2021/02/11-11:54:52 [INFO ]:zipファイル判定:True
-2021/02/11-11:54:52 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\適当建築\202102111058.zip の検討をします-------
-2021/02/11-11:54:52 [INFO ]:zipファイル判定:True
-2021/02/11-11:54:52 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft_1.10.2\test\202102111058.zip の検討をします-------
-2021/02/11-11:54:52 [INFO ]:zipファイル判定:True
-2021/02/11-11:54:52 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft_1.10.2\The Water SkyBlock ver2.2.3\202102111058.zip の検討をします-------
-2021/02/11-11:54:52 [INFO ]:zipファイル判定:True
-2021/02/11-11:54:52 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft_1.9\Rare Species SkyBlock ii Beta2.2.2 (1)\202102111058.zip の検討をします-------
-2021/02/11-11:54:52 [INFO ]:zipファイル判定:True
-2021/02/11-11:54:52 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft_forge1.12.2\新規ワールド\202102111058.zip の検討をします-------
-2021/02/11-11:54:52 [INFO ]:zipファイル判定:True
-2021/02/11-11:54:52 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft_forge1.12.2\新規ワールド-\202102111058.zip の検討をします-------
-2021/02/11-11:54:52 [INFO ]:zipファイル判定:True
-2021/02/11-11:54:52 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft_forge1.12.2\新規ワールド--\202102111058.zip の検討をします-------
-2021/02/11-11:54:52 [INFO ]:zipファイル判定:True
-2021/02/11-11:54:52 [INFO ]:0件圧縮済み,17件のスルー,1件のエラーが発生しました
-2021/02/11-11:55:01 [ERROR]:Args Error
-2021/02/11-11:55:28 [INFO ]:=========DoZipping=========
-2021/02/11-11:55:28 [INFO ]:18件のバックアップを検討します
-2021/02/11-11:55:28 [INFO ]:-------0 の検討をします-------
-2021/02/11-11:55:28 [INFO ]:zipファイル判定:False
-2021/02/11-11:55:28 [INFO ]:0 の処理を開始します
-2021/02/11-11:55:28 [ERROR]:0: zipping io exception
-2021/02/11-11:55:28 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v12.0.9\202102111058.zip の検討をします-------
-2021/02/11-11:55:28 [INFO ]:zipファイル判定:True
-2021/02/11-11:55:28 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v12.0.9 - コピー\202102111058.zip の検討をします-------
-2021/02/11-11:55:28 [INFO ]:zipファイル判定:True
-2021/02/11-11:55:28 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v9.1.4\202102111058.zip の検討をします-------
-2021/02/11-11:55:28 [INFO ]:zipファイル判定:True
-2021/02/11-11:55:28 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v9.1.4 - コピー\202102111058.zip の検討をします-------
-2021/02/11-11:55:28 [INFO ]:zipファイル判定:True
-2021/02/11-11:55:28 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft\The Water SkyBlock ver2.2.3\202102111058.zip の検討をします-------
-2021/02/11-11:55:28 [INFO ]:zipファイル判定:True
-2021/02/11-11:55:28 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\a\202102111058.zip の検討をします-------
-2021/02/11-11:55:28 [INFO ]:zipファイル判定:True
-2021/02/11-11:55:28 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\The Water SkyBlock ver3.1.2\202102111058.zip の検討をします-------
-2021/02/11-11:55:28 [INFO ]:zipファイル判定:True
-2021/02/11-11:55:28 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\The Water SkyBlock ver3.1.3b\202102111058.zip の検討をします-------
-2021/02/11-11:55:28 [INFO ]:zipファイル判定:True
-2021/02/11-11:55:28 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\新規ワールド\202102111058.zip の検討をします-------
-2021/02/11-11:55:28 [INFO ]:zipファイル判定:True
-2021/02/11-11:55:28 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\検証用ワールド\202102111058.zip の検討をします-------
-2021/02/11-11:55:28 [INFO ]:zipファイル判定:True
-2021/02/11-11:55:28 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\適当建築\202102111058.zip の検討をします-------
-2021/02/11-11:55:28 [INFO ]:zipファイル判定:True
-2021/02/11-11:55:28 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft_1.10.2\test\202102111058.zip の検討をします-------
-2021/02/11-11:55:28 [INFO ]:zipファイル判定:True
-2021/02/11-11:55:28 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft_1.10.2\The Water SkyBlock ver2.2.3\202102111058.zip の検討をします-------
-2021/02/11-11:55:28 [INFO ]:zipファイル判定:True
-2021/02/11-11:55:28 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft_1.9\Rare Species SkyBlock ii Beta2.2.2 (1)\202102111058.zip の検討をします-------
-2021/02/11-11:55:28 [INFO ]:zipファイル判定:True
-2021/02/11-11:55:28 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft_forge1.12.2\新規ワールド\202102111058.zip の検討をします-------
-2021/02/11-11:55:28 [INFO ]:zipファイル判定:True
-2021/02/11-11:55:28 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft_forge1.12.2\新規ワールド-\202102111058.zip の検討をします-------
-2021/02/11-11:55:28 [INFO ]:zipファイル判定:True
-2021/02/11-11:55:28 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft_forge1.12.2\新規ワールド--\202102111058.zip の検討をします-------
-2021/02/11-11:55:28 [INFO ]:zipファイル判定:True
-2021/02/11-11:55:28 [INFO ]:0件圧縮済み,17件のスルー,1件のエラーが発生しました
-2021/02/11-11:55:40 [ERROR]:Args Error
-2021/02/11-12:06:00 [INFO ]:=========DoZipping=========
-2021/02/11-12:06:00 [INFO ]:18件のバックアップを検討します
-2021/02/11-12:06:00 [INFO ]:-------0 の検討をします-------
-2021/02/11-12:06:00 [INFO ]:zipファイル判定:False
-2021/02/11-12:06:00 [INFO ]:0 の処理を開始します
-2021/02/11-12:06:00 [ERROR]:0: zipping io exception
-2021/02/11-12:06:00 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v12.0.9\202102111058.zip の検討をします-------
-2021/02/11-12:06:00 [INFO ]:zipファイル判定:True
-2021/02/11-12:06:00 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v12.0.9 - コピー\202102111058.zip の検討をします-------
-2021/02/11-12:06:00 [INFO ]:zipファイル判定:True
-2021/02/11-12:06:00 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v9.1.4\202102111058.zip の検討をします-------
-2021/02/11-12:06:00 [INFO ]:zipファイル判定:True
-2021/02/11-12:06:00 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v9.1.4 - コピー\202102111058.zip の検討をします-------
-2021/02/11-12:06:00 [INFO ]:zipファイル判定:True
-2021/02/11-12:06:00 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft\The Water SkyBlock ver2.2.3\202102111058.zip の検討をします-------
-2021/02/11-12:06:00 [INFO ]:zipファイル判定:True
-2021/02/11-12:06:00 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\a\202102111058.zip の検討をします-------
-2021/02/11-12:06:00 [INFO ]:zipファイル判定:True
-2021/02/11-12:06:00 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\The Water SkyBlock ver3.1.2\202102111058.zip の検討をします-------
-2021/02/11-12:06:00 [INFO ]:zipファイル判定:True
-2021/02/11-12:06:00 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\The Water SkyBlock ver3.1.3b\202102111058.zip の検討をします-------
-2021/02/11-12:06:00 [INFO ]:zipファイル判定:True
-2021/02/11-12:06:00 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\新規ワールド\202102111058.zip の検討をします-------
-2021/02/11-12:06:00 [INFO ]:zipファイル判定:True
-2021/02/11-12:06:00 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\検証用ワールド\202102111058.zip の検討をします-------
-2021/02/11-12:06:00 [INFO ]:zipファイル判定:True
-2021/02/11-12:06:00 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\適当建築\202102111058.zip の検討をします-------
-2021/02/11-12:06:00 [INFO ]:zipファイル判定:True
-2021/02/11-12:06:00 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft_1.10.2\test\202102111058.zip の検討をします-------
-2021/02/11-12:06:00 [INFO ]:zipファイル判定:True
-2021/02/11-12:06:00 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft_1.10.2\The Water SkyBlock ver2.2.3\202102111058.zip の検討をします-------
-2021/02/11-12:06:00 [INFO ]:zipファイル判定:True
-2021/02/11-12:06:00 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft_1.9\Rare Species SkyBlock ii Beta2.2.2 (1)\202102111058.zip の検討をします-------
-2021/02/11-12:06:00 [INFO ]:zipファイル判定:True
-2021/02/11-12:06:00 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft_forge1.12.2\新規ワールド\202102111058.zip の検討をします-------
-2021/02/11-12:06:00 [INFO ]:zipファイル判定:True
-2021/02/11-12:06:00 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft_forge1.12.2\新規ワールド-\202102111058.zip の検討をします-------
-2021/02/11-12:06:00 [INFO ]:zipファイル判定:True
-2021/02/11-12:06:00 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft_forge1.12.2\新規ワールド--\202102111058.zip の検討をします-------
-2021/02/11-12:06:00 [INFO ]:zipファイル判定:True
-2021/02/11-12:06:00 [INFO ]:0件圧縮済み,17件のスルー,1件のエラーが発生しました
-2021/02/11-12:06:04 [ERROR]:Args Error
+2021/02/11-12:50:36 [ERROR]:Args Error
+2021/02/11-12:51:07 [ERROR]:argsが存在しません
+2021/02/11-12:52:15 [INFO ]:=========DoZipping=========
+2021/02/11-12:52:15 [INFO ]:18件のバックアップを検討します
+2021/02/11-12:52:15 [INFO ]:-------0 の検討をします-------
+2021/02/11-12:52:15 [INFO ]:zipファイル判定:False
+2021/02/11-12:52:15 [INFO ]:0 の処理を開始します
+2021/02/11-12:52:15 [ERROR]:0: zipping io exception
+2021/02/11-12:52:15 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v12.0.9\202102111058.zip の検討をします-------
+2021/02/11-12:52:15 [INFO ]:zipファイル判定:True
+2021/02/11-12:52:15 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v12.0.9 - コピー\202102111058.zip の検討をします-------
+2021/02/11-12:52:15 [INFO ]:zipファイル判定:True
+2021/02/11-12:52:15 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v9.1.4\202102111058.zip の検討をします-------
+2021/02/11-12:52:15 [INFO ]:zipファイル判定:True
+2021/02/11-12:52:15 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v9.1.4 - コピー\202102111058.zip の検討をします-------
+2021/02/11-12:52:15 [INFO ]:zipファイル判定:True
+2021/02/11-12:52:15 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft\The Water SkyBlock ver2.2.3\202102111058.zip の検討をします-------
+2021/02/11-12:52:15 [INFO ]:zipファイル判定:True
+2021/02/11-12:52:15 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\a\202102111058.zip の検討をします-------
+2021/02/11-12:52:15 [INFO ]:zipファイル判定:True
+2021/02/11-12:52:15 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\The Water SkyBlock ver3.1.2\202102111058.zip の検討をします-------
+2021/02/11-12:52:15 [INFO ]:zipファイル判定:True
+2021/02/11-12:52:15 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\The Water SkyBlock ver3.1.3b\202102111058.zip の検討をします-------
+2021/02/11-12:52:15 [INFO ]:zipファイル判定:True
+2021/02/11-12:52:15 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\新規ワールド\202102111058.zip の検討をします-------
+2021/02/11-12:52:15 [INFO ]:zipファイル判定:True
+2021/02/11-12:52:15 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\検証用ワールド\202102111058.zip の検討をします-------
+2021/02/11-12:52:15 [INFO ]:zipファイル判定:True
+2021/02/11-12:52:15 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\適当建築\202102111058.zip の検討をします-------
+2021/02/11-12:52:15 [INFO ]:zipファイル判定:True
+2021/02/11-12:52:15 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft_1.10.2\test\202102111058.zip の検討をします-------
+2021/02/11-12:52:15 [INFO ]:zipファイル判定:True
+2021/02/11-12:52:15 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft_1.10.2\The Water SkyBlock ver2.2.3\202102111058.zip の検討をします-------
+2021/02/11-12:52:15 [INFO ]:zipファイル判定:True
+2021/02/11-12:52:15 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft_1.9\Rare Species SkyBlock ii Beta2.2.2 (1)\202102111058.zip の検討をします-------
+2021/02/11-12:52:15 [INFO ]:zipファイル判定:True
+2021/02/11-12:52:15 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft_forge1.12.2\新規ワールド\202102111058.zip の検討をします-------
+2021/02/11-12:52:15 [INFO ]:zipファイル判定:True
+2021/02/11-12:52:15 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft_forge1.12.2\新規ワールド-\202102111058.zip の検討をします-------
+2021/02/11-12:52:15 [INFO ]:zipファイル判定:True
+2021/02/11-12:52:15 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft_forge1.12.2\新規ワールド--\202102111058.zip の検討をします-------
+2021/02/11-12:52:15 [INFO ]:zipファイル判定:True
+2021/02/11-12:52:15 [INFO ]:0件圧縮済み,17件のスルー,1件のエラーが発生しました
+2021/02/11-13:11:34 [ERROR]:argsが存在しません
+2021/02/11-13:11:34 [INFO ]:
+
+2021/02/11-13:11:45 [INFO ]:=========Decompression=========
+2021/02/11-13:11:45 [INFO ]:18件のバックアップを検討します
+2021/02/11-13:11:45 [INFO ]:-------1 の検討をします-------
+2021/02/11-13:11:45 [INFO ]:zipファイル判定:False
+2021/02/11-13:11:45 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v12.0.9\202102111058.zip の検討をします-------
+2021/02/11-13:11:45 [INFO ]:zipファイル判定:True
+2021/02/11-13:11:45 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v12.0.9\202102111058.zipの処理を開始します
+2021/02/11-13:11:47 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v12.0.9 - コピー\202102111058.zip の検討をします-------
+2021/02/11-13:11:47 [INFO ]:zipファイル判定:True
+2021/02/11-13:11:47 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v12.0.9 - コピー\202102111058.zipの処理を開始します
+2021/02/11-13:11:49 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v9.1.4\202102111058.zip の検討をします-------
+2021/02/11-13:11:49 [INFO ]:zipファイル判定:True
+2021/02/11-13:11:49 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v9.1.4\202102111058.zipの処理を開始します
+2021/02/11-13:11:50 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v9.1.4 - コピー\202102111058.zip の検討をします-------
+2021/02/11-13:11:50 [INFO ]:zipファイル判定:True
+2021/02/11-13:11:50 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v9.1.4 - コピー\202102111058.zipの処理を開始します
+2021/02/11-13:11:52 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft\The Water SkyBlock ver2.2.3\202102111058.zip の検討をします-------
+2021/02/11-13:11:52 [INFO ]:zipファイル判定:True
+2021/02/11-13:11:52 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft\The Water SkyBlock ver2.2.3\202102111058.zipの処理を開始します
+2021/02/11-13:11:53 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\a\202102111058.zip の検討をします-------
+2021/02/11-13:11:53 [INFO ]:zipファイル判定:True
+2021/02/11-13:11:53 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\a\202102111058.zipの処理を開始します
+2021/02/11-13:11:57 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\The Water SkyBlock ver3.1.2\202102111058.zip の検討をします-------
+2021/02/11-13:11:57 [INFO ]:zipファイル判定:True
+2021/02/11-13:11:57 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\The Water SkyBlock ver3.1.2\202102111058.zipの処理を開始します
+2021/02/11-13:12:01 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\The Water SkyBlock ver3.1.3b\202102111058.zip の検討をします-------
+2021/02/11-13:12:01 [INFO ]:zipファイル判定:True
+2021/02/11-13:12:01 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\The Water SkyBlock ver3.1.3b\202102111058.zipの処理を開始します
+2021/02/11-13:12:23 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\新規ワールド\202102111058.zip の検討をします-------
+2021/02/11-13:12:23 [INFO ]:zipファイル判定:True
+2021/02/11-13:12:23 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\新規ワールド\202102111058.zipの処理を開始します
+2021/02/11-13:12:24 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\検証用ワールド\202102111058.zip の検討をします-------
+2021/02/11-13:12:24 [INFO ]:zipファイル判定:True
+2021/02/11-13:12:24 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\検証用ワールド\202102111058.zipの処理を開始します
+2021/02/11-13:12:26 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\適当建築\202102111058.zip の検討をします-------
+2021/02/11-13:12:26 [INFO ]:zipファイル判定:True
+2021/02/11-13:12:26 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\適当建築\202102111058.zipの処理を開始します
+2021/02/11-13:12:26 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft_1.10.2\test\202102111058.zip の検討をします-------
+2021/02/11-13:12:26 [INFO ]:zipファイル判定:True
+2021/02/11-13:12:26 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft_1.10.2\test\202102111058.zipの処理を開始します
+2021/02/11-13:12:28 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft_1.10.2\The Water SkyBlock ver2.2.3\202102111058.zip の検討をします-------
+2021/02/11-13:12:28 [INFO ]:zipファイル判定:True
+2021/02/11-13:12:28 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft_1.10.2\The Water SkyBlock ver2.2.3\202102111058.zipの処理を開始します
+2021/02/11-13:12:30 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft_1.9\Rare Species SkyBlock ii Beta2.2.2 (1)\202102111058.zip の検討をします-------
+2021/02/11-13:12:30 [INFO ]:zipファイル判定:True
+2021/02/11-13:12:30 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft_1.9\Rare Species SkyBlock ii Beta2.2.2 (1)\202102111058.zipの処理を開始します
+2021/02/11-13:12:36 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft_forge1.12.2\新規ワールド\202102111058.zip の検討をします-------
+2021/02/11-13:12:36 [INFO ]:zipファイル判定:True
+2021/02/11-13:12:36 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft_forge1.12.2\新規ワールド\202102111058.zipの処理を開始します
+2021/02/11-13:12:42 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft_forge1.12.2\新規ワールド-\202102111058.zip の検討をします-------
+2021/02/11-13:12:42 [INFO ]:zipファイル判定:True
+2021/02/11-13:12:42 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft_forge1.12.2\新規ワールド-\202102111058.zipの処理を開始します
+2021/02/11-13:12:44 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft_forge1.12.2\新規ワールド--\202102111058.zip の検討をします-------
+2021/02/11-13:12:44 [INFO ]:zipファイル判定:True
+2021/02/11-13:12:44 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft_forge1.12.2\新規ワールド--\202102111058.zipの処理を開始します
+2021/02/11-13:12:44 [INFO ]:0件圧縮済み,1件のスルー,0件のエラーが発生しました
+2021/02/11-13:12:44 [INFO ]:
+
+2021/02/11-13:53:26 [INFO ]:=========DoZipping=========
+2021/02/11-13:53:26 [INFO ]:18件のバックアップを検討します
+2021/02/11-13:53:26 [INFO ]:-------0 の検討をします-------
+2021/02/11-13:53:26 [INFO ]:zipファイル判定:False
+2021/02/11-13:53:26 [INFO ]:0 の処理を開始します
+2021/02/11-13:53:26 [ERROR]:0: zipping io exception
+2021/02/11-13:53:26 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v12.0.9\202102111058 の検討をします-------
+2021/02/11-13:53:26 [INFO ]:zipファイル判定:False
+2021/02/11-13:53:26 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v12.0.9\202102111058 の処理を開始します
+2021/02/11-13:53:35 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v12.0.9\202102111058 zip化完了
+2021/02/11-13:53:36 [INFO ]:[D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v12.0.9\202102111058]削除完了
+2021/02/11-13:53:36 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v12.0.9 - コピー\202102111058 の検討をします-------
+2021/02/11-13:53:36 [INFO ]:zipファイル判定:False
+2021/02/11-13:53:36 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v12.0.9 - コピー\202102111058 の処理を開始します
+2021/02/11-13:53:44 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v12.0.9 - コピー\202102111058 zip化完了
+2021/02/11-13:53:45 [INFO ]:[D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v12.0.9 - コピー\202102111058]削除完了
+2021/02/11-13:53:45 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v9.1.4\202102111058 の検討をします-------
+2021/02/11-13:53:45 [INFO ]:zipファイル判定:False
+2021/02/11-13:53:45 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v9.1.4\202102111058 の処理を開始します
+2021/02/11-13:53:50 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v9.1.4\202102111058 zip化完了
+2021/02/11-13:53:51 [INFO ]:[D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v9.1.4\202102111058]削除完了
+2021/02/11-13:53:51 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v9.1.4 - コピー\202102111058 の検討をします-------
+2021/02/11-13:53:51 [INFO ]:zipファイル判定:False
+2021/02/11-13:53:51 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v9.1.4 - コピー\202102111058 の処理を開始します
+2021/02/11-13:54:00 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v9.1.4 - コピー\202102111058 zip化完了
+2021/02/11-13:54:01 [INFO ]:[D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v9.1.4 - コピー\202102111058]削除完了
+2021/02/11-13:54:01 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft\The Water SkyBlock ver2.2.3\202102111058 の検討をします-------
+2021/02/11-13:54:01 [INFO ]:zipファイル判定:False
+2021/02/11-13:54:01 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft\The Water SkyBlock ver2.2.3\202102111058 の処理を開始します
+2021/02/11-13:54:04 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft\The Water SkyBlock ver2.2.3\202102111058 zip化完了
+2021/02/11-13:54:05 [INFO ]:[D:\Documents\MinecraftAutoBackup\.minecraft\The Water SkyBlock ver2.2.3\202102111058]削除完了
+2021/02/11-13:54:05 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\a\202102111058 の検討をします-------
+2021/02/11-13:54:05 [INFO ]:zipファイル判定:False
+2021/02/11-13:54:05 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\a\202102111058 の処理を開始します
+2021/02/11-13:54:13 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\a\202102111058 zip化完了
+2021/02/11-13:54:15 [INFO ]:[D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\a\202102111058]削除完了
+2021/02/11-13:54:15 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\The Water SkyBlock ver3.1.2\202102111058 の検討をします-------
+2021/02/11-13:54:15 [INFO ]:zipファイル判定:False
+2021/02/11-13:54:15 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\The Water SkyBlock ver3.1.2\202102111058 の処理を開始します
+2021/02/11-13:54:21 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\The Water SkyBlock ver3.1.2\202102111058 zip化完了
+2021/02/11-13:54:23 [INFO ]:[D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\The Water SkyBlock ver3.1.2\202102111058]削除完了
+2021/02/11-13:54:23 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\The Water SkyBlock ver3.1.3b\202102111058 の検討をします-------
+2021/02/11-13:54:23 [INFO ]:zipファイル判定:False
+2021/02/11-13:54:23 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\The Water SkyBlock ver3.1.3b\202102111058 の処理を開始します
+2021/02/11-13:54:45 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\The Water SkyBlock ver3.1.3b\202102111058 zip化完了
+2021/02/11-13:54:49 [INFO ]:[D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\The Water SkyBlock ver3.1.3b\202102111058]削除完了
+2021/02/11-13:54:49 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\新規ワールド\202102111058 の検討をします-------
+2021/02/11-13:54:49 [INFO ]:zipファイル判定:False
+2021/02/11-13:54:49 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\新規ワールド\202102111058 の処理を開始します
+2021/02/11-13:54:49 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\新規ワールド\202102111058 zip化完了
+2021/02/11-13:54:50 [INFO ]:[D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\新規ワールド\202102111058]削除完了
+2021/02/11-13:54:50 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\検証用ワールド\202102111058 の検討をします-------
+2021/02/11-13:54:50 [INFO ]:zipファイル判定:False
+2021/02/11-13:54:50 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\検証用ワールド\202102111058 の処理を開始します
+2021/02/11-13:54:50 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\検証用ワールド\202102111058 zip化完了
+2021/02/11-13:54:51 [INFO ]:[D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\検証用ワールド\202102111058]削除完了
+2021/02/11-13:54:51 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\適当建築\202102111058 の検討をします-------
+2021/02/11-13:54:51 [INFO ]:zipファイル判定:False
+2021/02/11-13:54:51 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\適当建築\202102111058 の処理を開始します
+2021/02/11-13:54:51 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\適当建築\202102111058 zip化完了
+2021/02/11-13:54:51 [INFO ]:[D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\適当建築\202102111058]削除完了
+2021/02/11-13:54:51 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft_1.10.2\test\202102111058 の検討をします-------
+2021/02/11-13:54:51 [INFO ]:zipファイル判定:False
+2021/02/11-13:54:51 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft_1.10.2\test\202102111058 の処理を開始します
+2021/02/11-13:54:52 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft_1.10.2\test\202102111058 zip化完了
+2021/02/11-13:54:52 [INFO ]:[D:\Documents\MinecraftAutoBackup\.minecraft_1.10.2\test\202102111058]削除完了
+2021/02/11-13:54:52 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft_1.10.2\The Water SkyBlock ver2.2.3\202102111058 の検討をします-------
+2021/02/11-13:54:52 [INFO ]:zipファイル判定:False
+2021/02/11-13:54:52 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft_1.10.2\The Water SkyBlock ver2.2.3\202102111058 の処理を開始します
+2021/02/11-13:54:55 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft_1.10.2\The Water SkyBlock ver2.2.3\202102111058 zip化完了
+2021/02/11-13:54:56 [INFO ]:[D:\Documents\MinecraftAutoBackup\.minecraft_1.10.2\The Water SkyBlock ver2.2.3\202102111058]削除完了
+2021/02/11-13:54:56 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft_1.9\Rare Species SkyBlock ii Beta2.2.2 (1)\202102111058 の検討をします-------
+2021/02/11-13:54:56 [INFO ]:zipファイル判定:False
+2021/02/11-13:54:56 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft_1.9\Rare Species SkyBlock ii Beta2.2.2 (1)\202102111058 の処理を開始します
+2021/02/11-13:55:02 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft_1.9\Rare Species SkyBlock ii Beta2.2.2 (1)\202102111058 zip化完了
+2021/02/11-13:55:03 [INFO ]:[D:\Documents\MinecraftAutoBackup\.minecraft_1.9\Rare Species SkyBlock ii Beta2.2.2 (1)\202102111058]削除完了
+2021/02/11-13:55:03 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft_forge1.12.2\新規ワールド\202102111058 の検討をします-------
+2021/02/11-13:55:03 [INFO ]:zipファイル判定:False
+2021/02/11-13:55:03 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft_forge1.12.2\新規ワールド\202102111058 の処理を開始します
+2021/02/11-13:55:06 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft_forge1.12.2\新規ワールド\202102111058 zip化完了
+2021/02/11-13:55:06 [INFO ]:[D:\Documents\MinecraftAutoBackup\.minecraft_forge1.12.2\新規ワールド\202102111058]削除完了
+2021/02/11-13:55:06 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft_forge1.12.2\新規ワールド-\202102111058 の検討をします-------
+2021/02/11-13:55:06 [INFO ]:zipファイル判定:False
+2021/02/11-13:55:06 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft_forge1.12.2\新規ワールド-\202102111058 の処理を開始します
+2021/02/11-13:55:07 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft_forge1.12.2\新規ワールド-\202102111058 zip化完了
+2021/02/11-13:55:08 [INFO ]:[D:\Documents\MinecraftAutoBackup\.minecraft_forge1.12.2\新規ワールド-\202102111058]削除完了
+2021/02/11-13:55:08 [INFO ]:-------D:\Documents\MinecraftAutoBackup\.minecraft_forge1.12.2\新規ワールド--\202102111058 の検討をします-------
+2021/02/11-13:55:08 [INFO ]:zipファイル判定:False
+2021/02/11-13:55:08 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft_forge1.12.2\新規ワールド--\202102111058 の処理を開始します
+2021/02/11-13:55:09 [INFO ]:D:\Documents\MinecraftAutoBackup\.minecraft_forge1.12.2\新規ワールド--\202102111058 zip化完了
+2021/02/11-13:55:09 [INFO ]:[D:\Documents\MinecraftAutoBackup\.minecraft_forge1.12.2\新規ワールド--\202102111058]削除完了
+2021/02/11-13:55:09 [INFO ]:17件圧縮済み,0件のスルー,1件のエラーが発生しました
