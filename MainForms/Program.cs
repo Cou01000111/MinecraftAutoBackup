@@ -1352,19 +1352,22 @@ internal class AppConfigForm :Form {
             if (AppConfig.DoZip) {
                 //設定上はtrue,formのほうはfalseの場合（falseに変更された場合）
                 List<string> backups = Util.GetBackups();
+
                 if (backups.Count > 0) {
                     //バックアップが存在している場合
                     DialogResult r = MessageBox.Show("現在保存されているバックアップをすべて解凍しますか？", "保存方式", MessageBoxButtons.YesNo);
                     if (r == DialogResult.Yes) {
                         // 既存のバックアップ.zipをすべて解凍する
-                        string command = ".\\SubModule\\Decompression.exe";
-                        string _args = "";
+                        string command = ".\\SubModule\\Zipper.exe";
+                        string _args = "1 ";
                         foreach (string s in backups) {
                             _args += $"\"{s}\" ";
                         }
-                        var Decompression = new ProcessStartInfo();
-                        Decompression.FileName = command;
-                        Decompression.Arguments = _args;
+                        var Decompression = new ProcessStartInfo {
+                            FileName = command,
+                            Arguments = _args
+                        };
+                        Console.WriteLine($"Zipper {command} {_args}");
                         Process.Start(Decompression);
                     }
                 }
@@ -1378,14 +1381,16 @@ internal class AppConfigForm :Form {
                     DialogResult r = MessageBox.Show("現在保存されているバックアップをすべて圧縮しますか？", "保存方式", MessageBoxButtons.YesNo);
                     if (r == DialogResult.Yes) {
                         // 既存のバックアップ.zipをすべて解凍する
-                        string command = ".\\SubModule\\DoZipping.exe";
-                        string _args = "";
+                        string command = ".\\SubModule\\Zipper.exe";
+                        string _args = "0 ";
                         foreach(string s in backups) {
                             _args += $"\"{s}\" ";
                         }
-                        var doZipping = new ProcessStartInfo();
-                        doZipping.FileName = command;
-                        doZipping.Arguments = _args;
+                        var doZipping = new ProcessStartInfo {
+                            FileName = command,
+                            Arguments = _args
+                        };
+                        Console.WriteLine($"Zipper {command} {_args}");
                         Process.Start(doZipping);
                         //Util.task = Task.Run(() => { DoZipping(backups); });
                     }
