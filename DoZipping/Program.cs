@@ -1,65 +1,75 @@
-﻿using System;
-using System.IO;
+﻿using Microsoft.VisualBasic.FileIO;
+using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.IO.Compression;
-using System.Threading;
+using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.VisualBasic.FileIO;
 
 namespace Zipper {
     class Program {
         static void Main(string[] args) {
-            Logger log = new Logger(3);
-            // © DOBON!.
-            //Mutex関係
-            // https://dobon.net/vb/dotnet/process/checkprevinstance.html
-            //Mutex名を決める（必ずアプリケーション固有の文字列に変更すること！）
-            string mutexName = "ZippingProcess";
-            //Mutexオブジェクトを作成する
-            Mutex mutex = new System.Threading.Mutex(false, mutexName);
-
-            bool hasHandle = false;
-            try {
-                try {
-                    hasHandle = mutex.WaitOne(0, false);
-                }
-                //.NET Framework 2.0以降の場合
-                catch (System.Threading.AbandonedMutexException) {
-                    hasHandle = true;
-                }
-                if (hasHandle == false) {
-                    log.Error("二重起動されました");
-                    return;
-                }
-                Process.MainProcess(args);
-            }
-            finally {
-                if (hasHandle) {
-                    mutex.ReleaseMutex();
-                }
-                mutex.Close();
-            }
+            Logger log = new Logger();
+            new AppConfig();
+            Process.MainProcess(args);
         }
     }
 
     class Process {
+        public static string tmpPath;
         public static void MainProcess(string[] args) {
-            Logger log = new Logger(3);
+            Logger log = new Logger();
             int zippingCount = 0;
             int errorCount = 0;
             int skipCount = 0;
 
             if (args.ToList().Count() == 0) {
                 log.Error("argsが存在しません");
-                log.Info("\n");
+                EndTimeProcess();
                 return;
             }
+
+            //一つだけzipされたとき=>zip化する
+            //zip,decomされた時
+
+            //tmpファイルを作りそこへバックアップ先を移す
+            log.Info("tmpファイルを作成します");
+            tmpPath = $"{Path.GetTempPath()}MABtmp";
+            log.Info($"tmpフォルダへバックアップをコピーしています");
+            if (File.Exists(tmpPath)) {
+                log.Warn("MABtmpを削除します");
+                Directory.Delete(tmpPath, true);
+            }
+            FileSystem.CreateDirectory(tmpPath);
+            try { FileSystem.CopyDirectory(AppConfig.BackupPath + "\\", tmpPath); }
+            catch (Exception e) {
+                Console.WriteLine(e.Message);
+            }
+            //圧縮 & 非圧縮するファイルへのパスの配列を作る
+
+            log.Info("");
+            Console.WriteLine("call: GetBackups");
+            List<string> backups = new List<string>();
+            List<string> dirs;
+            dirs = Directory.GetDirectories(AppConfig.BackupPath).ToList();
+            List<string> worlds = new List<string>();
+            foreach (string dir in dirs) {
+                worlds.AddRange(Directory.GetDirectories(dir));
+            }
+            foreach (var w in worlds) {
+                backups.AddRange(Directory.GetDirectories(w));
+                backups.AddRange(Directory.GetFiles(w));
+            }
+            //Console.WriteLine($"dir:{dirs.Count()}, worlds:{worlds.Count()}, backups:{backups.Count()}");
+            //while (GetLog.isRunningOtherZipper()) {
+            //    Task.Delay(10000);
+            //}
+
 
             if (args[0] == "0") {
                 //0番ならzippingMode
                 //try {
-                List<string> pasess = args.ToList();
+                List<string> pasess = backups;
                 log.Info("=========DoZipping=========");
                 log.Info($"{pasess.Count()}件のバックアップを検討します");
                 foreach (var path in pasess) {
@@ -94,29 +104,8 @@ namespace Zipper {
 
                         // -------Delete--------
                         try {
-                            FileSystem.DeleteDirectory(path,UIOption.OnlyErrorDialogs,RecycleOption.DeletePermanently);
+                            FileSystem.DeleteDirectory(path, UIOption.OnlyErrorDialogs, RecycleOption.DeletePermanently);
                         }
-                        //catch (IOException) {
-                        //    log.Warn($"{path}が使用中だったため10秒後再試行します");
-                        //    Task.Delay(10000);
-                        //    try { File.Delete($"{path}"); }
-                        //    catch {
-                        //        log.Error($"{path}が使用中のためスルーします");
-                        //        errorCount++;
-                        //        continue;
-                        //    }
-                        //    //Console.ReadLine();
-                        //}
-                        //catch (UnauthorizedAccessException) {
-                        //    log.Warn($"{path}が使用中だったため10秒後再試行します");
-                        //    Task.Delay(10000);
-                        //    try { File.Delete($"{path}"); }
-                        //    catch {
-                        //        log.Error($"{path}が使用中のためスルーします");
-                        //        errorCount++;
-                        //        continue;
-                        //    }
-                        //}
                         catch (Exception e) {
                             log.Error(e.GetType().ToString());
                             log.Error(e.Message);
@@ -138,12 +127,17 @@ namespace Zipper {
                 //    log.Info("error");
                 //}
                 log.Info($"{zippingCount}件圧縮済み,{skipCount}件のスルー,{errorCount}件のエラーが発生しました");
+                Directory.Delete(AppConfig.BackupPath, true);
+                FileSystem.CopyDirectory(tmpPath, AppConfig.BackupPath);
+                EndTimeProcess();
 
-            } else if(args[0] == "1") {
+            }
+            else if (args[0] == "1") {
                 //1番ならdecompressionMode
                 //try {
-                List<string> pasess = args.ToList();
+                List<string> pasess = backups;
                 log.Info("=========Decompression=========");
+
                 log.Info($"{pasess.Count()}件のバックアップを検討します");
                 foreach (var path in pasess) {
                     log.Info($"-------{path} の検討をします-------");
@@ -198,7 +192,9 @@ namespace Zipper {
                     }
                 }
                 log.Info($"{zippingCount}件圧縮済み,{skipCount}件のスルー,{errorCount}件のエラーが発生しました");
-                log.Info("\n");
+                Directory.Delete(AppConfig.BackupPath, true);
+                FileSystem.CopyDirectory(tmpPath, AppConfig.BackupPath);
+                EndTimeProcess();
                 //}
                 //catch (Exception) {
                 //    log.Info("error");
@@ -206,20 +202,34 @@ namespace Zipper {
             }
             else {
                 log.Error("Args Error");
-                log.Info("\n");
+                EndTimeProcess();
                 return;
             }
 
         }
+
+        public static void EndTimeProcess() {
+            Logger log = new Logger();
+            log.Info("Exit Process");
+            Directory.Delete(tmpPath, true);
+        }
     }
 
     class Logger {
-        private string logPath = ".\\logs\\Zipper.txt";
-        private int outputLevel;
+        public static string logPath = ".\\logs\\Zipper.txt";
+        private static int outputLevel = 3;
 
 
-        public Logger(int level) {
-            outputLevel = level;
+        public Logger(string p, int ol) {
+            logPath = p;
+            outputLevel = ol;
+        }
+        public Logger(string p) {
+            logPath = p;
+        }
+
+        public Logger() {
+
         }
 
         public void Base(int level, string message) {
@@ -258,6 +268,55 @@ namespace Zipper {
         }
         public void Error(string message) {
             Base(0, message);
+        }
+    }
+
+    class GetLog {
+        static Logger logger = new Logger();
+        public static string Leaest() {
+            return Base()[Base().Count - 2];
+        }
+
+        public static List<string> Nearest(int x) {
+            List<string> logs = new List<string>();
+            List<string> _logs = Base();
+            for (int i = 0; i < x; i++) {
+                logs.Add(_logs[i + 1]);
+            }
+            return logs;
+        }
+
+        static List<string> Base() {
+            List<string> logs = new List<string>();
+            try {
+
+                using (StreamReader s = new StreamReader(Logger.logPath)) {
+                    string _logs = s.ReadToEnd();
+                    logs = _logs.Split('\n').ToList();
+                }
+                logs.Reverse();
+            }
+            catch {
+                Task.Delay(2000);//二秒後再試行
+                try {
+                    logs = new List<string>();
+                    using (StreamReader s = new StreamReader(Logger.logPath)) {
+                        string _logs = s.ReadToEnd();
+                        logs = _logs.Split('\n').ToList();
+                    }
+                    logs.Reverse();
+                }
+                catch {
+                    throw new Exception();
+                }
+            }
+            return logs;
+        }
+
+        public static bool isRunningOtherZipper() {
+            string log = Leaest().Substring(28, Leaest().Length - 28);
+            logger.Debug("leaest:" + log);
+            return !(log == "Exit Process");
         }
     }
 }
