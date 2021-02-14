@@ -1,18 +1,15 @@
-﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
-using System.IO;
-using System.Text;
-using System.ComponentModel;
-using System.Collections.Generic;
-using System.Collections;
-using System.Diagnostics;
-using System.Linq;
-using Microsoft.VisualBasic.FileIO;
-using System.Threading.Tasks;
+﻿using Microsoft.VisualBasic.FileIO;
 using Microsoft.WindowsAPICodePack.Dialogs;
-using System.IO.Compression;
-using System.Text.RegularExpressions;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 class Program {
     [STAThread]
     static void Main() {
@@ -60,6 +57,7 @@ class WorldListForm :Form {
         this.Text = "Minecraft Auto Backup";
         this.Icon = new Icon(".\\Image\\app.ico");
         this.Font = new Font(AppConfig.Font.Name, 11);
+        Console.WriteLine(AppConfig.Font.Name);
 
         Util.FontStyle = AppConfig.Font;
         this.FormClosing += new FormClosingEventHandler(WorldListForm_FormClosing);
@@ -823,7 +821,7 @@ class BackGroundTasks :Form {
         backupDataPath = AppConfig.BackupPath;
         this.ShowInTaskbar = false;
         this.Icon = new Icon(".\\Image\\app.ico");
-        
+
         notifyIcon.Icon = new Icon(".\\Image\\app_sub.ico");
         notifyIcon.Visible = true;
         notifyIcon.Text = "ただいましています";
@@ -879,7 +877,7 @@ public class Util {
         }
         Console.WriteLine($"dir:{dirs.Count()}, worlds:{worlds.Count()}, backups:{backups.Count()}");
         Console.WriteLine("-----GetBackups-----");
-        foreach(var a in backups) {
+        foreach (var a in backups) {
             Console.WriteLine(a);
         }
         Console.WriteLine("--------------------");
@@ -1338,8 +1336,9 @@ internal class AppConfigForm :Form {
         fontDialog.ShowColor = false;
         fontDialog.ShowEffects = false;
         if (fontDialog.ShowDialog() != DialogResult.Cancel) {
-            Util.FontStyle = fontDialog.Font;
+            AppConfig.Font = fontDialog.Font;
         }
+        this.fontName.Text = fontDialog.Font.Name;
     }
 
     private void ok_Click(object sender, EventArgs e) {
@@ -1351,49 +1350,69 @@ internal class AppConfigForm :Form {
         if (AppConfig.DoZip != this.doZip.Checked) {
             if (AppConfig.DoZip) {
                 //設定上はtrue,formのほうはfalseの場合（falseに変更された場合）
-                List<string> backups = Util.GetBackups();
+                //List<string> backups = Util.GetBackups();
+                //FileSystem.CreateDirectory(".\\tmp");
+                //var t = Task.Run(() => {
+                //    try{ FileSystem.CopyDirectory(AppConfig.BackupPath, ".\\tmp"); }
+                //    catch( Exception ex) {
+                //        Console.WriteLine("catch error");
+                //        Console.WriteLine(ex.StackTrace);
+                //        Console.WriteLine(ex.Message);
+                //        Console.WriteLine(ex.Data);
+                //    }
+                //});
 
-                if (backups.Count > 0) {
-                    //バックアップが存在している場合
-                    DialogResult r = MessageBox.Show("現在保存されているバックアップをすべて解凍しますか？", "保存方式", MessageBoxButtons.YesNo);
-                    if (r == DialogResult.Yes) {
-                        // 既存のバックアップ.zipをすべて解凍する
-                        string command = ".\\SubModule\\Zipper.exe";
-                        string _args = "1 ";
-                        foreach (string s in backups) {
-                            _args += $"\"{s}\" ";
-                        }
-                        var Decompression = new ProcessStartInfo {
-                            FileName = command,
-                            Arguments = _args
-                        };
-                        Console.WriteLine($"Zipper {command} {_args}");
-                        Process.Start(Decompression);
-                    }
+                //バックアップが存在している場合
+                DialogResult r = MessageBox.Show("現在保存されているバックアップをすべて解凍しますか？", "保存方式", MessageBoxButtons.YesNo);
+                if (r == DialogResult.Yes) {
+                    // 既存のバックアップ.zipをすべて解凍する
+                    string command = ".\\SubModule\\Zipper.exe";
+                    string _args = "1";
+                    var Decompression = new ProcessStartInfo {
+                        FileName = command,
+                        Arguments = _args
+                    };
+                    Console.WriteLine($"Zipper {command} {_args}");
+                    Process.Start(Decompression);
+
                 }
             }
             else if (!AppConfig.DoZip) {
                 //設定上はfalse,formのほうはtrueの場合（trueに変更された場合）
                 List<string> backups = Util.GetBackups();
+                FileSystem.CreateDirectory(".\\tmp");
+                var t = Task.Run(() => {
+                    try { FileSystem.CopyDirectory(AppConfig.BackupPath, ".\\tmp"); }
+                    catch (Exception ex) {
+                        Console.WriteLine("catch error");
+                        Console.WriteLine(ex.StackTrace);
+                        Console.WriteLine(ex.Message);
+                        Console.WriteLine(ex.Data);
+                    }
+                });
+                foreach (string b in backups) {
+                    b.Replace(AppConfig.BackupPath, ".\\tmp");
+                    Console.WriteLine($"info:{b}");
+                }
 
                 if (backups.Count > 0) {
                     //バックアップが存在している場合
                     DialogResult r = MessageBox.Show("現在保存されているバックアップをすべて圧縮しますか？", "保存方式", MessageBoxButtons.YesNo);
-                    if (r == DialogResult.Yes) {
-                        // 既存のバックアップ.zipをすべて解凍する
-                        string command = ".\\SubModule\\Zipper.exe";
-                        string _args = "0 ";
-                        foreach(string s in backups) {
-                            _args += $"\"{s}\" ";
-                        }
-                        var doZipping = new ProcessStartInfo {
-                            FileName = command,
-                            Arguments = _args
-                        };
-                        Console.WriteLine($"Zipper {command} {_args}");
-                        Process.Start(doZipping);
-                        //Util.task = Task.Run(() => { DoZipping(backups); });
-                    }
+                    //if (r == DialogResult.Yes) {
+                    //    // 既存のバックアップ.zipをすべて解凍する
+                    //    string command = ".\\SubModule\\Zipper.exe";
+                    //    string _args = "0 ";
+                    //    foreach (string s in backups) {
+                    //        _args += $"\"{s}\" ";
+                    //    }
+                    //    var doZipping = new ProcessStartInfo {
+                    //        FileName = command,
+                    //        Arguments = _args
+                    //    };
+                    //    Console.WriteLine($"Zipper {command} {_args}");
+                    //    Process.Start(doZipping);
+                    //    //Util.task = Task.Run(() => { DoZipping(backups); });
+                    //}
                 }
             }
             else {

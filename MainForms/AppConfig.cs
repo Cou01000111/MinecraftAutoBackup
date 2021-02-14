@@ -57,6 +57,7 @@ public class AppConfig {
             $"{BackupPath}\n{Font.Name}\n" +
             (DoZip ? "zip" : "normal") +
             $"\n{Language}\n{ClientSize.Width}\n{ClientSize.Height}\n{ClientPoint.X}\n{ClientPoint.Y}\n{BackupCount}";
+        Console.WriteLine("info: Writing "+Text);
         File.WriteAllText(appConfigPath, Text);
     }
 
