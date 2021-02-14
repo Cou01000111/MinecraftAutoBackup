@@ -1,13 +1,13 @@
-﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
-using System.IO;
-using System.Text;
+﻿using Microsoft.VisualBasic.FileIO;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using Microsoft.VisualBasic.FileIO;
+using System.Drawing;
+using System.IO;
 using System.IO.Compression;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
 
 /*
  フォルダ構成
@@ -49,12 +49,15 @@ namespace MABProcessAtWait {
                 if (hasHandle == false) {
                     return;
                 }
-                new AppConfig();
-                Config.Load();
-                Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
-                Form1 f = new Form1();
-                Application.Run();
+
+                    new AppConfig();
+                    Config.Load();
+                    Util.NotReadonly(AppConfig.BackupPath);
+                    Application.EnableVisualStyles();
+                    Application.SetCompatibleTextRenderingDefault(false);
+                    Form1 f = new Form1();
+                    Application.Run();
+                
             }
             finally {
                 if (hasHandle) {
@@ -115,6 +118,9 @@ namespace MABProcessAtWait {
             // lancherが起動していてflagがtrue => 何もしない
             // lancherが起動していなくてflagがtrue => flagをfalseにする
             if (Process.GetProcessesByName("MinecraftLauncher").Length > 0 && !isRunning) {
+                while (Util.IsZipperRunning()) {
+                    System.Threading.Tasks.Task.Delay(10000);
+                }
                 isRunning = true;
                 Console.WriteLine("info:Minecraft Lancherの起動を検知しました");
                 Console.WriteLine("info:isRunningがfalseに設定されていました");
@@ -212,8 +218,38 @@ namespace MABProcessAtWait {
     }
 
     public static class Util {
+        public static bool IsZipperRunning() {
+            //一回もzipperが起動されていない場合
+            if (File.Exists($".\\logs\\Zipper.txt")) {
+                return false;
+            }
+            //zipperのlogからlog取得
+            List<string> strs = new List<string>();
+            using (StreamReader r = new StreamReader($".\\logs\\Zipper.txt")) {
+                while (r.Peek() > -1) {
+                    strs.Add(r.ReadLine());
+                }
+            }
+            //最終行がExit Processかどうかを取得
+            string decisionStr = strs[strs.Count() - 2].Substring(28, strs[strs.Count() - 2].Length);
+            Console.WriteLine($"decisionStrは{decisionStr}です");
+            return decisionStr != "Exit Process";
+        }
+
         public static string TrimDoubleQuotationMarks(string target) {
             return target.Trim(new char[] { '"' });
+        }
+
+        public static void NotReadonly(string path) {
+            Console.WriteLine("call:NotReadonly");
+            Console.WriteLine($"{path}を入力されました");
+            List<string> pasess = Directory.GetFiles(path, "*", System.IO.SearchOption.AllDirectories).ToList();
+            foreach(string p in pasess) {
+                if((File.GetAttributes(p) & FileAttributes.ReadOnly) == FileAttributes.ReadOnly) {
+                    Console.WriteLine($"info:{p} のreadonlyを外します");
+                    File.SetAttributes(p, File.GetAttributes(p) & ~FileAttributes.ReadOnly);
+                }
+            }
         }
     }
 
