@@ -146,10 +146,11 @@ namespace MABProcessAtWait {
                 foreach (string worldPath in worldPasses) {
                     notifyIcon.Text = $"{backupCount++}/{worldPasses.Count}";
                     //前回のリロードとバックアップまでの間にワールドが消された場合
+                    string backupPath = backupDataPath + "\\" + Path.GetFileName(Directory.GetParent(Directory.GetParent(worldPath).ToString()).ToString()) + "\\" + Path.GetFileName(worldPath) + "\\" + nowTime;
+                    string worldBackupPath = backupDataPath + "\\" + Path.GetFileName(Directory.GetParent(Directory.GetParent(worldPath).ToString()).ToString()) + "\\" + Path.GetFileName(worldPath);
                     try { doBackup(worldPath, nowTime); }
                     catch (DirectoryNotFoundException dnfe) {
-                        string backupPath = backupDataPath + "\\" + Path.GetFileName(Directory.GetParent(Directory.GetParent(worldPath).ToString()).ToString()) + "\\" + Path.GetFileName(worldPath) + "\\" + nowTime;
-                        string worldBackupPath = backupDataPath + "\\" + Path.GetFileName(Directory.GetParent(Directory.GetParent(worldPath).ToString()).ToString()) + "\\" + Path.GetFileName(worldPath);
+                        
                         Console.Error.WriteLine(worldPath + ":DirectoryNotFoundException : " + dnfe.Message);
                         if (!Directory.Exists(worldPath)) {
                             DialogResult r = MessageBox.Show(
@@ -157,6 +158,22 @@ namespace MABProcessAtWait {
                             "Minecraft Auto Backup",
                             MessageBoxButtons.OK);
                         }
+                    }
+                    //バックアップ超過分削除
+                    if (Directory.GetFileSystemEntries(worldBackupPath).ToList().Count() > int.Parse(AppConfig.BackupCount)) {
+                        Console.WriteLine($"{worldBackupPath}のバックアップ数({Directory.GetFileSystemEntries(worldBackupPath).ToList().Count()})が超過している(AppConfig:{int.Parse(AppConfig.BackupCount)})ので削除処理に移ります");
+                        //バックアップ数がappconfig.backupCountより多い場合超過分を削除する
+                        List<string> backups = Directory.GetDirectories(worldBackupPath)
+                            .OrderByDescending(filePath => File.GetLastWriteTime(filePath).Date)
+                            .ThenBy(filePath => File.GetLastWriteTime(filePath).TimeOfDay).ToList();
+                        List<string> deleteBackups = new List<string>();
+                        for (int i = int.Parse(AppConfig.BackupCount); i < backups.Count(); i++) {
+                            Console.WriteLine($"{backups[i]}を削除します");
+                            Directory.Delete(backups[i], true);
+                        }
+                    }
+                    else {
+                        Console.WriteLine($"{worldBackupPath}({Directory.GetFileSystemEntries(worldBackupPath).ToList().Count()})の超過分(AppConfig:{int.Parse(AppConfig.BackupCount)})は発見されませんでした");
                     }
                     //バックアップ保持数を調整
 
@@ -192,19 +209,24 @@ namespace MABProcessAtWait {
         void doBackup(string path, string Time) {
             string backupPath = backupDataPath + "\\" + Path.GetFileName(Directory.GetParent(Directory.GetParent(path).ToString()).ToString()) + "\\" + Path.GetFileName(path) + "\\" + Time;
             string worldBackupPath = backupDataPath + "\\" + Path.GetFileName(Directory.GetParent(Directory.GetParent(path).ToString()).ToString()) + "\\" + Path.GetFileName(path);
+            if (AppConfig.DoZip)
+                backupPath += ".zip";
             if (!Directory.Exists(worldBackupPath)) {
                 Directory.CreateDirectory(worldBackupPath);
             }
             if (AppConfig.DoZip) {
-                Console.WriteLine(path + " を " + backupPath + ".zip へバックアップ中です");
-                ZipFile.CreateFromDirectory(path, $"{backupPath}.zip");
-                Console.WriteLine(path + " を " + backupPath + " .zipへバックアップしました");
+                Console.WriteLine(path + " を " + backupPath + " へバックアップ中です");
+                ZipFile.CreateFromDirectory(path, backupPath);
+                Console.WriteLine(path + " を " + backupPath + "へバックアップしました");
             }
             else {
                 Console.WriteLine(path + " を " + backupPath + "へバックアップ中です");
                 FileSystem.CopyDirectory(path, backupPath);
                 Console.WriteLine(path + " を " + backupPath + "へバックアップしました");
             }
+            
+
+
         }
     }
 
