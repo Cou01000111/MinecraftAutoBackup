@@ -253,26 +253,17 @@ class WorldListForm :Form {
         AppConfig.ClientPoint = this.Location;
         AppConfig.ClientSize = this.ClientSize;
         AppConfig.WriteAppConfig();
-        //try {
-        //    System.Diagnostics.Process.Start(".\\SubModule\\MABProcessAtWait.exe");
-        //}
-        //catch (Win32Exception w) {
-        //    Console.WriteLine(w.Message);
-        //    Console.WriteLine(w.ErrorCode.ToString());
-        //    Console.WriteLine(w.NativeErrorCode.ToString());
-        //    Console.WriteLine(w.StackTrace);
-        //    Console.WriteLine(w.Source);
-        //    Exception f = w.GetBaseException();
-        //    Console.WriteLine(f.Message);
-        //}
-        if ((Util.task != null)) {
-            if (!(Util.task.IsCompleted)) {
-                //非同期で実行しているタスクがまだ終わっていない場合
-                Console.WriteLine("info:タスクが未完了なのでバックグラウンドで処理します");
-                //this.Close();
-                BackGroundTasks f = new BackGroundTasks();
-                Application.Run();
-            }
+        try {
+            System.Diagnostics.Process.Start(".\\SubModule\\MABProcessAtWait.exe");
+        }
+        catch (Win32Exception w) {
+            Console.WriteLine(w.Message);
+            Console.WriteLine(w.ErrorCode.ToString());
+            Console.WriteLine(w.NativeErrorCode.ToString());
+            Console.WriteLine(w.StackTrace);
+            Console.WriteLine(w.Source);
+            Exception f = w.GetBaseException();
+            Console.WriteLine(f.Message);
         }
     }
     void Exit_Click(object sender, EventArgs e) {

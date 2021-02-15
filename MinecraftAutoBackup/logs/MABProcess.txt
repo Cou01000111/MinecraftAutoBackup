@@ -1,0 +1,107 @@
+2021/02/15-22:56:52 [DEBUG]:call:LoadConfigToApp
+2021/02/15-23:00:48 [DEBUG]:call:LoadConfigToApp
+2021/02/15-23:00:48 [INFO ]:Configから20件のワールドを読み込みました
+2021/02/15-23:00:48 [DEBUG]:call:NotReadonly
+2021/02/15-23:00:48 [INFO ]:D:\Documents\MinecraftAutoBackupを入力されました
+2021/02/15-23:01:00 [DEBUG]:call:LoadConfigToApp
+2021/02/15-23:01:00 [INFO ]:Configから20件のワールドを読み込みました
+2021/02/15-23:01:00 [DEBUG]:call:NotReadonly
+2021/02/15-23:01:00 [INFO ]:D:\Documents\MinecraftAutoBackupを入力されました
+2021/02/15-23:02:20 [DEBUG]:call:LoadConfigToApp
+2021/02/15-23:02:20 [INFO ]:Configから20件のワールドを読み込みました
+2021/02/15-23:02:20 [DEBUG]:call:NotReadonly
+2021/02/15-23:02:20 [INFO ]:D:\Documents\MinecraftAutoBackupを入力されました
+2021/02/15-23:02:21 [INFO ]:Minecraft Lancherの起動を検知しました
+2021/02/15-23:02:21 [INFO ]:isRunningがfalseに設定されていました
+2021/02/15-23:02:21 [INFO ]:バックアッププロセスを始めます
+2021/02/15-23:02:21 [INFO ]:C:\Users\YUUKI\AppData\Roaming\.minecraft\saves\buildinng を D:\Documents\MinecraftAutoBackup\.minecraft\buildinng\202102152302へバックアップ中です
+2021/02/15-23:02:21 [INFO ]:C:\Users\YUUKI\AppData\Roaming\.minecraft\saves\buildinng を D:\Documents\MinecraftAutoBackup\.minecraft\buildinng\202102152302へバックアップしました
+2021/02/15-23:02:21 [INFO ]:C:\Users\YUUKI\AppData\Roaming\.minecraft\saves\commanding (1) を D:\Documents\MinecraftAutoBackup\.minecraft\commanding (1)\202102152302へバックアップ中です
+2021/02/15-23:02:21 [INFO ]:C:\Users\YUUKI\AppData\Roaming\.minecraft\saves\commanding (1) を D:\Documents\MinecraftAutoBackup\.minecraft\commanding (1)\202102152302へバックアップしました
+2021/02/15-23:02:21 [INFO ]:C:\Users\YUUKI\AppData\Roaming\.minecraft\saves\sWorld を D:\Documents\MinecraftAutoBackup\.minecraft\sWorld\202102152302へバックアップ中です
+2021/02/15-23:02:23 [INFO ]:C:\Users\YUUKI\AppData\Roaming\.minecraft\saves\sWorld を D:\Documents\MinecraftAutoBackup\.minecraft\sWorld\202102152302へバックアップしました
+2021/02/15-23:02:23 [INFO ]:C:\Users\YUUKI\AppData\Roaming\.minecraft\saves\The Unusual SkyBlock v12.0.9 を D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v12.0.9\202102152302へバックアップ中です
+2021/02/15-23:02:25 [INFO ]:C:\Users\YUUKI\AppData\Roaming\.minecraft\saves\The Unusual SkyBlock v12.0.9 を D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v12.0.9\202102152302へバックアップしました
+2021/02/15-23:02:25 [INFO ]:C:\Users\YUUKI\AppData\Roaming\.minecraft\saves\The Unusual SkyBlock v12.0.9 - コピー を D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v12.0.9 - コピー\202102152302へバックアップ中です
+2021/02/15-23:02:29 [INFO ]:C:\Users\YUUKI\AppData\Roaming\.minecraft\saves\The Unusual SkyBlock v12.0.9 - コピー を D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v12.0.9 - コピー\202102152302へバックアップしました
+2021/02/15-23:02:29 [INFO ]:C:\Users\YUUKI\AppData\Roaming\.minecraft\saves\The Unusual SkyBlock v9.1.4 を D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v9.1.4\202102152302へバックアップ中です
+2021/02/15-23:02:33 [INFO ]:C:\Users\YUUKI\AppData\Roaming\.minecraft\saves\The Unusual SkyBlock v9.1.4 を D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v9.1.4\202102152302へバックアップしました
+2021/02/15-23:02:33 [INFO ]:C:\Users\YUUKI\AppData\Roaming\.minecraft\saves\The Unusual SkyBlock v9.1.4 - コピー を D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v9.1.4 - コピー\202102152302へバックアップ中です
+2021/02/15-23:02:37 [INFO ]:C:\Users\YUUKI\AppData\Roaming\.minecraft\saves\The Unusual SkyBlock v9.1.4 - コピー を D:\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v9.1.4 - コピー\202102152302へバックアップしました
+2021/02/15-23:02:37 [INFO ]:C:\Users\YUUKI\AppData\Roaming\.minecraft\saves\The Water SkyBlock ver2.2.3 を D:\Documents\MinecraftAutoBackup\.minecraft\The Water SkyBlock ver2.2.3\202102152302へバックアップ中です
+2021/02/15-23:02:41 [INFO ]:C:\Users\YUUKI\AppData\Roaming\.minecraft\saves\The Water SkyBlock ver2.2.3 を D:\Documents\MinecraftAutoBackup\.minecraft\The Water SkyBlock ver2.2.3\202102152302へバックアップしました
+2021/02/15-23:02:41 [INFO ]:C:\Users\YUUKI\AppData\Roaming\.minecraft-1.14.4-optifine\saves\a を D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\a\202102152302へバックアップ中です
+2021/02/15-23:02:50 [INFO ]:C:\Users\YUUKI\AppData\Roaming\.minecraft-1.14.4-optifine\saves\a を D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\a\202102152302へバックアップしました
+2021/02/15-23:02:50 [INFO ]:C:\Users\YUUKI\AppData\Roaming\.minecraft-1.14.4-optifine\saves\The Water SkyBlock ver3.1.2 を D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\The Water SkyBlock ver3.1.2\202102152302へバックアップ中です
+2021/02/15-23:03:01 [INFO ]:C:\Users\YUUKI\AppData\Roaming\.minecraft-1.14.4-optifine\saves\The Water SkyBlock ver3.1.2 を D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\The Water SkyBlock ver3.1.2\202102152302へバックアップしました
+2021/02/15-23:03:01 [INFO ]:C:\Users\YUUKI\AppData\Roaming\.minecraft-1.14.4-optifine\saves\The Water SkyBlock ver3.1.3b を D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\The Water SkyBlock ver3.1.3b\202102152302へバックアップ中です
+2021/02/15-23:03:18 [INFO ]:C:\Users\YUUKI\AppData\Roaming\.minecraft-1.14.4-optifine\saves\The Water SkyBlock ver3.1.3b を D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\The Water SkyBlock ver3.1.3b\202102152302へバックアップしました
+2021/02/15-23:03:18 [INFO ]:C:\Users\YUUKI\AppData\Roaming\.minecraft-1.14.4-optifine\saves\新規ワールド を D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\新規ワールド\202102152302へバックアップ中です
+2021/02/15-23:03:18 [INFO ]:C:\Users\YUUKI\AppData\Roaming\.minecraft-1.14.4-optifine\saves\新規ワールド を D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\新規ワールド\202102152302へバックアップしました
+2021/02/15-23:03:18 [INFO ]:C:\Users\YUUKI\AppData\Roaming\.minecraft-1.14.4-optifine\saves\検証用ワールド を D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\検証用ワールド\202102152302へバックアップ中です
+2021/02/15-23:03:19 [INFO ]:C:\Users\YUUKI\AppData\Roaming\.minecraft-1.14.4-optifine\saves\検証用ワールド を D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\検証用ワールド\202102152302へバックアップしました
+2021/02/15-23:03:19 [INFO ]:C:\Users\YUUKI\AppData\Roaming\.minecraft-1.14.4-optifine\saves\適当建築 を D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\適当建築\202102152302へバックアップ中です
+2021/02/15-23:03:19 [INFO ]:C:\Users\YUUKI\AppData\Roaming\.minecraft-1.14.4-optifine\saves\適当建築 を D:\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\適当建築\202102152302へバックアップしました
+2021/02/15-23:03:19 [INFO ]:C:\Users\YUUKI\AppData\Roaming\.minecraft_1.10.2\saves\test を D:\Documents\MinecraftAutoBackup\.minecraft_1.10.2\test\202102152302へバックアップ中です
+2021/02/15-23:03:19 [INFO ]:C:\Users\YUUKI\AppData\Roaming\.minecraft_1.10.2\saves\test を D:\Documents\MinecraftAutoBackup\.minecraft_1.10.2\test\202102152302へバックアップしました
+2021/02/15-23:03:19 [INFO ]:C:\Users\YUUKI\AppData\Roaming\.minecraft_1.10.2\saves\The Water SkyBlock ver2.2.3 を D:\Documents\MinecraftAutoBackup\.minecraft_1.10.2\The Water SkyBlock ver2.2.3\202102152302へバックアップ中です
+2021/02/15-23:03:21 [INFO ]:C:\Users\YUUKI\AppData\Roaming\.minecraft_1.10.2\saves\The Water SkyBlock ver2.2.3 を D:\Documents\MinecraftAutoBackup\.minecraft_1.10.2\The Water SkyBlock ver2.2.3\202102152302へバックアップしました
+2021/02/15-23:03:21 [INFO ]:C:\Users\YUUKI\AppData\Roaming\.minecraft_1.9\saves\Rare Species SkyBlock ii Beta2.2.2 (1) を D:\Documents\MinecraftAutoBackup\.minecraft_1.9\Rare Species SkyBlock ii Beta2.2.2 (1)\202102152302へバックアップ中です
+2021/02/15-23:03:25 [INFO ]:C:\Users\YUUKI\AppData\Roaming\.minecraft_1.9\saves\Rare Species SkyBlock ii Beta2.2.2 (1) を D:\Documents\MinecraftAutoBackup\.minecraft_1.9\Rare Species SkyBlock ii Beta2.2.2 (1)\202102152302へバックアップしました
+2021/02/15-23:03:25 [INFO ]:C:\Users\YUUKI\AppData\Roaming\.minecraft_forge1.12.2\saves\新規ワールド を D:\Documents\MinecraftAutoBackup\.minecraft_forge1.12.2\新規ワールド\202102152302へバックアップ中です
+2021/02/15-23:03:25 [INFO ]:C:\Users\YUUKI\AppData\Roaming\.minecraft_forge1.12.2\saves\新規ワールド を D:\Documents\MinecraftAutoBackup\.minecraft_forge1.12.2\新規ワールド\202102152302へバックアップしました
+2021/02/15-23:03:25 [INFO ]:C:\Users\YUUKI\AppData\Roaming\.minecraft_forge1.12.2\saves\新規ワールド- を D:\Documents\MinecraftAutoBackup\.minecraft_forge1.12.2\新規ワールド-\202102152302へバックアップ中です
+2021/02/15-23:03:25 [INFO ]:C:\Users\YUUKI\AppData\Roaming\.minecraft_forge1.12.2\saves\新規ワールド- を D:\Documents\MinecraftAutoBackup\.minecraft_forge1.12.2\新規ワールド-\202102152302へバックアップしました
+2021/02/15-23:03:25 [INFO ]:C:\Users\YUUKI\AppData\Roaming\.minecraft_forge1.12.2\saves\新規ワールド-- を D:\Documents\MinecraftAutoBackup\.minecraft_forge1.12.2\新規ワールド--\202102152302へバックアップ中です
+2021/02/15-23:03:26 [INFO ]:C:\Users\YUUKI\AppData\Roaming\.minecraft_forge1.12.2\saves\新規ワールド-- を D:\Documents\MinecraftAutoBackup\.minecraft_forge1.12.2\新規ワールド--\202102152302へバックアップしました
+2021/02/15-23:03:26 [DEBUG]:call:reloadConfig
+2021/02/15-23:03:26 [DEBUG]:call:GetWorldDataFromPC
+2021/02/15-23:03:26 [DEBUG]:config: 20
+2021/02/15-23:03:26 [DEBUG]:HDD   : 20
+2021/02/15-23:03:26 [DEBUG]:pc:0回目
+2021/02/15-23:03:26 [DEBUG]:pc:1回目
+2021/02/15-23:03:26 [DEBUG]:pc:2回目
+2021/02/15-23:03:26 [DEBUG]:pc:3回目
+2021/02/15-23:03:26 [DEBUG]:pc:4回目
+2021/02/15-23:03:26 [DEBUG]:pc:5回目
+2021/02/15-23:03:26 [DEBUG]:pc:6回目
+2021/02/15-23:03:26 [DEBUG]:pc:7回目
+2021/02/15-23:03:26 [DEBUG]:pc:8回目
+2021/02/15-23:03:26 [DEBUG]:pc:9回目
+2021/02/15-23:03:26 [DEBUG]:pc:10回目
+2021/02/15-23:03:26 [DEBUG]:pc:11回目
+2021/02/15-23:03:26 [DEBUG]:pc:12回目
+2021/02/15-23:03:26 [DEBUG]:pc:13回目
+2021/02/15-23:03:26 [DEBUG]:pc:14回目
+2021/02/15-23:03:26 [DEBUG]:pc:15回目
+2021/02/15-23:03:26 [DEBUG]:pc:16回目
+2021/02/15-23:03:26 [DEBUG]:pc:17回目
+2021/02/15-23:03:26 [DEBUG]:pc:18回目
+2021/02/15-23:03:26 [DEBUG]:pc:19回目
+2021/02/15-23:03:26 [DEBUG]:config: 20
+2021/02/15-23:03:26 [DEBUG]:HDD   : 20
+2021/02/15-23:03:26 [DEBUG]:config:0回目
+2021/02/15-23:03:26 [DEBUG]:config:1回目
+2021/02/15-23:03:26 [DEBUG]:config:2回目
+2021/02/15-23:03:26 [DEBUG]:config:3回目
+2021/02/15-23:03:26 [DEBUG]:config:4回目
+2021/02/15-23:03:26 [DEBUG]:config:5回目
+2021/02/15-23:03:26 [DEBUG]:config:6回目
+2021/02/15-23:03:26 [DEBUG]:config:7回目
+2021/02/15-23:03:26 [DEBUG]:config:8回目
+2021/02/15-23:03:26 [DEBUG]:config:9回目
+2021/02/15-23:03:26 [DEBUG]:config:10回目
+2021/02/15-23:03:26 [DEBUG]:config:11回目
+2021/02/15-23:03:26 [DEBUG]:config:12回目
+2021/02/15-23:03:26 [DEBUG]:config:13回目
+2021/02/15-23:03:26 [DEBUG]:config:14回目
+2021/02/15-23:03:26 [DEBUG]:config:15回目
+2021/02/15-23:03:26 [DEBUG]:config:16回目
+2021/02/15-23:03:26 [DEBUG]:config:17回目
+2021/02/15-23:03:26 [DEBUG]:config:18回目
+2021/02/15-23:03:26 [DEBUG]:config:19回目
+2021/02/15-23:03:26 [DEBUG]:config: 20
+2021/02/15-23:03:26 [DEBUG]:HDD   : 20
+2021/02/15-23:03:26 [DEBUG]:config: 20
+2021/02/15-23:03:26 [DEBUG]:HDD   : 20
+2021/02/15-23:03:26 [INFO ]:全バックアップが完了しました 

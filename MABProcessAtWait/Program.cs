@@ -161,44 +161,46 @@ namespace MABProcessAtWait {
                     }
 
                     //バックアップ超過分削除
-                    if (Directory.GetFileSystemEntries(worldBackupPath).ToList().Count() > int.Parse(AppConfig.BackupCount)) {
-                        Logger.Info($"{worldBackupPath}のバックアップ数({Directory.GetFileSystemEntries(worldBackupPath).ToList().Count()})が超過している(AppConfig:{int.Parse(AppConfig.BackupCount)})ので削除処理に移ります");
-                        //バックアップ数がappconfig.backupCountより多い場合超過分を削除する
-                        List<string> backups = Directory.GetFileSystemEntries(worldBackupPath)
-                            .OrderByDescending(filePath => File.GetLastWriteTime(filePath).Date)
-                            .ThenByDescending(filePath => File.GetLastWriteTime(filePath).TimeOfDay).ToList();
-                        Logger.Debug($"buckups count: {backups.Count()}");
-                        foreach(string s in backups) {
-                            Logger.Debug($"backups:[{s}]");
-                        }
-                        List<string> deleteBackups = new List<string>();
-                        for (int i = int.Parse(AppConfig.BackupCount); i < backups.Count(); i++) {
-                            Logger.Info($"{backups[i]}を削除します");
+                    if (AppConfig.BackupCount != "無制限") {
+                        if (Directory.GetFileSystemEntries(worldBackupPath).ToList().Count() > int.Parse(AppConfig.BackupCount)) {
+                            Logger.Info($"{worldBackupPath}のバックアップ数({Directory.GetFileSystemEntries(worldBackupPath).ToList().Count()})が超過している(AppConfig:{int.Parse(AppConfig.BackupCount)})ので削除処理に移ります");
+                            //バックアップ数がappconfig.backupCountより多い場合超過分を削除する
+                            List<string> backups = Directory.GetFileSystemEntries(worldBackupPath)
+                                .OrderByDescending(filePath => File.GetLastWriteTime(filePath).Date)
+                                .ThenByDescending(filePath => File.GetLastWriteTime(filePath).TimeOfDay).ToList();
+                            Logger.Debug($"buckups count: {backups.Count()}");
+                            foreach (string s in backups) {
+                                Logger.Debug($"backups:[{s}]");
+                            }
+                            List<string> deleteBackups = new List<string>();
+                            for (int i = int.Parse(AppConfig.BackupCount); i < backups.Count(); i++) {
+                                Logger.Info($"{backups[i]}を削除します");
 
-                            //zipファイルかどうか判定
-                            if (backups[i].Contains(".zip")) {
-                                //zipファイルの場合
-                                try { File.Delete(backups[i]); }
-                                catch (Exception exc) {
-                                    Logger.Error($"{backups[i]}");
-                                    Logger.Error($"{exc.Message}");
-                                    Logger.Error($"{exc.StackTrace}");
+                                //zipファイルかどうか判定
+                                if (backups[i].Contains(".zip")) {
+                                    //zipファイルの場合
+                                    try { File.Delete(backups[i]); }
+                                    catch (Exception exc) {
+                                        Logger.Error($"{backups[i]}");
+                                        Logger.Error($"{exc.Message}");
+                                        Logger.Error($"{exc.StackTrace}");
+                                    }
                                 }
-                            }
-                            else {
-                                //ディレクトリの場合
-                                try { Directory.Delete(backups[i], true); }
-                                catch (Exception exc) {
-                                    Logger.Error($"{backups[i]}");
-                                    Logger.Error($"{exc.Message}");
-                                    Logger.Error($"{exc.StackTrace}");
+                                else {
+                                    //ディレクトリの場合
+                                    try { Directory.Delete(backups[i], true); }
+                                    catch (Exception exc) {
+                                        Logger.Error($"{backups[i]}");
+                                        Logger.Error($"{exc.Message}");
+                                        Logger.Error($"{exc.StackTrace}");
+                                    }
                                 }
+
                             }
-                            
                         }
-                    }
-                    else {
-                        Logger.Info($"{worldBackupPath}({Directory.GetFileSystemEntries(worldBackupPath).ToList().Count()})の超過分(AppConfig:{int.Parse(AppConfig.BackupCount)})は発見されませんでした");
+                        else {
+                            Logger.Info($"{worldBackupPath}({Directory.GetFileSystemEntries(worldBackupPath).ToList().Count()})の超過分(AppConfig:{int.Parse(AppConfig.BackupCount)})は発見されませんでした");
+                        }
                     }
                     //バックアップ保持数を調整
 
@@ -267,7 +269,7 @@ namespace MABProcessAtWait {
     public static class Util {
         public static bool IsZipperRunning() {
             //一回もzipperが起動されていない場合
-            if (File.Exists($".\\logs\\Zipper.txt")) {
+            if (!File.Exists($".\\logs\\Zipper.txt")) {
                 return false;
             }
             //zipperのlogからlog取得
