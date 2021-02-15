@@ -57,7 +57,7 @@ namespace MABProcessAtWait {
                     Application.SetCompatibleTextRenderingDefault(false);
                     Form1 f = new Form1();
                     Application.Run();
-                
+
             }
             finally {
                 if (hasHandle) {
@@ -100,14 +100,14 @@ namespace MABProcessAtWait {
         }
 
         void Close_Click(object sender, EventArgs e) {
-            Console.WriteLine("info:アプリケーションが終了しました");
+            Logger.Info("アプリケーションが終了しました");
             notifyIcon.Visible = false;
             notifyIcon.Dispose();
             Application.Exit();
         }
 
         void Form1_Closing(object sender, EventArgs e) {
-            Console.WriteLine("info:アプリケーションが強制終了しました");
+            Logger.Info("アプリケーションが強制終了しました");
             notifyIcon.Visible = false;
             notifyIcon.Dispose();
         }
@@ -122,9 +122,9 @@ namespace MABProcessAtWait {
                     System.Threading.Tasks.Task.Delay(10000);
                 }
                 isRunning = true;
-                Console.WriteLine("info:Minecraft Lancherの起動を検知しました");
-                Console.WriteLine("info:isRunningがfalseに設定されていました");
-                Console.WriteLine("info:バックアッププロセスを始めます");
+                Logger.Info("Minecraft Lancherの起動を検知しました");
+                Logger.Info("isRunningがfalseに設定されていました");
+                Logger.Info("バックアッププロセスを始めます");
                 notifyIcon.Icon = new Icon(".\\Image\\app_sub_doing.ico");
                 int backupCount = 0;
                 ContextMenuStrip menu = new ContextMenuStrip();
@@ -138,7 +138,7 @@ namespace MABProcessAtWait {
                 List<string> worldPasses = GetWorldPasses();// バックアップをするワールドへのパス一覧
                 string nowTime = DateTime.Now.ToString("yyyyMMddHHmm");
                 if (worldPasses.Count == 0) {
-                    Console.WriteLine("info:どうやらバックアップ予定のデータはないようです");
+                    Logger.Info("どうやらバックアップ予定のデータはないようです");
                 }
 
                 notifyIcon.Text = $"{backupCount}/{worldPasses.Count}";
@@ -150,7 +150,7 @@ namespace MABProcessAtWait {
                     string worldBackupPath = backupDataPath + "\\" + Path.GetFileName(Directory.GetParent(Directory.GetParent(worldPath).ToString()).ToString()) + "\\" + Path.GetFileName(worldPath);
                     try { doBackup(worldPath, nowTime); }
                     catch (DirectoryNotFoundException dnfe) {
-                        
+
                         Console.Error.WriteLine(worldPath + ":DirectoryNotFoundException : " + dnfe.Message);
                         if (!Directory.Exists(worldPath)) {
                             DialogResult r = MessageBox.Show(
@@ -159,35 +159,60 @@ namespace MABProcessAtWait {
                             MessageBoxButtons.OK);
                         }
                     }
+
                     //バックアップ超過分削除
                     if (Directory.GetFileSystemEntries(worldBackupPath).ToList().Count() > int.Parse(AppConfig.BackupCount)) {
-                        Console.WriteLine($"{worldBackupPath}のバックアップ数({Directory.GetFileSystemEntries(worldBackupPath).ToList().Count()})が超過している(AppConfig:{int.Parse(AppConfig.BackupCount)})ので削除処理に移ります");
+                        Logger.Info($"{worldBackupPath}のバックアップ数({Directory.GetFileSystemEntries(worldBackupPath).ToList().Count()})が超過している(AppConfig:{int.Parse(AppConfig.BackupCount)})ので削除処理に移ります");
                         //バックアップ数がappconfig.backupCountより多い場合超過分を削除する
-                        List<string> backups = Directory.GetDirectories(worldBackupPath)
+                        List<string> backups = Directory.GetFileSystemEntries(worldBackupPath)
                             .OrderByDescending(filePath => File.GetLastWriteTime(filePath).Date)
-                            .ThenBy(filePath => File.GetLastWriteTime(filePath).TimeOfDay).ToList();
+                            .ThenByDescending(filePath => File.GetLastWriteTime(filePath).TimeOfDay).ToList();
+                        Logger.Debug($"buckups count: {backups.Count()}");
+                        foreach(string s in backups) {
+                            Logger.Debug($"backups:[{s}]");
+                        }
                         List<string> deleteBackups = new List<string>();
                         for (int i = int.Parse(AppConfig.BackupCount); i < backups.Count(); i++) {
-                            Console.WriteLine($"{backups[i]}を削除します");
-                            Directory.Delete(backups[i], true);
+                            Logger.Info($"{backups[i]}を削除します");
+
+                            //zipファイルかどうか判定
+                            if (backups[i].Contains(".zip")) {
+                                //zipファイルの場合
+                                try { File.Delete(backups[i]); }
+                                catch (Exception exc) {
+                                    Logger.Error($"{backups[i]}");
+                                    Logger.Error($"{exc.Message}");
+                                    Logger.Error($"{exc.StackTrace}");
+                                }
+                            }
+                            else {
+                                //ディレクトリの場合
+                                try { Directory.Delete(backups[i], true); }
+                                catch (Exception exc) {
+                                    Logger.Error($"{backups[i]}");
+                                    Logger.Error($"{exc.Message}");
+                                    Logger.Error($"{exc.StackTrace}");
+                                }
+                            }
+                            
                         }
                     }
                     else {
-                        Console.WriteLine($"{worldBackupPath}({Directory.GetFileSystemEntries(worldBackupPath).ToList().Count()})の超過分(AppConfig:{int.Parse(AppConfig.BackupCount)})は発見されませんでした");
+                        Logger.Info($"{worldBackupPath}({Directory.GetFileSystemEntries(worldBackupPath).ToList().Count()})の超過分(AppConfig:{int.Parse(AppConfig.BackupCount)})は発見されませんでした");
                     }
                     //バックアップ保持数を調整
 
                 }
                 Config.ReloadConfig();
-                Console.WriteLine("全バックアップが完了しました ");
+                Logger.Info("全バックアップが完了しました ");
 
                 timer.Enabled = true;
                 notifyIcon.Icon = new Icon(".\\Image\\app_sub.ico");
                 notifyIcon.Text = "MAB待機モジュール";
             }
             else if (!(Process.GetProcessesByName("MinecraftLauncher").Length > 0) && isRunning) {
-                Console.WriteLine("info:ランチャーの停止を検知しました");
-                Console.WriteLine("info:isRunningにfalseを設定します");
+                Logger.Info("ランチャーの停止を検知しました");
+                Logger.Info("isRunningにfalseを設定します");
                 isRunning = false;
             }
         }
@@ -215,16 +240,16 @@ namespace MABProcessAtWait {
                 Directory.CreateDirectory(worldBackupPath);
             }
             if (AppConfig.DoZip) {
-                Console.WriteLine(path + " を " + backupPath + " へバックアップ中です");
+                Logger.Info(path + " を " + backupPath + " へバックアップ中です");
                 ZipFile.CreateFromDirectory(path, backupPath);
-                Console.WriteLine(path + " を " + backupPath + "へバックアップしました");
+                Logger.Info(path + " を " + backupPath + "へバックアップしました");
             }
             else {
-                Console.WriteLine(path + " を " + backupPath + "へバックアップ中です");
+                Logger.Info(path + " を " + backupPath + "へバックアップ中です");
                 FileSystem.CopyDirectory(path, backupPath);
-                Console.WriteLine(path + " を " + backupPath + "へバックアップしました");
+                Logger.Info(path + " を " + backupPath + "へバックアップしました");
             }
-            
+
 
 
         }
@@ -254,7 +279,7 @@ namespace MABProcessAtWait {
             }
             //最終行がExit Processかどうかを取得
             string decisionStr = strs[strs.Count() - 2].Substring(28, strs[strs.Count() - 2].Length);
-            Console.WriteLine($"decisionStrは{decisionStr}です");
+            Logger.Info($"decisionStrは{decisionStr}です");
             return decisionStr != "Exit Process";
         }
 
@@ -263,12 +288,12 @@ namespace MABProcessAtWait {
         }
 
         public static void NotReadonly(string path) {
-            Console.WriteLine("call:NotReadonly");
-            Console.WriteLine($"{path}を入力されました");
+            Logger.Debug("call:NotReadonly");
+            Logger.Info($"{path}を入力されました");
             List<string> pasess = Directory.GetFiles(path, "*", System.IO.SearchOption.AllDirectories).ToList();
             foreach(string p in pasess) {
                 if((File.GetAttributes(p) & FileAttributes.ReadOnly) == FileAttributes.ReadOnly) {
-                    Console.WriteLine($"info:{p} のreadonlyを外します");
+                    Logger.Info($"{p} のreadonlyを外します");
                     File.SetAttributes(p, File.GetAttributes(p) & ~FileAttributes.ReadOnly);
                 }
             }
@@ -308,7 +333,7 @@ namespace MABProcessAtWait {
 
         //datasの中にworldName,worldDirに当てはまる要素があるかどうか
         private static bool IsWorldParticular(string worldName, string worldDir, string[] datas) {
-            //Console.WriteLine(datas[1] + ",\"" + worldName + "\"と" + datas[3] + ",\"" + worldDir + "\"");
+            //Logger.Info(datas[1] + ",\"" + worldName + "\"と" + datas[3] + ",\"" + worldDir + "\"");
             return datas[1] == "\"" + worldName + "\"" && datas[3] == "\"" + worldDir + "\"";
         }
 
@@ -318,7 +343,7 @@ namespace MABProcessAtWait {
         /// ConfigファイルからAppに読み込む
         /// </summary>
         public static void Load() {
-            Console.WriteLine("call:LoadConfigToApp");
+            Logger.Debug("call:LoadConfigToApp");
             List<string> texts = new List<string>();
             using (StreamReader reader = new StreamReader(configPath, Encoding.GetEncoding("utf-8"))) {
                 while (reader.Peek() >= 0) {
@@ -326,7 +351,7 @@ namespace MABProcessAtWait {
                     datas = datas.Select(x => Util.TrimDoubleQuotationMarks(x)).ToList();
                     configs.Add(new World(datas[2], Convert.ToBoolean(datas[0]), Convert.ToBoolean(datas[4])));
                 }
-                Console.WriteLine($"info:Configから{configs.Count()}件のワールドを読み込みました");
+                Logger.Info($"Configから{configs.Count()}件のワールドを読み込みました");
             }
 
         }
@@ -347,55 +372,55 @@ namespace MABProcessAtWait {
         /// Configファイルを更新する
         /// </summary>
         public static List<World> ReloadConfig() {
-            Console.WriteLine("call:reloadConfig");
+            Logger.Debug("call:reloadConfig");
             List<World> worldInHdd = GetWorldDataFromHDD();
             List<World> worldInConfig = GetConfig();
-            Console.WriteLine($"config: {worldInConfig.Count()}");
-            Console.WriteLine($"HDD   : {worldInHdd.Count()}");
+            Logger.Debug($"config: {worldInConfig.Count()}");
+            Logger.Debug($"HDD   : {worldInHdd.Count()}");
 
             int i = 0;
             //configに存在しないpathをconfigに追加する
             foreach (World pc in worldInHdd) {
-                Console.WriteLine($"pc:{i}回目");
+                Logger.Debug($"pc:{i}回目");
                 //dobackup以外を比較して判定
                 //List<WorldForComparison> _comp = worldInConfig.Select(x => new WorldForComparison(x)).ToList();
                 if (!worldInConfig.Select(x => $"{x.WPath}_{x.isAlive}").ToList().Contains($"{pc.WPath}_{pc.isAlive}")) {
-                    Console.WriteLine($"info:ADD {pc.WName}");
+                    Logger.Info($"ADD {pc.WName}");
                     configs.Add(pc);
                 }
                 i++;
             }
             List<World> removeWorlds = new List<World>();
-            Console.WriteLine($"config: {worldInConfig.Count()}");
-            Console.WriteLine($"HDD   : {worldInHdd.Count()}");
+            Logger.Debug($"config: {worldInConfig.Count()}");
+            Logger.Debug($"HDD   : {worldInHdd.Count()}");
 
             i = 0;
             //configに存在するがhddに存在しない(削除されたワールド)pathをconfigで死亡扱いにする
             //isAliveプロパティを追加したので、そちらで管理
             int wI = 0;
-            //Console.WriteLine("-----config一覧-----");
+            //Logger.Info("-----config一覧-----");
             //foreach(var a in worldInHdd.Select(x => new WorldForComparison(x)).ToList()) {
-            //    Console.WriteLine($"pc : {a.path}/{a.isAlive.ToString()}");
+            //    Logger.Info($"pc : {a.path}/{a.isAlive.ToString()}");
             //}
-            //Console.WriteLine("--------------------");
+            //Logger.Info("--------------------");
             foreach (World world in worldInConfig) {
-                Console.WriteLine($"config:{i}回目");
+                Logger.Debug($"config:{i}回目");
                 //dobackup以外を比較して判定
                 if (!worldInHdd.Select(x => $"{x.WPath}_{x.isAlive}").ToList().Contains($"{world.WPath}_{world.isAlive}")) {
                     //config内のworldがHDDになかった場合
                     if (GetBackups(world).Count() == 0) {
                         // バックアップが一つもない場合はconfigから削除
-                        Console.WriteLine($"info:バックアップが一つもないのでRemoveWorldsに{world.WName}を追加");
+                        Logger.Info($"バックアップが一つもないのでRemoveWorldsに{world.WName}を追加");
                         removeWorlds.Add(world);
                     }
                     else {
                         if (world.isAlive) {
                             //バックアップが一つでもある場合は、backup一覧に表示するために殺すだけにする
-                            Console.WriteLine($"info:{world.WName}のバックアップが残っているため殺害");
+                            Logger.Info($"{world.WName}のバックアップが残っているため殺害");
                             Config.configs[wI].isAlive = false;
                             int count = 1;
                             while (Directory.Exists($"{AppConfig.BackupPath}\\{Config.configs[wI].WDir}\\{Config.configs[wI].WName}_(削除済み)_{count}")) {
-                                Console.WriteLine($"info: path[ {AppConfig.BackupPath}\\{Config.configs[wI].WDir}\\{Config.configs[wI].WName}_(削除済み)_{count} ]");
+                                Logger.Info($" path[ {AppConfig.BackupPath}\\{Config.configs[wI].WDir}\\{Config.configs[wI].WName}_(削除済み)_{count} ]");
                                 count++;
                             }
 
@@ -410,22 +435,22 @@ namespace MABProcessAtWait {
                 i++;
             }
 
-            Console.WriteLine($"config: {worldInConfig.Count()}");
-            Console.WriteLine($"HDD   : {worldInHdd.Count()}");
+            Logger.Debug($"config: {worldInConfig.Count()}");
+            Logger.Debug($"HDD   : {worldInHdd.Count()}");
 
             foreach (World w in removeWorlds) {
                 if (configs.Remove(w)) {
-                    Console.WriteLine($"info:REMOVE {w.WName} suc");
+                    Logger.Info($"REMOVE {w.WName} suc");
                 }
                 else {
-                    Console.WriteLine($"info:REMOVE {w.WName} 見つかりませんでした");
+                    Logger.Info($"REMOVE {w.WName} 見つかりませんでした");
                 }
             }
 
             Write();
 
-            Console.WriteLine($"config: {worldInConfig.Count()}");
-            Console.WriteLine($"HDD   : {worldInHdd.Count()}");
+            Logger.Debug($"config: {worldInConfig.Count()}");
+            Logger.Debug($"HDD   : {worldInHdd.Count()}");
 
             return removeWorlds;
         }
@@ -434,14 +459,14 @@ namespace MABProcessAtWait {
                 return Directory.GetDirectories(AppConfig.BackupPath + "\\" + w.WDir + "\\" + w.WName).ToList();
             }
             catch (DirectoryNotFoundException) {
-                Console.WriteLine($"{AppConfig.BackupPath}\\{w.WDir}\\{w.WName} にアクセスできませんでした");
+                Logger.Info($"{AppConfig.BackupPath}\\{w.WDir}\\{w.WName} にアクセスできませんでした");
                 return new List<string>();
             }
         }
 
         public static void Change(string worldName, string worldDir, string doBackup) {
-            Console.WriteLine("call:Change");
-            Console.WriteLine("info:GET  worldName: " + worldName + ",  worldDir: " + worldDir + ",  dobackup: " + doBackup);
+            Logger.Debug("call:Change");
+            Logger.Debug("GET  worldName: " + worldName + ",  worldDir: " + worldDir + ",  dobackup: " + doBackup);
             List<World> _configs = new List<World>();
             foreach (World config in configs) {
                 if (config.WName == worldName && config.WDir == worldDir) {
@@ -461,7 +486,7 @@ namespace MABProcessAtWait {
         /// </summary>
         /// <returns>取得したList<world></returns>
         private static List<World> GetWorldDataFromHDD() {
-            Console.WriteLine("call:GetWorldDataFromPC");
+            Logger.Debug("call:GetWorldDataFromPC");
             List<World> worlds = new List<World>();
             List<string> _gameDirectory = Directory.GetDirectories(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)).ToList();
             List<string> gameDirectory = new List<string>();
@@ -469,7 +494,7 @@ namespace MABProcessAtWait {
                 List<string> dirsInDir = Directory.GetDirectories(dir).ToList();
                 dirsInDir = dirsInDir.Select(x => Path.GetFileName(x)).Cast<string>().ToList();
                 if (dirsInDir.Contains("logs") && dirsInDir.Contains("resourcepacks") && dirsInDir.Contains("saves")) {
-                    //Console.WriteLine($"info:ゲームディレクトリ[{dir}]を発見しました");
+                    //Logger.Info($"ゲームディレクトリ[{dir}]を発見しました");
                     gameDirectory.Add(dir);
                 }
             }
@@ -480,7 +505,7 @@ namespace MABProcessAtWait {
                 }
             }
             //foreach(var a in worlds) {
-            //    Console.WriteLine($"info:world[{a.WName}]");
+            //    Logger.Info($"world[{a.WName}]");
             //}
             return worlds;
         }
@@ -492,7 +517,7 @@ namespace MABProcessAtWait {
         /// <returns>取得したList<world></returns>
         private static List<World> GetWorldDataFromHDD(List<string> gameDirectory) {
             List<World> worlds = new List<World>();
-            Console.WriteLine("call:GetWorldDataFromPC");
+            Logger.Debug("call:GetWorldDataFromPC");
             foreach (string dir in gameDirectory) {
                 if (Directory.Exists($"{dir}\\saves")) {
                     List<string> _worlds = Directory.GetDirectories($"{dir}\\saves").ToList();
@@ -502,17 +527,17 @@ namespace MABProcessAtWait {
                 }
             }
             //foreach(var a in worlds) {
-            //    Console.WriteLine($"info:world[{a.WName}]");
+            //    Logger.Info($"world[{a.WName}]");
             //}
             return worlds;
         }
 
         public static void ConsoleConfig() {
-            Console.WriteLine("----Configs----");
+            Logger.Info("----Configs----");
             foreach (World w in configs) {
-                Console.WriteLine($"[{w.WDoBackup},{w.WName},{w.WPath},{w.WDir},]");
+                Logger.Info($"[{w.WDoBackup},{w.WName},{w.WPath},{w.WDir},]");
             }
-            Console.WriteLine("---------------");
+            Logger.Info("---------------");
         }
         /// <summary>
         /// ワールドのバックアップソースが生きているかどうか
@@ -521,11 +546,11 @@ namespace MABProcessAtWait {
         /// <returns></returns>
         public static bool isBackupAlive(World w) {
             if (w.isAlive) {
-                //Console.WriteLine("info[DEBUG]:バックアップは死んでいます");
+                //Logger.Info("info[DEBUG]:バックアップは死んでいます");
                 return false;
             }
             else {
-                //Console.WriteLine("info[DEBUG]:バックアップは生きています");
+                //Logger.Info("info[DEBUG]:バックアップは生きています");
                 return true;
             }
         }
@@ -540,7 +565,7 @@ namespace MABProcessAtWait {
         public bool isAlive { get; set; }
         public World(string path) {
             //if (!Directory.Exists(path)) {
-            //    Console.WriteLine($"info:不正なpath[{path}]が渡されました");
+            //    Logger.Info($"不正なpath[{path}]が渡されました");
             //    return;
             //}
             WDoBackup = true;
@@ -552,7 +577,7 @@ namespace MABProcessAtWait {
 
         public World(string path, bool doBackup, bool _isAlive) {
             //if (!Directory.Exists(path)) {
-            //    Console.WriteLine($"info:不正なpath[{path}]が渡されました");
+            //    Logger.Info($"不正なpath[{path}]が渡されました");
             //    return;
             //}
             WDoBackup = doBackup;
