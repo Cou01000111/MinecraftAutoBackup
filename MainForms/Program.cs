@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-class Program {
+class Program {ｘ
     [STAThread]
     static void Main() {
         //起動時処理
