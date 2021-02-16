@@ -8,7 +8,7 @@ public class World {
     public bool isAlive { get; set; }
     public World(string path) {
         //if (!Directory.Exists(path)) {
-        //    Console.WriteLine($"info:不正なpath[{path}]が渡されました");
+        //    Logger.Error($"info:不正なpath[{path}]が渡されました");
         //    return;
         //}
         WDoBackup = true;
@@ -20,7 +20,7 @@ public class World {
 
     public World(string path, bool doBackup, bool _isAlive) {
         //if (!Directory.Exists(path)) {
-        //    Console.WriteLine($"info:不正なpath[{path}]が渡されました");
+        //    Logger.Error($"info:不正なpath[{path}]が渡されました");
         //    return;
         //}
         WDoBackup = doBackup;

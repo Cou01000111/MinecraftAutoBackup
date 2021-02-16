@@ -48,17 +48,17 @@ public class AppConfig {
                 AddGameDirPath.Add(datas[i]);
             }
         }
-        Console.WriteLine("-----loaded appConfig-----");
-        Console.WriteLine($"backupPath:{BackupPath}");
-        Console.WriteLine($"font:{Font}");
-        Console.WriteLine($"dozip:{DoZip}");
-        Console.WriteLine($"clientSize:{ClientSize.Width},{ClientSize.Height}");
-        Console.WriteLine($"clientPoint:{ClientPoint.X},{ClientPoint.Y}");
-        Console.WriteLine($"backupCount:{BackupCount}");
+        Logger.Info("-----loaded appConfig-----");
+        Logger.Info($"backupPath:{BackupPath}");
+        Logger.Info($"font:{Font}");
+        Logger.Info($"dozip:{DoZip}");
+        Logger.Info($"clientSize:{ClientSize.Width},{ClientSize.Height}");
+        Logger.Info($"clientPoint:{ClientPoint.X},{ClientPoint.Y}");
+        Logger.Info($"backupCount:{BackupCount}");
         foreach(string path in AddGameDirPath) {
-            Console.WriteLine($"addGameDirPath:{path}");
+            Logger.Info($"addGameDirPath:{path}");
         }
-        Console.WriteLine("--------------------------");
+        Logger.Info("--------------------------");
     }
 
     public static void WriteAppConfig() {
@@ -69,7 +69,7 @@ public class AppConfig {
         foreach(string path in AddGameDirPath) {
             Text += $"\n{path}";
         }
-        Console.WriteLine("info: Writing "+Text);
+        Logger.Info(" Writing "+Text);
         File.WriteAllText(appConfigPath, Text);
     }
 
