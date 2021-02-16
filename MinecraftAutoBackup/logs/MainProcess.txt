@@ -324,3 +324,358 @@ ja
 0
 0
 5
+2021/02/16-18:01:34 [INFO ]:-----起動時処理-------
+2021/02/16-18:01:34 [INFO ]:-----loaded appConfig-----
+2021/02/16-18:01:34 [INFO ]:backupPath:D:\Documents\MinecraftAutoBackup
+2021/02/16-18:01:34 [INFO ]:font:[Font: Name=Meiryo UI, Size=11, Units=3, GdiCharSet=1, GdiVerticalFont=False]
+2021/02/16-18:01:34 [INFO ]:dozip:False
+2021/02/16-18:01:34 [INFO ]:clientSize:600,600
+2021/02/16-18:01:34 [INFO ]:clientPoint:0,0
+2021/02/16-18:01:34 [INFO ]:backupCount:5
+2021/02/16-18:01:34 [INFO ]:--------------------------
+2021/02/16-18:01:34 [INFO ]:call:LoadConfigToApp
+2021/02/16-18:01:34 [INFO ]:Configから20件のワールドを読み込みました
+2021/02/16-18:01:34 [INFO ]:call:reloadConfig
+2021/02/16-18:01:34 [INFO ]:call:GetWorldDataFromPC
+2021/02/16-18:01:34 [INFO ]:----------------------
+2021/02/16-18:01:34 [INFO ]:call: GetBackups
+2021/02/16-18:01:34 [INFO ]:dir:5, worlds:22, backups:95
+2021/02/16-18:01:34 [INFO ]:20件のワールドのバックアップを読み込みます
+2021/02/16-18:01:36 [INFO ]:dozip[False]
+2021/02/16-18:02:02 [INFO ]:C:\Users\YUUKI\AppData\Roaming\.minecraft_1.9 - コピーの判定を行います
+2021/02/16-18:02:02 [INFO ]:C:\Users\YUUKI\AppData\Roaming\.minecraft_1.9 - コピーをconfigに追加します
+2021/02/16-18:02:02 [INFO ]:call:GetWorldDataFromPC
+2021/02/16-18:02:02 [INFO ]:configsにRare Species SkyBlock ii Beta2.2.2 (1)を追加しました
+2021/02/16-18:02:04 [INFO ]:push ok
+2021/02/16-18:02:04 [INFO ]:call:Change
+2021/02/16-18:02:04 [INFO ]:GET  worldName: buildinng,  worldDir: .minecraft,  dobackup: True
+2021/02/16-18:02:04 [INFO ]:call:Change
+2021/02/16-18:02:04 [INFO ]:GET  worldName: commanding (1),  worldDir: .minecraft,  dobackup: True
+2021/02/16-18:02:04 [INFO ]:call:Change
+2021/02/16-18:02:04 [INFO ]:GET  worldName: sWorld,  worldDir: .minecraft,  dobackup: True
+2021/02/16-18:02:04 [INFO ]:call:Change
+2021/02/16-18:02:04 [INFO ]:GET  worldName: The Unusual SkyBlock v12.0.9,  worldDir: .minecraft,  dobackup: True
+2021/02/16-18:02:04 [INFO ]:call:Change
+2021/02/16-18:02:04 [INFO ]:GET  worldName: The Unusual SkyBlock v12.0.9 - コピー,  worldDir: .minecraft,  dobackup: True
+2021/02/16-18:02:04 [INFO ]:call:Change
+2021/02/16-18:02:04 [INFO ]:GET  worldName: The Unusual SkyBlock v9.1.4,  worldDir: .minecraft,  dobackup: True
+2021/02/16-18:02:04 [INFO ]:call:Change
+2021/02/16-18:02:04 [INFO ]:GET  worldName: The Unusual SkyBlock v9.1.4 - コピー,  worldDir: .minecraft,  dobackup: True
+2021/02/16-18:02:04 [INFO ]:call:Change
+2021/02/16-18:02:04 [INFO ]:GET  worldName: The Water SkyBlock ver2.2.3,  worldDir: .minecraft,  dobackup: True
+2021/02/16-18:02:04 [INFO ]:call:Change
+2021/02/16-18:02:04 [INFO ]:GET  worldName: a,  worldDir: .minecraft-1.14.4-optifine,  dobackup: True
+2021/02/16-18:02:04 [INFO ]:call:Change
+2021/02/16-18:02:04 [INFO ]:GET  worldName: The Water SkyBlock ver3.1.2,  worldDir: .minecraft-1.14.4-optifine,  dobackup: True
+2021/02/16-18:02:04 [INFO ]:call:Change
+2021/02/16-18:02:04 [INFO ]:GET  worldName: The Water SkyBlock ver3.1.3b,  worldDir: .minecraft-1.14.4-optifine,  dobackup: True
+2021/02/16-18:02:04 [INFO ]:call:Change
+2021/02/16-18:02:04 [INFO ]:GET  worldName: 新規ワールド,  worldDir: .minecraft-1.14.4-optifine,  dobackup: False
+2021/02/16-18:02:04 [INFO ]:call:Change
+2021/02/16-18:02:04 [INFO ]:GET  worldName: 検証用ワールド,  worldDir: .minecraft-1.14.4-optifine,  dobackup: False
+2021/02/16-18:02:04 [INFO ]:call:Change
+2021/02/16-18:02:04 [INFO ]:GET  worldName: 適当建築,  worldDir: .minecraft-1.14.4-optifine,  dobackup: False
+2021/02/16-18:02:04 [INFO ]:call:Change
+2021/02/16-18:02:04 [INFO ]:GET  worldName: test,  worldDir: .minecraft_1.10.2,  dobackup: False
+2021/02/16-18:02:04 [INFO ]:call:Change
+2021/02/16-18:02:04 [INFO ]:GET  worldName: The Water SkyBlock ver2.2.3,  worldDir: .minecraft_1.10.2,  dobackup: False
+2021/02/16-18:02:04 [INFO ]:call:Change
+2021/02/16-18:02:04 [INFO ]:GET  worldName: Rare Species SkyBlock ii Beta2.2.2 (1),  worldDir: .minecraft_1.9,  dobackup: False
+2021/02/16-18:02:04 [INFO ]:call:Change
+2021/02/16-18:02:04 [INFO ]:GET  worldName: 新規ワールド,  worldDir: .minecraft_forge1.12.2,  dobackup: False
+2021/02/16-18:02:04 [INFO ]:call:Change
+2021/02/16-18:02:04 [INFO ]:GET  worldName: 新規ワールド-,  worldDir: .minecraft_forge1.12.2,  dobackup: False
+2021/02/16-18:02:04 [INFO ]:call:Change
+2021/02/16-18:02:04 [INFO ]:GET  worldName: 新規ワールド--,  worldDir: .minecraft_forge1.12.2,  dobackup: False
+2021/02/16-18:02:04 [INFO ]:終了時処理を開始します
+2021/02/16-18:02:04 [INFO ]: Writing D:\Documents\MinecraftAutoBackup
+Meiryo UI
+normal
+ja
+600
+600
+0
+0
+5
+C:\Users\YUUKI\AppData\Roaming\.minecraft_1.9 - コピー
+2021/02/16-18:02:06 [INFO ]:-----起動時処理-------
+2021/02/16-18:02:06 [INFO ]:-----loaded appConfig-----
+2021/02/16-18:02:06 [INFO ]:backupPath:D:\Documents\MinecraftAutoBackup
+2021/02/16-18:02:06 [INFO ]:font:[Font: Name=Meiryo UI, Size=11, Units=3, GdiCharSet=1, GdiVerticalFont=False]
+2021/02/16-18:02:06 [INFO ]:dozip:False
+2021/02/16-18:02:06 [INFO ]:clientSize:600,600
+2021/02/16-18:02:06 [INFO ]:clientPoint:0,0
+2021/02/16-18:02:06 [INFO ]:backupCount:5
+2021/02/16-18:02:06 [INFO ]:addGameDirPath:C:\Users\YUUKI\AppData\Roaming\.minecraft_1.9 - コピー
+2021/02/16-18:02:06 [INFO ]:--------------------------
+2021/02/16-18:02:06 [INFO ]:call:LoadConfigToApp
+2021/02/16-18:02:06 [INFO ]:Configから21件のワールドを読み込みました
+2021/02/16-18:02:06 [INFO ]:call:reloadConfig
+2021/02/16-18:02:06 [INFO ]:call:GetWorldDataFromPC
+2021/02/16-18:02:06 [INFO ]:call:GetWorldDataFromPC
+2021/02/16-18:02:06 [INFO ]:----------------------
+2021/02/16-18:02:06 [INFO ]:call: GetBackups
+2021/02/16-18:02:06 [INFO ]:dir:5, worlds:22, backups:95
+2021/02/16-18:02:06 [INFO ]:21件のワールドのバックアップを読み込みます
+2021/02/16-18:02:49 [INFO ]:終了時処理を開始します
+2021/02/16-18:02:49 [INFO ]: Writing D:\Documents\MinecraftAutoBackup
+Meiryo UI
+normal
+ja
+600
+600
+0
+0
+5
+C:\Users\YUUKI\AppData\Roaming\.minecraft_1.9 - コピー
+2021/02/16-22:50:14 [INFO ]:-----起動時処理-------
+2021/02/16-22:50:14 [INFO ]:-----loaded appConfig-----
+2021/02/16-22:50:14 [INFO ]:backupPath:D:\Documents\MinecraftAutoBackup
+2021/02/16-22:50:14 [INFO ]:font:[Font: Name=Meiryo UI, Size=11, Units=3, GdiCharSet=1, GdiVerticalFont=False]
+2021/02/16-22:50:14 [INFO ]:dozip:False
+2021/02/16-22:50:14 [INFO ]:clientSize:600,600
+2021/02/16-22:50:14 [INFO ]:clientPoint:0,0
+2021/02/16-22:50:14 [INFO ]:backupCount:5
+2021/02/16-22:50:14 [INFO ]:addGameDirPath:C:\Users\YUUKI\AppData\Roaming\.minecraft_1.9 - コピー
+2021/02/16-22:50:14 [INFO ]:--------------------------
+2021/02/16-22:50:14 [INFO ]:call:LoadConfigToApp
+2021/02/16-22:50:14 [INFO ]:Configから21件のワールドを読み込みました
+2021/02/16-22:50:14 [INFO ]:call:reloadConfig
+2021/02/16-22:50:14 [INFO ]:call:GetWorldDataFromPC
+2021/02/16-22:50:14 [INFO ]:call:GetWorldDataFromPC
+2021/02/16-22:50:14 [INFO ]:----------------------
+2021/02/16-22:50:14 [INFO ]:call: GetBackups
+2021/02/16-22:50:14 [INFO ]:dir:5, worlds:22, backups:95
+2021/02/16-22:50:14 [INFO ]:21件のワールドのバックアップを読み込みます
+2021/02/16-22:50:16 [INFO ]:dozip[False]
+2021/02/16-22:50:17 [INFO ]:selectedItem[5]
+2021/02/16-22:50:17 [INFO ]: Writing D:\Documents\MinecraftAutoBackup
+Meiryo UI
+normal
+ja
+600
+600
+0
+0
+5
+C:\Users\YUUKI\AppData\Roaming\.minecraft_1.9 - コピー
+2021/02/16-22:50:23 [INFO ]:終了時処理を開始します
+2021/02/16-22:50:23 [INFO ]: Writing D:\Documents\MinecraftAutoBackup
+Meiryo UI
+normal
+ja
+600
+600
+0
+0
+5
+C:\Users\YUUKI\AppData\Roaming\.minecraft_1.9 - コピー
+2021/02/16-22:54:25 [INFO ]:-----起動時処理-------
+2021/02/16-22:54:25 [INFO ]:-----loaded appConfig-----
+2021/02/16-22:54:25 [INFO ]:backupPath:D:\Documents\MinecraftAutoBackup
+2021/02/16-22:54:25 [INFO ]:font:[Font: Name=Meiryo UI, Size=11, Units=3, GdiCharSet=1, GdiVerticalFont=False]
+2021/02/16-22:54:25 [INFO ]:dozip:False
+2021/02/16-22:54:25 [INFO ]:clientSize:600,600
+2021/02/16-22:54:25 [INFO ]:clientPoint:0,0
+2021/02/16-22:54:25 [INFO ]:backupCount:5
+2021/02/16-22:54:25 [INFO ]:addGameDirPath:C:\Users\YUUKI\AppData\Roaming\.minecraft_1.9 - コピー
+2021/02/16-22:54:25 [INFO ]:--------------------------
+2021/02/16-22:54:25 [INFO ]:call:LoadConfigToApp
+2021/02/16-22:54:25 [INFO ]:Configから21件のワールドを読み込みました
+2021/02/16-22:54:25 [INFO ]:call:reloadConfig
+2021/02/16-22:54:25 [INFO ]:call:GetWorldDataFromPC
+2021/02/16-22:54:25 [INFO ]:call:GetWorldDataFromPC
+2021/02/16-22:54:25 [INFO ]:----------------------
+2021/02/16-22:54:25 [INFO ]:call: GetBackups
+2021/02/16-22:54:25 [INFO ]:dir:5, worlds:22, backups:95
+2021/02/16-22:54:25 [INFO ]:21件のワールドのバックアップを読み込みます
+2021/02/16-22:54:27 [INFO ]:push exit
+2021/02/16-22:54:27 [INFO ]:終了時処理を開始します
+2021/02/16-22:54:27 [INFO ]: Writing D:\Documents\MinecraftAutoBackup
+Meiryo UI
+normal
+ja
+600
+600
+0
+0
+5
+C:\Users\YUUKI\AppData\Roaming\.minecraft_1.9 - コピー
+2021/02/16-22:54:30 [INFO ]:-----起動時処理-------
+2021/02/16-22:54:30 [INFO ]:-----loaded appConfig-----
+2021/02/16-22:54:30 [INFO ]:backupPath:D:\Documents\MinecraftAutoBackup
+2021/02/16-22:54:30 [INFO ]:font:[Font: Name=Meiryo UI, Size=11, Units=3, GdiCharSet=1, GdiVerticalFont=False]
+2021/02/16-22:54:30 [INFO ]:dozip:False
+2021/02/16-22:54:30 [INFO ]:clientSize:600,600
+2021/02/16-22:54:30 [INFO ]:clientPoint:0,0
+2021/02/16-22:54:30 [INFO ]:backupCount:5
+2021/02/16-22:54:30 [INFO ]:addGameDirPath:C:\Users\YUUKI\AppData\Roaming\.minecraft_1.9 - コピー
+2021/02/16-22:54:30 [INFO ]:--------------------------
+2021/02/16-22:54:30 [INFO ]:call:LoadConfigToApp
+2021/02/16-22:54:30 [INFO ]:Configから21件のワールドを読み込みました
+2021/02/16-22:54:30 [INFO ]:call:reloadConfig
+2021/02/16-22:54:30 [INFO ]:call:GetWorldDataFromPC
+2021/02/16-22:54:30 [INFO ]:call:GetWorldDataFromPC
+2021/02/16-22:54:30 [INFO ]:----------------------
+2021/02/16-22:54:30 [INFO ]:call: GetBackups
+2021/02/16-22:54:30 [INFO ]:dir:5, worlds:22, backups:95
+2021/02/16-22:54:30 [INFO ]:21件のワールドのバックアップを読み込みます
+2021/02/16-22:54:31 [INFO ]:dozip[False]
+2021/02/16-22:54:38 [INFO ]:C:\Users\YUUKI\AppData\Roaming\.minecraft_1.9 - コピーの判定を行います
+2021/02/16-22:54:39 [INFO ]:call:GetWorldDataFromPC
+2021/02/16-22:54:40 [INFO ]:selectedItem[5]
+2021/02/16-22:54:40 [INFO ]: Writing D:\Documents\MinecraftAutoBackup
+Meiryo UI
+normal
+ja
+600
+600
+0
+0
+5
+C:\Users\YUUKI\AppData\Roaming\.minecraft_1.9 - コピー
+2021/02/16-22:54:43 [INFO ]:終了時処理を開始します
+2021/02/16-22:54:43 [INFO ]: Writing D:\Documents\MinecraftAutoBackup
+Meiryo UI
+normal
+ja
+600
+600
+0
+0
+5
+C:\Users\YUUKI\AppData\Roaming\.minecraft_1.9 - コピー
+2021/02/16-22:54:49 [INFO ]:-----起動時処理-------
+2021/02/16-22:54:49 [INFO ]:-----loaded appConfig-----
+2021/02/16-22:54:49 [INFO ]:backupPath:D:\Documents\MinecraftAutoBackup
+2021/02/16-22:54:49 [INFO ]:font:[Font: Name=Meiryo UI, Size=11, Units=3, GdiCharSet=1, GdiVerticalFont=False]
+2021/02/16-22:54:49 [INFO ]:dozip:False
+2021/02/16-22:54:49 [INFO ]:clientSize:600,600
+2021/02/16-22:54:49 [INFO ]:clientPoint:0,0
+2021/02/16-22:54:49 [INFO ]:backupCount:5
+2021/02/16-22:54:49 [INFO ]:addGameDirPath:C:\Users\YUUKI\AppData\Roaming\.minecraft_1.9 - コピー
+2021/02/16-22:54:49 [INFO ]:--------------------------
+2021/02/16-22:54:49 [INFO ]:call:LoadConfigToApp
+2021/02/16-22:54:49 [INFO ]:Configから21件のワールドを読み込みました
+2021/02/16-22:54:49 [INFO ]:call:reloadConfig
+2021/02/16-22:54:49 [INFO ]:call:GetWorldDataFromPC
+2021/02/16-22:54:49 [INFO ]:call:GetWorldDataFromPC
+2021/02/16-22:54:49 [INFO ]:----------------------
+2021/02/16-22:54:50 [INFO ]:call: GetBackups
+2021/02/16-22:54:50 [INFO ]:dir:5, worlds:22, backups:95
+2021/02/16-22:54:50 [INFO ]:21件のワールドのバックアップを読み込みます
+2021/02/16-22:54:51 [INFO ]:dozip[False]
+2021/02/16-22:55:00 [INFO ]:selectedItem[5]
+2021/02/16-22:55:00 [INFO ]: Writing D:\Documents\MinecraftAutoBackup
+Meiryo UI
+normal
+ja
+600
+600
+0
+0
+5
+C:\Users\YUUKI\AppData\Roaming\.minecraft_1.9 - コピー
+2021/02/16-22:55:10 [INFO ]:終了時処理を開始します
+2021/02/16-22:55:10 [INFO ]: Writing D:\Documents\MinecraftAutoBackup
+Meiryo UI
+normal
+ja
+990
+600
+0
+0
+5
+C:\Users\YUUKI\AppData\Roaming\.minecraft_1.9 - コピー
+2021/02/16-22:55:11 [INFO ]:-----起動時処理-------
+2021/02/16-22:55:11 [INFO ]:-----loaded appConfig-----
+2021/02/16-22:55:11 [INFO ]:backupPath:D:\Documents\MinecraftAutoBackup
+2021/02/16-22:55:11 [INFO ]:font:[Font: Name=Meiryo UI, Size=11, Units=3, GdiCharSet=1, GdiVerticalFont=False]
+2021/02/16-22:55:11 [INFO ]:dozip:False
+2021/02/16-22:55:11 [INFO ]:clientSize:990,600
+2021/02/16-22:55:11 [INFO ]:clientPoint:0,0
+2021/02/16-22:55:11 [INFO ]:backupCount:5
+2021/02/16-22:55:11 [INFO ]:addGameDirPath:C:\Users\YUUKI\AppData\Roaming\.minecraft_1.9 - コピー
+2021/02/16-22:55:11 [INFO ]:--------------------------
+2021/02/16-22:55:11 [INFO ]:call:LoadConfigToApp
+2021/02/16-22:55:11 [INFO ]:Configから21件のワールドを読み込みました
+2021/02/16-22:55:11 [INFO ]:call:reloadConfig
+2021/02/16-22:55:11 [INFO ]:call:GetWorldDataFromPC
+2021/02/16-22:55:11 [INFO ]:call:GetWorldDataFromPC
+2021/02/16-22:55:11 [INFO ]:REMOVE Rare Species SkyBlock ii Beta2.2.2 (1) suc
+2021/02/16-22:55:11 [INFO ]:----------------------
+2021/02/16-22:55:12 [INFO ]:call: GetBackups
+2021/02/16-22:55:12 [INFO ]:dir:5, worlds:22, backups:95
+2021/02/16-22:55:12 [INFO ]:20件のワールドのバックアップを読み込みます
+2021/02/16-22:55:15 [INFO ]:dozip[False]
+2021/02/16-22:55:36 [INFO ]:C:\Users\YUUKI\AppData\Roaming\.minecraft_1.9 - コピーの判定を行います
+2021/02/16-22:55:36 [INFO ]:C:\Users\YUUKI\AppData\Roaming\.minecraft_1.9 - コピーをconfigに追加します
+2021/02/16-22:55:36 [INFO ]:call:GetWorldDataFromPC
+2021/02/16-22:55:36 [INFO ]:configsにRare Species SkyBlock ii Beta2.2.2 (1)を追加しました
+2021/02/16-22:55:37 [INFO ]:selectedItem[5]
+2021/02/16-22:55:37 [INFO ]: Writing D:\Documents\MinecraftAutoBackup
+Meiryo UI
+normal
+ja
+990
+600
+0
+0
+5
+C:\Users\YUUKI\AppData\Roaming\.minecraft_1.9 - コピー
+C:\Users\YUUKI\AppData\Roaming\.minecraft_1.9 - コピー
+2021/02/16-22:55:39 [INFO ]:push ok
+2021/02/16-22:55:39 [INFO ]:call:Change
+2021/02/16-22:55:39 [INFO ]:GET  worldName: buildinng,  worldDir: .minecraft,  dobackup: True
+2021/02/16-22:55:39 [INFO ]:call:Change
+2021/02/16-22:55:39 [INFO ]:GET  worldName: commanding (1),  worldDir: .minecraft,  dobackup: True
+2021/02/16-22:55:39 [INFO ]:call:Change
+2021/02/16-22:55:39 [INFO ]:GET  worldName: sWorld,  worldDir: .minecraft,  dobackup: True
+2021/02/16-22:55:39 [INFO ]:call:Change
+2021/02/16-22:55:39 [INFO ]:GET  worldName: The Unusual SkyBlock v12.0.9,  worldDir: .minecraft,  dobackup: True
+2021/02/16-22:55:39 [INFO ]:call:Change
+2021/02/16-22:55:39 [INFO ]:GET  worldName: The Unusual SkyBlock v12.0.9 - コピー,  worldDir: .minecraft,  dobackup: True
+2021/02/16-22:55:39 [INFO ]:call:Change
+2021/02/16-22:55:39 [INFO ]:GET  worldName: The Unusual SkyBlock v9.1.4,  worldDir: .minecraft,  dobackup: True
+2021/02/16-22:55:39 [INFO ]:call:Change
+2021/02/16-22:55:39 [INFO ]:GET  worldName: The Unusual SkyBlock v9.1.4 - コピー,  worldDir: .minecraft,  dobackup: True
+2021/02/16-22:55:39 [INFO ]:call:Change
+2021/02/16-22:55:39 [INFO ]:GET  worldName: The Water SkyBlock ver2.2.3,  worldDir: .minecraft,  dobackup: True
+2021/02/16-22:55:39 [INFO ]:call:Change
+2021/02/16-22:55:39 [INFO ]:GET  worldName: a,  worldDir: .minecraft-1.14.4-optifine,  dobackup: True
+2021/02/16-22:55:39 [INFO ]:call:Change
+2021/02/16-22:55:39 [INFO ]:GET  worldName: The Water SkyBlock ver3.1.2,  worldDir: .minecraft-1.14.4-optifine,  dobackup: True
+2021/02/16-22:55:39 [INFO ]:call:Change
+2021/02/16-22:55:39 [INFO ]:GET  worldName: The Water SkyBlock ver3.1.3b,  worldDir: .minecraft-1.14.4-optifine,  dobackup: True
+2021/02/16-22:55:39 [INFO ]:call:Change
+2021/02/16-22:55:39 [INFO ]:GET  worldName: 新規ワールド,  worldDir: .minecraft-1.14.4-optifine,  dobackup: False
+2021/02/16-22:55:39 [INFO ]:call:Change
+2021/02/16-22:55:39 [INFO ]:GET  worldName: 検証用ワールド,  worldDir: .minecraft-1.14.4-optifine,  dobackup: False
+2021/02/16-22:55:39 [INFO ]:call:Change
+2021/02/16-22:55:39 [INFO ]:GET  worldName: 適当建築,  worldDir: .minecraft-1.14.4-optifine,  dobackup: False
+2021/02/16-22:55:39 [INFO ]:call:Change
+2021/02/16-22:55:39 [INFO ]:GET  worldName: test,  worldDir: .minecraft_1.10.2,  dobackup: False
+2021/02/16-22:55:39 [INFO ]:call:Change
+2021/02/16-22:55:39 [INFO ]:GET  worldName: The Water SkyBlock ver2.2.3,  worldDir: .minecraft_1.10.2,  dobackup: False
+2021/02/16-22:55:39 [INFO ]:call:Change
+2021/02/16-22:55:39 [INFO ]:GET  worldName: Rare Species SkyBlock ii Beta2.2.2 (1),  worldDir: .minecraft_1.9,  dobackup: False
+2021/02/16-22:55:39 [INFO ]:call:Change
+2021/02/16-22:55:39 [INFO ]:GET  worldName: 新規ワールド,  worldDir: .minecraft_forge1.12.2,  dobackup: False
+2021/02/16-22:55:39 [INFO ]:call:Change
+2021/02/16-22:55:39 [INFO ]:GET  worldName: 新規ワールド-,  worldDir: .minecraft_forge1.12.2,  dobackup: False
+2021/02/16-22:55:39 [INFO ]:call:Change
+2021/02/16-22:55:39 [INFO ]:GET  worldName: 新規ワールド--,  worldDir: .minecraft_forge1.12.2,  dobackup: False
+2021/02/16-22:55:39 [INFO ]:call:Change
+2021/02/16-22:55:39 [INFO ]:GET  worldName: Rare Species SkyBlock ii Beta2.2.2 (1),  worldDir: .minecraft_1.9 - コピー,  dobackup: True
+2021/02/16-22:55:39 [INFO ]:終了時処理を開始します
+2021/02/16-22:55:39 [INFO ]: Writing D:\Documents\MinecraftAutoBackup
+Meiryo UI
+normal
+ja
+990
+600
+0
+0
+5
+C:\Users\YUUKI\AppData\Roaming\.minecraft_1.9 - コピー
+C:\Users\YUUKI\AppData\Roaming\.minecraft_1.9 - コピー

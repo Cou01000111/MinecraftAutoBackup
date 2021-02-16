@@ -272,6 +272,7 @@ class WorldListForm :Form {
     }
     void Config_Click(object sender, EventArgs e) {
         AppConfigForm appConfigForm = new AppConfigForm();
+        appConfigForm.Owner = this;
         appConfigForm.Show();
     }
 }
@@ -1161,13 +1162,13 @@ public class Config {
     /// </summary>
     /// <param name="w"></param>
     /// <returns></returns>
-    public static bool isBackupAlive(World w) {
+    public static bool IsBackupAlive(World w) {
         if (w.isAlive) {
-            Logger.Debug("info[DEBUG]:バックアップは死んでいます");
+            Logger.Debug("バックアップは死んでいます");
             return false;
         }
         else {
-            Logger.Debug("info[DEBUG]:バックアップは生きています");
+            Logger.Debug("バックアップは生きています");
             return true;
         }
     }
@@ -1239,6 +1240,7 @@ internal class AppConfigForm :Form {
         ClientSize = new Size(500, 300);
         Font = new Font(AppConfig.Font.Name, 10);
         Padding = new Padding(8);
+        FormClosing += new FormClosingEventHandler(AppConfigForm_Closing);
 
         //各種コントロール設定
 
@@ -1442,10 +1444,18 @@ internal class AppConfigForm :Form {
         AppConfig.BackupCount = this.backupCount.SelectedItem.ToString();
         Logger.Info($"selectedItem[{this.backupCount.SelectedItem.ToString()}]");
         AppConfig.WriteAppConfig();
+
+        //WorldListViewを更新する
+        ((WorldListView)((TabControl)(((WorldListForm)this.Owner).Controls[0])).TabPages[0].Controls[0]).LoadFromConfigToList();
+
         this.Close();
     }
     private void cansel_Click(object sender, EventArgs e) {
         this.Close();
+    }
+
+    private void AppConfigForm_Closing(object sender, EventArgs e) {
+
     }
 
     private bool GameDirectoryConfigExists(string str) {
