@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-class Program {ｘ
+class Program {
     [STAThread]
     static void Main() {
         //起動時処理
@@ -663,13 +663,13 @@ class BackupDataListViewItem :ListViewItem {
 }
 
 class RestoreFromBackupForm :Form {
-    FlowLayoutPanel panel;
-    Label description;
-    CheckBox removeBackup;
-    CheckBox dontOverwriting;
-    Button doRestore;
-    string pathSrc;
-    string pathTar;
+    private FlowLayoutPanel panel;
+    private Label description;
+    private CheckBox removeBackup;
+    private CheckBox dontOverwriting;
+    private Button doRestore;
+    private string pathSrc;
+    private string pathTar;
 
     /*
     バックアップオプション
@@ -771,7 +771,7 @@ class RestoreFromBackupForm :Form {
 
     }
 
-    void doRestore_Click(object sender, EventArgs e) {
+    private void doRestore_Click(object sender, EventArgs e) {
         restoreFromBackup(sender, e);
     }
     private void restoreFromBackup(object sender, EventArgs e) {
@@ -1135,7 +1135,7 @@ public class Config {
     /// </summary>
     /// <param name="gameDirectory"></param>
     /// <returns>取得したList<world></returns>
-    private static List<World> GetWorldDataFromHDD(List<string> gameDirectory) {
+    public static List<World> GetWorldDataFromHDD(List<string> gameDirectory) {
         List<World> worlds = new List<World>();
         Console.WriteLine("call:GetWorldDataFromPC");
         foreach (string dir in gameDirectory) {
@@ -1174,6 +1174,22 @@ public class Config {
             return true;
         }
     }
+
+    //configsに存在しているゲームディレクトリをすべて返す
+    public static List<string> GetGameDirInConfigs() {
+        List<string> gameDirs = new List<string>();
+        foreach(World cfg in configs) {
+            Console.WriteLine($"cfg:{cfg.WDir}");
+            if(!gameDirs.Contains(cfg.WDir)){
+                gameDirs.Add(cfg.WDir);
+            }
+        }
+
+        foreach (string gameDir in gameDirs) {
+            Console.WriteLine($"gameDirInConfigs:{gameDir}");
+        }
+        return gameDirs;
+    }
 }
 
 //ちょっとFormの書き方変えてみたやつ
@@ -1193,6 +1209,8 @@ internal class AppConfigForm :Form {
     FlowLayoutPanel backupCountPanel = new FlowLayoutPanel();
     Label backupCountText = new Label();
     ComboBox backupCount = new ComboBox();
+    Button addGameDir = new Button();
+    Button addWorldData = new Button();
 
 
     FlowLayoutPanel fontTabF = new FlowLayoutPanel();
@@ -1206,10 +1224,10 @@ internal class AppConfigForm :Form {
 
     public AppConfigForm() {
 
-        //controls追加
+        //controls追加（ほかのフォームと比べ先に追加している。メリットは忘れた）
         backupPathPanel.Controls.AddRange(new Control[] { backupPathInput, refe });
         backupCountPanel.Controls.AddRange(new Control[] { backupCountText, backupCount });
-        backupTabF.Controls.AddRange(new Control[] { backupPath, backupPathPanel, doZip, backupCountPanel });
+        backupTabF.Controls.AddRange(new Control[] { backupPath, backupPathPanel, doZip, backupCountPanel, addGameDir });
         backupTab.Controls.Add(backupTabF);
         fontTabF.Controls.AddRange(new Control[] { fontName, fontChange });
         fontTab.Controls.Add(fontTabF);
@@ -1285,6 +1303,10 @@ internal class AppConfigForm :Form {
         Console.WriteLine($"info:dozip[{AppConfig.DoZip}]");
         //doZip.BackColor = Color.Blue;
 
+        addGameDir.Text = "ゲームディレクトリを手動で追加する";
+        addGameDir.AutoSize = true;
+        addGameDir.Click += new EventHandler(addGameDir_Click);
+
         fontName.Text = $"フォント名 :  {Util.FontStyle.Name}";
         fontName.AutoSize = true;
 
@@ -1307,6 +1329,37 @@ internal class AppConfigForm :Form {
 
     }
 
+    private void addGameDir_Click(object sender,EventArgs e) {
+        List<World> worlds = new List<World>();
+        CommonOpenFileDialog copd = new CommonOpenFileDialog();
+        copd.Title = "ゲームディレクトリを選択してください（複数選択可）";
+        copd.IsFolderPicker = true;
+        copd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+        copd.Multiselect = true;
+        if (copd.ShowDialog() == CommonFileDialogResult.Ok) {
+            List<string> addGameDir = copd.FileNames.ToList();
+            List<string> removeAddGameDir = new List<string>();
+            foreach (string str in addGameDir) {
+                Console.WriteLine($"{str}の判定を行います");
+                if (GameDirectoryConfigExists(str)) {
+                    MessageBox.Show($"ゲームディレクトリ{str}はすでに認識しています","Minecraft Auto Backup",MessageBoxButtons.OK);
+                    removeAddGameDir.Add(str);
+                }
+            }
+            foreach(string str in removeAddGameDir) {
+                addGameDir.Remove(str);
+            }
+            foreach(string str in addGameDir) {
+                Console.WriteLine($"{str}をconfigに追加します");
+            }
+            worlds.AddRange(Config.GetWorldDataFromHDD(addGameDir));
+        }
+        foreach (var w in worlds) {
+            Console.WriteLine($"configsに{w.WName}を追加しました");
+            Config.configs.Add(w);
+            Config.Write();
+        }
+    }
     private void refe_Click(object sender, EventArgs e) {
         OpenFileDialog openFileDialog = new OpenFileDialog();
         openFileDialog.Title = "バックアップ先フォルダを選択してください";
@@ -1340,70 +1393,45 @@ internal class AppConfigForm :Form {
         //doZip
         if (AppConfig.DoZip != this.doZip.Checked) {
             if (AppConfig.DoZip) {
-                //設定上はtrue,formのほうはfalseの場合（falseに変更された場合）
-                //List<string> backups = Util.GetBackups();
-                //FileSystem.CreateDirectory(".\\tmp");
-                //var t = Task.Run(() => {
-                //    try{ FileSystem.CopyDirectory(AppConfig.BackupPath, ".\\tmp"); }
-                //    catch( Exception ex) {
-                //        Console.WriteLine("catch error");
-                //        Console.WriteLine(ex.StackTrace);
-                //        Console.WriteLine(ex.Message);
-                //        Console.WriteLine(ex.Data);
-                //    }
-                //});
+                //設定上はtrue,formのほうはflaseの場合（falseに変更された場合）
+                List<string> backups = Util.GetBackups();
+                if (backups.Count > 0) {
+                    //バックアップが存在している場合
 
-                //バックアップが存在している場合
-                DialogResult r = MessageBox.Show("現在保存されているバックアップをすべて解凍しますか？", "保存方式", MessageBoxButtons.YesNo);
-                if (r == DialogResult.Yes) {
-                    // 既存のバックアップ.zipをすべて解凍する
-                    string command = ".\\SubModule\\Zipper.exe";
-                    string _args = "1";
-                    var Decompression = new ProcessStartInfo {
-                        FileName = command,
-                        Arguments = _args
-                    };
-                    Console.WriteLine($"Zipper {command} {_args}");
-                    Process.Start(Decompression);
-
+                    //バックアップが存在している場合
+                    DialogResult r = MessageBox.Show("現在保存されているバックアップをすべて解凍しますか？", "保存方式", MessageBoxButtons.YesNo);
+                    if (r == DialogResult.Yes) {
+                        // 既存のバックアップ.zipをすべて解凍する
+                        string command = ".\\SubModule\\Zipper.exe";
+                        string _args = "1";
+                        var Decompression = new ProcessStartInfo {
+                            FileName = command,
+                            Arguments = _args
+                        };
+                        Console.WriteLine($"Zipper {command} {_args}");
+                        Process.Start(Decompression);
+                    }
                 }
             }
             else if (!AppConfig.DoZip) {
                 //設定上はfalse,formのほうはtrueの場合（trueに変更された場合）
                 List<string> backups = Util.GetBackups();
-                FileSystem.CreateDirectory(".\\tmp");
-                var t = Task.Run(() => {
-                    try { FileSystem.CopyDirectory(AppConfig.BackupPath, ".\\tmp"); }
-                    catch (Exception ex) {
-                        Console.WriteLine("catch error");
-                        Console.WriteLine(ex.StackTrace);
-                        Console.WriteLine(ex.Message);
-                        Console.WriteLine(ex.Data);
-                    }
-                });
-                foreach (string b in backups) {
-                    b.Replace(AppConfig.BackupPath, ".\\tmp");
-                    Console.WriteLine($"info:{b}");
-                }
 
                 if (backups.Count > 0) {
                     //バックアップが存在している場合
                     DialogResult r = MessageBox.Show("現在保存されているバックアップをすべて圧縮しますか？", "保存方式", MessageBoxButtons.YesNo);
-                    //if (r == DialogResult.Yes) {
-                    //    // 既存のバックアップ.zipをすべて解凍する
-                    //    string command = ".\\SubModule\\Zipper.exe";
-                    //    string _args = "0 ";
-                    //    foreach (string s in backups) {
-                    //        _args += $"\"{s}\" ";
-                    //    }
-                    //    var doZipping = new ProcessStartInfo {
-                    //        FileName = command,
-                    //        Arguments = _args
-                    //    };
-                    //    Console.WriteLine($"Zipper {command} {_args}");
-                    //    Process.Start(doZipping);
-                    //    //Util.task = Task.Run(() => { DoZipping(backups); });
-                    //}
+                    if (r == DialogResult.Yes) {
+                        // 既存のバックアップ.zipをすべて解凍する
+                        string command = ".\\SubModule\\Zipper.exe";
+                        string _args = "0";
+                        var doZipping = new ProcessStartInfo {
+                            FileName = command,
+                            Arguments = _args
+                        };
+                        Console.WriteLine($"Zipper {command} {_args}");
+                        Process.Start(doZipping);
+                        //Util.task = Task.Run(() => { DoZipping(backups); });
+                    }
                 }
             }
             else {
@@ -1420,45 +1448,12 @@ internal class AppConfigForm :Form {
     private void cansel_Click(object sender, EventArgs e) {
         this.Close();
     }
-    //private void DoZipping(List<string> pasess) {
-    //    Console.WriteLine("call:DoZipping");
-    //    Console.WriteLine($"{pasess.Count()}件のバックアップを検討します");
-    //    foreach (string path in pasess) {
-    //        if (!path.Contains(".zip")) {
-    //            //バックアップがzipじゃない場合
-    //            Console.WriteLine($"info: [{path}]のスレッド開始");
-    //            try { ZipFile.CreateFromDirectory(path, $"{path}.zip"); }
-    //            catch (IOException) {
-    //                Console.WriteLine($"{path}: zipping io exception");
-    //                continue;
-    //            }
-    //            Console.WriteLine($" info: [{path}]zip化完了");
-    //            try { Directory.Delete(path, true); }
-    //            catch (IOException) {
-    //                Console.WriteLine($"{path}: deleting io exception");
-    //            }
-    //            Console.WriteLine($" info: [{path}]削除完了");
-    //            //Console.WriteLine($"{Path.GetDirectoryName(backupPath)}\\{Path.GetFileName(backupPath)}をzipにします");
-    //        }
-    //    }
-    //}
 
-    //private void Decompression(List<string> pasess) {
-    //    Console.WriteLine("call:Decompression");
-    //    Console.WriteLine($"{pasess.Count()}件のバックアップを検討します");
-    //    foreach (var path in pasess) {
-    //        if (path.Contains(".zip")) {
-    //            //バックアップがzipの場合
-    //            Console.WriteLine($"{path}を解凍します");
-    //            try { ZipFile.ExtractToDirectory($"{path}", path.Substring(0,path.Length - 4)); }
-    //            catch (IOException) { Console.WriteLine($"{path}: extracting io exception"); }
-    //            try{ File.Delete($"{path}"); }
-    //            catch (IOException) { Console.WriteLine($"{path}: deleting io exception"); }
-    //            //Console.WriteLine($"{Path.GetDirectoryName(backupPath)}\\{Path.GetFileName(backupPath)}をzipにします");
-    //        }
-    //    }
-    //    Console.WriteLine("解凍完了");
-    //}
+    private bool GameDirectoryConfigExists(string str) {
+        List<string> gameDirsInConfigs = Config.GetGameDirInConfigs();
+        Console.WriteLine($"return:{gameDirsInConfigs.Contains(Path.GetFileName(str))}");
+        return gameDirsInConfigs.Contains(Path.GetFileName(str));
+    }
 }
 
 public class WorldForComparison {
