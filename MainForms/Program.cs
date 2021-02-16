@@ -1002,6 +1002,9 @@ public class Config {
     public static List<World> ReloadConfig() {
         Console.WriteLine("call:reloadConfig");
         List<World> worldInHdd = GetWorldDataFromHDD();
+        foreach (string world in AppConfig.AddGameDirPath) {
+            worldInHdd.AddRange(GetWorldDataFromHDD(world));
+        }
         List<World> worldInConfig = GetConfig();
         Console.WriteLine($"config: {worldInConfig.Count()}");
         Console.WriteLine($"HDD   : {worldInHdd.Count()}");
@@ -1151,6 +1154,17 @@ public class Config {
         //}
         return worlds;
     }
+    public static List<World> GetWorldDataFromHDD(string gameDirectory) {
+        List<World> worlds = new List<World>();
+        Console.WriteLine("call:GetWorldDataFromPC");
+        if (Directory.Exists($"{gameDirectory}\\saves")) {
+            List<string> _worlds = Directory.GetDirectories($"{gameDirectory}\\saves").ToList();
+            foreach (string worldPath in _worlds) {
+                worlds.Add(new World(Util.TrimDoubleQuotationMarks(worldPath)));
+            }
+        }
+        return worlds;
+    }
 
     public static void ConsoleConfig() {
         Console.WriteLine("----Configs----");
@@ -1178,9 +1192,9 @@ public class Config {
     //configsに存在しているゲームディレクトリをすべて返す
     public static List<string> GetGameDirInConfigs() {
         List<string> gameDirs = new List<string>();
-        foreach(World cfg in configs) {
+        foreach (World cfg in configs) {
             Console.WriteLine($"cfg:{cfg.WDir}");
-            if(!gameDirs.Contains(cfg.WDir)){
+            if (!gameDirs.Contains(cfg.WDir)) {
                 gameDirs.Add(cfg.WDir);
             }
         }
@@ -1329,7 +1343,7 @@ internal class AppConfigForm :Form {
 
     }
 
-    private void addGameDir_Click(object sender,EventArgs e) {
+    private void addGameDir_Click(object sender, EventArgs e) {
         List<World> worlds = new List<World>();
         CommonOpenFileDialog copd = new CommonOpenFileDialog();
         copd.Title = "ゲームディレクトリを選択してください（複数選択可）";
@@ -1342,15 +1356,16 @@ internal class AppConfigForm :Form {
             foreach (string str in addGameDir) {
                 Console.WriteLine($"{str}の判定を行います");
                 if (GameDirectoryConfigExists(str)) {
-                    MessageBox.Show($"ゲームディレクトリ{str}はすでに認識しています","Minecraft Auto Backup",MessageBoxButtons.OK);
+                    MessageBox.Show($"ゲームディレクトリ{str}はすでに認識しています", "Minecraft Auto Backup", MessageBoxButtons.OK);
                     removeAddGameDir.Add(str);
                 }
             }
-            foreach(string str in removeAddGameDir) {
+            foreach (string str in removeAddGameDir) {
                 addGameDir.Remove(str);
             }
-            foreach(string str in addGameDir) {
+            foreach (string str in addGameDir) {
                 Console.WriteLine($"{str}をconfigに追加します");
+                AppConfig.AddGameDirPath.Add(str);
             }
             worlds.AddRange(Config.GetWorldDataFromHDD(addGameDir));
         }
@@ -1358,6 +1373,7 @@ internal class AppConfigForm :Form {
             Console.WriteLine($"configsに{w.WName}を追加しました");
             Config.configs.Add(w);
             Config.Write();
+            
         }
     }
     private void refe_Click(object sender, EventArgs e) {
