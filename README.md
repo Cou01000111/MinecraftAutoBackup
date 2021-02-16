@@ -3,10 +3,9 @@
 ## 現バージョンの注意点
 - スタートアップに項目が自動で追加されないので、手動で` .\MinecraftAutoBackup\SubModules\MABProcess.exe `のショートカットを作成し、`shell:startup`に追加しないといけない
 - 現在フォントを変えてもアプリを再起動しないと適応されない
-- 保存形式を変えたときに一括圧縮、一括解凍機能になんかやばそうなバグがありそうなのでなるべく使わないようにお願いします
 
 ## ダウンロード
-[最新バージョン(beta)](https://github.com/Cou01000111/MinecraftAutoBackup/releases/download/v0.6.1-beta/MinecraftAutoBackup.zip)
+[最新バージョン(beta)](https://github.com/Cou01000111/MinecraftAutoBackup/releases/download/v0.7.0-beta/MinecraftAutoBackup.zip)
 
 ## 概要
 minecraftで「普段遊んでいるワールドに違うバージョンで入ってしまった！！」という時に役立つバックアップソフトです
