@@ -679,3 +679,136 @@ ja
 5
 C:\Users\YUUKI\AppData\Roaming\.minecraft_1.9 - コピー
 C:\Users\YUUKI\AppData\Roaming\.minecraft_1.9 - コピー
+2021/02/17-18:36:50 [INFO ]:-----起動時処理-------
+2021/02/17-18:36:50 [INFO ]:-----loaded appConfig-----
+2021/02/17-18:36:50 [INFO ]:backupPath:C:\Users\YUUKI\Documents\MinecraftAutoBackup
+2021/02/17-18:36:50 [INFO ]:font:[Font: Name=Meiryo UI, Size=11, Units=3, GdiCharSet=1, GdiVerticalFont=False]
+2021/02/17-18:36:50 [INFO ]:dozip:False
+2021/02/17-18:36:50 [INFO ]:clientSize:600,600
+2021/02/17-18:36:50 [INFO ]:clientPoint:0,0
+2021/02/17-18:36:50 [INFO ]:backupCount:5
+2021/02/17-18:36:50 [INFO ]:--------------------------
+2021/02/17-18:36:53 [INFO ]:call:LoadConfigToApp
+2021/02/17-18:36:53 [INFO ]:Configから21件のワールドを読み込みました
+2021/02/17-18:36:53 [INFO ]:call:reloadConfig
+2021/02/17-18:36:53 [INFO ]:call:GetWorldDataFromPC
+2021/02/17-18:36:53 [INFO ]:----------------------
+2021/02/17-18:36:53 [INFO ]:call: GetBackups
+2021/02/17-18:36:53 [INFO ]:dir:6, worlds:23, backups:96
+2021/02/17-18:36:53 [INFO ]:21件のワールドのバックアップを読み込みます
+2021/02/17-18:36:58 [INFO ]:call:addListView
+2021/02/17-18:36:58 [INFO ]:sWorldの一覧以下のパスからロードします
+2021/02/17-18:36:58 [INFO ]:path:C:\Users\YUUKI\AppData\Roaming\.minecraft\saves\sWorld
+2021/02/17-18:36:58 [INFO ]:backupFolderCount[5]
+2021/02/17-18:37:00 [INFO ]:call:Menu_Opening
+2021/02/17-18:37:00 [INFO ]:ListViewItem: {2021-02-17 00:32}
+2021/02/17-18:37:00 [INFO ]:sWorld
+2021/02/17-18:37:00 [INFO ]:(Boolean)True
+2021/02/17-18:37:01 [INFO ]:call:ReturnBackup_Click
+2021/02/17-18:37:01 [INFO ]:(Boolean)True
+2021/02/17-18:37:01 [INFO ]:src[C:\Users\YUUKI\Documents\MinecraftAutoBackup\.minecraft\sWorld\202102170032]
+2021/02/17-18:37:01 [INFO ]:tar[C:\Users\YUUKI\AppData\Roaming\.minecraft\saves\sWorld]
+2021/02/17-18:37:01 [INFO ]:C:\Users\YUUKI\Documents\MinecraftAutoBackup\.minecraft\sWorld\202102170032をC:\Users\YUUKI\AppData\Roaming\.minecraft\saves\sWorldに上書きします
+2021/02/17-18:37:12 [INFO ]: src[C:\Users\YUUKI\Documents\MinecraftAutoBackup\.minecraft\sWorld\202102170032]
+2021/02/17-18:37:12 [INFO ]: tar[C:\Users\YUUKI\AppData\Roaming\.minecraft\saves\sWorld]
+2021/02/17-18:37:12 [INFO ]:restore from backup
+2021/02/17-18:37:12 [INFO ]:option:dont over writing [True],remove backup [False]
+2021/02/17-18:39:01 [INFO ]:終了時処理を開始します
+2021/02/17-18:39:01 [INFO ]: Writing C:\Users\YUUKI\Documents\MinecraftAutoBackup
+Meiryo UI
+normal
+ja
+600
+600
+0
+0
+5
+2021/02/19-20:55:46 [INFO ]:-----起動時処理-------
+2021/02/19-20:55:47 [INFO ]:-----loaded appConfig-----
+2021/02/19-20:55:47 [INFO ]:backupPath:C:\Users\YUUKI\Documents\MinecraftAutoBackup
+2021/02/19-20:55:47 [INFO ]:font:[Font: Name=Meiryo UI, Size=11, Units=3, GdiCharSet=1, GdiVerticalFont=False]
+2021/02/19-20:55:47 [INFO ]:dozip:False
+2021/02/19-20:55:47 [INFO ]:clientSize:600,600
+2021/02/19-20:55:47 [INFO ]:clientPoint:0,0
+2021/02/19-20:55:47 [INFO ]:backupCount:5
+2021/02/19-20:55:47 [INFO ]:--------------------------
+2021/02/19-20:55:47 [INFO ]:call:LoadConfigToApp
+2021/02/19-20:55:47 [INFO ]:Configから22件のワールドを読み込みました
+2021/02/19-20:55:47 [INFO ]:call:reloadConfig
+2021/02/19-20:55:47 [INFO ]:call:GetWorldDataFromPC
+2021/02/19-20:55:47 [INFO ]:----------------------
+2021/02/19-20:55:47 [INFO ]:call: GetBackups
+2021/02/19-20:55:47 [INFO ]:dir:6, worlds:24, backups:104
+2021/02/19-20:55:47 [INFO ]:22件のワールドのバックアップを読み込みます
+2021/02/19-20:59:01 [INFO ]:call:addListView
+2021/02/19-20:59:01 [INFO ]:sWorldの一覧以下のパスからロードします
+2021/02/19-20:59:01 [INFO ]:path:C:\Users\YUUKI\AppData\Roaming\.minecraft\saves\sWorld
+2021/02/19-20:59:01 [INFO ]:backupFolderCount[5]
+2021/02/19-20:59:07 [INFO ]:call:Menu_Opening
+2021/02/19-20:59:07 [INFO ]:ListViewItem: {2021-02-19 20:24}
+2021/02/19-20:59:07 [INFO ]:sWorld
+2021/02/19-20:59:07 [INFO ]:(Boolean)True
+2021/02/19-20:59:08 [INFO ]:call:ReturnBackup_Click
+2021/02/19-20:59:08 [INFO ]:(Boolean)True
+2021/02/19-20:59:08 [INFO ]:src[C:\Users\YUUKI\Documents\MinecraftAutoBackup\.minecraft\sWorld\202102192024]
+2021/02/19-20:59:08 [INFO ]:tar[C:\Users\YUUKI\AppData\Roaming\.minecraft\saves\sWorld]
+2021/02/19-20:59:08 [INFO ]:C:\Users\YUUKI\Documents\MinecraftAutoBackup\.minecraft\sWorld\202102192024をC:\Users\YUUKI\AppData\Roaming\.minecraft\saves\sWorldに上書きします
+2021/02/19-20:59:10 [INFO ]: src[C:\Users\YUUKI\Documents\MinecraftAutoBackup\.minecraft\sWorld\202102192024]
+2021/02/19-20:59:10 [INFO ]: tar[C:\Users\YUUKI\AppData\Roaming\.minecraft\saves\sWorld]
+2021/02/19-20:59:10 [INFO ]:restore from backup
+2021/02/19-20:59:10 [INFO ]:option:dont over writing [True],remove backup [False]
+2021/02/19-21:00:14 [INFO ]:call:removeListView
+2021/02/19-21:00:16 [INFO ]:call:addListView
+2021/02/19-21:00:16 [INFO ]:sWorld(1)の一覧以下のパスからロードします
+2021/02/19-21:00:16 [INFO ]:path:C:\Users\YUUKI\AppData\Roaming\.minecraft\saves\sWorld(1)
+2021/02/19-21:00:16 [INFO ]:backupFolderCount[4]
+2021/02/19-21:00:18 [INFO ]:call:Menu_Opening
+2021/02/19-21:00:18 [INFO ]:ListViewItem: {2021-02-19 20:24}
+2021/02/19-21:00:18 [INFO ]:sWorld(1)
+2021/02/19-21:00:18 [INFO ]:(Boolean)True
+2021/02/19-21:00:20 [INFO ]:call:ReturnBackup_Click
+2021/02/19-21:00:20 [INFO ]:(Boolean)True
+2021/02/19-21:00:20 [INFO ]:src[C:\Users\YUUKI\Documents\MinecraftAutoBackup\.minecraft\sWorld(1)\202102192024]
+2021/02/19-21:00:20 [INFO ]:tar[C:\Users\YUUKI\AppData\Roaming\.minecraft\saves\sWorld(1)]
+2021/02/19-21:00:20 [INFO ]:C:\Users\YUUKI\Documents\MinecraftAutoBackup\.minecraft\sWorld(1)\202102192024をC:\Users\YUUKI\AppData\Roaming\.minecraft\saves\sWorld(1)に上書きします
+2021/02/19-21:00:26 [INFO ]: src[C:\Users\YUUKI\Documents\MinecraftAutoBackup\.minecraft\sWorld(1)\202102192024]
+2021/02/19-21:00:26 [INFO ]: tar[C:\Users\YUUKI\AppData\Roaming\.minecraft\saves\sWorld(1)]
+2021/02/19-21:00:26 [INFO ]:restore from backup
+2021/02/19-21:00:26 [INFO ]:option:dont over writing [True],remove backup [False]
+2021/02/19-21:19:00 [INFO ]:終了時処理を開始します
+2021/02/19-21:19:00 [INFO ]: Writing C:\Users\YUUKI\Documents\MinecraftAutoBackup
+Meiryo UI
+normal
+ja
+600
+600
+0
+0
+5
+2021/02/20-17:24:35 [INFO ]:-----起動時処理-------
+2021/02/20-17:24:35 [INFO ]:-----loaded appConfig-----
+2021/02/20-17:24:35 [INFO ]:backupPath:C:\Users\YUUKI\Documents\MinecraftAutoBackup
+2021/02/20-17:24:35 [INFO ]:font:[Font: Name=Meiryo UI, Size=11, Units=3, GdiCharSet=1, GdiVerticalFont=False]
+2021/02/20-17:24:35 [INFO ]:dozip:False
+2021/02/20-17:24:35 [INFO ]:clientSize:600,600
+2021/02/20-17:24:35 [INFO ]:clientPoint:0,0
+2021/02/20-17:24:35 [INFO ]:backupCount:5
+2021/02/20-17:24:35 [INFO ]:--------------------------
+2021/02/20-17:24:35 [INFO ]:call:LoadConfigToApp
+2021/02/20-17:24:35 [INFO ]:Configから24件のワールドを読み込みました
+2021/02/20-17:24:35 [INFO ]:call:reloadConfig
+2021/02/20-17:24:35 [INFO ]:call:GetWorldDataFromPC
+2021/02/20-17:24:35 [INFO ]:----------------------
+2021/02/20-17:24:35 [INFO ]:call: GetBackups
+2021/02/20-17:24:35 [INFO ]:dir:6, worlds:24, backups:105
+2021/02/20-17:24:35 [INFO ]:24件のワールドのバックアップを読み込みます
+2021/02/20-17:24:40 [INFO ]:終了時処理を開始します
+2021/02/20-17:24:40 [INFO ]: Writing C:\Users\YUUKI\Documents\MinecraftAutoBackup
+Meiryo UI
+normal
+ja
+600
+600
+0
+0
+5
