@@ -76,6 +76,7 @@ namespace MABProcessAtWait {
         string backupDataPath;
         NotifyIcon notifyIcon;
         bool isRunning = false;
+        Task backupTask;
 
         public Form1() {
             backupDataPath = AppConfig.BackupPath;
@@ -102,7 +103,13 @@ namespace MABProcessAtWait {
         }
 
         void Close_Click(object sender, EventArgs e) {
-            Logger.Info("アプリケーションが終了しました");
+            if ((backupTask == null) || (backupTask.IsCompleted)) {
+                Logger.Info("アプリケーションが終了しました");
+            }
+            else {
+                Logger.Warn("アプリケーションが強制終了しました");
+            }
+            
             notifyIcon.Visible = false;
             notifyIcon.Dispose();
             Application.Exit();
@@ -135,7 +142,7 @@ namespace MABProcessAtWait {
                 exit.Click += new EventHandler(Close_Click);
                 menu.Items.Add(exit);
                 notifyIcon.ContextMenuStrip = menu;
-                Task t = Task.Run(() => {
+                backupTask = Task.Run(() => {
                     DoBackupProcess();
                 });
             }
@@ -225,6 +232,7 @@ namespace MABProcessAtWait {
             timer.Enabled = true;
             notifyIcon.Icon = new Icon(".\\Image\\app_sub.ico");
             notifyIcon.Text = "MAB待機モジュール";
+            notifyIcon.ContextMenu.MenuItems[0].Text = "終了";
         }
 
         //バックアップをするワールドデータのパスを配列にして返す
