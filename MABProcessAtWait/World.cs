@@ -20,10 +20,6 @@ namespace MABProcessAtWait {
         public string WDir { get; set; }
         public bool isAlive { get; set; }
         public World(string path) {
-            //if (!Directory.Exists(path)) {
-            //    Logger.Info($"不正なpath[{path}]が渡されました");
-            //    return;
-            //}
             WDoBackup = true;
             WPath = path;
             WName = Path.GetFileName(path);
@@ -32,10 +28,6 @@ namespace MABProcessAtWait {
         }
 
         public World(string path, bool doBackup, bool _isAlive) {
-            //if (!Directory.Exists(path)) {
-            //    Logger.Info($"不正なpath[{path}]が渡されました");
-            //    return;
-            //}
             WDoBackup = doBackup;
             WPath = path;
             WName = Path.GetFileName(path);

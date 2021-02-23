@@ -7,6 +7,8 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Windows.Forms;
+using System.Threading;
+using System.Threading.Tasks;
 
 /*
  フォルダ構成
@@ -33,6 +35,7 @@ namespace MABProcessAtWait {
             // https://dobon.net/vb/dotnet/process/checkprevinstance.html
             //Mutex名を決める（必ずアプリケーション固有の文字列に変更すること！）
             string mutexName = "MABProcess";
+
             //Mutexオブジェクトを作成する
             System.Threading.Mutex mutex = new System.Threading.Mutex(false, mutexName);
 
@@ -84,7 +87,7 @@ namespace MABProcessAtWait {
                 Enabled = true
             };
             timer.Interval = 1000;
-            timer.Tick += new EventHandler(timer_Tick);
+            timer.Tick += new EventHandler(Timer_Tick);
 
             notifyIcon = new NotifyIcon();
             notifyIcon.Icon = new Icon(".\\Image\\app_sub.ico");
@@ -111,7 +114,7 @@ namespace MABProcessAtWait {
             notifyIcon.Dispose();
         }
 
-        void timer_Tick(object sender, EventArgs e) {
+        void Timer_Tick(object sender, EventArgs e) {
             // lancherが起動してない場合 => 何もしない
             // lancherが起動していてflagがfalse => flagをtrueにしてバックアップ動作
             // lancherが起動していてflagがtrue => 何もしない
@@ -123,9 +126,8 @@ namespace MABProcessAtWait {
                 isRunning = true;
                 Logger.Info("Minecraft Lancherの起動を検知しました");
                 Logger.Info("isRunningがfalseに設定されていました");
-                Logger.Info("バックアッププロセスを始めます");
+
                 notifyIcon.Icon = new Icon(".\\Image\\app_sub_doing.ico");
-                int backupCount = 0;
                 ContextMenuStrip menu = new ContextMenuStrip();
                 ToolStripMenuItem exit = new ToolStripMenuItem() {
                     Text = "強制終了",
@@ -133,89 +135,96 @@ namespace MABProcessAtWait {
                 exit.Click += new EventHandler(Close_Click);
                 menu.Items.Add(exit);
                 notifyIcon.ContextMenuStrip = menu;
-
-                List<string> worldPasses = GetWorldPasses();// バックアップをするワールドへのパス一覧
-                string nowTime = DateTime.Now.ToString("yyyyMMddHHmm");
-                if (worldPasses.Count == 0) {
-                    Logger.Info("どうやらバックアップ予定のデータはないようです");
-                }
-
-                notifyIcon.Text = $"{backupCount}/{worldPasses.Count}";
-
-                foreach (string worldPath in worldPasses) {
-                    notifyIcon.Text = $"{backupCount++}/{worldPasses.Count}";
-                    //前回のリロードとバックアップまでの間にワールドが消された場合
-                    string backupPath = backupDataPath + "\\" + Path.GetFileName(Directory.GetParent(Directory.GetParent(worldPath).ToString()).ToString()) + "\\" + Path.GetFileName(worldPath) + "\\" + nowTime;
-                    string worldBackupPath = backupDataPath + "\\" + Path.GetFileName(Directory.GetParent(Directory.GetParent(worldPath).ToString()).ToString()) + "\\" + Path.GetFileName(worldPath);
-                    try { doBackup(worldPath, nowTime); }
-                    catch (DirectoryNotFoundException dnfe) {
-
-                        Console.Error.WriteLine(worldPath + ":DirectoryNotFoundException : " + dnfe.Message);
-                        if (!Directory.Exists(worldPath)) {
-                            DialogResult r = MessageBox.Show(
-                            $"バックアップ予定のワールドデータ[{Path.GetFileName(worldPath)}]が見つかりませんでした。",
-                            "Minecraft Auto Backup",
-                            MessageBoxButtons.OK);
-                        }
-                    }
-
-                    //バックアップ超過分削除
-                    if (AppConfig.BackupCount != "無制限") {
-                        if (Directory.GetFileSystemEntries(worldBackupPath).ToList().Count() > int.Parse(AppConfig.BackupCount)) {
-                            Logger.Info($"{worldBackupPath}のバックアップ数({Directory.GetFileSystemEntries(worldBackupPath).ToList().Count()})が超過している(AppConfig:{int.Parse(AppConfig.BackupCount)})ので削除処理に移ります");
-                            //バックアップ数がappconfig.backupCountより多い場合超過分を削除する
-                            List<string> backups = Directory.GetFileSystemEntries(worldBackupPath)
-                                .OrderByDescending(filePath => File.GetLastWriteTime(filePath).Date)
-                                .ThenByDescending(filePath => File.GetLastWriteTime(filePath).TimeOfDay).ToList();
-                            Logger.Debug($"buckups count: {backups.Count()}");
-                            foreach (string s in backups) {
-                                Logger.Debug($"backups:[{s}]");
-                            }
-                            List<string> deleteBackups = new List<string>();
-                            for (int i = int.Parse(AppConfig.BackupCount); i < backups.Count(); i++) {
-                                Logger.Info($"{backups[i]}を削除します");
-
-                                //zipファイルかどうか判定
-                                if (backups[i].Contains(".zip")) {
-                                    //zipファイルの場合
-                                    try { File.Delete(backups[i]); }
-                                    catch (Exception exc) {
-                                        Logger.Error($"{backups[i]}");
-                                        Logger.Error($"{exc.Message}");
-                                        Logger.Error($"{exc.StackTrace}");
-                                    }
-                                }
-                                else {
-                                    //ディレクトリの場合
-                                    try { Directory.Delete(backups[i], true); }
-                                    catch (Exception exc) {
-                                        Logger.Error($"{backups[i]}");
-                                        Logger.Error($"{exc.Message}");
-                                        Logger.Error($"{exc.StackTrace}");
-                                    }
-                                }
-
-                            }
-                        }
-                        else {
-                            Logger.Info($"{worldBackupPath}({Directory.GetFileSystemEntries(worldBackupPath).ToList().Count()})の超過分(AppConfig:{int.Parse(AppConfig.BackupCount)})は発見されませんでした");
-                        }
-                    }
-                    //バックアップ保持数を調整
-
-                }
-                Config.ReloadConfig();
-                Logger.Info("全バックアップが完了しました ");
-
-                timer.Enabled = true;
-                notifyIcon.Icon = new Icon(".\\Image\\app_sub.ico");
-                notifyIcon.Text = "MAB待機モジュール";
+                Task t = Task.Run(() => {
+                    DoBackupProcess();
+                });
             }
             else if (!(Process.GetProcessesByName("MinecraftLauncher").Length > 0) && isRunning) {
                 Logger.Info("ランチャーの停止を検知しました");
                 Logger.Info("isRunningにfalseを設定します");
                 isRunning = false;
             }
+        }
+
+        private void DoBackupProcess() {
+            Logger.Info("バックアッププロセスを始めます");
+            int backupCount = 0;
+
+            List<string> worldPasses = GetWorldPasses();// バックアップをするワールドへのパス一覧
+            string nowTime = DateTime.Now.ToString("yyyyMMddHHmm");
+            if (worldPasses.Count == 0) {
+                Logger.Info("どうやらバックアップ予定のデータはないようです");
+            }
+
+            notifyIcon.Text = $"{backupCount}/{worldPasses.Count}";
+
+            foreach (string worldPath in worldPasses) {
+                notifyIcon.Text = $"{backupCount++}/{worldPasses.Count}";
+                //前回のリロードとバックアップまでの間にワールドが消された場合
+                string backupPath = backupDataPath + "\\" + Path.GetFileName(Directory.GetParent(Directory.GetParent(worldPath).ToString()).ToString()) + "\\" + Path.GetFileName(worldPath) + "\\" + nowTime;
+                string worldBackupPath = backupDataPath + "\\" + Path.GetFileName(Directory.GetParent(Directory.GetParent(worldPath).ToString()).ToString()) + "\\" + Path.GetFileName(worldPath);
+                try { DoBackup(worldPath, nowTime); }
+                catch (DirectoryNotFoundException dnfe) {
+
+                    Console.Error.WriteLine(worldPath + ":DirectoryNotFoundException : " + dnfe.Message);
+                    if (!Directory.Exists(worldPath)) {
+                        DialogResult r = MessageBox.Show(
+                        $"バックアップ予定のワールドデータ[{Path.GetFileName(worldPath)}]が見つかりませんでした。",
+                        "Minecraft Auto Backup",
+                        MessageBoxButtons.OK);
+                    }
+                }
+
+                //バックアップ超過分削除
+                if (AppConfig.BackupCount != "無制限") {
+                    if (Directory.GetFileSystemEntries(worldBackupPath).ToList().Count() > int.Parse(AppConfig.BackupCount)) {
+                        Logger.Info($"{worldBackupPath}のバックアップ数({Directory.GetFileSystemEntries(worldBackupPath).ToList().Count()})が超過している(AppConfig:{int.Parse(AppConfig.BackupCount)})ので削除処理に移ります");
+                        //バックアップ数がappconfig.backupCountより多い場合超過分を削除する
+                        List<string> backups = Directory.GetFileSystemEntries(worldBackupPath)
+                            .OrderByDescending(filePath => File.GetLastWriteTime(filePath).Date)
+                            .ThenByDescending(filePath => File.GetLastWriteTime(filePath).TimeOfDay).ToList();
+                        Logger.Debug($"buckups count: {backups.Count()}");
+                        foreach (string s in backups) {
+                            Logger.Debug($"backups:[{s}]");
+                        }
+                        List<string> deleteBackups = new List<string>();
+                        for (int i = int.Parse(AppConfig.BackupCount); i < backups.Count(); i++) {
+                            Logger.Info($"{backups[i]}を削除します");
+
+                            //zipファイルかどうか判定
+                            if (backups[i].Contains(".zip")) {
+                                //zipファイルの場合
+                                try { File.Delete(backups[i]); }
+                                catch (Exception exc) {
+                                    Logger.Error($"{backups[i]}");
+                                    Logger.Error($"{exc.Message}");
+                                    Logger.Error($"{exc.StackTrace}");
+                                }
+                            }
+                            else {
+                                //ディレクトリの場合
+                                try { Directory.Delete(backups[i], true); }
+                                catch (Exception exc) {
+                                    Logger.Error($"{backups[i]}");
+                                    Logger.Error($"{exc.Message}");
+                                    Logger.Error($"{exc.StackTrace}");
+                                }
+                            }
+
+                        }
+                    }
+                    else {
+                        Logger.Info($"{worldBackupPath}({Directory.GetFileSystemEntries(worldBackupPath).ToList().Count()})の超過分(AppConfig:{int.Parse(AppConfig.BackupCount)})は発見されませんでした");
+                    }
+                }
+
+            }
+            Config.ReloadConfig();
+            Logger.Info("全バックアップが完了しました ");
+
+            timer.Enabled = true;
+            notifyIcon.Icon = new Icon(".\\Image\\app_sub.ico");
+            notifyIcon.Text = "MAB待機モジュール";
         }
 
         //バックアップをするワールドデータのパスを配列にして返す
@@ -232,7 +241,7 @@ namespace MABProcessAtWait {
             return worldPasses;
         }
 
-        void doBackup(string path, string Time) {
+        void DoBackup(string path, string Time) {
             string backupPath = backupDataPath + "\\" + Path.GetFileName(Directory.GetParent(Directory.GetParent(path).ToString()).ToString()) + "\\" + Path.GetFileName(path) + "\\" + Time;
             string worldBackupPath = backupDataPath + "\\" + Path.GetFileName(Directory.GetParent(Directory.GetParent(path).ToString()).ToString()) + "\\" + Path.GetFileName(path);
             if (AppConfig.DoZip)

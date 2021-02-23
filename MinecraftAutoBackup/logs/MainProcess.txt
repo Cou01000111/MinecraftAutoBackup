@@ -812,3 +812,68 @@ ja
 0
 0
 5
+2021/02/22-20:16:39 [INFO ]:-----起動時処理-------
+2021/02/22-20:16:39 [INFO ]:-----loaded appConfig-----
+2021/02/22-20:16:39 [INFO ]:backupPath:C:\Users\YUUKI\Documents\MinecraftAutoBackup
+2021/02/22-20:16:39 [INFO ]:font:[Font: Name=Meiryo UI, Size=11, Units=3, GdiCharSet=1, GdiVerticalFont=False]
+2021/02/22-20:16:39 [INFO ]:dozip:False
+2021/02/22-20:16:39 [INFO ]:clientSize:600,600
+2021/02/22-20:16:39 [INFO ]:clientPoint:0,0
+2021/02/22-20:16:39 [INFO ]:backupCount:5
+2021/02/22-20:16:39 [INFO ]:--------------------------
+2021/02/22-20:16:39 [INFO ]:configファイルがないのでconfigファイルを作成します
+2021/02/22-20:16:39 [INFO ]:call:MakeConfig
+2021/02/22-20:16:39 [INFO ]:configファイル[.\Config\config.txt]生成完了
+2021/02/22-20:16:39 [INFO ]:call:GetWorldDataFromPC
+2021/02/22-20:16:39 [INFO ]:world[buildinng]を発見しました
+2021/02/22-20:16:39 [INFO ]:world[commanding (1)]を発見しました
+2021/02/22-20:16:39 [INFO ]:world[sWorld(1)(1)]を発見しました
+2021/02/22-20:16:39 [INFO ]:world[The Unusual SkyBlock v12.0.9]を発見しました
+2021/02/22-20:16:39 [INFO ]:world[The Unusual SkyBlock v12.0.9 - コピー]を発見しました
+2021/02/22-20:16:39 [INFO ]:world[The Unusual SkyBlock v9.1.4]を発見しました
+2021/02/22-20:16:39 [INFO ]:world[The Unusual SkyBlock v9.1.4 - コピー]を発見しました
+2021/02/22-20:16:39 [INFO ]:world[The Water SkyBlock ver2.2.3]を発見しました
+2021/02/22-20:16:39 [INFO ]:world[a]を発見しました
+2021/02/22-20:16:39 [INFO ]:world[The Water SkyBlock ver3.1.2]を発見しました
+2021/02/22-20:16:39 [INFO ]:world[The Water SkyBlock ver3.1.3b]を発見しました
+2021/02/22-20:16:39 [INFO ]:world[新規ワールド]を発見しました
+2021/02/22-20:16:39 [INFO ]:world[検証用ワールド]を発見しました
+2021/02/22-20:16:39 [INFO ]:world[適当建築]を発見しました
+2021/02/22-20:16:39 [INFO ]:world[test]を発見しました
+2021/02/22-20:16:39 [INFO ]:world[The Water SkyBlock ver2.2.3]を発見しました
+2021/02/22-20:16:39 [INFO ]:world[Rare Species SkyBlock ii Beta2.2.2 (1)]を発見しました
+2021/02/22-20:16:39 [INFO ]:world[Rare Species SkyBlock ii Beta2.2.2 (1)]を発見しました
+2021/02/22-20:16:39 [INFO ]:world[新規ワールド]を発見しました
+2021/02/22-20:16:39 [INFO ]:world[新規ワールド-]を発見しました
+2021/02/22-20:16:39 [INFO ]:world[新規ワールド--]を発見しました
+2021/02/22-20:16:39 [INFO ]:----------------------
+2021/02/22-20:16:39 [INFO ]:call: GetBackups
+2021/02/22-20:16:39 [INFO ]:dir:6, worlds:26, backups:107
+2021/02/22-20:16:39 [INFO ]:21件のワールドのバックアップを読み込みます
+2021/02/22-20:16:44 [INFO ]:call:addListView
+2021/02/22-20:16:44 [INFO ]:sWorld(1)(1)の一覧以下のパスからロードします
+2021/02/22-20:16:44 [INFO ]:path:C:\Users\YUUKI\AppData\Roaming\.minecraft\saves\sWorld(1)(1)
+2021/02/22-20:16:44 [INFO ]:backupFolderCount[1]
+2021/02/22-20:16:46 [INFO ]:call:Menu_Opening
+2021/02/22-20:16:46 [INFO ]:ListViewItem: {2021-02-20 17:24}
+2021/02/22-20:16:46 [INFO ]:sWorld(1)(1)
+2021/02/22-20:16:46 [INFO ]:(Boolean)True
+2021/02/22-20:16:48 [INFO ]:call:ReturnBackup_Click
+2021/02/22-20:16:48 [INFO ]:(Boolean)True
+2021/02/22-20:16:48 [INFO ]:src[C:\Users\YUUKI\Documents\MinecraftAutoBackup\.minecraft\sWorld(1)(1)\202102201724]
+2021/02/22-20:16:48 [INFO ]:tar[C:\Users\YUUKI\AppData\Roaming\.minecraft\saves\sWorld(1)(1)]
+2021/02/22-20:16:48 [INFO ]:C:\Users\YUUKI\Documents\MinecraftAutoBackup\.minecraft\sWorld(1)(1)\202102201724をC:\Users\YUUKI\AppData\Roaming\.minecraft\saves\sWorld(1)(1)に上書きします
+2021/02/22-20:16:49 [INFO ]: src[C:\Users\YUUKI\Documents\MinecraftAutoBackup\.minecraft\sWorld(1)(1)\202102201724]
+2021/02/22-20:16:49 [INFO ]: tar[C:\Users\YUUKI\AppData\Roaming\.minecraft\saves\sWorld(1)(1)]
+2021/02/22-20:16:49 [INFO ]:restore from backup
+2021/02/22-20:16:49 [INFO ]:option:dont over writing [True],remove backup [False]
+2021/02/22-20:18:37 [INFO ]:終了時処理を開始します
+2021/02/22-20:18:37 [INFO ]: Writing C:\Users\YUUKI\Documents\MinecraftAutoBackup
+Meiryo UI
+normal
+ja
+600
+600
+0
+0
+5
