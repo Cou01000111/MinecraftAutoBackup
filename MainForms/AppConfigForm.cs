@@ -13,6 +13,7 @@ internal class AppConfigForm :Form {
     TabControl tab = new TabControl();
     TabPage backupTab = new TabPage();
     TabPage fontTab = new TabPage();
+    TabPage startupTab = new TabPage();
 
     FlowLayoutPanel backupTabF = new FlowLayoutPanel();
     Label backupPath = new Label();
@@ -35,6 +36,9 @@ internal class AppConfigForm :Form {
     Button ok = new Button();
     Button cansel = new Button();
 
+    FlowLayoutPanel startupTabF = new FlowLayoutPanel();
+    Button addStartup = new Button();
+
 
     public AppConfigForm() {
 
@@ -45,7 +49,10 @@ internal class AppConfigForm :Form {
         backupTab.Controls.Add(backupTabF);
         fontTabF.Controls.AddRange(new Control[] { fontName, fontChange });
         fontTab.Controls.Add(fontTabF);
-        tab.Controls.AddRange(new Control[] { backupTab, fontTab });
+        startupTabF.Controls.AddRange(new Control[] { addStartup });
+        startupTab.Controls.Add(startupTabF);
+
+        tab.Controls.AddRange(new Control[] { backupTab, fontTab, startupTab });
         this.Controls.Add(tab);
         okCanselFlowPanel.Controls.AddRange(new Control[] { cansel, ok });
         this.Controls.Add(okCanselFlowPanel);
@@ -64,12 +71,15 @@ internal class AppConfigForm :Form {
         tab.Location = new Point(10, 10);
         backupTab.BackColor = SystemColors.Window;
         fontTab.BackColor = SystemColors.Window;
+        startupTab.BackColor = SystemColors.Window;
+        
         okCanselFlowPanel.Dock = DockStyle.Bottom;
         okCanselFlowPanel.Height = 40;
         okCanselFlowPanel.FlowDirection = FlowDirection.RightToLeft;
 
-        backupTab.Text = AppConfig.Language == "ja" ? "バックアップ" : "backup";
-        fontTab.Text = AppConfig.Language == "ja" ? "フォント" : "font";
+        backupTab.Text =  "バックアップ";
+        fontTab.Text =  "フォント";
+        startupTab.Text =  "スタートアップに追加";
 
         backupPath.Text = "バックアップの保存先";
         backupPath.AutoSize = true;
@@ -121,6 +131,7 @@ internal class AppConfigForm :Form {
         addGameDir.Text = "ゲームディレクトリを手動で追加する";
         addGameDir.AutoSize = true;
         addGameDir.Click += new EventHandler(addGameDir_Click);
+        addGameDir.UseVisualStyleBackColor = true;
 
         fontName.Text = $"フォント名 :  {Util.FontStyle.Name}";
         fontName.AutoSize = true;
@@ -129,6 +140,19 @@ internal class AppConfigForm :Form {
         fontChange.AutoSize = true;
         fontChange.BackColor = SystemColors.Control;
         fontChange.Click += new EventHandler(fontChange_Click);
+        fontChange.UseVisualStyleBackColor = true;
+
+        startupTabF.Padding = new Padding(8);
+        startupTabF.Dock = DockStyle.Fill;
+        startupTabF.WrapContents = false;
+        startupTabF.FlowDirection = FlowDirection.TopDown;
+        startupTabF.Height = 20;
+
+        addStartup.Text = "スタートアップに登録する";
+        addStartup.AutoSize = true;
+        addStartup.BackColor = SystemColors.Control;
+        addStartup.Click += new EventHandler(fontChange_Click);
+        addStartup.UseVisualStyleBackColor = true;
 
         ok.Text = "OK";
         ok.Width = 96;

@@ -4,7 +4,6 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-#region tab backup
 class BackupDataPanel :FlowLayoutPanel {
     private Label backupDataDir;
     private BackupDataListView backupDataList;

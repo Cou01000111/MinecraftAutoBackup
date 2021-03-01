@@ -1,5 +1,4 @@
 ﻿using System.Windows.Forms;
-#region tab backup
 
 class AddInfoButton :Button {
     public int id { get; set; }

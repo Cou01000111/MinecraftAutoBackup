@@ -877,3 +877,918 @@ ja
 0
 0
 5
+2021/02/23-21:42:51 [INFO ]:-----起動時処理-------
+2021/02/23-21:42:51 [INFO ]:-----loaded appConfig-----
+2021/02/23-21:42:51 [INFO ]:backupPath:C:\Users\YUUKI\Documents\MinecraftAutoBackup
+2021/02/23-21:42:51 [INFO ]:font:[Font: Name=Meiryo UI, Size=11, Units=3, GdiCharSet=1, GdiVerticalFont=False]
+2021/02/23-21:42:51 [INFO ]:dozip:False
+2021/02/23-21:42:51 [INFO ]:clientSize:600,600
+2021/02/23-21:42:51 [INFO ]:clientPoint:0,0
+2021/02/23-21:42:51 [INFO ]:backupCount:5
+2021/02/23-21:42:51 [INFO ]:--------------------------
+2021/02/23-21:42:51 [INFO ]:configファイルがないのでconfigファイルを作成します
+2021/02/23-21:42:55 [INFO ]:call:MakeConfig
+2021/02/23-21:42:55 [INFO ]:configファイル[.\Config\config.txt]生成完了
+2021/02/23-21:42:55 [INFO ]:call:GetWorldDataFromPC
+2021/02/23-21:42:55 [INFO ]:world[buildinng]を発見しました
+2021/02/23-21:42:55 [INFO ]:world[commanding (1)]を発見しました
+2021/02/23-21:42:55 [INFO ]:world[sWorld(1)(1)]を発見しました
+2021/02/23-21:42:55 [INFO ]:world[sWorld(1)(1)(1)]を発見しました
+2021/02/23-21:42:55 [INFO ]:world[The Unusual SkyBlock v9.1.4]を発見しました
+2021/02/23-21:42:55 [INFO ]:world[The Unusual SkyBlock v9.1.4 - コピー]を発見しました
+2021/02/23-21:42:55 [INFO ]:world[The Water SkyBlock ver2.2.3]を発見しました
+2021/02/23-21:42:55 [INFO ]:world[a]を発見しました
+2021/02/23-21:42:55 [INFO ]:world[The Water SkyBlock ver3.1.2]を発見しました
+2021/02/23-21:42:55 [INFO ]:world[The Water SkyBlock ver3.1.3b]を発見しました
+2021/02/23-21:42:55 [INFO ]:world[新規ワールド]を発見しました
+2021/02/23-21:42:55 [INFO ]:world[検証用ワールド]を発見しました
+2021/02/23-21:42:55 [INFO ]:world[適当建築]を発見しました
+2021/02/23-21:42:55 [INFO ]:world[test]を発見しました
+2021/02/23-21:42:55 [INFO ]:world[The Unusual SkyBlock v12.0.9]を発見しました
+2021/02/23-21:42:55 [INFO ]:world[The Unusual SkyBlock v12.0.9 - コピー]を発見しました
+2021/02/23-21:42:55 [INFO ]:world[The Water SkyBlock ver2.2.3]を発見しました
+2021/02/23-21:42:55 [INFO ]:world[Rare Species SkyBlock ii Beta2.2.2 (1)]を発見しました
+2021/02/23-21:42:55 [INFO ]:world[Rare Species SkyBlock ii Beta2.2.2 (1)]を発見しました
+2021/02/23-21:42:55 [INFO ]:world[新規ワールド]を発見しました
+2021/02/23-21:42:55 [INFO ]:world[新規ワールド-]を発見しました
+2021/02/23-21:42:55 [INFO ]:world[新規ワールド--]を発見しました
+2021/02/23-21:42:55 [INFO ]:----------------------
+2021/02/23-21:42:55 [INFO ]:call: GetBackups
+2021/02/23-21:42:55 [INFO ]:dir:6, worlds:29, backups:137
+2021/02/23-21:42:55 [INFO ]:22件のワールドのバックアップを読み込みます
+2021/02/23-21:42:57 [INFO ]:終了時処理を開始します
+2021/02/23-21:42:57 [INFO ]: Writing C:\Users\YUUKI\Documents\MinecraftAutoBackup
+Meiryo UI
+normal
+ja
+600
+600
+0
+0
+5
+2021/02/23-21:57:52 [INFO ]:-----起動時処理-------
+2021/02/23-21:57:52 [INFO ]:-----loaded appConfig-----
+2021/02/23-21:57:52 [INFO ]:backupPath:C:\Users\YUUKI\Documents\MinecraftAutoBackup
+2021/02/23-21:57:52 [INFO ]:font:[Font: Name=Meiryo UI, Size=11, Units=3, GdiCharSet=1, GdiVerticalFont=False]
+2021/02/23-21:57:52 [INFO ]:dozip:False
+2021/02/23-21:57:52 [INFO ]:clientSize:600,600
+2021/02/23-21:57:52 [INFO ]:clientPoint:0,0
+2021/02/23-21:57:52 [INFO ]:backupCount:5
+2021/02/23-21:57:52 [INFO ]:--------------------------
+2021/02/23-21:57:52 [INFO ]:call:LoadConfigToApp
+2021/02/23-21:57:52 [INFO ]:Configから22件のワールドを読み込みました
+2021/02/23-21:57:52 [INFO ]:call:reloadConfig
+2021/02/23-21:57:52 [INFO ]:call:GetWorldDataFromPC
+2021/02/23-21:57:52 [INFO ]:----------------------
+2021/02/23-21:57:53 [INFO ]:call: GetBackups
+2021/02/23-21:57:53 [INFO ]:dir:6, worlds:29, backups:135
+2021/02/23-21:57:53 [INFO ]:22件のワールドのバックアップを読み込みます
+2021/02/23-21:58:36 [INFO ]:dozip[False]
+2021/02/23-22:00:57 [INFO ]:call:addListView
+2021/02/23-22:00:57 [INFO ]:buildinngの一覧以下のパスからロードします
+2021/02/23-22:00:57 [INFO ]:path:C:\Users\YUUKI\AppData\Roaming\.minecraft\saves\buildinng
+2021/02/23-22:00:57 [INFO ]:backupFolderCount[5]
+2021/02/23-22:00:59 [INFO ]:call:Menu_Opening
+2021/02/23-22:00:59 [INFO ]:ListViewItem: {2021-02-23 21:43}
+2021/02/23-22:00:59 [INFO ]:buildinng
+2021/02/23-22:00:59 [INFO ]:(Boolean)True
+2021/02/23-22:01:10 [INFO ]:call:Menu_Opening
+2021/02/23-22:01:10 [INFO ]:ListViewItem: {2021-02-23 15:52}
+2021/02/23-22:01:10 [INFO ]:buildinng
+2021/02/23-22:01:10 [INFO ]:(Boolean)True
+2021/02/23-22:01:26 [INFO ]:call:Menu_Opening
+2021/02/23-22:01:26 [INFO ]:ListViewItem: {2021-02-23 15:52}
+2021/02/23-22:01:26 [INFO ]:buildinng
+2021/02/23-22:01:26 [INFO ]:(Boolean)True
+2021/02/23-22:01:28 [INFO ]:call:ReturnBackup_Click
+2021/02/23-22:01:28 [INFO ]:(Boolean)True
+2021/02/23-22:01:28 [INFO ]:src[C:\Users\YUUKI\Documents\MinecraftAutoBackup\.minecraft\buildinng\202102231552]
+2021/02/23-22:01:28 [INFO ]:tar[C:\Users\YUUKI\AppData\Roaming\.minecraft\saves\buildinng]
+2021/02/23-22:01:28 [INFO ]:C:\Users\YUUKI\Documents\MinecraftAutoBackup\.minecraft\buildinng\202102231552をC:\Users\YUUKI\AppData\Roaming\.minecraft\saves\buildinngに上書きします
+2021/02/23-22:01:55 [INFO ]:終了時処理を開始します
+2021/02/23-22:01:55 [INFO ]: Writing C:\Users\YUUKI\Documents\MinecraftAutoBackup
+Meiryo UI
+normal
+ja
+706
+702
+0
+0
+5
+2021/02/24-01:46:00 [INFO ]:-----起動時処理-------
+2021/02/24-01:46:00 [INFO ]:-----loaded appConfig-----
+2021/02/24-01:46:00 [INFO ]:backupPath:C:\Users\YUUKI\Documents\MinecraftAutoBackup
+2021/02/24-01:46:00 [INFO ]:font:[Font: Name=Meiryo UI, Size=11, Units=3, GdiCharSet=1, GdiVerticalFont=False]
+2021/02/24-01:46:00 [INFO ]:dozip:False
+2021/02/24-01:46:00 [INFO ]:clientSize:706,702
+2021/02/24-01:46:00 [INFO ]:clientPoint:0,0
+2021/02/24-01:46:00 [INFO ]:backupCount:5
+2021/02/24-01:46:00 [INFO ]:--------------------------
+2021/02/24-01:46:00 [INFO ]:call:LoadConfigToApp
+2021/02/24-01:46:00 [INFO ]:Configから22件のワールドを読み込みました
+2021/02/24-01:46:00 [INFO ]:call:reloadConfig
+2021/02/24-01:46:00 [INFO ]:call:GetWorldDataFromPC
+2021/02/24-01:46:00 [INFO ]:----------------------
+2021/02/24-01:46:00 [INFO ]:call: GetBackups
+2021/02/24-01:46:00 [INFO ]:dir:6, worlds:29, backups:135
+2021/02/24-01:46:00 [INFO ]:22件のワールドのバックアップを読み込みます
+2021/02/24-01:46:02 [INFO ]:dozip[False]
+2021/02/24-01:48:45 [INFO ]:selectedItem[5]
+2021/02/24-01:48:45 [INFO ]: Writing C:\Users\YUUKI\Documents\MinecraftAutoBackup
+UD デジタル 教科書体 NK-R
+normal
+ja
+706
+702
+0
+0
+5
+2021/02/24-01:48:47 [INFO ]:dozip[False]
+2021/02/24-01:48:50 [INFO ]:selectedItem[5]
+2021/02/24-01:48:50 [INFO ]: Writing C:\Users\YUUKI\Documents\MinecraftAutoBackup
+UD デジタル 教科書体 NK-R
+normal
+ja
+706
+702
+0
+0
+5
+2021/02/24-01:48:52 [INFO ]:push ok
+2021/02/24-01:48:52 [INFO ]:call:Change
+2021/02/24-01:48:52 [INFO ]:GET  worldName: buildinng,  worldDir: .minecraft,  dobackup: True
+2021/02/24-01:48:52 [INFO ]:call:Change
+2021/02/24-01:48:52 [INFO ]:GET  worldName: commanding (1),  worldDir: .minecraft,  dobackup: True
+2021/02/24-01:48:52 [INFO ]:call:Change
+2021/02/24-01:48:52 [INFO ]:GET  worldName: sWorld(1)(1),  worldDir: .minecraft,  dobackup: True
+2021/02/24-01:48:52 [INFO ]:call:Change
+2021/02/24-01:48:52 [INFO ]:GET  worldName: sWorld(1)(1)(1),  worldDir: .minecraft,  dobackup: True
+2021/02/24-01:48:52 [INFO ]:call:Change
+2021/02/24-01:48:52 [INFO ]:GET  worldName: The Unusual SkyBlock v9.1.4,  worldDir: .minecraft,  dobackup: True
+2021/02/24-01:48:52 [INFO ]:call:Change
+2021/02/24-01:48:52 [INFO ]:GET  worldName: The Unusual SkyBlock v9.1.4 - コピー,  worldDir: .minecraft,  dobackup: True
+2021/02/24-01:48:52 [INFO ]:call:Change
+2021/02/24-01:48:52 [INFO ]:GET  worldName: The Water SkyBlock ver2.2.3,  worldDir: .minecraft,  dobackup: True
+2021/02/24-01:48:52 [INFO ]:call:Change
+2021/02/24-01:48:52 [INFO ]:GET  worldName: a,  worldDir: .minecraft-1.14.4-optifine,  dobackup: True
+2021/02/24-01:48:52 [INFO ]:call:Change
+2021/02/24-01:48:52 [INFO ]:GET  worldName: The Water SkyBlock ver3.1.2,  worldDir: .minecraft-1.14.4-optifine,  dobackup: True
+2021/02/24-01:48:52 [INFO ]:call:Change
+2021/02/24-01:48:52 [INFO ]:GET  worldName: The Water SkyBlock ver3.1.3b,  worldDir: .minecraft-1.14.4-optifine,  dobackup: True
+2021/02/24-01:48:52 [INFO ]:call:Change
+2021/02/24-01:48:52 [INFO ]:GET  worldName: 新規ワールド,  worldDir: .minecraft-1.14.4-optifine,  dobackup: True
+2021/02/24-01:48:52 [INFO ]:call:Change
+2021/02/24-01:48:52 [INFO ]:GET  worldName: 検証用ワールド,  worldDir: .minecraft-1.14.4-optifine,  dobackup: True
+2021/02/24-01:48:52 [INFO ]:call:Change
+2021/02/24-01:48:52 [INFO ]:GET  worldName: 適当建築,  worldDir: .minecraft-1.14.4-optifine,  dobackup: True
+2021/02/24-01:48:52 [INFO ]:call:Change
+2021/02/24-01:48:52 [INFO ]:GET  worldName: test,  worldDir: .minecraft_1.10.2,  dobackup: True
+2021/02/24-01:48:52 [INFO ]:call:Change
+2021/02/24-01:48:52 [INFO ]:GET  worldName: The Unusual SkyBlock v12.0.9,  worldDir: .minecraft_1.10.2,  dobackup: True
+2021/02/24-01:48:52 [INFO ]:call:Change
+2021/02/24-01:48:52 [INFO ]:GET  worldName: The Unusual SkyBlock v12.0.9 - コピー,  worldDir: .minecraft_1.10.2,  dobackup: True
+2021/02/24-01:48:52 [INFO ]:call:Change
+2021/02/24-01:48:52 [INFO ]:GET  worldName: The Water SkyBlock ver2.2.3,  worldDir: .minecraft_1.10.2,  dobackup: True
+2021/02/24-01:48:52 [INFO ]:call:Change
+2021/02/24-01:48:52 [INFO ]:GET  worldName: Rare Species SkyBlock ii Beta2.2.2 (1),  worldDir: .minecraft_1.9,  dobackup: True
+2021/02/24-01:48:52 [INFO ]:call:Change
+2021/02/24-01:48:52 [INFO ]:GET  worldName: Rare Species SkyBlock ii Beta2.2.2 (1),  worldDir: .minecraft_1.9 - コピー,  dobackup: True
+2021/02/24-01:48:52 [INFO ]:call:Change
+2021/02/24-01:48:52 [INFO ]:GET  worldName: 新規ワールド,  worldDir: .minecraft_forge1.12.2,  dobackup: True
+2021/02/24-01:48:52 [INFO ]:call:Change
+2021/02/24-01:48:52 [INFO ]:GET  worldName: 新規ワールド-,  worldDir: .minecraft_forge1.12.2,  dobackup: True
+2021/02/24-01:48:52 [INFO ]:call:Change
+2021/02/24-01:48:52 [INFO ]:GET  worldName: 新規ワールド--,  worldDir: .minecraft_forge1.12.2,  dobackup: True
+2021/02/24-01:48:52 [INFO ]:終了時処理を開始します
+2021/02/24-01:48:52 [INFO ]: Writing C:\Users\YUUKI\Documents\MinecraftAutoBackup
+UD デジタル 教科書体 NK-R
+normal
+ja
+706
+702
+0
+0
+5
+2021/02/24-01:48:54 [INFO ]:-----起動時処理-------
+2021/02/24-01:48:54 [INFO ]:-----loaded appConfig-----
+2021/02/24-01:48:54 [INFO ]:backupPath:C:\Users\YUUKI\Documents\MinecraftAutoBackup
+2021/02/24-01:48:54 [INFO ]:font:[Font: Name=UD デジタル 教科書体 NK-R, Size=11, Units=3, GdiCharSet=1, GdiVerticalFont=False]
+2021/02/24-01:48:54 [INFO ]:dozip:False
+2021/02/24-01:48:54 [INFO ]:clientSize:706,702
+2021/02/24-01:48:54 [INFO ]:clientPoint:0,0
+2021/02/24-01:48:54 [INFO ]:backupCount:5
+2021/02/24-01:48:54 [INFO ]:--------------------------
+2021/02/24-01:48:54 [INFO ]:call:LoadConfigToApp
+2021/02/24-01:48:54 [INFO ]:Configから22件のワールドを読み込みました
+2021/02/24-01:48:54 [INFO ]:call:reloadConfig
+2021/02/24-01:48:54 [INFO ]:call:GetWorldDataFromPC
+2021/02/24-01:48:54 [INFO ]:----------------------
+2021/02/24-01:48:54 [INFO ]:call: GetBackups
+2021/02/24-01:48:54 [INFO ]:dir:6, worlds:29, backups:135
+2021/02/24-01:48:54 [INFO ]:22件のワールドのバックアップを読み込みます
+2021/02/24-01:49:22 [INFO ]:dozip[False]
+2021/02/24-01:49:29 [INFO ]:selectedItem[5]
+2021/02/24-01:49:29 [INFO ]: Writing C:\Users\YUUKI\Documents\MinecraftAutoBackup
+MS UI Gothic
+normal
+ja
+706
+702
+0
+0
+5
+2021/02/24-01:49:31 [INFO ]:終了時処理を開始します
+2021/02/24-01:49:31 [INFO ]: Writing C:\Users\YUUKI\Documents\MinecraftAutoBackup
+MS UI Gothic
+normal
+ja
+543
+702
+0
+0
+5
+2021/02/24-01:49:32 [INFO ]:-----起動時処理-------
+2021/02/24-01:49:32 [INFO ]:-----loaded appConfig-----
+2021/02/24-01:49:32 [INFO ]:backupPath:C:\Users\YUUKI\Documents\MinecraftAutoBackup
+2021/02/24-01:49:32 [INFO ]:font:[Font: Name=MS UI Gothic, Size=11, Units=3, GdiCharSet=1, GdiVerticalFont=False]
+2021/02/24-01:49:32 [INFO ]:dozip:False
+2021/02/24-01:49:32 [INFO ]:clientSize:543,702
+2021/02/24-01:49:32 [INFO ]:clientPoint:0,0
+2021/02/24-01:49:32 [INFO ]:backupCount:5
+2021/02/24-01:49:32 [INFO ]:--------------------------
+2021/02/24-01:49:33 [INFO ]:call:LoadConfigToApp
+2021/02/24-01:49:33 [INFO ]:Configから22件のワールドを読み込みました
+2021/02/24-01:49:33 [INFO ]:call:reloadConfig
+2021/02/24-01:49:33 [INFO ]:call:GetWorldDataFromPC
+2021/02/24-01:49:33 [INFO ]:----------------------
+2021/02/24-01:49:33 [INFO ]:call: GetBackups
+2021/02/24-01:49:33 [INFO ]:dir:6, worlds:29, backups:135
+2021/02/24-01:49:33 [INFO ]:22件のワールドのバックアップを読み込みます
+2021/02/24-01:49:50 [INFO ]:dozip[False]
+2021/02/24-01:49:57 [INFO ]:selectedItem[5]
+2021/02/24-01:49:57 [INFO ]: Writing C:\Users\YUUKI\Documents\MinecraftAutoBackup
+ＭＳ ゴシック
+normal
+ja
+543
+702
+0
+0
+5
+2021/02/24-01:49:58 [INFO ]:終了時処理を開始します
+2021/02/24-01:49:58 [INFO ]: Writing C:\Users\YUUKI\Documents\MinecraftAutoBackup
+ＭＳ ゴシック
+normal
+ja
+543
+679
+0
+0
+5
+2021/02/24-01:50:00 [INFO ]:-----起動時処理-------
+2021/02/24-01:50:00 [INFO ]:-----loaded appConfig-----
+2021/02/24-01:50:00 [INFO ]:backupPath:C:\Users\YUUKI\Documents\MinecraftAutoBackup
+2021/02/24-01:50:00 [INFO ]:font:[Font: Name=ＭＳ ゴシック, Size=11, Units=3, GdiCharSet=1, GdiVerticalFont=False]
+2021/02/24-01:50:00 [INFO ]:dozip:False
+2021/02/24-01:50:00 [INFO ]:clientSize:543,679
+2021/02/24-01:50:00 [INFO ]:clientPoint:0,0
+2021/02/24-01:50:00 [INFO ]:backupCount:5
+2021/02/24-01:50:00 [INFO ]:--------------------------
+2021/02/24-01:50:01 [INFO ]:call:LoadConfigToApp
+2021/02/24-01:50:01 [INFO ]:Configから22件のワールドを読み込みました
+2021/02/24-01:50:01 [INFO ]:call:reloadConfig
+2021/02/24-01:50:01 [INFO ]:call:GetWorldDataFromPC
+2021/02/24-01:50:01 [INFO ]:----------------------
+2021/02/24-01:50:01 [INFO ]:call: GetBackups
+2021/02/24-01:50:01 [INFO ]:dir:6, worlds:29, backups:135
+2021/02/24-01:50:01 [INFO ]:22件のワールドのバックアップを読み込みます
+2021/02/24-01:50:42 [INFO ]:終了時処理を開始します
+2021/02/24-01:50:42 [INFO ]: Writing C:\Users\YUUKI\Documents\MinecraftAutoBackup
+ＭＳ ゴシック
+normal
+ja
+543
+679
+0
+0
+5
+2021/03/01-14:38:03 [INFO ]:-----起動時処理-------
+2021/03/01-14:38:03 [INFO ]:-----loaded appConfig-----
+2021/03/01-14:38:03 [INFO ]:backupPath:C:\Users\YUUKI\Documents\MinecraftAutoBackup
+2021/03/01-14:38:03 [INFO ]:font:[Font: Name=ＭＳ ゴシック, Size=11, Units=3, GdiCharSet=1, GdiVerticalFont=False]
+2021/03/01-14:38:03 [INFO ]:dozip:False
+2021/03/01-14:38:03 [INFO ]:clientSize:543,679
+2021/03/01-14:38:03 [INFO ]:clientPoint:0,0
+2021/03/01-14:38:03 [INFO ]:backupCount:5
+2021/03/01-14:38:03 [INFO ]:--------------------------
+2021/03/01-14:38:03 [INFO ]:call:LoadConfigToApp
+2021/03/01-14:38:03 [INFO ]:Configから22件のワールドを読み込みました
+2021/03/01-14:38:03 [INFO ]:call:reloadConfig
+2021/03/01-14:38:03 [INFO ]:call:GetWorldDataFromPC
+2021/03/01-14:38:03 [INFO ]:----------------------
+2021/03/01-14:38:04 [INFO ]:call: GetBackups
+2021/03/01-14:38:04 [INFO ]:dir:6, worlds:29, backups:135
+2021/03/01-14:38:04 [INFO ]:22件のワールドのバックアップを読み込みます
+2021/03/01-14:38:07 [INFO ]:dozip[False]
+2021/03/01-14:38:25 [INFO ]:selectedItem[5]
+2021/03/01-14:38:25 [INFO ]: Writing C:\Users\YUUKI\Documents\MinecraftAutoBackup
+UD デジタル 教科書体 NK-R
+normal
+ja
+543
+679
+0
+0
+5
+2021/03/01-14:38:27 [INFO ]:終了時処理を開始します
+2021/03/01-14:38:27 [INFO ]: Writing C:\Users\YUUKI\Documents\MinecraftAutoBackup
+UD デジタル 教科書体 NK-R
+normal
+ja
+543
+679
+0
+0
+5
+2021/03/01-14:38:29 [INFO ]:-----起動時処理-------
+2021/03/01-14:38:29 [INFO ]:-----loaded appConfig-----
+2021/03/01-14:38:29 [INFO ]:backupPath:C:\Users\YUUKI\Documents\MinecraftAutoBackup
+2021/03/01-14:38:29 [INFO ]:font:[Font: Name=UD デジタル 教科書体 NK-R, Size=11, Units=3, GdiCharSet=1, GdiVerticalFont=False]
+2021/03/01-14:38:29 [INFO ]:dozip:False
+2021/03/01-14:38:29 [INFO ]:clientSize:543,679
+2021/03/01-14:38:29 [INFO ]:clientPoint:0,0
+2021/03/01-14:38:29 [INFO ]:backupCount:5
+2021/03/01-14:38:29 [INFO ]:--------------------------
+2021/03/01-14:38:29 [INFO ]:call:LoadConfigToApp
+2021/03/01-14:38:29 [INFO ]:Configから22件のワールドを読み込みました
+2021/03/01-14:38:29 [INFO ]:call:reloadConfig
+2021/03/01-14:38:29 [INFO ]:call:GetWorldDataFromPC
+2021/03/01-14:38:29 [INFO ]:----------------------
+2021/03/01-14:38:29 [INFO ]:call: GetBackups
+2021/03/01-14:38:29 [INFO ]:dir:6, worlds:29, backups:135
+2021/03/01-14:38:29 [INFO ]:22件のワールドのバックアップを読み込みます
+2021/03/01-14:39:15 [INFO ]:call:addListView
+2021/03/01-14:39:15 [INFO ]:buildinngの一覧以下のパスからロードします
+2021/03/01-14:39:15 [INFO ]:path:C:\Users\YUUKI\AppData\Roaming\.minecraft\saves\buildinng
+2021/03/01-14:39:15 [INFO ]:backupFolderCount[5]
+2021/03/01-14:39:16 [INFO ]:call:Menu_Opening
+2021/03/01-14:39:16 [INFO ]:ListViewItem: {2021-02-24 14:19}
+2021/03/01-14:39:16 [INFO ]:buildinng
+2021/03/01-14:39:16 [INFO ]:(Boolean)True
+2021/03/01-14:40:14 [INFO ]:終了時処理を開始します
+2021/03/01-14:40:14 [INFO ]: Writing C:\Users\YUUKI\Documents\MinecraftAutoBackup
+UD デジタル 教科書体 NK-R
+normal
+ja
+787
+679
+0
+0
+5
+2021/03/01-14:52:37 [INFO ]:-----起動時処理-------
+2021/03/01-14:52:37 [INFO ]:-----loaded appConfig-----
+2021/03/01-14:52:37 [INFO ]:backupPath:C:\Users\YUUKI\Documents\MinecraftAutoBackup
+2021/03/01-14:52:37 [INFO ]:font:[Font: Name=UD デジタル 教科書体 NK-R, Size=11, Units=3, GdiCharSet=1, GdiVerticalFont=False]
+2021/03/01-14:52:37 [INFO ]:dozip:False
+2021/03/01-14:52:37 [INFO ]:clientSize:787,679
+2021/03/01-14:52:37 [INFO ]:clientPoint:0,0
+2021/03/01-14:52:37 [INFO ]:backupCount:5
+2021/03/01-14:52:37 [INFO ]:--------------------------
+2021/03/01-14:52:37 [INFO ]:call:LoadConfigToApp
+2021/03/01-14:52:37 [INFO ]:Configから22件のワールドを読み込みました
+2021/03/01-14:52:37 [INFO ]:call:reloadConfig
+2021/03/01-14:52:37 [INFO ]:call:GetWorldDataFromPC
+2021/03/01-14:52:37 [INFO ]:----------------------
+2021/03/01-14:52:37 [INFO ]:call: GetBackups
+2021/03/01-14:52:37 [INFO ]:dir:6, worlds:29, backups:135
+2021/03/01-14:52:37 [INFO ]:22件のワールドのバックアップを読み込みます
+2021/03/01-14:52:39 [INFO ]:dozip[False]
+2021/03/01-14:52:44 [INFO ]:selectedItem[5]
+2021/03/01-14:52:44 [INFO ]: Writing C:\Users\YUUKI\Documents\MinecraftAutoBackup
+UD デジタル 教科書体 NK-R
+normal
+ja
+787
+679
+0
+0
+5
+2021/03/01-14:52:45 [INFO ]:push ok
+2021/03/01-14:52:45 [INFO ]:call:Change
+2021/03/01-14:52:45 [INFO ]:GET  worldName: buildinng,  worldDir: .minecraft,  dobackup: True
+2021/03/01-14:52:45 [INFO ]:call:Change
+2021/03/01-14:52:45 [INFO ]:GET  worldName: commanding (1),  worldDir: .minecraft,  dobackup: True
+2021/03/01-14:52:45 [INFO ]:call:Change
+2021/03/01-14:52:45 [INFO ]:GET  worldName: sWorld(1)(1),  worldDir: .minecraft,  dobackup: True
+2021/03/01-14:52:45 [INFO ]:call:Change
+2021/03/01-14:52:45 [INFO ]:GET  worldName: sWorld(1)(1)(1),  worldDir: .minecraft,  dobackup: True
+2021/03/01-14:52:45 [INFO ]:call:Change
+2021/03/01-14:52:45 [INFO ]:GET  worldName: The Unusual SkyBlock v9.1.4,  worldDir: .minecraft,  dobackup: True
+2021/03/01-14:52:45 [INFO ]:call:Change
+2021/03/01-14:52:45 [INFO ]:GET  worldName: The Unusual SkyBlock v9.1.4 - コピー,  worldDir: .minecraft,  dobackup: True
+2021/03/01-14:52:45 [INFO ]:call:Change
+2021/03/01-14:52:45 [INFO ]:GET  worldName: The Water SkyBlock ver2.2.3,  worldDir: .minecraft,  dobackup: True
+2021/03/01-14:52:45 [INFO ]:call:Change
+2021/03/01-14:52:45 [INFO ]:GET  worldName: a,  worldDir: .minecraft-1.14.4-optifine,  dobackup: True
+2021/03/01-14:52:45 [INFO ]:call:Change
+2021/03/01-14:52:45 [INFO ]:GET  worldName: The Water SkyBlock ver3.1.2,  worldDir: .minecraft-1.14.4-optifine,  dobackup: True
+2021/03/01-14:52:45 [INFO ]:call:Change
+2021/03/01-14:52:45 [INFO ]:GET  worldName: The Water SkyBlock ver3.1.3b,  worldDir: .minecraft-1.14.4-optifine,  dobackup: True
+2021/03/01-14:52:45 [INFO ]:call:Change
+2021/03/01-14:52:45 [INFO ]:GET  worldName: 新規ワールド,  worldDir: .minecraft-1.14.4-optifine,  dobackup: True
+2021/03/01-14:52:45 [INFO ]:call:Change
+2021/03/01-14:52:45 [INFO ]:GET  worldName: 検証用ワールド,  worldDir: .minecraft-1.14.4-optifine,  dobackup: True
+2021/03/01-14:52:45 [INFO ]:call:Change
+2021/03/01-14:52:45 [INFO ]:GET  worldName: 適当建築,  worldDir: .minecraft-1.14.4-optifine,  dobackup: True
+2021/03/01-14:52:45 [INFO ]:call:Change
+2021/03/01-14:52:45 [INFO ]:GET  worldName: test,  worldDir: .minecraft_1.10.2,  dobackup: True
+2021/03/01-14:52:45 [INFO ]:call:Change
+2021/03/01-14:52:45 [INFO ]:GET  worldName: The Unusual SkyBlock v12.0.9,  worldDir: .minecraft_1.10.2,  dobackup: True
+2021/03/01-14:52:45 [INFO ]:call:Change
+2021/03/01-14:52:45 [INFO ]:GET  worldName: The Unusual SkyBlock v12.0.9 - コピー,  worldDir: .minecraft_1.10.2,  dobackup: True
+2021/03/01-14:52:45 [INFO ]:call:Change
+2021/03/01-14:52:45 [INFO ]:GET  worldName: The Water SkyBlock ver2.2.3,  worldDir: .minecraft_1.10.2,  dobackup: True
+2021/03/01-14:52:45 [INFO ]:call:Change
+2021/03/01-14:52:45 [INFO ]:GET  worldName: Rare Species SkyBlock ii Beta2.2.2 (1),  worldDir: .minecraft_1.9,  dobackup: True
+2021/03/01-14:52:45 [INFO ]:call:Change
+2021/03/01-14:52:45 [INFO ]:GET  worldName: Rare Species SkyBlock ii Beta2.2.2 (1),  worldDir: .minecraft_1.9 - コピー,  dobackup: True
+2021/03/01-14:52:45 [INFO ]:call:Change
+2021/03/01-14:52:45 [INFO ]:GET  worldName: 新規ワールド,  worldDir: .minecraft_forge1.12.2,  dobackup: True
+2021/03/01-14:52:45 [INFO ]:call:Change
+2021/03/01-14:52:45 [INFO ]:GET  worldName: 新規ワールド-,  worldDir: .minecraft_forge1.12.2,  dobackup: True
+2021/03/01-14:52:45 [INFO ]:call:Change
+2021/03/01-14:52:45 [INFO ]:GET  worldName: 新規ワールド--,  worldDir: .minecraft_forge1.12.2,  dobackup: True
+2021/03/01-14:52:45 [INFO ]:終了時処理を開始します
+2021/03/01-14:52:45 [INFO ]: Writing C:\Users\YUUKI\Documents\MinecraftAutoBackup
+UD デジタル 教科書体 NK-R
+normal
+ja
+787
+679
+0
+0
+5
+2021/03/01-14:56:39 [INFO ]:-----起動時処理-------
+2021/03/01-14:56:40 [INFO ]:-----loaded appConfig-----
+2021/03/01-14:56:40 [INFO ]:backupPath:C:\Users\YUUKI\Documents\MinecraftAutoBackup
+2021/03/01-14:56:40 [INFO ]:font:[Font: Name=UD デジタル 教科書体 NK-R, Size=11, Units=3, GdiCharSet=1, GdiVerticalFont=False]
+2021/03/01-14:56:40 [INFO ]:dozip:False
+2021/03/01-14:56:40 [INFO ]:clientSize:787,679
+2021/03/01-14:56:40 [INFO ]:clientPoint:0,0
+2021/03/01-14:56:40 [INFO ]:backupCount:5
+2021/03/01-14:56:40 [INFO ]:--------------------------
+2021/03/01-14:56:40 [INFO ]:call:LoadConfigToApp
+2021/03/01-14:56:40 [INFO ]:Configから22件のワールドを読み込みました
+2021/03/01-14:56:40 [INFO ]:call:reloadConfig
+2021/03/01-14:56:40 [INFO ]:call:GetWorldDataFromPC
+2021/03/01-14:56:40 [INFO ]:----------------------
+2021/03/01-14:56:40 [INFO ]:call: GetBackups
+2021/03/01-14:56:40 [INFO ]:dir:6, worlds:29, backups:135
+2021/03/01-14:56:40 [INFO ]:22件のワールドのバックアップを読み込みます
+2021/03/01-14:56:42 [INFO ]:dozip[False]
+2021/03/01-14:56:46 [INFO ]:selectedItem[5]
+2021/03/01-14:56:46 [INFO ]: Writing C:\Users\YUUKI\Documents\MinecraftAutoBackup
+UD デジタル 教科書体 NK-R
+normal
+ja
+787
+679
+0
+0
+5
+2021/03/01-14:56:46 [INFO ]:終了時処理を開始します
+2021/03/01-14:56:46 [INFO ]: Writing C:\Users\YUUKI\Documents\MinecraftAutoBackup
+UD デジタル 教科書体 NK-R
+normal
+ja
+787
+679
+0
+0
+5
+2021/03/01-15:00:11 [INFO ]:-----起動時処理-------
+2021/03/01-15:00:11 [INFO ]:-----loaded appConfig-----
+2021/03/01-15:00:11 [INFO ]:backupPath:C:\Users\YUUKI\Documents\MinecraftAutoBackup
+2021/03/01-15:00:11 [INFO ]:font:[Font: Name=UD デジタル 教科書体 NK-R, Size=11, Units=3, GdiCharSet=1, GdiVerticalFont=False]
+2021/03/01-15:00:11 [INFO ]:dozip:False
+2021/03/01-15:00:11 [INFO ]:clientSize:787,679
+2021/03/01-15:00:11 [INFO ]:clientPoint:0,0
+2021/03/01-15:00:11 [INFO ]:backupCount:5
+2021/03/01-15:00:11 [INFO ]:--------------------------
+2021/03/01-15:00:11 [INFO ]:call:LoadConfigToApp
+2021/03/01-15:00:11 [INFO ]:Configから22件のワールドを読み込みました
+2021/03/01-15:00:11 [INFO ]:call:reloadConfig
+2021/03/01-15:00:11 [INFO ]:call:GetWorldDataFromPC
+2021/03/01-15:00:11 [INFO ]:----------------------
+2021/03/01-15:00:11 [INFO ]:call: GetBackups
+2021/03/01-15:00:11 [INFO ]:dir:6, worlds:29, backups:135
+2021/03/01-15:00:11 [INFO ]:22件のワールドのバックアップを読み込みます
+2021/03/01-15:00:15 [INFO ]:dozip[False]
+2021/03/01-15:02:27 [INFO ]:selectedItem[5]
+2021/03/01-15:02:27 [INFO ]: Writing C:\Users\YUUKI\Documents\MinecraftAutoBackup
+UD デジタル 教科書体 NK-R
+normal
+ja
+787
+679
+0
+0
+5
+2021/03/01-15:02:28 [INFO ]:push ok
+2021/03/01-15:02:28 [INFO ]:call:Change
+2021/03/01-15:02:28 [INFO ]:GET  worldName: buildinng,  worldDir: .minecraft,  dobackup: True
+2021/03/01-15:02:28 [INFO ]:call:Change
+2021/03/01-15:02:28 [INFO ]:GET  worldName: commanding (1),  worldDir: .minecraft,  dobackup: True
+2021/03/01-15:02:28 [INFO ]:call:Change
+2021/03/01-15:02:28 [INFO ]:GET  worldName: sWorld(1)(1),  worldDir: .minecraft,  dobackup: True
+2021/03/01-15:02:28 [INFO ]:call:Change
+2021/03/01-15:02:28 [INFO ]:GET  worldName: sWorld(1)(1)(1),  worldDir: .minecraft,  dobackup: True
+2021/03/01-15:02:28 [INFO ]:call:Change
+2021/03/01-15:02:28 [INFO ]:GET  worldName: The Unusual SkyBlock v9.1.4,  worldDir: .minecraft,  dobackup: True
+2021/03/01-15:02:28 [INFO ]:call:Change
+2021/03/01-15:02:28 [INFO ]:GET  worldName: The Unusual SkyBlock v9.1.4 - コピー,  worldDir: .minecraft,  dobackup: True
+2021/03/01-15:02:28 [INFO ]:call:Change
+2021/03/01-15:02:28 [INFO ]:GET  worldName: The Water SkyBlock ver2.2.3,  worldDir: .minecraft,  dobackup: True
+2021/03/01-15:02:28 [INFO ]:call:Change
+2021/03/01-15:02:28 [INFO ]:GET  worldName: a,  worldDir: .minecraft-1.14.4-optifine,  dobackup: True
+2021/03/01-15:02:28 [INFO ]:call:Change
+2021/03/01-15:02:28 [INFO ]:GET  worldName: The Water SkyBlock ver3.1.2,  worldDir: .minecraft-1.14.4-optifine,  dobackup: True
+2021/03/01-15:02:28 [INFO ]:call:Change
+2021/03/01-15:02:28 [INFO ]:GET  worldName: The Water SkyBlock ver3.1.3b,  worldDir: .minecraft-1.14.4-optifine,  dobackup: True
+2021/03/01-15:02:28 [INFO ]:call:Change
+2021/03/01-15:02:28 [INFO ]:GET  worldName: 新規ワールド,  worldDir: .minecraft-1.14.4-optifine,  dobackup: True
+2021/03/01-15:02:28 [INFO ]:call:Change
+2021/03/01-15:02:28 [INFO ]:GET  worldName: 検証用ワールド,  worldDir: .minecraft-1.14.4-optifine,  dobackup: True
+2021/03/01-15:02:28 [INFO ]:call:Change
+2021/03/01-15:02:28 [INFO ]:GET  worldName: 適当建築,  worldDir: .minecraft-1.14.4-optifine,  dobackup: True
+2021/03/01-15:02:28 [INFO ]:call:Change
+2021/03/01-15:02:28 [INFO ]:GET  worldName: test,  worldDir: .minecraft_1.10.2,  dobackup: True
+2021/03/01-15:02:28 [INFO ]:call:Change
+2021/03/01-15:02:28 [INFO ]:GET  worldName: The Unusual SkyBlock v12.0.9,  worldDir: .minecraft_1.10.2,  dobackup: True
+2021/03/01-15:02:28 [INFO ]:call:Change
+2021/03/01-15:02:28 [INFO ]:GET  worldName: The Unusual SkyBlock v12.0.9 - コピー,  worldDir: .minecraft_1.10.2,  dobackup: True
+2021/03/01-15:02:28 [INFO ]:call:Change
+2021/03/01-15:02:28 [INFO ]:GET  worldName: The Water SkyBlock ver2.2.3,  worldDir: .minecraft_1.10.2,  dobackup: True
+2021/03/01-15:02:28 [INFO ]:call:Change
+2021/03/01-15:02:28 [INFO ]:GET  worldName: Rare Species SkyBlock ii Beta2.2.2 (1),  worldDir: .minecraft_1.9,  dobackup: True
+2021/03/01-15:02:28 [INFO ]:call:Change
+2021/03/01-15:02:28 [INFO ]:GET  worldName: Rare Species SkyBlock ii Beta2.2.2 (1),  worldDir: .minecraft_1.9 - コピー,  dobackup: True
+2021/03/01-15:02:28 [INFO ]:call:Change
+2021/03/01-15:02:28 [INFO ]:GET  worldName: 新規ワールド,  worldDir: .minecraft_forge1.12.2,  dobackup: True
+2021/03/01-15:02:28 [INFO ]:call:Change
+2021/03/01-15:02:28 [INFO ]:GET  worldName: 新規ワールド-,  worldDir: .minecraft_forge1.12.2,  dobackup: True
+2021/03/01-15:02:28 [INFO ]:call:Change
+2021/03/01-15:02:28 [INFO ]:GET  worldName: 新規ワールド--,  worldDir: .minecraft_forge1.12.2,  dobackup: True
+2021/03/01-15:02:28 [INFO ]:終了時処理を開始します
+2021/03/01-15:02:28 [INFO ]: Writing C:\Users\YUUKI\Documents\MinecraftAutoBackup
+UD デジタル 教科書体 NK-R
+normal
+ja
+787
+679
+0
+0
+5
+2021/03/01-15:05:25 [INFO ]:-----起動時処理-------
+2021/03/01-15:05:25 [INFO ]:-----loaded appConfig-----
+2021/03/01-15:05:25 [INFO ]:backupPath:C:\Users\YUUKI\Documents\MinecraftAutoBackup
+2021/03/01-15:05:25 [INFO ]:font:[Font: Name=UD デジタル 教科書体 NK-R, Size=11, Units=3, GdiCharSet=1, GdiVerticalFont=False]
+2021/03/01-15:05:25 [INFO ]:dozip:False
+2021/03/01-15:05:25 [INFO ]:clientSize:787,679
+2021/03/01-15:05:25 [INFO ]:clientPoint:0,0
+2021/03/01-15:05:25 [INFO ]:backupCount:5
+2021/03/01-15:05:25 [INFO ]:--------------------------
+2021/03/01-15:05:25 [INFO ]:call:LoadConfigToApp
+2021/03/01-15:05:25 [INFO ]:Configから22件のワールドを読み込みました
+2021/03/01-15:05:25 [INFO ]:call:reloadConfig
+2021/03/01-15:05:25 [INFO ]:call:GetWorldDataFromPC
+2021/03/01-15:05:25 [INFO ]:----------------------
+2021/03/01-15:05:25 [INFO ]:call: GetBackups
+2021/03/01-15:05:25 [INFO ]:dir:6, worlds:29, backups:135
+2021/03/01-15:05:25 [INFO ]:22件のワールドのバックアップを読み込みます
+2021/03/01-15:05:27 [INFO ]:dozip[False]
+2021/03/01-15:05:38 [INFO ]:selectedItem[5]
+2021/03/01-15:05:38 [INFO ]: Writing C:\Users\YUUKI\Documents\MinecraftAutoBackup
+UD デジタル 教科書体 NK-R
+normal
+ja
+787
+679
+0
+0
+5
+2021/03/01-15:05:40 [INFO ]:push ok
+2021/03/01-15:05:40 [INFO ]:call:Change
+2021/03/01-15:05:40 [INFO ]:GET  worldName: buildinng,  worldDir: .minecraft,  dobackup: True
+2021/03/01-15:05:40 [INFO ]:call:Change
+2021/03/01-15:05:40 [INFO ]:GET  worldName: commanding (1),  worldDir: .minecraft,  dobackup: True
+2021/03/01-15:05:40 [INFO ]:call:Change
+2021/03/01-15:05:40 [INFO ]:GET  worldName: sWorld(1)(1),  worldDir: .minecraft,  dobackup: True
+2021/03/01-15:05:40 [INFO ]:call:Change
+2021/03/01-15:05:40 [INFO ]:GET  worldName: sWorld(1)(1)(1),  worldDir: .minecraft,  dobackup: True
+2021/03/01-15:05:40 [INFO ]:call:Change
+2021/03/01-15:05:40 [INFO ]:GET  worldName: The Unusual SkyBlock v9.1.4,  worldDir: .minecraft,  dobackup: True
+2021/03/01-15:05:40 [INFO ]:call:Change
+2021/03/01-15:05:40 [INFO ]:GET  worldName: The Unusual SkyBlock v9.1.4 - コピー,  worldDir: .minecraft,  dobackup: True
+2021/03/01-15:05:40 [INFO ]:call:Change
+2021/03/01-15:05:40 [INFO ]:GET  worldName: The Water SkyBlock ver2.2.3,  worldDir: .minecraft,  dobackup: True
+2021/03/01-15:05:40 [INFO ]:call:Change
+2021/03/01-15:05:40 [INFO ]:GET  worldName: a,  worldDir: .minecraft-1.14.4-optifine,  dobackup: True
+2021/03/01-15:05:40 [INFO ]:call:Change
+2021/03/01-15:05:40 [INFO ]:GET  worldName: The Water SkyBlock ver3.1.2,  worldDir: .minecraft-1.14.4-optifine,  dobackup: True
+2021/03/01-15:05:40 [INFO ]:call:Change
+2021/03/01-15:05:40 [INFO ]:GET  worldName: The Water SkyBlock ver3.1.3b,  worldDir: .minecraft-1.14.4-optifine,  dobackup: True
+2021/03/01-15:05:40 [INFO ]:call:Change
+2021/03/01-15:05:40 [INFO ]:GET  worldName: 新規ワールド,  worldDir: .minecraft-1.14.4-optifine,  dobackup: True
+2021/03/01-15:05:40 [INFO ]:call:Change
+2021/03/01-15:05:40 [INFO ]:GET  worldName: 検証用ワールド,  worldDir: .minecraft-1.14.4-optifine,  dobackup: True
+2021/03/01-15:05:40 [INFO ]:call:Change
+2021/03/01-15:05:40 [INFO ]:GET  worldName: 適当建築,  worldDir: .minecraft-1.14.4-optifine,  dobackup: True
+2021/03/01-15:05:40 [INFO ]:call:Change
+2021/03/01-15:05:40 [INFO ]:GET  worldName: test,  worldDir: .minecraft_1.10.2,  dobackup: True
+2021/03/01-15:05:40 [INFO ]:call:Change
+2021/03/01-15:05:40 [INFO ]:GET  worldName: The Unusual SkyBlock v12.0.9,  worldDir: .minecraft_1.10.2,  dobackup: True
+2021/03/01-15:05:40 [INFO ]:call:Change
+2021/03/01-15:05:40 [INFO ]:GET  worldName: The Unusual SkyBlock v12.0.9 - コピー,  worldDir: .minecraft_1.10.2,  dobackup: True
+2021/03/01-15:05:40 [INFO ]:call:Change
+2021/03/01-15:05:40 [INFO ]:GET  worldName: The Water SkyBlock ver2.2.3,  worldDir: .minecraft_1.10.2,  dobackup: True
+2021/03/01-15:05:40 [INFO ]:call:Change
+2021/03/01-15:05:40 [INFO ]:GET  worldName: Rare Species SkyBlock ii Beta2.2.2 (1),  worldDir: .minecraft_1.9,  dobackup: True
+2021/03/01-15:05:40 [INFO ]:call:Change
+2021/03/01-15:05:40 [INFO ]:GET  worldName: Rare Species SkyBlock ii Beta2.2.2 (1),  worldDir: .minecraft_1.9 - コピー,  dobackup: True
+2021/03/01-15:05:40 [INFO ]:call:Change
+2021/03/01-15:05:40 [INFO ]:GET  worldName: 新規ワールド,  worldDir: .minecraft_forge1.12.2,  dobackup: True
+2021/03/01-15:05:40 [INFO ]:call:Change
+2021/03/01-15:05:40 [INFO ]:GET  worldName: 新規ワールド-,  worldDir: .minecraft_forge1.12.2,  dobackup: True
+2021/03/01-15:05:40 [INFO ]:call:Change
+2021/03/01-15:05:40 [INFO ]:GET  worldName: 新規ワールド--,  worldDir: .minecraft_forge1.12.2,  dobackup: True
+2021/03/01-15:05:40 [INFO ]:終了時処理を開始します
+2021/03/01-15:05:40 [INFO ]: Writing C:\Users\YUUKI\Documents\MinecraftAutoBackup
+UD デジタル 教科書体 NK-R
+normal
+ja
+787
+679
+0
+0
+5
+2021/03/01-15:06:54 [INFO ]:-----起動時処理-------
+2021/03/01-15:06:54 [INFO ]:-----loaded appConfig-----
+2021/03/01-15:06:54 [INFO ]:backupPath:C:\Users\YUUKI\Documents\MinecraftAutoBackup
+2021/03/01-15:06:54 [INFO ]:font:[Font: Name=UD デジタル 教科書体 NK-R, Size=11, Units=3, GdiCharSet=1, GdiVerticalFont=False]
+2021/03/01-15:06:54 [INFO ]:dozip:False
+2021/03/01-15:06:54 [INFO ]:clientSize:787,679
+2021/03/01-15:06:54 [INFO ]:clientPoint:0,0
+2021/03/01-15:06:54 [INFO ]:backupCount:5
+2021/03/01-15:06:54 [INFO ]:--------------------------
+2021/03/01-15:06:54 [INFO ]:call:LoadConfigToApp
+2021/03/01-15:06:54 [INFO ]:Configから22件のワールドを読み込みました
+2021/03/01-15:06:54 [INFO ]:call:reloadConfig
+2021/03/01-15:06:54 [INFO ]:call:GetWorldDataFromPC
+2021/03/01-15:06:54 [INFO ]:----------------------
+2021/03/01-15:06:54 [INFO ]:call: GetBackups
+2021/03/01-15:06:54 [INFO ]:dir:6, worlds:29, backups:135
+2021/03/01-15:06:54 [INFO ]:22件のワールドのバックアップを読み込みます
+2021/03/01-15:07:05 [INFO ]:dozip[False]
+2021/03/01-15:07:10 [INFO ]:selectedItem[5]
+2021/03/01-15:07:10 [INFO ]: Writing C:\Users\YUUKI\Documents\MinecraftAutoBackup
+UD デジタル 教科書体 NK-R
+normal
+ja
+787
+679
+0
+0
+5
+2021/03/01-15:07:11 [INFO ]:push ok
+2021/03/01-15:07:11 [INFO ]:call:Change
+2021/03/01-15:07:11 [INFO ]:GET  worldName: buildinng,  worldDir: .minecraft,  dobackup: True
+2021/03/01-15:07:11 [INFO ]:call:Change
+2021/03/01-15:07:11 [INFO ]:GET  worldName: commanding (1),  worldDir: .minecraft,  dobackup: True
+2021/03/01-15:07:11 [INFO ]:call:Change
+2021/03/01-15:07:11 [INFO ]:GET  worldName: sWorld(1)(1),  worldDir: .minecraft,  dobackup: True
+2021/03/01-15:07:11 [INFO ]:call:Change
+2021/03/01-15:07:11 [INFO ]:GET  worldName: sWorld(1)(1)(1),  worldDir: .minecraft,  dobackup: True
+2021/03/01-15:07:11 [INFO ]:call:Change
+2021/03/01-15:07:11 [INFO ]:GET  worldName: The Unusual SkyBlock v9.1.4,  worldDir: .minecraft,  dobackup: True
+2021/03/01-15:07:11 [INFO ]:call:Change
+2021/03/01-15:07:11 [INFO ]:GET  worldName: The Unusual SkyBlock v9.1.4 - コピー,  worldDir: .minecraft,  dobackup: True
+2021/03/01-15:07:11 [INFO ]:call:Change
+2021/03/01-15:07:11 [INFO ]:GET  worldName: The Water SkyBlock ver2.2.3,  worldDir: .minecraft,  dobackup: True
+2021/03/01-15:07:11 [INFO ]:call:Change
+2021/03/01-15:07:11 [INFO ]:GET  worldName: a,  worldDir: .minecraft-1.14.4-optifine,  dobackup: True
+2021/03/01-15:07:11 [INFO ]:call:Change
+2021/03/01-15:07:11 [INFO ]:GET  worldName: The Water SkyBlock ver3.1.2,  worldDir: .minecraft-1.14.4-optifine,  dobackup: True
+2021/03/01-15:07:11 [INFO ]:call:Change
+2021/03/01-15:07:11 [INFO ]:GET  worldName: The Water SkyBlock ver3.1.3b,  worldDir: .minecraft-1.14.4-optifine,  dobackup: True
+2021/03/01-15:07:11 [INFO ]:call:Change
+2021/03/01-15:07:11 [INFO ]:GET  worldName: 新規ワールド,  worldDir: .minecraft-1.14.4-optifine,  dobackup: True
+2021/03/01-15:07:11 [INFO ]:call:Change
+2021/03/01-15:07:11 [INFO ]:GET  worldName: 検証用ワールド,  worldDir: .minecraft-1.14.4-optifine,  dobackup: True
+2021/03/01-15:07:11 [INFO ]:call:Change
+2021/03/01-15:07:11 [INFO ]:GET  worldName: 適当建築,  worldDir: .minecraft-1.14.4-optifine,  dobackup: True
+2021/03/01-15:07:11 [INFO ]:call:Change
+2021/03/01-15:07:11 [INFO ]:GET  worldName: test,  worldDir: .minecraft_1.10.2,  dobackup: True
+2021/03/01-15:07:11 [INFO ]:call:Change
+2021/03/01-15:07:11 [INFO ]:GET  worldName: The Unusual SkyBlock v12.0.9,  worldDir: .minecraft_1.10.2,  dobackup: True
+2021/03/01-15:07:11 [INFO ]:call:Change
+2021/03/01-15:07:11 [INFO ]:GET  worldName: The Unusual SkyBlock v12.0.9 - コピー,  worldDir: .minecraft_1.10.2,  dobackup: True
+2021/03/01-15:07:11 [INFO ]:call:Change
+2021/03/01-15:07:11 [INFO ]:GET  worldName: The Water SkyBlock ver2.2.3,  worldDir: .minecraft_1.10.2,  dobackup: True
+2021/03/01-15:07:11 [INFO ]:call:Change
+2021/03/01-15:07:11 [INFO ]:GET  worldName: Rare Species SkyBlock ii Beta2.2.2 (1),  worldDir: .minecraft_1.9,  dobackup: True
+2021/03/01-15:07:11 [INFO ]:call:Change
+2021/03/01-15:07:11 [INFO ]:GET  worldName: Rare Species SkyBlock ii Beta2.2.2 (1),  worldDir: .minecraft_1.9 - コピー,  dobackup: True
+2021/03/01-15:07:11 [INFO ]:call:Change
+2021/03/01-15:07:11 [INFO ]:GET  worldName: 新規ワールド,  worldDir: .minecraft_forge1.12.2,  dobackup: True
+2021/03/01-15:07:11 [INFO ]:call:Change
+2021/03/01-15:07:11 [INFO ]:GET  worldName: 新規ワールド-,  worldDir: .minecraft_forge1.12.2,  dobackup: True
+2021/03/01-15:07:11 [INFO ]:call:Change
+2021/03/01-15:07:11 [INFO ]:GET  worldName: 新規ワールド--,  worldDir: .minecraft_forge1.12.2,  dobackup: True
+2021/03/01-15:07:11 [INFO ]:終了時処理を開始します
+2021/03/01-15:07:11 [INFO ]: Writing C:\Users\YUUKI\Documents\MinecraftAutoBackup
+UD デジタル 教科書体 NK-R
+normal
+ja
+787
+679
+0
+0
+5
+2021/03/01-16:31:04 [INFO ]:-----起動時処理-------
+2021/03/01-16:31:04 [INFO ]:-----loaded appConfig-----
+2021/03/01-16:31:04 [INFO ]:backupPath:C:\Users\YUUKI\Documents\MinecraftAutoBackup
+2021/03/01-16:31:04 [INFO ]:font:[Font: Name=UD デジタル 教科書体 NK-R, Size=11, Units=3, GdiCharSet=1, GdiVerticalFont=False]
+2021/03/01-16:31:04 [INFO ]:dozip:False
+2021/03/01-16:31:04 [INFO ]:clientSize:787,679
+2021/03/01-16:31:04 [INFO ]:clientPoint:0,0
+2021/03/01-16:31:04 [INFO ]:backupCount:5
+2021/03/01-16:31:04 [INFO ]:--------------------------
+2021/03/01-16:31:04 [INFO ]:call:LoadConfigToApp
+2021/03/01-16:31:04 [INFO ]:Configから22件のワールドを読み込みました
+2021/03/01-16:31:04 [INFO ]:call:reloadConfig
+2021/03/01-16:31:04 [INFO ]:call:GetWorldDataFromPC
+2021/03/01-16:31:04 [INFO ]:----------------------
+2021/03/01-16:31:04 [INFO ]:call: GetBackups
+2021/03/01-16:31:04 [INFO ]:dir:6, worlds:29, backups:135
+2021/03/01-16:31:04 [INFO ]:22件のワールドのバックアップを読み込みます
+2021/03/01-16:31:06 [INFO ]:dozip[False]
+2021/03/01-16:31:38 [INFO ]:終了時処理を開始します
+2021/03/01-16:31:38 [INFO ]: Writing C:\Users\YUUKI\Documents\MinecraftAutoBackup
+UD デジタル 教科書体 NK-R
+normal
+ja
+787
+679
+0
+0
+5
+2021/03/01-16:32:54 [INFO ]:-----起動時処理-------
+2021/03/01-16:32:54 [INFO ]:-----loaded appConfig-----
+2021/03/01-16:32:54 [INFO ]:backupPath:C:\Users\YUUKI\Documents\MinecraftAutoBackup
+2021/03/01-16:32:54 [INFO ]:font:[Font: Name=UD デジタル 教科書体 NK-R, Size=11, Units=3, GdiCharSet=1, GdiVerticalFont=False]
+2021/03/01-16:32:54 [INFO ]:dozip:False
+2021/03/01-16:32:54 [INFO ]:clientSize:787,679
+2021/03/01-16:32:54 [INFO ]:clientPoint:0,0
+2021/03/01-16:32:54 [INFO ]:backupCount:5
+2021/03/01-16:32:54 [INFO ]:--------------------------
+2021/03/01-16:32:54 [INFO ]:call:LoadConfigToApp
+2021/03/01-16:32:54 [INFO ]:Configから22件のワールドを読み込みました
+2021/03/01-16:32:54 [INFO ]:call:reloadConfig
+2021/03/01-16:32:54 [INFO ]:call:GetWorldDataFromPC
+2021/03/01-16:32:54 [INFO ]:----------------------
+2021/03/01-16:32:54 [INFO ]:call: GetBackups
+2021/03/01-16:32:54 [INFO ]:dir:6, worlds:29, backups:135
+2021/03/01-16:32:54 [INFO ]:22件のワールドのバックアップを読み込みます
+2021/03/01-16:32:58 [INFO ]:dozip[False]
+2021/03/01-16:33:20 [INFO ]:selectedItem[5]
+2021/03/01-16:33:20 [INFO ]: Writing C:\Users\YUUKI\Documents\MinecraftAutoBackup
+UD デジタル 教科書体 NK-R
+normal
+ja
+787
+679
+0
+0
+5
+2021/03/01-16:33:20 [INFO ]:終了時処理を開始します
+2021/03/01-16:33:20 [INFO ]: Writing C:\Users\YUUKI\Documents\MinecraftAutoBackup
+UD デジタル 教科書体 NK-R
+normal
+ja
+787
+679
+0
+0
+5
+2021/03/01-16:33:49 [INFO ]:-----起動時処理-------
+2021/03/01-16:33:49 [INFO ]:-----loaded appConfig-----
+2021/03/01-16:33:49 [INFO ]:backupPath:C:\Users\YUUKI\Documents\MinecraftAutoBackup
+2021/03/01-16:33:49 [INFO ]:font:[Font: Name=UD デジタル 教科書体 NK-R, Size=11, Units=3, GdiCharSet=1, GdiVerticalFont=False]
+2021/03/01-16:33:49 [INFO ]:dozip:False
+2021/03/01-16:33:49 [INFO ]:clientSize:787,679
+2021/03/01-16:33:49 [INFO ]:clientPoint:0,0
+2021/03/01-16:33:49 [INFO ]:backupCount:5
+2021/03/01-16:33:49 [INFO ]:--------------------------
+2021/03/01-16:33:49 [INFO ]:call:LoadConfigToApp
+2021/03/01-16:33:49 [INFO ]:Configから22件のワールドを読み込みました
+2021/03/01-16:33:49 [INFO ]:call:reloadConfig
+2021/03/01-16:33:49 [INFO ]:call:GetWorldDataFromPC
+2021/03/01-16:33:49 [INFO ]:----------------------
+2021/03/01-16:33:49 [INFO ]:call: GetBackups
+2021/03/01-16:33:49 [INFO ]:dir:6, worlds:29, backups:135
+2021/03/01-16:33:49 [INFO ]:22件のワールドのバックアップを読み込みます
+2021/03/01-16:33:51 [INFO ]:dozip[False]
+2021/03/01-16:33:58 [INFO ]:終了時処理を開始します
+2021/03/01-16:33:58 [INFO ]: Writing C:\Users\YUUKI\Documents\MinecraftAutoBackup
+UD デジタル 教科書体 NK-R
+normal
+ja
+787
+679
+0
+0
+5
+2021/03/01-16:34:31 [INFO ]:-----起動時処理-------
+2021/03/01-16:34:31 [INFO ]:-----loaded appConfig-----
+2021/03/01-16:34:31 [INFO ]:backupPath:C:\Users\YUUKI\Documents\MinecraftAutoBackup
+2021/03/01-16:34:31 [INFO ]:font:[Font: Name=UD デジタル 教科書体 NK-R, Size=11, Units=3, GdiCharSet=1, GdiVerticalFont=False]
+2021/03/01-16:34:31 [INFO ]:dozip:False
+2021/03/01-16:34:31 [INFO ]:clientSize:787,679
+2021/03/01-16:34:31 [INFO ]:clientPoint:0,0
+2021/03/01-16:34:31 [INFO ]:backupCount:5
+2021/03/01-16:34:31 [INFO ]:--------------------------
+2021/03/01-16:34:31 [INFO ]:call:LoadConfigToApp
+2021/03/01-16:34:31 [INFO ]:Configから22件のワールドを読み込みました
+2021/03/01-16:34:31 [INFO ]:call:reloadConfig
+2021/03/01-16:34:31 [INFO ]:call:GetWorldDataFromPC
+2021/03/01-16:34:31 [INFO ]:----------------------
+2021/03/01-16:34:31 [INFO ]:call: GetBackups
+2021/03/01-16:34:31 [INFO ]:dir:6, worlds:29, backups:135
+2021/03/01-16:34:31 [INFO ]:22件のワールドのバックアップを読み込みます
+2021/03/01-16:34:34 [INFO ]:dozip[False]
+2021/03/01-16:34:45 [INFO ]:selectedItem[5]
+2021/03/01-16:34:45 [INFO ]: Writing C:\Users\YUUKI\Documents\MinecraftAutoBackup
+UD デジタル 教科書体 NK-R
+normal
+ja
+787
+679
+0
+0
+5
+2021/03/01-16:34:46 [INFO ]:push ok
+2021/03/01-16:34:46 [INFO ]:call:Change
+2021/03/01-16:34:46 [INFO ]:GET  worldName: buildinng,  worldDir: .minecraft,  dobackup: True
+2021/03/01-16:34:46 [INFO ]:call:Change
+2021/03/01-16:34:46 [INFO ]:GET  worldName: commanding (1),  worldDir: .minecraft,  dobackup: True
+2021/03/01-16:34:46 [INFO ]:call:Change
+2021/03/01-16:34:46 [INFO ]:GET  worldName: sWorld(1)(1),  worldDir: .minecraft,  dobackup: True
+2021/03/01-16:34:46 [INFO ]:call:Change
+2021/03/01-16:34:46 [INFO ]:GET  worldName: sWorld(1)(1)(1),  worldDir: .minecraft,  dobackup: True
+2021/03/01-16:34:46 [INFO ]:call:Change
+2021/03/01-16:34:46 [INFO ]:GET  worldName: The Unusual SkyBlock v9.1.4,  worldDir: .minecraft,  dobackup: True
+2021/03/01-16:34:46 [INFO ]:call:Change
+2021/03/01-16:34:46 [INFO ]:GET  worldName: The Unusual SkyBlock v9.1.4 - コピー,  worldDir: .minecraft,  dobackup: True
+2021/03/01-16:34:46 [INFO ]:call:Change
+2021/03/01-16:34:46 [INFO ]:GET  worldName: The Water SkyBlock ver2.2.3,  worldDir: .minecraft,  dobackup: True
+2021/03/01-16:34:46 [INFO ]:call:Change
+2021/03/01-16:34:46 [INFO ]:GET  worldName: a,  worldDir: .minecraft-1.14.4-optifine,  dobackup: True
+2021/03/01-16:34:46 [INFO ]:call:Change
+2021/03/01-16:34:46 [INFO ]:GET  worldName: The Water SkyBlock ver3.1.2,  worldDir: .minecraft-1.14.4-optifine,  dobackup: True
+2021/03/01-16:34:46 [INFO ]:call:Change
+2021/03/01-16:34:46 [INFO ]:GET  worldName: The Water SkyBlock ver3.1.3b,  worldDir: .minecraft-1.14.4-optifine,  dobackup: True
+2021/03/01-16:34:46 [INFO ]:call:Change
+2021/03/01-16:34:46 [INFO ]:GET  worldName: 新規ワールド,  worldDir: .minecraft-1.14.4-optifine,  dobackup: True
+2021/03/01-16:34:46 [INFO ]:call:Change
+2021/03/01-16:34:46 [INFO ]:GET  worldName: 検証用ワールド,  worldDir: .minecraft-1.14.4-optifine,  dobackup: True
+2021/03/01-16:34:46 [INFO ]:call:Change
+2021/03/01-16:34:46 [INFO ]:GET  worldName: 適当建築,  worldDir: .minecraft-1.14.4-optifine,  dobackup: True
+2021/03/01-16:34:46 [INFO ]:call:Change
+2021/03/01-16:34:46 [INFO ]:GET  worldName: test,  worldDir: .minecraft_1.10.2,  dobackup: True
+2021/03/01-16:34:46 [INFO ]:call:Change
+2021/03/01-16:34:46 [INFO ]:GET  worldName: The Unusual SkyBlock v12.0.9,  worldDir: .minecraft_1.10.2,  dobackup: True
+2021/03/01-16:34:46 [INFO ]:call:Change
+2021/03/01-16:34:46 [INFO ]:GET  worldName: The Unusual SkyBlock v12.0.9 - コピー,  worldDir: .minecraft_1.10.2,  dobackup: True
+2021/03/01-16:34:46 [INFO ]:call:Change
+2021/03/01-16:34:46 [INFO ]:GET  worldName: The Water SkyBlock ver2.2.3,  worldDir: .minecraft_1.10.2,  dobackup: True
+2021/03/01-16:34:46 [INFO ]:call:Change
+2021/03/01-16:34:46 [INFO ]:GET  worldName: Rare Species SkyBlock ii Beta2.2.2 (1),  worldDir: .minecraft_1.9,  dobackup: True
+2021/03/01-16:34:46 [INFO ]:call:Change
+2021/03/01-16:34:46 [INFO ]:GET  worldName: Rare Species SkyBlock ii Beta2.2.2 (1),  worldDir: .minecraft_1.9 - コピー,  dobackup: True
+2021/03/01-16:34:46 [INFO ]:call:Change
+2021/03/01-16:34:46 [INFO ]:GET  worldName: 新規ワールド,  worldDir: .minecraft_forge1.12.2,  dobackup: True
+2021/03/01-16:34:46 [INFO ]:call:Change
+2021/03/01-16:34:46 [INFO ]:GET  worldName: 新規ワールド-,  worldDir: .minecraft_forge1.12.2,  dobackup: True
+2021/03/01-16:34:46 [INFO ]:call:Change
+2021/03/01-16:34:46 [INFO ]:GET  worldName: 新規ワールド--,  worldDir: .minecraft_forge1.12.2,  dobackup: True
+2021/03/01-16:34:46 [INFO ]:終了時処理を開始します
+2021/03/01-16:34:46 [INFO ]: Writing C:\Users\YUUKI\Documents\MinecraftAutoBackup
+UD デジタル 教科書体 NK-R
+normal
+ja
+787
+679
+0
+0
+5
