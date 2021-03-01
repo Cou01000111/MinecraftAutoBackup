@@ -3,7 +3,7 @@ using System.IO;
 
 static class Logger {
     public static string logPath = ".\\logs\\MainProcess.txt";
-    private static int outputLevel = 2;
+    private static int outputLevel = 3;
 
     public static void Base(int level, string message) {
         string logLevelStr;
