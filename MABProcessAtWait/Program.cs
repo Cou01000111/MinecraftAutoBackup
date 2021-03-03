@@ -232,7 +232,12 @@ namespace MABProcessAtWait {
             timer.Enabled = true;
             notifyIcon.Icon = new Icon(".\\Image\\app_sub.ico");
             notifyIcon.Text = "MAB待機モジュール";
-            notifyIcon.ContextMenu.MenuItems[0].Text = "終了";
+            ContextMenuStrip menu = new ContextMenuStrip();
+            ToolStripMenuItem exit = new ToolStripMenuItem();
+            exit.Text = "終了";
+            exit.Click += new EventHandler(Close_Click);
+            menu.Items.Add(exit);
+            notifyIcon.ContextMenuStrip = menu;
         }
 
         //バックアップをするワールドデータのパスを配列にして返す

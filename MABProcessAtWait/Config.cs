@@ -18,41 +18,8 @@ image
 
 namespace MABProcessAtWait {
     public class Config {
-        /*
-         必要な関数
-        与えられたワールドオブジェクトをコンフィグファイルに書き変える
-        コンフィグファイルの中身を渡す関数
-        コンフィグファイルがないときにコンフィグファイルを作る関数
-        コンフィグファイルからメモリに読み込む関数
-        メモリの内容をコンフィグファイルに書き込む関数
-        コンフィグファイルの内容をハードディスクの内容と照らし合わせて更新する
-         ハードディスクの内容をワールドオブジェクトのListにして返す
-        与えられたワールドオブジェクトをコンフィグファイルに書き加える
-        与えられたワールドオブジェクトをコンフィグファイルから消す
-
-        必要な関数:改良案
-
-         コンフィグファイルがないときにコンフィグファイルを作る関数
-         コンフィグファイルからメモリに読み込む関数
-         メモリの内容をコンフィグファイルに書き込む関数
-        コンフィグファイルの内容をハードディスクの内容と照らし合わせて更新する
-         ハードディスクの内容をワールドオブジェクトのListにして返す
-        与えられたワールドオブジェクトをメモリに書き変える
-         */
-        /*
-        バックアップに関するオプションを記録するtxtファイル
-        "バックアップの可否","ワールド名","ワールドへのパス","ワールドの所属するディレクトリ"
-        が入っている
-        */
         public static List<World> configs = new List<World>();
-
         public static string configPath = @".\Config\config.txt";
-
-        //datasの中にworldName,worldDirに当てはまる要素があるかどうか
-        private static bool IsWorldParticular(string worldName, string worldDir, string[] datas) {
-            //Logger.Info(datas[1] + ",\"" + worldName + "\"と" + datas[3] + ",\"" + worldDir + "\"");
-            return datas[1] == "\"" + worldName + "\"" && datas[3] == "\"" + worldDir + "\"";
-        }
 
         public static List<World> GetConfig() => configs;
 
@@ -89,6 +56,7 @@ namespace MABProcessAtWait {
         /// Configファイルを更新する
         /// </summary>
         public static List<World> ReloadConfig() {
+            ConsoleConfig();
             Logger.Debug("call:reloadConfig");
             List<World> worldInHdd = GetWorldDataFromHDD();
             List<World> worldInConfig = GetConfig();
@@ -100,7 +68,6 @@ namespace MABProcessAtWait {
             foreach (World pc in worldInHdd) {
                 Logger.Debug($"pc:{i}回目");
                 //dobackup以外を比較して判定
-                //List<WorldForComparison> _comp = worldInConfig.Select(x => new WorldForComparison(x)).ToList();
                 if (!worldInConfig.Select(x => $"{x.WPath}_{x.isAlive}").ToList().Contains($"{pc.WPath}_{pc.isAlive}")) {
                     Logger.Info($"ADD {pc.WName}");
                     configs.Add(pc);
@@ -112,8 +79,6 @@ namespace MABProcessAtWait {
             Logger.Debug($"HDD   : {worldInHdd.Count()}");
 
             i = 0;
-            //configに存在するがhddに存在しない(削除されたワールド)pathをconfigで死亡扱いにする
-            //isAliveプロパティを追加したので、そちらで管理
             int wI = 0;
             //Logger.Info("-----config一覧-----");
             //foreach(var a in worldInHdd.Select(x => new WorldForComparison(x)).ToList()) {
@@ -256,6 +221,7 @@ namespace MABProcessAtWait {
             }
             Logger.Info("---------------");
         }
+
         /// <summary>
         /// ワールドのバックアップソースが生きているかどうか
         /// </summary>

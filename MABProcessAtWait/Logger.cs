@@ -4,7 +4,7 @@ using System.IO;
 namespace MABProcessAtWait {
     static class Logger {
         public static string logPath = ".\\logs\\MABProcess.txt";
-        private static int outputLevel = 2;
+        private static int outputLevel = 3;
 
         public static void Base(int level, string message) {
             string logLevelStr;
