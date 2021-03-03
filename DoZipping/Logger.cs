@@ -19,7 +19,7 @@ namespace Zipper {
 
         }
 
-        public void Base(int level, string message) {
+        public static void Base(int level, string message) {
             string logLevelStr;
             switch (level) {
                 case 3:
@@ -44,16 +44,16 @@ namespace Zipper {
                 File.AppendAllText(logPath, logMessage);
             }
         }
-        public void Debug(string message) {
+        public static void Debug(string message) {
             Base(3, message);
         }
-        public void Info(string message) {
+        public static void Info(string message) {
             Base(2, message);
         }
-        public void Warn(string message) {
+        public static void Warn(string message) {
             Base(1, message);
         }
-        public void Error(string message) {
+        public static void Error(string message) {
             Base(0, message);
         }
     }

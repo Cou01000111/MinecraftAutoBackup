@@ -49,7 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppConfig.cs" />
-    <Compile Include="GetLog.cs" />
+    <Compile Include="Log.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Process.cs" />
     <Compile Include="Program.cs" />

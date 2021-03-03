@@ -5,13 +5,12 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace Zipper {
-    class GetLog {
-        static Logger logger = new Logger();
+    class Log {
         public static string Leaest() {
             return Base()[Base().Count - 2];
         }
 
-        public static List<string> Nearest(int x) {
+        public static List<string> GetNearest(int x) {
             List<string> logs = new List<string>();
             List<string> _logs = Base();
             for (int i = 0; i < x; i++) {
@@ -20,7 +19,7 @@ namespace Zipper {
             return logs;
         }
 
-        static List<string> Base() {
+        private static List<string> Base() {
             List<string> logs = new List<string>();
             try {
 
@@ -49,7 +48,7 @@ namespace Zipper {
 
         public static bool isRunningOtherZipper() {
             string log = Leaest().Substring(28, Leaest().Length - 28);
-            logger.Debug("leaest:" + log);
+            Logger.Debug("leaest:" + log);
             return !(log == "Exit Process");
         }
     }
