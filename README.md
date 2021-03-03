@@ -1,8 +1,7 @@
 # MinecraftAutoBackup
 
 ## 現バージョンの注意点
-- スタートアップに項目が自動で追加されないので、手動で` .\MinecraftAutoBackup\SubModules\MABProcess.exe `のショートカットを作成し、`shell:startup`に追加しないといけない
-- 現在フォントを変えてもアプリを再起動しないと適応されない
+- beta版なので未知のバグがある可能性が高いです。バグを発見した際はtwitterのDMまでご連絡ください。
 
 ## ダウンロード
 [最新バージョン(beta)](https://github.com/Cou01000111/MinecraftAutoBackup/releases/download/v0.7.3-beta/MinecraftAutoBackup.zip)
