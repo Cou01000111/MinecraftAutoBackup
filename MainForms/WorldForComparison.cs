@@ -1,9 +1,9 @@
 ﻿public class WorldForComparison {
-    public string path { get; set; }
-    public bool isAlive { get; set; }
+    public string WorldPath { get; set; }
+    public bool IsAlive { get; set; }
 
     public WorldForComparison(World w) {
-        path = w.WPath;
-        isAlive = w.isAlive;
+        WorldPath = w.WorldPath;
+        IsAlive = w.IsAlive;
     }
 }

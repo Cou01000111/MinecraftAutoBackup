@@ -7,7 +7,7 @@ class AddInfoButton :Button {
 
     public AddInfoButton(string path) {
         Logger.Debug(path);
-        World = Config.configs.Find(x => x.WPath == path);
+        World = Config.configs.Find(x => x.WorldPath == path);
         Text = "バックアップ一覧";
         Width = (int)Util.FontStyle.Size * 14;
         Height = (int)Util.FontStyle.Size * 3;

@@ -20,21 +20,21 @@ class RestoreFromBackupForm :Form {
     */
     public RestoreFromBackupForm(string backupSourcePath, World backupTarget) {
         Logger.Info($"src[{backupSourcePath}]");
-        Logger.Info($"tar[{backupTarget.WPath}]");
+        Logger.Info($"tar[{backupTarget.WorldPath}]");
         pathSrc = backupSourcePath;
-        pathTar = backupTarget.WPath;
+        pathTar = backupTarget.WorldPath;
         if (!((Directory.Exists(backupSourcePath) || (File.Exists(backupSourcePath))))) {
             Logger.Error($"normal {Directory.Exists(backupSourcePath)}");
             Logger.Error($"zip    {File.Exists(backupSourcePath)}");
             Logger.Error($"バックアップは存在しません");
             return;
         }
-        this.Text = "バックアップから復元します";
-        this.Icon = new Icon(".\\Image\\app.ico");
-        this.Font = Util.FontStyle;
-        this.Padding = new Padding((int)Util.FontStyle.Size * 2);
-        this.ClientSize = new Size((int)Util.FontStyle.Size * 30, (int)Util.FontStyle.Size * 35);
-        this.FormBorderStyle = FormBorderStyle.FixedSingle;
+        Text = "バックアップから復元します";
+        Icon = new Icon(".\\Image\\app.ico");
+        Font = Util.FontStyle;
+        Padding = new Padding((int)Util.FontStyle.Size * 2);
+        ClientSize = new Size((int)Util.FontStyle.Size * 30, (int)Util.FontStyle.Size * 35);
+        FormBorderStyle = FormBorderStyle.FixedSingle;
 
         panel = new FlowLayoutPanel() {
             Padding = new Padding((int)Util.FontStyle.Size),
@@ -69,7 +69,7 @@ class RestoreFromBackupForm :Form {
 
         removeBackup = new CheckBox() {
             Text = $"バックアップ元（{Path.GetFileName(pathSrc)}）を削除する",
-            Width = this.Width - this.Padding.Left * 2 - this.panel.Padding.Left * 2 - 10,
+            Width = Width - Padding.Left * 2 - panel.Padding.Left * 2 - 10,
             Height = (int)Util.FontStyle.Height * 2 + 2,
             //BackColor = Color.Blue,
             //AutoSize = true,
@@ -77,7 +77,7 @@ class RestoreFromBackupForm :Form {
 
         dontOverwriting = new CheckBox() {
             Text = $"バックアップ先（{Path.GetFileName(Path.GetDirectoryName(Path.GetDirectoryName(pathTar)))}\\saves\\{Path.GetFileName(pathTar)}）を上書きしない\n(別名で新規作成する)",
-            Width = this.Width - this.Padding.Left * 2 - this.panel.Padding.Left * 2 - 10,
+            Width = Width - Padding.Left * 2 - panel.Padding.Left * 2 - 10,
             Height = (int)Util.FontStyle.Height * 6,
             //BackColor = Color.Blue,
         };
@@ -85,7 +85,7 @@ class RestoreFromBackupForm :Form {
         doRestore = new Button() {
             Text = "バックアップから復元する",
             Height = (int)Util.FontStyle.Size * 5,
-            Width = this.Width - this.Padding.Left * 2 - this.panel.Padding.Left * 2 - 10,
+            Width = Width - Padding.Left * 2 - panel.Padding.Left * 2 - 10,
             Margin = new Padding(0, 0, 0, 20),
             UseVisualStyleBackColor = true,
             BackColor = SystemColors.Control
@@ -95,17 +95,17 @@ class RestoreFromBackupForm :Form {
         Logger.Info($"{pathSrc}を{pathTar}に上書きします");
         panel.Controls.Add(description);
         panel.Controls.Add(removeBackup);
-        if (backupTarget.isAlive) {
+        if (backupTarget.IsAlive) {
             //バックアップ先ワールドが生きている場合
             panel.Controls.Add(dontOverwriting);
         }
         panel.Controls.Add(doRestore);
-        this.Controls.Add(panel);
+        Controls.Add(panel);
 
-        description.Width = this.panel.Width - this.panel.Padding.Left * 2 - 10;
-        removeBackup.Width = this.panel.Width - this.panel.Padding.Left * 2 - 10;
-        dontOverwriting.Width = this.panel.Width - this.panel.Padding.Left * 2 - 10;
-        doRestore.Width = this.panel.Width - this.panel.Padding.Left * 2 - 10;
+        description.Width = panel.Width - panel.Padding.Left * 2 - 10;
+        removeBackup.Width = panel.Width - panel.Padding.Left * 2 - 10;
+        dontOverwriting.Width = panel.Width - panel.Padding.Left * 2 - 10;
+        doRestore.Width = panel.Width - panel.Padding.Left * 2 - 10;
 
     }
 
@@ -113,15 +113,15 @@ class RestoreFromBackupForm :Form {
         restoreFromBackup(sender, e);
     }
     private void restoreFromBackup(object sender, EventArgs e) {
-        this.Close();
-        string src = this.pathSrc;
-        string tar = this.pathTar;
+        Close();
+        string src = pathSrc;
+        string tar = pathTar;
 
         Logger.Info($" src[{src}]");
         Logger.Info($" tar[{tar}]");
-        if (this.dontOverwriting.Checked) {
+        if (dontOverwriting.Checked) {
             Logger.Info("restore from backup");
-            Logger.Info($"option:dont over writing [{this.dontOverwriting.Checked}],remove backup [{this.removeBackup.Checked}]");
+            Logger.Info($"option:dont over writing [{dontOverwriting.Checked}],remove backup [{removeBackup.Checked}]");
             int i = 0;
             bool ok = false;
             while (!ok) {
@@ -132,11 +132,11 @@ class RestoreFromBackupForm :Form {
             FileSystem.CopyDirectory(src, $"{tar}({i})", true);
         }
         else {
-            Logger.Info($"option:dont over writing [{this.dontOverwriting.Checked}],remove backup [{this.removeBackup.Checked}]");
+            Logger.Info($"option:dont over writing [{dontOverwriting.Checked}],remove backup [{removeBackup.Checked}]");
             FileSystem.CopyDirectory(src, tar, true);
         }
 
-        if (this.removeBackup.Checked) {
+        if (removeBackup.Checked) {
             Logger.Info("元データを消します");
             Directory.Delete(src);
         }

@@ -12,10 +12,10 @@ class BackupDataPanel :FlowLayoutPanel {
     private FlowLayoutPanel panel;
     //コンストラクタ
     public BackupDataPanel() {
-        this.Dock = DockStyle.Fill;
-        this.FlowDirection = FlowDirection.TopDown;
-        this.AutoScroll = true;
-        this.WrapContents = false;
+        Dock = DockStyle.Fill;
+        FlowDirection = FlowDirection.TopDown;
+        AutoScroll = true;
+        WrapContents = false;
 
 
         int iCount = 0;
@@ -27,43 +27,27 @@ class BackupDataPanel :FlowLayoutPanel {
                 Text = "バックアップが存在しません",
                 Margin = new Padding(10),
             };
-            this.Controls.Add(notBackupFile);
+            Controls.Add(notBackupFile);
         }
         else {
             Logger.Info($"{Config.GetConfig().Count()}件のワールドのバックアップを読み込みます");
             foreach (World world in Config.GetConfig()) {
-                ////バックアップがない場合表示しない
-                ////バックアップがなくかつ、元が死んでいる場合はconfigsから削除
-                //if (GetBackupFiles(world.WName, world.WDir).Count() <= 0) {
-                //    if(world.WPath == "dead") {
-                //        deadF = true;
-                //        if (!Config.configs.Remove(world)) {
-                //            //reloadでバックアップが存在しない削除済みワールドはconfigにないはずなのでエラー
-                //            throw new Exception();
-                //        };
-                //        Config.Write();
-                //    }
-                //    continue;
-                //}
                 if (Util.GetBackup(world).Count() == 0) {
                     //バックアップが一つもない場合continue
                     continue;
                 }
 
                 backupDataDir = new Label() {
-                    Text = world.WName + "/" + world.WDir + "",
+                    Text = world.WorldName + "/" + world.WorldDir + "",
                     AutoSize = true,
                     Height = (int)Util.FontStyle.Size * 2,
                     Margin = new Padding((int)Util.FontStyle.Size),
-                    //BackColor = Color.Yellow
                 };
-                if (!world.isAlive) {
+                if (!world.IsAlive) {
                     backupDataDir.ForeColor = Color.Red;
                 }
-                addInfo = new AddInfoButton(world.WPath) {
-
+                addInfo = new AddInfoButton(world.WorldPath) {
                     id = iCount,
-                    //BackColor = Color.Red
                 };
                 dualPanel = new FlowLayoutPanel() {
                     FlowDirection = FlowDirection.LeftToRight,
@@ -91,7 +75,7 @@ class BackupDataPanel :FlowLayoutPanel {
         }
     }
 
-    void addInfo_Click(object sender, EventArgs e) {
+    private void addInfo_Click(object sender, EventArgs e) {
         var button = (AddInfoButton)sender;
         int index = button.id;
         if (this.Controls[index].Controls.Count == 2) {
@@ -104,39 +88,22 @@ class BackupDataPanel :FlowLayoutPanel {
         }
     }
 
-    void addListView(object sender, EventArgs e) {
+    private void addListView(object sender, EventArgs e) {
         var button = (AddInfoButton)sender;
         int index = button.id;
         Logger.Info("call:addListView");
         backupDataList = new BackupDataListView(button.World);
-        //if (backupDataList.Items.Count == 0) {
-        //    Logger.Info("not backup folder");
-        //    return;
-        //}
+
         this.Controls[index].Controls.Add(backupDataList);
         int a = (int)((dualPanel.Height + Margin.Left * 2) + backupDataList.Height);
-        int dh = (int)(dualPanel.Height + Margin.Left * 2);
         this.Controls[index].Height = a;
     }
 
-    void removeListView(object sender, EventArgs e) {
+    private void removeListView(object sender, EventArgs e) {
         Logger.Info("call:removeListView");
         var button = (AddInfoButton)sender;
         int index = button.id;
         this.Controls[index].Controls.Remove(this.Controls[index].Controls[1]);
         this.Controls[index].Height = dualPanel.Height + Margin.Left * 2;
-    }
-    public static List<string> GetBackupFiles(string worldName, string worldDir) {
-        Logger.Info("call:get backup files");
-        if (!Directory.Exists(AppConfig.BackupPath + "\\" + worldDir)) {
-            Logger.Info($"{worldDir}ディレクトリのバックアップデータが一切ないのでフォルダを生成します");
-            Directory.CreateDirectory(AppConfig.BackupPath + "\\" + worldDir);
-        }
-        if (!Directory.Exists(AppConfig.BackupPath + "\\" + worldDir + "\\" + worldName)) {
-            Logger.Info($"{worldName}のバックアップデータが一切ないのでフォルダを生成します");
-            Directory.CreateDirectory(AppConfig.BackupPath + "\\" + worldDir + "\\" + worldName);
-        }
-        List<string> folders = new List<string>(Directory.GetDirectories(AppConfig.BackupPath + "\\" + worldDir + "\\" + worldName));
-        return folders;
     }
 }

@@ -22,18 +22,18 @@ public class AppConfig {
     public static Point ClientPoint { get; set; }
     public static string BackupCount { get; set; }
     public static List<string> AddGameDirPath { get; set; }
-    public static string appConfigPath = ".\\Config\\AppConfig.txt";
+    public static string AppConfigPath = ".\\Config\\AppConfig.txt";
 
     public AppConfig() {
         AddGameDirPath = new List<string>();
-        if (!File.Exists(appConfigPath)) {
+        if (!File.Exists(AppConfigPath)) {
             //AppConfigファイルがなかった場合
             string Text =
                 $"{System.Environment.GetFolderPath(Environment.SpecialFolder.Personal)}\\MinecraftAutoBackup\nMeiryo UI\nnormal\nja\n600\n600\n0\n0\n5";
-            File.WriteAllText(appConfigPath, Text);
+            File.WriteAllText(AppConfigPath, Text);
         }
         List<string> datas = new List<string>();
-        using (StreamReader reader = new StreamReader(appConfigPath, Encoding.GetEncoding("utf-8"))) {
+        using (StreamReader reader = new StreamReader(AppConfigPath, Encoding.GetEncoding("utf-8"))) {
             while (reader.Peek() >= 0) {
                 datas.Add(reader.ReadLine());
             }
@@ -70,7 +70,7 @@ public class AppConfig {
             Text += $"\n{path}";
         }
         Logger.Info(" Writing "+Text);
-        File.WriteAllText(appConfigPath, Text);
+        File.WriteAllText(AppConfigPath, Text);
     }
 
 }

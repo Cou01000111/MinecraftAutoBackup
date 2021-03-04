@@ -10,34 +10,34 @@ using System.Windows.Forms;
 //結局メリットはよくわからなかった
 internal class AppConfigForm :Form {
 
-    TabControl tab = new TabControl();
-    TabPage backupTab = new TabPage();
-    TabPage fontTab = new TabPage();
-    TabPage startupTab = new TabPage();
+    private TabControl tab = new TabControl();
+    private TabPage backupTab = new TabPage();
+    private TabPage fontTab = new TabPage();
+    private TabPage startupTab = new TabPage();
 
-    FlowLayoutPanel backupTabF = new FlowLayoutPanel();
-    Label backupPath = new Label();
-    FlowLayoutPanel backupPathPanel = new FlowLayoutPanel();
-    TextBox backupPathInput = new TextBox();
-    Button refe = new Button();
-    CheckBox doZip = new CheckBox();
-    FlowLayoutPanel backupCountPanel = new FlowLayoutPanel();
-    Label backupCountText = new Label();
-    ComboBox backupCount = new ComboBox();
-    Button addGameDir = new Button();
-    Button addWorldData = new Button();
+    private FlowLayoutPanel backupTabF = new FlowLayoutPanel();
+    private Label backupPath = new Label();
+    private FlowLayoutPanel backupPathPanel = new FlowLayoutPanel();
+    private TextBox backupPathInput = new TextBox();
+    private Button refe = new Button();
+    private CheckBox doZip = new CheckBox();
+    private FlowLayoutPanel backupCountPanel = new FlowLayoutPanel();
+    private Label backupCountText = new Label();
+    private ComboBox backupCount = new ComboBox();
+    private Button addGameDir = new Button();
+    private Button addWorldData = new Button();
 
 
-    FlowLayoutPanel fontTabF = new FlowLayoutPanel();
-    Label fontName = new Label();
-    Button fontChange = new Button();
+    private FlowLayoutPanel fontTabF = new FlowLayoutPanel();
+    private Label fontName = new Label();
+    private Button fontChange = new Button();
 
-    FlowLayoutPanel okCanselFlowPanel = new FlowLayoutPanel();
-    Button ok = new Button();
-    Button cansel = new Button();
+    private FlowLayoutPanel okCanselFlowPanel = new FlowLayoutPanel();
+    private Button ok = new Button();
+    private Button cansel = new Button();
 
-    FlowLayoutPanel startupTabF = new FlowLayoutPanel();
-    CheckBox addStartup = new CheckBox();
+    private FlowLayoutPanel startupTabF = new FlowLayoutPanel();
+    private CheckBox addStartup = new CheckBox();
 
 
     public AppConfigForm() {
@@ -63,7 +63,6 @@ internal class AppConfigForm :Form {
         ClientSize = new Size(500, 300);
         Font = new Font(AppConfig.Font.Name, 10);
         Padding = new Padding(8);
-        FormClosing += new FormClosingEventHandler(AppConfigForm_Closing);
 
         //各種コントロール設定
 
@@ -72,7 +71,7 @@ internal class AppConfigForm :Form {
         backupTab.BackColor = SystemColors.Window;
         fontTab.BackColor = SystemColors.Window;
         startupTab.BackColor = SystemColors.Window;
-        
+
         okCanselFlowPanel.Dock = DockStyle.Bottom;
         okCanselFlowPanel.Height = 40;
         okCanselFlowPanel.FlowDirection = FlowDirection.RightToLeft;
@@ -194,7 +193,7 @@ internal class AppConfigForm :Form {
             worlds.AddRange(Config.GetWorldDataFromHDD(addGameDir));
         }
         foreach (var w in worlds) {
-            Logger.Info($"configsに{w.WName}を追加しました");
+            Logger.Info($"configsに{w.WorldName}を追加しました");
             Config.configs.Add(w);
             Config.Write();
 
@@ -296,7 +295,7 @@ internal class AppConfigForm :Form {
     private void addStartup_CheckedChanged(object sender, EventArgs e) {
         Logger.Debug("call:addStartup_CheckedChanged");
         if (addStartup.Checked) {
-            Logger.Debug(true);
+            Logger.Debug("true");
             //スタートアップ登録
             //ショートカットの作成
             string shortcutPath = System.IO.Path.Combine(Environment.GetFolderPath(System.Environment.SpecialFolder.Startup), @"MinecraftAutoBackup.lnk");
@@ -304,24 +303,15 @@ internal class AppConfigForm :Form {
             string targetPath = Path.GetDirectoryName(Application.ExecutablePath) + "\\SubModule\\MABProcessAtWait";
             Logger.Debug($"{targetPath}へのショートカットを{shortcutPath}に作成します");
 
-            // WshShellを作成
-            IWshRuntimeLibrary.WshShell shell = new IWshRuntimeLibrary.WshShell();
-            // ショートカットのパスを指定して、WshShortcutを作成
-            IWshRuntimeLibrary.IWshShortcut shortcut = (IWshRuntimeLibrary.IWshShortcut)shell.CreateShortcut(shortcutPath);
-            // ①リンク先
-            shortcut.TargetPath = targetPath;
-            // ②引数
-            shortcut.Arguments = "";
-            // ③作業フォルダ
-            shortcut.WorkingDirectory = Application.StartupPath;
-            // ④実行時の大きさ 1が通常、3が最大化、7が最小化
-            shortcut.WindowStyle = 1;
-            // ⑤コメント
-            shortcut.Description = "MABProcessへのショートカットです。";
-            // ⑥アイコンのパス 自分のEXEファイルのインデックス0のアイコン
-            shortcut.IconLocation = Application.ExecutablePath + ",0";
-
             // ショートカットを作成
+            IWshRuntimeLibrary.WshShell shell = new IWshRuntimeLibrary.WshShell();
+            IWshRuntimeLibrary.IWshShortcut shortcut = (IWshRuntimeLibrary.IWshShortcut)shell.CreateShortcut(shortcutPath);
+            shortcut.TargetPath = targetPath;
+            shortcut.Arguments = "";
+            shortcut.WorkingDirectory = Application.StartupPath;
+            shortcut.WindowStyle = 1;
+            shortcut.Description = "MABProcessへのショートカットです。";
+            shortcut.IconLocation = Application.ExecutablePath + ",0";
             shortcut.Save();
 
             // 後始末
@@ -344,15 +334,11 @@ internal class AppConfigForm :Form {
             }
         }
         else {
-            Logger.Debug(false);
+            Logger.Debug("false");
             //解除
             Logger.Debug($"{Environment.GetFolderPath(System.Environment.SpecialFolder.Startup)}\\MinecraftAutoBackup.lnkを削除します");
             File.Delete($"{Environment.GetFolderPath(System.Environment.SpecialFolder.Startup)}\\MinecraftAutoBackup.lnk");
         }
-        
-    }
-
-    private void AppConfigForm_Closing(object sender, EventArgs e) {
 
     }
 

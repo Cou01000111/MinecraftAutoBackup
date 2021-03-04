@@ -5,8 +5,8 @@
 
 class BackupDataListViewItem :ListViewItem {
     public BackupDataListViewItem(string[] items, World w) : base(items) {
-        world = w;
+        World = w;
     }
 
-    public World world { get; set; }
+    public World World { get; set; }
 }

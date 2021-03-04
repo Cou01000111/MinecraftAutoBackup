@@ -41,7 +41,7 @@ class BackupDataListView :ListView {
         };
 
         openInExplorer.Click += new EventHandler(OpenInExplorer_Click);
-        if (worldObj.isAlive)
+        if (worldObj.IsAlive)
             cMenu.Items.Add(openInExplorer);
 
         this.ContextMenuStrip = cMenu;
@@ -55,20 +55,21 @@ class BackupDataListView :ListView {
             clmnBackupTime,clmnAffiliationWorldName,clmnWorldAffiliationDir
         });
 
+        //なんかこれやると横幅そろうらしい
         foreach (ColumnHeader ch in this.Columns) {
             ch.Width = -2;
         }
 
-        Load(worldObj);
+        LoadFromBackupFolder(worldObj);
         if (Items.Count > 0) {
-            Logger.Debug(Height);
+            Logger.Debug($"{Height}");
             Height /= 4;
             Height *= Items.Count + 1;
         }
     }
-    void Load(World worldObj) {
-        Logger.Info("" + worldObj.WName + "の一覧以下のパスからロードします");
-        Logger.Info($"path:{worldObj.WPath}");
+    private void LoadFromBackupFolder(World worldObj) {
+        Logger.Info("" + worldObj.WorldName + "の一覧以下のパスからロードします");
+        Logger.Info($"path:{worldObj.WorldPath}");
         try {
             List<string> backupFolders = new List<string>(GetBackups(worldObj));
             Logger.Info($"backupFolderCount[{backupFolders.Count()}]");
@@ -78,7 +79,7 @@ class BackupDataListView :ListView {
                     Logger.Debug("a::::::::::::" + backupFolder);
                 }
                 DateTime time = DateTime.ParseExact((Path.GetFileName(backupFolder)).Substring(0, 12), "yyyyMMddHHmm", null);
-                this.Items.Add(new BackupDataListViewItem(new string[] { time.ToString("yyyy-MM-dd HH:mm"), worldObj.WName, worldObj.WDir }, worldObj));
+                this.Items.Add(new BackupDataListViewItem(new string[] { time.ToString("yyyy-MM-dd HH:mm"), worldObj.WorldName, worldObj.WorldDir }, worldObj));
             }
         }
         catch (DirectoryNotFoundException) {
@@ -87,10 +88,10 @@ class BackupDataListView :ListView {
     }
 
     private List<string> GetBackups(World w) {
-        return Directory.GetFileSystemEntries(AppConfig.BackupPath + "\\" + w.WDir + "\\" + w.WName).ToList();
+        return Directory.GetFileSystemEntries(AppConfig.BackupPath + "\\" + w.WorldDir + "\\" + w.WorldName).ToList();
     }
 
-    void Menu_Opening(object sender, CancelEventArgs e) {
+    private void Menu_Opening(object sender, CancelEventArgs e) {
         Logger.Info("call:Menu_Opening");
         Point p = this.PointToClient(Cursor.Position);
         BackupDataListViewItem item = this.HitTest(p).Item as BackupDataListViewItem;
@@ -101,8 +102,8 @@ class BackupDataListView :ListView {
             ContextMenuStrip menu = sender as ContextMenuStrip;
             if (menu != null) {
                 Logger.Info($"{item}");
-                Logger.Info(item.world.WName);
-                Logger.Info(item.world.isAlive);
+                Logger.Info(item.World.WorldName);
+                Logger.Info($"{item.World.IsAlive}");
                 selectedItem = item;
             }
         }
@@ -115,8 +116,8 @@ class BackupDataListView :ListView {
         Logger.Info("call:ReturnBackup_Click");
         ContextMenuStrip menu = sender as ContextMenuStrip;
         if (selectedItem != null) {
-            Logger.Info(selectedItem.world.isAlive);
-            if (!selectedItem.world.isAlive) {
+            Logger.Info($"{ selectedItem.World.IsAlive}");
+            if (!selectedItem.World.IsAlive) {
                 //バックアップ元ワールドが死んでいる場合messageBox出現
                 Logger.Info(" 死亡済みワールドのバックアップが選択されました");
                 MessageBox.Show("同名の別ワールドがゲームディレクトリ内に存在しています", "Minecraft Auto Backup", buttons: MessageBoxButtons.OK);
@@ -124,16 +125,16 @@ class BackupDataListView :ListView {
             DateTime dt = DateTime.ParseExact(selectedItem.SubItems[0].Text, "yyyy-MM-dd HH:mm", null);
             string fileName = dt.ToString("yyyyMMddHHmm");
             string src;
-            if (File.Exists($"{AppConfig.BackupPath}\\{selectedItem.SubItems[2].Text}\\{selectedItem.world.WName}\\{fileName}.zip")) {
+            if (File.Exists($"{AppConfig.BackupPath}\\{selectedItem.SubItems[2].Text}\\{selectedItem.World.WorldName}\\{fileName}.zip")) {
                 // バックアップがzipだった場合
-                src = $"{AppConfig.BackupPath}\\{selectedItem.SubItems[2].Text}\\{selectedItem.world.WName}\\{fileName}.zip";
+                src = $"{AppConfig.BackupPath}\\{selectedItem.SubItems[2].Text}\\{selectedItem.World.WorldName}\\{fileName}.zip";
             }
             else {
                 // バックアップがzipじゃなかった場合
-                src = $"{AppConfig.BackupPath}\\{selectedItem.SubItems[2].Text}\\{selectedItem.world.WName}\\{fileName}";
+                src = $"{AppConfig.BackupPath}\\{selectedItem.SubItems[2].Text}\\{selectedItem.World.WorldName}\\{fileName}";
             }
 
-            World tar = selectedItem.world;
+            World tar = selectedItem.World;
             RestoreFromBackupForm restoreFrom = new RestoreFromBackupForm(src, tar);
             restoreFrom.Show();
         }

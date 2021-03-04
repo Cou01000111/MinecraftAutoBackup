@@ -17,33 +17,33 @@ class WorldListView :ListView {
         clmnWorldName = new ColumnHeader() { Text = "ワールド名" };
         clmnWorldDir = new ColumnHeader() { Text = "所属ディレクトリ" };
 
-        this.Columns.AddRange(new ColumnHeader[]{
+        Columns.AddRange(new ColumnHeader[]{
             clmnDoBackup,
             clmnWorldName,
             clmnWorldDir,
         });
 
-        foreach (ColumnHeader ch in this.Columns) {
+        foreach (ColumnHeader ch in Columns) {
             ch.Width = -1;
         }
 
-        this.Columns[0].Width = (int)Util.FontStyle.Size * 14;
+        Columns[0].Width = (int)Util.FontStyle.Size * 14;
 
-        this.ItemCheck += new ItemCheckEventHandler(listView_ItemClick);
+        ItemCheck += new ItemCheckEventHandler(listView_ItemClick);
 
         LoadFromConfigToList();
 
     }
 
     public void LoadFromConfigToList() {
-        this.Items.Clear();
+        Items.Clear();
         List<World> listDatas = Config.GetConfig();
         int iItemCount = 0;
         foreach (var datas in listDatas) {
-            if (datas.isAlive) {
-                this.Items.Add(new ListViewItem(new string[] { " ", datas.WName, datas.WDir }));
-                Logger.Debug(datas.WDoBackup);
-                this.Items[iItemCount].Checked = Convert.ToBoolean(datas.WDoBackup);
+            if (datas.IsAlive) {
+                Items.Add(new ListViewItem(new string[] { " ", datas.WorldName, datas.WorldDir }));
+                Logger.Debug($"{datas.WorldDoBackup}");
+                Items[iItemCount].Checked = Convert.ToBoolean(datas.WorldDoBackup);
                 iItemCount++;
             }
 
@@ -63,8 +63,8 @@ class WorldListView :ListView {
     public List<string[]> GetWorldListView() {
         List<string[]> _return = new List<string[]>();
         int i = 0;
-        foreach (var item in this.Items) {
-            _return.Add(new string[] { this.Items[i].Checked.ToString(), this.Items[i].SubItems[1].Text, this.Items[i].SubItems[2].Text });
+        foreach (var item in Items) {
+            _return.Add(new string[] { Items[i].Checked.ToString(), Items[i].SubItems[1].Text, Items[i].SubItems[2].Text });
             i++;
         }
         return _return;

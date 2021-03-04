@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 public class Util {
-    public static Task task;
+    public static Task Task;
 
     private static Font fontStyle;
 
@@ -51,10 +51,10 @@ public class Util {
     //渡されたworldの現在存在するバックアップをListにして返す
     public static List<string> GetBackup(World w) {
         List<string> backups = new List<string>();
-        if (Directory.Exists($"{AppConfig.BackupPath}\\{w.WDir}\\{w.WName}")) {
+        if (Directory.Exists($"{AppConfig.BackupPath}\\{w.WorldDir}\\{w.WorldName}")) {
             //バックアップフォルダがある場合のみ実行
-            backups.AddRange(Directory.GetDirectories($"{AppConfig.BackupPath}\\{w.WDir}\\{w.WName}"));
-            backups.AddRange(Directory.GetFiles($"{AppConfig.BackupPath}\\{w.WDir}\\{w.WName}"));
+            backups.AddRange(Directory.GetDirectories($"{AppConfig.BackupPath}\\{w.WorldDir}\\{w.WorldName}"));
+            backups.AddRange(Directory.GetFiles($"{AppConfig.BackupPath}\\{w.WorldDir}\\{w.WorldName}"));
         }
         return backups;
     }

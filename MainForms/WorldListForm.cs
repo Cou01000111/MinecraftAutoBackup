@@ -23,16 +23,16 @@ class WorldListForm :Form {
 
     public WorldListForm() {
         //Form設定
-        this.Text = "Minecraft Auto Backup";
-        this.Icon = new Icon(".\\Image\\app.ico");
-        this.Font = new Font(AppConfig.Font.Name, 11);
+        Text = "Minecraft Auto Backup";
+        Icon = new Icon(".\\Image\\app.ico");
+        Font = new Font(AppConfig.Font.Name, 11);
         Logger.Debug(AppConfig.Font.Name);
 
         Util.FontStyle = AppConfig.Font;
-        this.FormClosing += new FormClosingEventHandler(WorldListForm_FormClosing);
-        this.Resize += new EventHandler(Form_Resize);
-        this.yesColor = Color.FromArgb(15, 27, 51);
-        this.cancelColor = Color.FromArgb(147, 31, 31);
+        FormClosing += new FormClosingEventHandler(WorldListForm_FormClosing);
+        Resize += new EventHandler(Form_Resize);
+        yesColor = Color.FromArgb(15, 27, 51);
+        cancelColor = Color.FromArgb(147, 31, 31);
 
 
         #region tabControl
@@ -54,7 +54,7 @@ class WorldListForm :Form {
         #region ツールバー
 
         menu = new MenuStrip() {
-            Font = this.Font,
+            Font = Font,
             Dock = DockStyle.Top,
             Padding = new Padding(0, 0, 0, 0),
             Height = (int)Util.FontStyle.Size * 2 + 4,
@@ -90,7 +90,7 @@ class WorldListForm :Form {
         //表示
         //ヘルプ
 
-        //this.Controls.Add(menu);[
+        //Controls.Add(menu);[
 
         #endregion
 
@@ -152,7 +152,7 @@ class WorldListForm :Form {
 
         };
 
-        this.BackColor = SystemColors.Window;
+        BackColor = SystemColors.Window;
 
         flowLayoutPanel.Controls.Add(cancel);
         flowLayoutPanel.Controls.Add(ok);
@@ -171,32 +171,32 @@ class WorldListForm :Form {
         tabPageBackup.Controls.Add(backupDataTable);
         #endregion
 
-        this.Controls.Add(tabControl);
-        this.Controls.Add(menu);
+        Controls.Add(tabControl);
+        Controls.Add(menu);
         int i = 0;
-        foreach (Control a in this.backupDataTable.Controls) {
-            this.backupDataTable.Controls[i].Width = this.Width - 60;
-            //this.backupDataTable.Controls[i].Controls[0].Width = this.Width - 60;
+        foreach (Control a in backupDataTable.Controls) {
+            backupDataTable.Controls[i].Width = Width - 60;
+            //backupDataTable.Controls[i].Controls[0].Width = Width - 60;
             i++;
         }
-        this.Load += new EventHandler(Form_Load);
+        Load += new EventHandler(Form_Load);
     }
 
-    void Form_Load(object sender, EventArgs e) {
-        this.ClientSize = AppConfig.ClientSize;
-        this.Location = AppConfig.ClientPoint;
+    private void Form_Load(object sender, EventArgs e) {
+        ClientSize = AppConfig.ClientSize;
+        Location = AppConfig.ClientPoint;
     }
 
-    void Form_Resize(object sender, EventArgs e) {
+    private void Form_Resize(object sender, EventArgs e) {
         //Logger.Info("大きさが変更されました大きさが変更されました");
         int i = 0;
-        foreach (Control a in this.backupDataTable.Controls) {
-            this.backupDataTable.Controls[i].Width = this.Width - 60;
-            //this.backupDataTable.Controls[i].Controls[0].Width = this.Width - 60;
+        foreach (Control a in backupDataTable.Controls) {
+            backupDataTable.Controls[i].Width = Width - 60;
+            //backupDataTable.Controls[i].Controls[0].Width = Width - 60;
             i++;
         }
     }
-    void Ok_Click(object sender, EventArgs e) {
+    private void Ok_Click(object sender, EventArgs e) {
         Logger.Info("push ok");
         List<string[]> configs = worldListView.GetWorldListView();
         foreach (var config in configs) {
@@ -204,23 +204,23 @@ class WorldListForm :Form {
             Config.Change(config[1], config[2], config[0]);
         }
         Config.Write();
-        this.Close();
+        Close();
         //Application.Exit();
     }
-    void Cancel_Click(object sender, EventArgs e) {
+    private void Cancel_Click(object sender, EventArgs e) {
         string message = "設定を保存しないで終了しますか？";
         string caption = "保存できてないよ？";
         MessageBoxButtons buttons = MessageBoxButtons.YesNo;
         DialogResult result = MessageBox.Show(this, message, caption, buttons, MessageBoxIcon.Question);
         if (result == DialogResult.Yes) {
-            this.Close();
+            Close();
         }
     }
-    void WorldListForm_FormClosing(object sender, CancelEventArgs e) {
+    private void WorldListForm_FormClosing(object sender, CancelEventArgs e) {
         Logger.Info("終了時処理を開始します");
 
-        AppConfig.ClientPoint = this.Location;
-        AppConfig.ClientSize = this.ClientSize;
+        AppConfig.ClientPoint = Location;
+        AppConfig.ClientSize = ClientSize;
         AppConfig.WriteAppConfig();
         try {
             System.Diagnostics.Process.Start(".\\SubModule\\MABProcessAtWait.exe");
@@ -235,11 +235,11 @@ class WorldListForm :Form {
             Logger.Error(f.Message);
         }
     }
-    void Exit_Click(object sender, EventArgs e) {
+    private void Exit_Click(object sender, EventArgs e) {
         Logger.Info("push exit");
-        this.Close();
+        Close();
     }
-    void Config_Click(object sender, EventArgs e) {
+    private void Config_Click(object sender, EventArgs e) {
         AppConfigForm appConfigForm = new AppConfigForm();
         appConfigForm.Owner = this;
         appConfigForm.Show();

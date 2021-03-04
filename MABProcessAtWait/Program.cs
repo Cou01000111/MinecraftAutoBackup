@@ -226,7 +226,7 @@ namespace MABProcessAtWait {
                 }
 
             }
-            Config.ReloadConfig();
+            Config.SyncConfig();
             Logger.Info("全バックアップが完了しました ");
 
             timer.Enabled = true;

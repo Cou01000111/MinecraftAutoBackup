@@ -9,13 +9,13 @@ class Program {
 
         new AppConfig();
 
-        if (!File.Exists(Config.configPath)) {
+        if (!File.Exists(Config.ConfigPath)) {
             Logger.Info("configファイルがないのでconfigファイルを作成します");
             Config.MakeConfig();
         }
         else {
             Config.Load();
-            Config.ReloadConfig();
+            Config.SyncConfig();
         }
 
         Logger.Info("----------------------");
