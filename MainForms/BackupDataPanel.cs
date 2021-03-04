@@ -30,8 +30,8 @@ class BackupDataPanel :FlowLayoutPanel {
             Controls.Add(notBackupFile);
         }
         else {
-            Logger.Info($"{Config.GetConfig().Count()}件のワールドのバックアップを読み込みます");
-            foreach (World world in Config.GetConfig()) {
+            Logger.Info($"{Config.Configs.Count()}件のワールドのバックアップを読み込みます");
+            foreach (World world in Config.Configs) {
                 if (Util.GetBackup(world).Count() == 0) {
                     //バックアップが一つもない場合continue
                     continue;

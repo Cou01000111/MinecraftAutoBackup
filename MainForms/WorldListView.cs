@@ -37,7 +37,7 @@ class WorldListView :ListView {
 
     public void LoadFromConfigToList() {
         Items.Clear();
-        List<World> listDatas = Config.GetConfig();
+        List<World> listDatas = Config.Configs;
         int iItemCount = 0;
         foreach (var datas in listDatas) {
             if (datas.IsAlive) {

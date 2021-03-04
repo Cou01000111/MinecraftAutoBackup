@@ -88,6 +88,9 @@
     <Compile Include="AppConfigForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="BackupDataListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="BackupDataListViewItem.cs" />
     <Compile Include="BackupDataPanel.cs">
       <SubType>Component</SubType>

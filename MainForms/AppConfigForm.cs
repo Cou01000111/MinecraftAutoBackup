@@ -194,7 +194,7 @@ internal class AppConfigForm :Form {
         }
         foreach (var w in worlds) {
             Logger.Info($"configsに{w.WorldName}を追加しました");
-            Config.configs.Add(w);
+            Config.Configs.Add(w);
             Config.Write();
 
         }
