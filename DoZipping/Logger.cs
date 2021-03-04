@@ -28,6 +28,7 @@ namespace Zipper {
                 Base("WARN ", message);
             }
         }
+
         public static void Error(string message) {
             if (outputLevel >= 0) {
                 Base("ERROR", message);

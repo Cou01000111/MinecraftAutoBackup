@@ -246,9 +246,9 @@ namespace MABProcessAtWait {
             List<string> worldPasses = new List<string>();
             _worldPasses = Config.GetConfig();
             foreach (World w in _worldPasses) {
-                if (w.WDoBackup && w.isAlive) {
+                if (w.WorldDoBackup && w.WorldIsAlive) {
                     //バックアップをする予定でかつ、バックアップ元が生きているワールドのみ追加
-                    worldPasses.Add(w.WPath);
+                    worldPasses.Add(w.WorldPath);
                 }
             }
             return worldPasses;

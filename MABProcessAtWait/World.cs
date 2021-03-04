@@ -14,25 +14,25 @@ image
 
 namespace MABProcessAtWait {
     public class World {
-        public bool WDoBackup { get; set; }
-        public string WPath { get; set; }
-        public string WName { get; set; }
-        public string WDir { get; set; }
-        public bool isAlive { get; set; }
+        public bool WorldDoBackup { get; set; }
+        public string WorldPath { get; set; }
+        public string WorldName { get; set; }
+        public string WorldDir { get; set; }
+        public bool WorldIsAlive { get; set; }
         public World(string path) {
-            WDoBackup = true;
-            WPath = path;
-            WName = Path.GetFileName(path);
-            WDir = Path.GetFileName(Path.GetDirectoryName(Path.GetDirectoryName(path)));
-            isAlive = true;
+            WorldDoBackup = true;
+            WorldPath = path;
+            WorldName = Path.GetFileName(path);
+            WorldDir = Path.GetFileName(Path.GetDirectoryName(Path.GetDirectoryName(path)));
+            WorldIsAlive = true;
         }
 
         public World(string path, bool doBackup, bool _isAlive) {
-            WDoBackup = doBackup;
-            WPath = path;
-            WName = Path.GetFileName(path);
-            WDir = Path.GetFileName(Path.GetDirectoryName(Path.GetDirectoryName(path)));
-            isAlive = _isAlive;
+            WorldDoBackup = doBackup;
+            WorldPath = path;
+            WorldName = Path.GetFileName(path);
+            WorldDir = Path.GetFileName(Path.GetDirectoryName(Path.GetDirectoryName(path)));
+            WorldIsAlive = _isAlive;
         }
     }
 }

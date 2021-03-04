@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace Zipper {
+namespace MABProcessAtWait {
     class Logger {
         public static string logPath = ".\\logs\\Zipper.txt";
         private static int outputLevel = 3;

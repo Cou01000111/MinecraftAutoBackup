@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace Zipper {
     class Logger {
         public static string logPath = ".\\logs\\Zipper.txt";
         private static int outputLevel = 3;
@@ -49,4 +48,3 @@ namespace Zipper {
             return GetLogFromFile()[GetLogFromFile().Count - 2];
         }
     }
-}

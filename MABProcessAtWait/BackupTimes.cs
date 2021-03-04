@@ -14,11 +14,11 @@ image
 
 namespace MABProcessAtWait {
     public class BackupTimes {
-        public string worldPath;
-        public DateTime nextBackupTime;
+        public string WorldPath;
+        public DateTime NextBackupTime;
         public BackupTimes(string path, string time) {
-            worldPath = path;
-            nextBackupTime = DateTimeOffset.FromUnixTimeSeconds(long.Parse(time)).DateTime;
+            WorldPath = path;
+            NextBackupTime = DateTimeOffset.FromUnixTimeSeconds(long.Parse(time)).DateTime;
         }
     }
 }
