@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Zipper {
     class Logger {
@@ -42,6 +44,21 @@ namespace Zipper {
         }
         public static void Error(string message) {
             Base(0, message);
+        }
+
+        public static List<string> GetLogFromFile() {
+            List<string> logs = new List<string>();
+
+            using (StreamReader s = new StreamReader(Logger.logPath)) {
+                string _logs = s.ReadToEnd();
+                logs = _logs.Split('\n').ToList();
+            }
+            logs.Reverse();
+            return logs;
+        }
+
+        public static string GetNearestLogFromFile() {
+            return GetLogFromFile()[GetLogFromFile().Count - 2];
         }
     }
 }
