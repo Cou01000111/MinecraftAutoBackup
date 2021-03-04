@@ -8,25 +8,7 @@ namespace Zipper {
         public static string logPath = ".\\logs\\Zipper.txt";
         private static int outputLevel = 3;
 
-        private static void Base(int level, string message) {
-            string logLevelStr;
-            switch (level) {
-                case 3:
-                    logLevelStr = "DEBUG";
-                    break;
-                case 2:
-                    logLevelStr = "INFO ";
-                    break;
-                case 1:
-                    logLevelStr = "WARN ";
-                    break;
-                case 0:
-                    logLevelStr = "ERROR";
-                    break;
-                default:
-                    logLevelStr = "NONE";
-                    break;
-            }
+        private static void Base(string logLevelStr, string message, int level) {
             if (level <= outputLevel) {
                 string logMessage = $"{DateTime.Now.ToString($"yyyy/MM/dd-HH:mm:ss")} [{logLevelStr}]:{message}\n";
                 Console.WriteLine(logMessage);
@@ -34,16 +16,16 @@ namespace Zipper {
             }
         }
         public static void Debug(string message) {
-            Base(3, message);
+            Base("DEBUG", message, 3);
         }
         public static void Info(string message) {
-            Base(2, message);
+            Base("INFO ", message, 2);
         }
         public static void Warn(string message) {
-            Base(1, message);
+            Base("WARN ", message, 1);
         }
         public static void Error(string message) {
-            Base(0, message);
+            Base("ERROR", message, 0);
         }
 
         public static List<string> GetLogFromFile() {
