@@ -16,7 +16,7 @@ namespace Zipper {
 
             if (args.ToList().Count() == 0) {
                 Logger.Error("argsが存在しません");
-                EndTimeProcess();
+                EndTimeProcess(false);
                 return;
             }
 
@@ -52,7 +52,7 @@ namespace Zipper {
             }
             else {
                 Logger.Error("Args Error");
-                EndTimeProcess();
+                EndTimeProcess(false);
                 return;
             }
 
@@ -67,7 +67,7 @@ namespace Zipper {
             catch (Exception e){
                 Logger.Error("tmpファイルの作成に失敗しました");
                 Logger.Error(e.StackTrace);
-                EndTimeProcess();
+                EndTimeProcess(false);
             }
 
             Logger.Info($"{tmpPath}:が作成されました");
@@ -119,10 +119,7 @@ namespace Zipper {
                     skipCount++;
                 }
             }
-            Logger.Info($"{zippingCount}件圧縮済み,{skipCount}件のスルー,{errorCount}件のエラーが発生しました");
-            Directory.Delete(AppConfig.BackupPath, true);
-            FileSystem.CopyDirectory(tmpPath, AppConfig.BackupPath);
-            EndTimeProcess();
+            EndTimeProcess(true);
         }
 
         private static void DecompProcess(List<string> backups) {
@@ -182,7 +179,7 @@ namespace Zipper {
             Logger.Info($"{zippingCount}件圧縮済み,{skipCount}件のスルー,{errorCount}件のエラーが発生しました");
             Directory.Delete(AppConfig.BackupPath, true);
             FileSystem.CopyDirectory(tmpPath, AppConfig.BackupPath);
-            EndTimeProcess();
+            EndTimeProcess(true);
         }
 
 
@@ -222,7 +219,6 @@ namespace Zipper {
                     Logger.Error(e.Message);
                     Logger.Error(e.StackTrace);
                 }
-                
             }
             
             Logger.Info("Exit Process");

@@ -166,7 +166,7 @@ namespace MABProcessAtWait {
         /// <summary>
         /// PCからワールドデータ一覧を取得
         /// </summary>
-        /// <returns>取得したList<world></returns>
+        /// <returns>取得したList(world)</returns>
         private static List<World> GetWorldDataFromHDD() {
             Logger.Debug("call:GetWorldDataFromPC");
             List<World> worlds = new List<World>();
@@ -176,7 +176,6 @@ namespace MABProcessAtWait {
                 List<string> dirsInDir = Directory.GetDirectories(dir).ToList();
                 dirsInDir = dirsInDir.Select(x => Path.GetFileName(x)).Cast<string>().ToList();
                 if (dirsInDir.Contains("logs") && dirsInDir.Contains("resourcepacks") && dirsInDir.Contains("saves")) {
-                    //Logger.Info($"ゲームディレクトリ[{dir}]を発見しました");
                     gameDirectory.Add(dir);
                 }
             }
@@ -186,9 +185,6 @@ namespace MABProcessAtWait {
                     worlds.Add(new World(Util.TrimDoubleQuotationMarks(worldPath)));
                 }
             }
-            //foreach(var a in worlds) {
-            //    Logger.Info($"world[{a.WName}]");
-            //}
             return worlds;
         }
 
@@ -196,7 +192,7 @@ namespace MABProcessAtWait {
         /// PCからワールドデータ一覧を取得
         /// </summary>
         /// <param name="gameDirectory"></param>
-        /// <returns>取得したList<world></returns>
+        /// <returns>取得したList(world)</returns>
         private static List<World> GetWorldDataFromHDD(List<string> gameDirectory) {
             List<World> worlds = new List<World>();
             Logger.Debug("call:GetWorldDataFromPC");
@@ -208,9 +204,6 @@ namespace MABProcessAtWait {
                     }
                 }
             }
-            //foreach(var a in worlds) {
-            //    Logger.Info($"world[{a.WName}]");
-            //}
             return worlds;
         }
 

@@ -8,24 +8,30 @@ namespace Zipper {
         public static string logPath = ".\\logs\\Zipper.txt";
         private static int outputLevel = 3;
 
-        private static void Base(string logLevelStr, string message, int level) {
-            if (level <= outputLevel) {
-                string logMessage = $"{DateTime.Now.ToString($"yyyy/MM/dd-HH:mm:ss")} [{logLevelStr}]:{message}\n";
-                Console.WriteLine(logMessage);
-                File.AppendAllText(logPath, logMessage);
-            }
+        private static void Base(string logLevelStr, string message) {
+            string logMessage = $"{DateTime.Now.ToString($"yyyy/MM/dd-HH:mm:ss")} [{logLevelStr}]:{message}\n";
+            Console.WriteLine(logMessage);
+            File.AppendAllText(logPath, logMessage);
         }
         public static void Debug(string message) {
-            Base("DEBUG", message, 3);
+            if (outputLevel >= 3) {
+                Base("DEBUG", message);
+            }
         }
         public static void Info(string message) {
-            Base("INFO ", message, 2);
+            if (outputLevel >= 2) {
+                Base("INFO ", message);
+            }
         }
         public static void Warn(string message) {
-            Base("WARN ", message, 1);
+            if (outputLevel >= 1) {
+                Base("WARN ", message);
+            }
         }
         public static void Error(string message) {
-            Base("ERROR", message, 0);
+            if (outputLevel >= 0) {
+                Base("ERROR", message);
+            }
         }
 
         public static List<string> GetLogFromFile() {

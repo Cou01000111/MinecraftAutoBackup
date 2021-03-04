@@ -21,11 +21,11 @@ public class AppConfig {
     public static Size ClientSize { get; set; }
     public static Point ClientPoint { get; set; }
     public static string BackupCount { get; set; }
-    public static List<string> AddGameDirPath { get; set; }
+    public static List<string> AddGameDirPasess { get; set; }
     public static string appConfigPath = ".\\Config\\AppConfig.txt";
 
     public AppConfig() {
-        AddGameDirPath = new List<string>();
+        AddGameDirPasess = new List<string>();
         if (!File.Exists(appConfigPath)) {
             //AppConfigファイルがなかった場合
             string Text =
@@ -45,7 +45,7 @@ public class AppConfig {
             ClientPoint = new Point(int.Parse(datas[6]), int.Parse(datas[7]));
             BackupCount = datas[8];
             for (int i = 9; i < datas.Count; i++) {
-                AddGameDirPath.Add(datas[i]);
+                AddGameDirPasess.Add(datas[i]);
             }
         }
         Console.WriteLine("-----loaded appConfig-----");
@@ -55,18 +55,9 @@ public class AppConfig {
         Console.WriteLine($"clientSize:{ClientSize.Width},{ClientSize.Height}");
         Console.WriteLine($"clientPoint:{ClientPoint.X},{ClientPoint.Y}");
         Console.WriteLine($"backupCount:{BackupCount}");
-        foreach (string path in AddGameDirPath) {
+        foreach (string path in AddGameDirPasess) {
             Console.WriteLine($"addGameDirPath:{path}");
         }
         Console.WriteLine("--------------------------");
     }
-
-    public static void WriteAppConfig() {
-        string Text =
-            $"{BackupPath}\n{Font.Name}\n" +
-            (DoZip ? "zip" : "normal") +
-            $"\n{Language}\n{ClientSize.Width}\n{ClientSize.Height}\n{ClientPoint.X}\n{ClientPoint.Y}\n{BackupCount}";
-        File.WriteAllText(appConfigPath, Text);
-    }
-
 }
