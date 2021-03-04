@@ -1,0 +1,4 @@
+2021/03/04-09:07:49 [DEBUG]:call:LoadConfigToApp
+2021/03/04-09:07:49 [INFO ]:Configから22件のワールドを読み込みました
+2021/03/04-09:07:49 [DEBUG]:call:NotReadonly
+2021/03/04-09:07:49 [INFO ]:C:\Users\Cou\Documents\MinecraftAutoBackupを入力されました

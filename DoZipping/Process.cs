@@ -61,7 +61,15 @@ namespace Zipper {
         private static void TmpProcess() {
             Logger.Info("tmpファイルを作成します");
             tmpPath = $"{Path.GetTempPath()}MABtmp";
-            FileSystem.CreateDirectory(tmpPath);
+            try{ 
+                FileSystem.CreateDirectory(tmpPath);
+            }
+            catch (Exception e){
+                Logger.Error("tmpファイルの作成に失敗しました");
+                Logger.Error(e.StackTrace);
+                EndTimeProcess();
+            }
+
             Logger.Info($"{tmpPath}:が作成されました");
             Logger.Info($"tmpフォルダへバックアップをコピーしています");
             //前回のtmpファイルが残っていた場合
@@ -158,17 +166,14 @@ namespace Zipper {
                             errorCount++;
                             continue;
                         }
-                        //Console.ReadLine();
                     }
                     catch (Exception e) {
                         Logger.Error(e.GetType().ToString());
                         Logger.Error(e.Message);
                         Logger.Error(e.StackTrace);
-                        //Console.ReadLine();
                         errorCount++;
                         continue;
                     }
-                    //Logger.Info($"{Path.GetDirectoryName(backupPath)}\\{Path.GetFileName(backupPath)}をzipにします");
                 }
                 else {
                     skipCount++;
@@ -205,9 +210,33 @@ namespace Zipper {
 
             Logger.Info($"{path} zip化完了");
         }
-        public static void EndTimeProcess() {
+        public static void EndTimeProcess(bool normalTermination) {
+            if (normalTermination) {
+                Logger.Info($"{zippingCount}件圧縮済み,{skipCount}件のスルー,{errorCount}件のエラーが発生しました");
+                //tmpファイルの内容をバックアップフォルダに移す
+                try {
+                    Directory.Delete(AppConfig.BackupPath, true);
+                    FileSystem.CopyDirectory(tmpPath, AppConfig.BackupPath);
+                }
+                catch (Exception e){
+                    Logger.Error(e.Message);
+                    Logger.Error(e.StackTrace);
+                }
+                
+            }
+            
             Logger.Info("Exit Process");
-            FileSystem.DeleteDirectory(tmpPath, UIOption.AllDialogs, RecycleOption.DeletePermanently);
+            try {
+                FileSystem.DeleteDirectory(tmpPath, UIOption.AllDialogs, RecycleOption.DeletePermanently);
+            }
+            catch (DirectoryNotFoundException) {
+                Logger.Warn("削除予定のtmpフォルダが見つかりませんでした");
+            }
+            catch (Exception e){
+                Logger.Error("EndTimeProcess内のtmpフォルダ削除で例外が発生しました");
+                Logger.Error(e.Message);
+                Logger.Error(e.StackTrace);
+            }
         }
     }
 }

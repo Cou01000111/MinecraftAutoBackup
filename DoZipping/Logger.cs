@@ -6,20 +6,7 @@ namespace Zipper {
         public static string logPath = ".\\logs\\Zipper.txt";
         private static int outputLevel = 3;
 
-
-        public Logger(string p, int ol) {
-            logPath = p;
-            outputLevel = ol;
-        }
-        public Logger(string p) {
-            logPath = p;
-        }
-
-        public Logger() {
-
-        }
-
-        public static void Base(int level, string message) {
+        private static void Base(int level, string message) {
             string logLevelStr;
             switch (level) {
                 case 3:
