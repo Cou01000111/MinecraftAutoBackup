@@ -72,11 +72,11 @@ namespace MABProcessAtWait {
     }
 
     public partial class Form1 :Form {
-        System.Windows.Forms.Timer timer;
-        string backupDataPath;
-        NotifyIcon notifyIcon;
-        bool isRunning = false;
-        Task backupTask;
+        private System.Windows.Forms.Timer timer;
+        private string backupDataPath;
+        private NotifyIcon notifyIcon;
+        private bool isRunning = false;
+        private Task backupTask;
 
         public Form1() {
             backupDataPath = AppConfig.BackupPath;
@@ -102,14 +102,14 @@ namespace MABProcessAtWait {
             notifyIcon.ContextMenuStrip = menu;
         }
 
-        void Close_Click(object sender, EventArgs e) {
+        private void Close_Click(object sender, EventArgs e) {
             if ((backupTask == null) || (backupTask.IsCompleted)) {
                 Logger.Info("アプリケーションが終了しました");
             }
             else {
                 Logger.Warn("アプリケーションが強制終了しました");
             }
-            
+
             notifyIcon.Visible = false;
             notifyIcon.Dispose();
             Application.Exit();
@@ -241,7 +241,7 @@ namespace MABProcessAtWait {
         }
 
         //バックアップをするワールドデータのパスを配列にして返す
-        List<string> GetWorldPasses() {
+        private List<string> GetWorldPasses() {
             List<World> _worldPasses = new List<World>();
             List<string> worldPasses = new List<string>();
             _worldPasses = Config.GetConfig();
@@ -254,7 +254,7 @@ namespace MABProcessAtWait {
             return worldPasses;
         }
 
-        void DoBackup(string path, string Time) {
+        private void DoBackup(string path, string Time) {
             string backupPath = backupDataPath + "\\" + Path.GetFileName(Directory.GetParent(Directory.GetParent(path).ToString()).ToString()) + "\\" + Path.GetFileName(path) + "\\" + Time;
             string worldBackupPath = backupDataPath + "\\" + Path.GetFileName(Directory.GetParent(Directory.GetParent(path).ToString()).ToString()) + "\\" + Path.GetFileName(path);
             if (AppConfig.DoZip)
