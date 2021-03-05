@@ -9,18 +9,22 @@ using System.Threading.Tasks;
 namespace Zipper {
     class Process {
         public static string tmpPath;
-        public static int zippingCount = 0;
+        public static int successCount = 0;
         public static int errorCount = 0;
         public static int skipCount = 0;
         public static void MainProcess(string[] args) {
+            //zipperがほかに動いてた場合は他zipperを強制終了してそのまま終了
+            System.Diagnostics.Process[] ps = System.Diagnostics.Process.GetProcessesByName("Zipper.exe");
+            foreach (System.Diagnostics.Process p in ps) {
+                Logger.Info($"{p.ProcessName}を検知しました");
+                p.Kill();
+            }
 
             if (args.ToList().Count() == 0) {
                 Logger.Error("argsが存在しません");
                 EndTimeProcess(false);
                 return;
             }
-
-            
 
             //一つだけzipされたとき=>zip化する
             //zip,decomされた時
@@ -115,7 +119,7 @@ namespace Zipper {
 
                     // -------Delete--------
                     try {
-                        FileSystem.DeleteDirectory(path, UIOption.AllDialogs, RecycleOption.DeletePermanently);
+                        FileSystem.DeleteDirectory(path, UIOption.OnlyErrorDialogs, RecycleOption.DeletePermanently);
                     }
                     catch (Exception e) {
                         Logger.Error(e.GetType().ToString());
@@ -126,7 +130,7 @@ namespace Zipper {
                         continue;
                     }
                     Logger.Info($"[{path}]削除完了");
-                    zippingCount++;
+                    successCount++;
                 }
                 else {
                     skipCount++;
@@ -141,7 +145,7 @@ namespace Zipper {
 
             Logger.Info($"{pasess.Count()}件のバックアップを検討します");
             foreach (var path in pasess) {
-                Logger.Info($"-------{path} の検討をします-------");
+                Logger.Info($"-----{path} の検討をします-----");
                 Logger.Info($"zipファイル判定:{path.Contains(".zip")}");
                 if (path.Contains(".zip")) {
                     //バックアップがzipの場合
@@ -166,17 +170,8 @@ namespace Zipper {
                         errorCount++;
                         continue;
                     }
+
                     try { File.Delete($"{path}"); }
-                    catch (IOException) {
-                        Logger.Warn($"{path}が使用中だったため10秒後再試行します");
-                        Task.Delay(10000);
-                        try { File.Delete($"{path}"); }
-                        catch {
-                            Logger.Error($"{path}が使用中のためスルーします");
-                            errorCount++;
-                            continue;
-                        }
-                    }
                     catch (Exception e) {
                         Logger.Error(e.GetType().ToString());
                         Logger.Error(e.Message);
@@ -184,6 +179,8 @@ namespace Zipper {
                         errorCount++;
                         continue;
                     }
+                    Logger.Info($"[{path}]削除完了");
+                    successCount++;
                 }
                 else {
                     skipCount++;
@@ -230,7 +227,7 @@ namespace Zipper {
         }
         public static void EndTimeProcess(bool normalTermination) {
             if (normalTermination) {
-                Logger.Info($"{zippingCount}件圧縮済み,{skipCount}件のスルー,{errorCount}件のエラーが発生しました");
+                Logger.Info($"{successCount}件圧縮/解凍済み,{skipCount}件のスルー,{errorCount}件のエラーが発生しました");
                 //tmpファイルの内容をバックアップフォルダに移す
                 try {
                     Directory.Delete(AppConfig.BackupPath, true);

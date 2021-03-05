@@ -257,14 +257,14 @@ namespace MABProcessAtWait {
             return worldPasses;
         }
 
-        private bool isZipperRunning() {
-            List<string> logs = new List<string>();
-            using (StreamReader s = new StreamReader(".\\logs\\Zipper.txt")) {
-                string _logs = s.ReadToEnd();
-                logs = _logs.Split('\n').ToList();
-            }
+        //private bool isZipperRunning() {
+        //    List<string> logs = new List<string>();
+        //    using (StreamReader s = new StreamReader(".\\logs\\Zipper.txt")) {
+        //        string _logs = s.ReadToEnd();
+        //        logs = _logs.Split('\n').ToList();
+        //    }
 
-        }
+        //}
 
         private void DoBackup(string path, string Time) {
             string backupPath = backupDataPath + "\\" + Path.GetFileName(Directory.GetParent(Directory.GetParent(path).ToString()).ToString()) + "\\" + Path.GetFileName(path) + "\\" + Time;
