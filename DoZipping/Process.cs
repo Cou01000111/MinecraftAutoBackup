@@ -6,6 +6,19 @@ using System.IO.Compression;
 using System.Linq;
 using System.Threading.Tasks;
 
+
+/*
+ 
+普通のフォルダはディレクトリだけど、zipファイルはファイルとして処理すること！！ディレクトリとzipファイルは全くの別物！！
+普通のフォルダはディレクトリだけど、zipファイルはファイルとして処理すること！！ディレクトリとzipファイルは全くの別物！！
+普通のフォルダはディレクトリだけど、zipファイルはファイルとして処理すること！！ディレクトリとzipファイルは全くの別物！！
+普通のフォルダはディレクトリだけど、zipファイルはファイルとして処理すること！！ディレクトリとzipファイルは全くの別物！！
+普通のフォルダはディレクトリだけど、zipファイルはファイルとして処理すること！！ディレクトリとzipファイルは全くの別物！！
+普通のフォルダはディレクトリだけど、zipファイルはファイルとして処理すること！！ディレクトリとzipファイルは全くの別物！！
+ 
+ */
+
+
 namespace Zipper {
     class Process {
         public static string tmpPath;
@@ -40,11 +53,16 @@ namespace Zipper {
             dirs = Directory.GetDirectories(AppConfig.BackupPath).ToList();
             List<string> worlds = new List<string>();
             foreach (string dir in dirs) {
+                Logger.Debug($"game directory : {dir} , ({Directory.Exists(dir)})");
                 worlds.AddRange(Directory.GetDirectories(dir));
             }
             foreach (var w in worlds) {
+                Logger.Debug($" world data    : {w} , ({Directory.Exists(w)})");
                 backups.AddRange(Directory.GetDirectories(w));
                 backups.AddRange(Directory.GetFiles(w));
+            }
+            foreach(var p in backups) {
+                Logger.Debug($"  backup data  : {p} , (dir {Directory.Exists(p)},file {File.Exists(p)})");
             }
 
 
@@ -77,8 +95,8 @@ namespace Zipper {
                 }
             }
             Logger.Info("tmpファイルを作成します");
-            
-            try{ 
+
+            try{
                 FileSystem.CreateDirectory(tmpPath);
             }
             catch (Exception e){
@@ -110,14 +128,28 @@ namespace Zipper {
             Logger.Info($"{pasess.Count()}件のバックアップを検討します");
             foreach (var path in pasess) {
                 Logger.Info($"-------{path} の検討をします-------");
-                Logger.Info($"zipファイル判定:{path.Contains(".zip")}");
-
+                Logger.Info($"zipファイル判定:{path.Contains(".zip")}\n({path})");
                 if (!path.Contains(".zip")) {
+                    // ---Zip---
+                    Logger.Info($"{path} の処理を開始します");
+                    try {
+                        ZipFile.CreateFromDirectory(path, $"{path}.zip");
+                    }
+                    catch (IOException) {
+                        Logger.Error($"{path}: zipping io exception");
+                        errorCount++;
+                        continue;
+                    }
+                    catch (Exception e) {
+                        Logger.Error(e.GetType().ToString());
+                        Logger.Error(e.Message);
+                        Logger.Error(e.StackTrace);
+                        errorCount++;
+                        continue;
+                    }
+                    Logger.Info($"{path} zip化完了");
 
-                    // -------Zip--------
-                    Zip(path);
-
-                    // -------Delete--------
+                    // ---Delete---
                     try {
                         FileSystem.DeleteDirectory(path, UIOption.OnlyErrorDialogs, RecycleOption.DeletePermanently);
                     }
@@ -125,7 +157,6 @@ namespace Zipper {
                         Logger.Error(e.GetType().ToString());
                         Logger.Error(e.Message);
                         Logger.Error(e.StackTrace);
-                        //Console.ReadLine();
                         errorCount++;
                         continue;
                     }
@@ -142,13 +173,13 @@ namespace Zipper {
         private static void DecompProcess(List<string> backups) {
             List<string> pasess = backups;
             Logger.Info("=========Decompression=========");
-
             Logger.Info($"{pasess.Count()}件のバックアップを検討します");
             foreach (var path in pasess) {
                 Logger.Info($"-----{path} の検討をします-----");
-                Logger.Info($"zipファイル判定:{path.Contains(".zip")}");
+                Logger.Info($"zipファイル判定:{path.Contains(".zip")}\n({path})");
+                Logger.Info($"{Directory.Exists(path)}");
                 if (path.Contains(".zip")) {
-                    //バックアップがzipの場合
+                    // ---Decomp---
                     Logger.Info($"{path}の処理を開始します");
                     try { ZipFile.ExtractToDirectory($"{path}", path.Substring(0, path.Length - 4)); }
                     catch (IOException) {
@@ -171,11 +202,24 @@ namespace Zipper {
                         continue;
                     }
 
+                    // ---Delete---
                     try { File.Delete($"{path}"); }
+                    catch (IOException) {
+                        Logger.Warn($"{path}が使用中だったため10秒後再試行します");
+                        Task.Delay(10000);
+                        try { File.Delete($"{path}"); }
+                        catch {
+                            Logger.Error($"{path}が使用中のためスルーします");
+                            errorCount++;
+                            continue;
+                        }
+                        //Console.ReadLine();
+                    }
                     catch (Exception e) {
                         Logger.Error(e.GetType().ToString());
                         Logger.Error(e.Message);
                         Logger.Error(e.StackTrace);
+                        //Console.ReadLine();
                         errorCount++;
                         continue;
                     }
@@ -199,31 +243,7 @@ namespace Zipper {
                 return;
             }
             EndTimeProcess(true);
-            
-        }
-        private static void Zip(string path) {
-            //バックアップがzipじゃない場合
-            Logger.Info($"{path} の処理を開始します");
-            try {
-                ZipFile.CreateFromDirectory(path, $"{path}.zip");
-            }
-            catch (IOException) {
-                Logger.Error($"{path}: zipping io exception");
-                //Console.ReadLine();
-                errorCount++;
-                return;
-            }
 
-            catch (Exception e) {
-                Logger.Error(e.GetType().ToString());
-                Logger.Error(e.Message);
-                Logger.Error(e.StackTrace);
-                //Console.ReadLine();
-                errorCount++;
-                return;
-            }
-
-            Logger.Info($"{path} zip化完了");
         }
         public static void EndTimeProcess(bool normalTermination) {
             if (normalTermination) {
@@ -238,7 +258,7 @@ namespace Zipper {
                     Logger.Error(e.StackTrace);
                 }
             }
-            
+
             Logger.Info("Exit Process");
             try {
                 Directory.Delete(tmpPath,true);
