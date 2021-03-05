@@ -52,13 +52,13 @@ namespace MABProcessAtWait {
                     return;
                 }
 
-                    new AppConfig();
-                    Config.Load();
-                    Util.NotReadonly(AppConfig.BackupPath);
-                    Application.EnableVisualStyles();
-                    Application.SetCompatibleTextRenderingDefault(false);
-                    Form1 f = new Form1();
-                    Application.Run();
+                new AppConfig();
+                Config.Load();
+                Util.NotReadonly(AppConfig.BackupPath);
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Form1 f = new Form1();
+                Application.Run();
 
             }
             finally {
@@ -155,6 +155,9 @@ namespace MABProcessAtWait {
 
         private void DoBackupProcess() {
             Logger.Info("バックアッププロセスを始めます");
+            //zipperが起動している場合はバックアップを保留にする
+
+
             int backupCount = 0;
 
             List<string> worldPasses = GetWorldPasses();// バックアップをするワールドへのパス一覧
@@ -252,6 +255,15 @@ namespace MABProcessAtWait {
                 }
             }
             return worldPasses;
+        }
+
+        private bool isZipperRunning() {
+            List<string> logs = new List<string>();
+            using (StreamReader s = new StreamReader(".\\logs\\Zipper.txt")) {
+                string _logs = s.ReadToEnd();
+                logs = _logs.Split('\n').ToList();
+            }
+
         }
 
         private void DoBackup(string path, string Time) {

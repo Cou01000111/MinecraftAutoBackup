@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 
     class Logger {
-        public static string logPath = ".\\logs\\Zipper.txt";
+        public static string logPath = ".\\logs\\MainForm.txt";
         private static int outputLevel = 3;
 
         private static void Base(string logLevelStr, string message) {

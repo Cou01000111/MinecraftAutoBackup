@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{27A29F46-DE82-4A0A-8137-9C6FF4C8A218}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Minecraft Auto Backup</RootNamespace>
+    <RootNamespace>MainForm</RootNamespace>
     <AssemblyName>Minecraft Auto Backup</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -119,6 +119,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace MABProcessAtWait {
     class Logger {
-        public static string logPath = ".\\logs\\Zipper.txt";
+        public static string logPath = ".\\logs\\MABProcess.txt";
         private static int outputLevel = 3;
 
         private static void Base(string logLevelStr, string message) {

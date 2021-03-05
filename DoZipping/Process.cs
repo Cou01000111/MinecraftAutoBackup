@@ -20,6 +20,8 @@ namespace Zipper {
                 return;
             }
 
+            
+
             //一つだけzipされたとき=>zip化する
             //zip,decomされた時
 
@@ -59,8 +61,19 @@ namespace Zipper {
         }
 
         private static void TmpProcess() {
-            Logger.Info("tmpファイルを作成します");
+            //前回のtmpファイルが残っている場合は削除
             tmpPath = $"{Path.GetTempPath()}MABtmp";
+            if (Directory.Exists(tmpPath)) {
+                try {
+                    Directory.Delete(tmpPath);
+                }
+                catch {
+                    Logger.Error("前回の残存tmpファイルが削除できませんでした");
+                    EndTimeProcess(false);
+                }
+            }
+            Logger.Info("tmpファイルを作成します");
+            
             try{ 
                 FileSystem.CreateDirectory(tmpPath);
             }
@@ -176,13 +189,21 @@ namespace Zipper {
                     skipCount++;
                 }
             }
-            Logger.Info($"{zippingCount}件圧縮済み,{skipCount}件のスルー,{errorCount}件のエラーが発生しました");
-            Directory.Delete(AppConfig.BackupPath, true);
-            FileSystem.CopyDirectory(tmpPath, AppConfig.BackupPath);
+            try {
+                FileSystem.DeleteDirectory(AppConfig.BackupPath,UIOption.OnlyErrorDialogs,RecycleOption.DeletePermanently);
+                FileSystem.CopyDirectory(tmpPath, AppConfig.BackupPath);
+            }
+            catch (Exception e) {
+                Logger.Error(e.Message);
+                Logger.Error(e.StackTrace);
+                Logger.Error($"バックアップフォルダ{AppConfig.BackupPath}の削除ができなかったため、処理が完了できませんでした");
+                System.Windows.Forms.MessageBox.Show("圧縮/解凍作業ができませんでした","Minecraft Auto Backup");
+                EndTimeProcess(false);
+                return;
+            }
             EndTimeProcess(true);
+            
         }
-
-
         private static void Zip(string path) {
             //バックアップがzipじゃない場合
             Logger.Info($"{path} の処理を開始します");
@@ -223,7 +244,7 @@ namespace Zipper {
             
             Logger.Info("Exit Process");
             try {
-                FileSystem.DeleteDirectory(tmpPath, UIOption.AllDialogs, RecycleOption.DeletePermanently);
+                Directory.Delete(tmpPath,true);
             }
             catch (DirectoryNotFoundException) {
                 Logger.Warn("削除予定のtmpフォルダが見つかりませんでした");
