@@ -49,8 +49,14 @@ namespace Zipper {
             Logger.Info("");
             Logger.Debug("call: GetBackups");
             List<string> backups = new List<string>();
-            List<string> dirs;
-            dirs = Directory.GetDirectories(AppConfig.BackupPath).ToList();
+            List<string> dirs = new List<string>();
+            try{ 
+                dirs = Directory.GetDirectories(AppConfig.BackupPath).ToList();
+            }
+            catch {
+                Logger.Error("バックアップが一つもありません");
+                EndTimeProcess(false);
+            }
             List<string> worlds = new List<string>();
             foreach (string dir in dirs) {
                 Logger.Debug($"game directory : {dir} , ({Directory.Exists(dir)})");
@@ -248,17 +254,42 @@ namespace Zipper {
         public static void EndTimeProcess(bool normalTermination) {
             if (normalTermination) {
                 Logger.Info($"{successCount}件圧縮/解凍済み,{skipCount}件のスルー,{errorCount}件のエラーが発生しました");
-                //tmpファイルの内容をバックアップフォルダに移す
+                //tmpファイルの内容をMinecraftAutoBackup_tmpに移す
                 try {
-                    Directory.Delete(AppConfig.BackupPath, true);
-                    FileSystem.CopyDirectory(tmpPath, AppConfig.BackupPath);
+                    if(Directory.Exists(AppConfig.BackupPath + "_tmp")) {
+                        FileSystem.DeleteDirectory(AppConfig.BackupPath + "_tmp", UIOption.OnlyErrorDialogs, RecycleOption.DeletePermanently);
+                    }
+                    Directory.CreateDirectory(AppConfig.BackupPath + "_tmp");
+                    FileSystem.CopyDirectory(tmpPath, AppConfig.BackupPath + "_tmp");
                 }
                 catch (Exception e){
+                    Logger.Error("_tmpファイルの削除に失敗しました");
                     Logger.Error(e.Message);
                     Logger.Error(e.StackTrace);
+                    goto NOTERROR;
+                }
+                //tmpファイルのコピーが成功した場合のみMinecraftAutoBackupを削除する
+                try {
+                    Directory.Delete(AppConfig.BackupPath, true);
+                }catch(Exception e) {
+                    Logger.Error("加工前フォルダの削除に失敗しました");
+                    Logger.Error(e.Message);
+                    Logger.Error(e.StackTrace);
+                    goto NOTERROR;
+                }
+                //MinecraftAutoBackup_tmpをMinecraftAutoBackupに改名する
+                try {
+                    Directory.Move(AppConfig.BackupPath + "_tmp", AppConfig.BackupPath);
+                }
+                catch (Exception e) {
+                    Logger.Error("tmpファイルのリネームに失敗しました");
+                    Logger.Error(e.Message);
+                    Logger.Error(e.StackTrace);
+                    goto NOTERROR;
                 }
             }
 
+            NOTERROR:
             Logger.Info("Exit Process");
             try {
                 Directory.Delete(tmpPath,true);

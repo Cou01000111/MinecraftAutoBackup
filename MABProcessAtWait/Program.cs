@@ -54,6 +54,10 @@ namespace MABProcessAtWait {
 
                 new AppConfig();
                 Config.Load();
+                if (Directory.Exists(AppConfig.BackupPath) == false) {
+                    Logger.Warn($"バックアップ先フォルダが存在しないため{AppConfig.BackupPath}を作成します");
+                    Directory.CreateDirectory(AppConfig.BackupPath);
+                }
                 Util.NotReadonly(AppConfig.BackupPath);
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);

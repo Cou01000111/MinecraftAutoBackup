@@ -9,8 +9,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("minecraftのbackupを補助するアプリケーションです")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("WindowsFormsApp1")]
-[assembly: AssemblyCopyright("Copyright © Courange 2020")]
+[assembly: AssemblyProduct("MinecraftAutoBackup")]
+[assembly: AssemblyCopyright("Copyright © 2021 courange")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
