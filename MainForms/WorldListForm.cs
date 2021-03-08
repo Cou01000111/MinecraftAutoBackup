@@ -21,12 +21,14 @@ class WorldListForm :Form {
     //バックアップ画面
     private BackupDataPanel backupDataTable;
 
+    private Logger logger = new Logger("MainForm",3);
+
     public WorldListForm() {
         //Form設定
         Text = "Minecraft Auto Backup";
         Icon = new Icon(".\\Image\\app.ico");
         Font = new Font(AppConfig.Font.Name, 11);
-        Logger.Debug(AppConfig.Font.Name);
+        logger.Debug(AppConfig.Font.Name);
 
         Util.FontStyle = AppConfig.Font;
         FormClosing += new FormClosingEventHandler(WorldListForm_FormClosing);
@@ -188,7 +190,7 @@ class WorldListForm :Form {
     }
 
     private void Form_Resize(object sender, EventArgs e) {
-        //Logger.Info("大きさが変更されました大きさが変更されました");
+        //logger.Info("大きさが変更されました大きさが変更されました");
         int i = 0;
         foreach (Control a in backupDataTable.Controls) {
             backupDataTable.Controls[i].Width = Width - 60;
@@ -197,10 +199,10 @@ class WorldListForm :Form {
         }
     }
     private void Ok_Click(object sender, EventArgs e) {
-        Logger.Info("push ok");
+        logger.Info("push ok");
         List<string[]> configs = worldListView.GetWorldListView();
         foreach (var config in configs) {
-            //Logger.Info($"{config[0]}, {config[1]}, {config[2]}");
+            //logger.Info($"{config[0]}, {config[1]}, {config[2]}");
             Config.Change(config[1], config[2], config[0]);
         }
         Config.Write();
@@ -217,7 +219,7 @@ class WorldListForm :Form {
         }
     }
     private void WorldListForm_FormClosing(object sender, CancelEventArgs e) {
-        Logger.Info("終了時処理を開始します");
+        logger.Info("終了時処理を開始します");
 
         AppConfig.ClientPoint = Location;
         AppConfig.ClientSize = ClientSize;
@@ -226,22 +228,22 @@ class WorldListForm :Form {
             System.Diagnostics.Process.Start(".\\SubModule\\MABProcessAtWait.exe");
         }
         catch (Win32Exception w) {
-            Logger.Error(w.Message);
-            Logger.Error(w.ErrorCode.ToString());
-            Logger.Error(w.NativeErrorCode.ToString());
-            Logger.Error(w.StackTrace);
-            Logger.Error(w.Source);
+            logger.Error(w.Message);
+            logger.Error(w.ErrorCode.ToString());
+            logger.Error(w.NativeErrorCode.ToString());
+            logger.Error(w.StackTrace);
+            logger.Error(w.Source);
             Exception f = w.GetBaseException();
-            Logger.Error(f.Message);
+            logger.Error(f.Message);
         }
     }
     private void Exit_Click(object sender, EventArgs e) {
-        Logger.Info("push exit");
+        logger.Info("push exit");
         Close();
     }
     private void Config_Click(object sender, EventArgs e) {
         AppConfigForm appConfigForm = new AppConfigForm();
         appConfigForm.Owner = this;
-        appConfigForm.Show();
+        appConfigForm.ShowDialog();
     }
 }

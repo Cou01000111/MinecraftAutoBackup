@@ -6,10 +6,13 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using System.Threading.Tasks;
+using Zipper;
+using MainForm;
 //ちょっとFormの書き方変えてみたやつ
 //結局メリットはよくわからなかった
 internal class AppConfigForm :Form {
-
+    private Logger logger = new Logger("MainForm", ".\\logs\\MainForm.txt", 3);
     private TabControl tab = new TabControl();
     private TabPage backupTab = new TabPage();
     private TabPage fontTab = new TabPage();
@@ -38,8 +41,6 @@ internal class AppConfigForm :Form {
 
     private FlowLayoutPanel startupTabF = new FlowLayoutPanel();
     private CheckBox addStartup = new CheckBox();
-
-
     public AppConfigForm() {
 
         //controls追加（ほかのフォームと比べ先に追加している。メリットは忘れた）
@@ -124,7 +125,7 @@ internal class AppConfigForm :Form {
         doZip.Text = "バックアップデータをZip圧縮する";
         doZip.AutoSize = true;
         doZip.Checked = AppConfig.DoZip;
-        Logger.Info($"dozip[{AppConfig.DoZip}]");
+        logger.Info($"dozip[{AppConfig.DoZip}]");
         //doZip.BackColor = Color.Blue;
 
         addGameDir.Text = "ゲームディレクトリを手動で追加する";
@@ -177,7 +178,7 @@ internal class AppConfigForm :Form {
             List<string> addGameDir = copd.FileNames.ToList();
             List<string> removeAddGameDir = new List<string>();
             foreach (string str in addGameDir) {
-                Logger.Info($"{str}の判定を行います");
+                logger.Info($"{str}の判定を行います");
                 if (GameDirectoryConfigExists(str)) {
                     MessageBox.Show($"ゲームディレクトリ{str}はすでに認識しています", "Minecraft Auto Backup", MessageBoxButtons.OK);
                     removeAddGameDir.Add(str);
@@ -187,13 +188,13 @@ internal class AppConfigForm :Form {
                 addGameDir.Remove(str);
             }
             foreach (string str in addGameDir) {
-                Logger.Info($"{str}をconfigに追加します");
+                logger.Info($"{str}をconfigに追加します");
                 AppConfig.AddGameDirPath.Add(str);
             }
             worlds.AddRange(Config.GetWorldDataFromHDD(addGameDir));
         }
         foreach (var w in worlds) {
-            Logger.Info($"configsに{w.WorldName}を追加しました");
+            logger.Info($"configsに{w.WorldName}を追加しました");
             Config.Configs.Add(w);
             Config.Write();
 
@@ -231,45 +232,47 @@ internal class AppConfigForm :Form {
 
         //doZip
         if (AppConfig.DoZip != this.doZip.Checked) {
+            List<string> backups = Util.GetBackups();
             if (AppConfig.DoZip) {
                 //設定上はtrue,formのほうはflaseの場合（falseに変更された場合）
-                List<string> backups = Util.GetBackups();
                 if (backups.Count > 0) {
-                    //バックアップが存在している場合
-
                     //バックアップが存在している場合
                     DialogResult r = MessageBox.Show("現在保存されているバックアップをすべて解凍しますか？", "保存方式", MessageBoxButtons.YesNo);
                     if (r == DialogResult.Yes) {
                         // 既存のバックアップ.zipをすべて解凍する
+                        Process p = new Process();
                         string command = ".\\SubModule\\Zipper.exe";
                         string _args = "1";
                         var Decompression = new ProcessStartInfo {
                             FileName = command,
                             Arguments = _args
                         };
-                        Logger.Info($"Zipper {command} {_args}");
-                        Process.Start(Decompression);
+                        p.StartInfo = Decompression;
+                        logger.Info($"Zipper {command} {_args}");
+                        p.Start();
+                        p.WaitForExit();
                     }
                 }
             }
             else if (!AppConfig.DoZip) {
                 //設定上はfalse,formのほうはtrueの場合（trueに変更された場合）
-                List<string> backups = Util.GetBackups();
-
                 if (backups.Count > 0) {
                     //バックアップが存在している場合
                     DialogResult r = MessageBox.Show("現在保存されているバックアップをすべて圧縮しますか？", "保存方式", MessageBoxButtons.YesNo);
                     if (r == DialogResult.Yes) {
-                        // 既存のバックアップ.zipをすべて解凍する
+                        Process p = new Process();
                         string command = ".\\SubModule\\Zipper.exe";
                         string _args = "0";
-                        var doZipping = new ProcessStartInfo {
+                        var Decompression = new ProcessStartInfo {
                             FileName = command,
                             Arguments = _args
                         };
-                        Logger.Info($"Zipper {command} {_args}");
-                        Process.Start(doZipping);
-                        //Util.task = Task.Run(() => { DoZipping(backups); });
+                        p.StartInfo = Decompression;
+                        logger.Info($"Zipper {command} {_args}");
+                        p.Start();
+                        this.Enabled = false;
+                        p.WaitForExit();
+                        this.Enabled = true;
                     }
                 }
             }
@@ -280,7 +283,7 @@ internal class AppConfigForm :Form {
         AppConfig.DoZip = this.doZip.Checked;
 
         AppConfig.BackupCount = this.backupCount.SelectedItem.ToString();
-        Logger.Info($"selectedItem[{this.backupCount.SelectedItem.ToString()}]");
+        logger.Info($"selectedItem[{this.backupCount.SelectedItem.ToString()}]");
         AppConfig.WriteAppConfig();
 
         //WorldListViewを更新する
@@ -293,15 +296,15 @@ internal class AppConfigForm :Form {
     }
 
     private void addStartup_CheckedChanged(object sender, EventArgs e) {
-        Logger.Debug("call:addStartup_CheckedChanged");
+        logger.Debug("call:addStartup_CheckedChanged");
         if (addStartup.Checked) {
-            Logger.Debug("true");
+            logger.Debug("true");
             //スタートアップ登録
             //ショートカットの作成
             string shortcutPath = System.IO.Path.Combine(Environment.GetFolderPath(System.Environment.SpecialFolder.Startup), @"MinecraftAutoBackup.lnk");
             // ショートカットのリンク先(起動するプログラムのパス)
             string targetPath = Path.GetDirectoryName(Application.ExecutablePath) + "\\SubModule\\MABProcessAtWait";
-            Logger.Debug($"{targetPath}へのショートカットを{shortcutPath}に作成します");
+            logger.Debug($"{targetPath}へのショートカットを{shortcutPath}に作成します");
 
             // ショートカットを作成
             IWshRuntimeLibrary.WshShell shell = new IWshRuntimeLibrary.WshShell();
@@ -334,9 +337,9 @@ internal class AppConfigForm :Form {
             }
         }
         else {
-            Logger.Debug("false");
+            logger.Debug("false");
             //解除
-            Logger.Debug($"{Environment.GetFolderPath(System.Environment.SpecialFolder.Startup)}\\MinecraftAutoBackup.lnkを削除します");
+            logger.Debug($"{Environment.GetFolderPath(System.Environment.SpecialFolder.Startup)}\\MinecraftAutoBackup.lnkを削除します");
             File.Delete($"{Environment.GetFolderPath(System.Environment.SpecialFolder.Startup)}\\MinecraftAutoBackup.lnk");
         }
 
@@ -344,7 +347,7 @@ internal class AppConfigForm :Form {
 
     private bool GameDirectoryConfigExists(string str) {
         List<string> gameDirsInConfigs = Config.GetGameDirInConfigs();
-        Logger.Debug($"return:{gameDirsInConfigs.Contains(Path.GetFileName(str))}");
+        logger.Debug($"return:{gameDirsInConfigs.Contains(Path.GetFileName(str))}");
         return gameDirsInConfigs.Contains(Path.GetFileName(str));
     }
 }

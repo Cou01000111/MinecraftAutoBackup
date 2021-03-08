@@ -10,6 +10,8 @@ public class Util {
 
     private static Font fontStyle;
 
+    private static Logger logger = new Logger("MainForm",3);
+
     public static Font FontStyle {
         set { fontStyle = value; }
         get { return fontStyle; }
@@ -25,7 +27,7 @@ public class Util {
 
     //現在存在しているバックアップへのパスをListにして返す
     public static List<string> GetBackups() {
-        Logger.Info("call: GetBackups");
+        logger.Info("call: GetBackups");
         List<string> backups = new List<string>();
         List<string> dirs;
         try { Directory.GetDirectories(AppConfig.BackupPath); }
@@ -39,12 +41,12 @@ public class Util {
             backups.AddRange(Directory.GetDirectories(w));
             backups.AddRange(Directory.GetFiles(w));
         }
-        Logger.Info($"dir:{dirs.Count()}, worlds:{worlds.Count()}, backups:{backups.Count()}");
-        Logger.Debug("-----GetBackups-----");
+        logger.Info($"dir:{dirs.Count()}, worlds:{worlds.Count()}, backups:{backups.Count()}");
+        logger.Debug("-----GetBackups-----");
         foreach (var a in backups) {
-            Logger.Debug(a);
+            logger.Debug(a);
         }
-        Logger.Debug("--------------------");
+        logger.Debug("--------------------");
         return backups;
     }
 

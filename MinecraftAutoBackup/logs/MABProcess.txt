@@ -1,0 +1,60 @@
+2021/03/06-11:52:59 [INFO ]:-----loaded appConfig-----
+2021/03/06-11:52:59 [INFO ]:backupPath:C:\Users\Cou\Documents\MinecraftAutoBackup
+2021/03/06-11:52:59 [INFO ]:font:[Font: Name=Meiryo UI, Size=11, Units=3, GdiCharSet=1, GdiVerticalFont=False]
+2021/03/06-11:52:59 [INFO ]:dozip:False
+2021/03/06-11:52:59 [INFO ]:clientSize:600,600
+2021/03/06-11:52:59 [INFO ]:clientPoint:0,0
+2021/03/06-11:52:59 [INFO ]:backupCount:5
+2021/03/06-11:52:59 [INFO ]:--------------------------
+2021/03/06-11:52:59 [DEBUG]:call:LoadConfigToApp
+2021/03/06-11:52:59 [INFO ]:Configから22件のワールドを読み込みました
+2021/03/06-11:52:59 [DEBUG]:call:NotReadonly
+2021/03/06-11:52:59 [INFO ]:C:\Users\Cou\Documents\MinecraftAutoBackupを入力されました
+2021/03/06-16:33:27 [INFO ]:-----loaded appConfig-----
+2021/03/06-16:33:27 [INFO ]:backupPath:C:\Users\Cou\Documents\MinecraftAutoBackup
+2021/03/06-16:33:27 [INFO ]:font:[Font: Name=Meiryo UI, Size=11, Units=3, GdiCharSet=1, GdiVerticalFont=False]
+2021/03/06-16:33:27 [INFO ]:dozip:False
+2021/03/06-16:33:27 [INFO ]:clientSize:600,600
+2021/03/06-16:33:27 [INFO ]:clientPoint:0,0
+2021/03/06-16:33:27 [INFO ]:backupCount:5
+2021/03/06-16:33:27 [INFO ]:--------------------------
+2021/03/06-16:33:27 [DEBUG]:call:LoadConfigToApp
+2021/03/06-16:33:27 [INFO ]:Configから22件のワールドを読み込みました
+2021/03/06-16:33:27 [DEBUG]:call:NotReadonly
+2021/03/06-16:33:27 [INFO ]:C:\Users\Cou\Documents\MinecraftAutoBackupを入力されました
+2021/03/06-16:43:12 [INFO ]:-----loaded appConfig-----
+2021/03/06-16:43:12 [INFO ]:backupPath:C:\Users\Cou\Documents\MinecraftAutoBackup
+2021/03/06-16:43:12 [INFO ]:font:[Font: Name=Meiryo UI, Size=11, Units=3, GdiCharSet=1, GdiVerticalFont=False]
+2021/03/06-16:43:12 [INFO ]:dozip:False
+2021/03/06-16:43:12 [INFO ]:clientSize:600,600
+2021/03/06-16:43:12 [INFO ]:clientPoint:0,0
+2021/03/06-16:43:12 [INFO ]:backupCount:5
+2021/03/06-16:43:12 [INFO ]:--------------------------
+2021/03/06-16:43:12 [DEBUG]:call:LoadConfigToApp
+2021/03/06-16:43:12 [INFO ]:Configから22件のワールドを読み込みました
+2021/03/06-16:43:12 [DEBUG]:call:NotReadonly
+2021/03/06-16:43:12 [INFO ]:C:\Users\Cou\Documents\MinecraftAutoBackupを入力されました
+2021/03/07-17:38:24 [INFO ]:-----loaded appConfig-----
+2021/03/07-17:38:24 [INFO ]:backupPath:C:\Users\Cou\Documents\MinecraftAutoBackup
+2021/03/07-17:38:24 [INFO ]:font:[Font: Name=Meiryo UI, Size=11, Units=3, GdiCharSet=1, GdiVerticalFont=False]
+2021/03/07-17:38:24 [INFO ]:dozip:True
+2021/03/07-17:38:24 [INFO ]:clientSize:600,600
+2021/03/07-17:38:24 [INFO ]:clientPoint:0,0
+2021/03/07-17:38:24 [INFO ]:backupCount:5
+2021/03/07-17:38:24 [INFO ]:--------------------------
+2021/03/07-17:38:24 [DEBUG]:call:LoadConfigToApp
+2021/03/07-17:38:24 [INFO ]:Configから22件のワールドを読み込みました
+2021/03/07-17:38:24 [DEBUG]:call:NotReadonly
+2021/03/07-17:38:24 [INFO ]:C:\Users\Cou\Documents\MinecraftAutoBackupを入力されました
+2021/03/08-14:12:42 [INFO ]:-----loaded appConfig-----
+2021/03/08-14:12:42 [INFO ]:backupPath:C:\Users\Cou\Documents\MinecraftAutoBackup
+2021/03/08-14:12:42 [INFO ]:font:[Font: Name=はれのそら明朝, Size=11, Units=3, GdiCharSet=1, GdiVerticalFont=False]
+2021/03/08-14:12:42 [INFO ]:dozip:True
+2021/03/08-14:12:42 [INFO ]:clientSize:600,600
+2021/03/08-14:12:42 [INFO ]:clientPoint:0,0
+2021/03/08-14:12:42 [INFO ]:backupCount:5
+2021/03/08-14:12:42 [INFO ]:--------------------------
+2021/03/08-14:12:42 [DEBUG]:call:LoadConfigToApp
+2021/03/08-14:12:42 [INFO ]:Configから22件のワールドを読み込みました
+2021/03/08-14:12:42 [DEBUG]:call:NotReadonly
+2021/03/08-14:12:42 [INFO ]:C:\Users\Cou\Documents\MinecraftAutoBackupを入力されました

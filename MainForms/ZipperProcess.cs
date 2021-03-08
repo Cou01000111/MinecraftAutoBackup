@@ -5,7 +5,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Forms;
+using MainForm;
 
 
 /*
@@ -21,58 +21,55 @@ using System.Windows.Forms;
 
 
 namespace Zipper {
-    class Process {
+    public static class ZipperProcess {
         public static string tmpPath;
         public static int successCount = 0;
         public static int errorCount = 0;
         public static int skipCount = 0;
-        public static void MainProcess(string[] args) {
-            Logger.Info("start Zipper");
-            if (args.ToList().Count() == 0) {
-                Logger.Error("argsが存在しません");
-                EndTimeProcess(false);
-                return;
-            }
-
+        public static WaitDialog wait;
+        private static Logger logger = new Logger("Zipper",".\\logs\\Zipper.txt",3);
+        public static void MainProcess(int args) {
+            logger.Info("start Zipper");
+            // waitDialogをだす]
+            wait = new WaitDialog();
+            wait.Show();
             //tmpファイルを作りそこへバックアップ先を移す
             TmpProcess();
-
             //圧縮 & 非圧縮するファイルへのパスの配列を作る
             List<string> backups = new List<string>();
             List<string> dirs = new List<string>();
-            try{
-                dirs = Directory.GetDirectories(AppConfig.BackupPath).ToList();
+            try{ 
+                dirs = Directory.GetDirectories(tmpPath).ToList();
             }
             catch {
-                Logger.Error("バックアップが一つもありません");
+                logger.Error("バックアップが一つもありません");
                 EndTimeProcess(false);
-                return;
             }
             List<string> worlds = new List<string>();
             foreach (string dir in dirs) {
-                Logger.Debug($"game directory : {dir} , ({Directory.Exists(dir)})");
+                logger.Debug($"game directory : {dir} , ({Directory.Exists(dir)})");
                 worlds.AddRange(Directory.GetDirectories(dir));
             }
             foreach (var w in worlds) {
-                Logger.Debug($" world data    : {w} , ({Directory.Exists(w)})");
+                logger.Debug($" world data    : {w} , ({Directory.Exists(w)})");
                 backups.AddRange(Directory.GetDirectories(w));
                 backups.AddRange(Directory.GetFiles(w));
             }
             foreach(var p in backups) {
-                Logger.Debug($"  backup data  : {p} , (dir {Directory.Exists(p)},file {File.Exists(p)})");
+                logger.Debug($"  backup data  : {p} , (dir {Directory.Exists(p)},file {File.Exists(p)})");
             }
 
 
-            if (args[0] == "0") {
+            if (args == 0) {
                 //0番ならzippingMode
                 ZipProcess(backups);
             }
-            else if (args[0] == "1") {
+            else if (args == 1) {
                 //1番ならdecompressionMode
                 DecompProcess(backups);
             }
             else {
-                Logger.Error("Args Error");
+                logger.Error("Args Error");
                 EndTimeProcess(false);
                 return;
             }
@@ -83,31 +80,29 @@ namespace Zipper {
             tmpPath = $"{Path.GetTempPath()}MABtmp";
             if (Directory.Exists(tmpPath)) {
                 try {
-                    FileSystem.DeleteDirectory(tmpPath, UIOption.OnlyErrorDialogs, RecycleOption.DeletePermanently);
+                    Directory.Delete(tmpPath);
                 }
                 catch {
-                    Logger.Error("前回の残存tmpファイルが削除できませんでした");
+                    logger.Error("前回の残存tmpファイルが削除できませんでした");
                     EndTimeProcess(false);
-                    return;
                 }
             }
-            Logger.Info("tmpファイルを作成します");
+            logger.Info("tmpファイルを作成します");
 
             try{
                 FileSystem.CreateDirectory(tmpPath);
             }
             catch (Exception e){
-                Logger.Error("tmpファイルの作成に失敗しました");
-                Logger.Error(e.StackTrace);
+                logger.Error("tmpファイルの作成に失敗しました");
+                logger.Error(e.StackTrace);
                 EndTimeProcess(false);
-                return;
             }
 
-            Logger.Info($"{tmpPath}:が作成されました");
-            Logger.Info($"tmpフォルダへバックアップをコピーしています");
+            logger.Info($"{tmpPath}:が作成されました");
+            logger.Info($"tmpフォルダへバックアップをコピーしています");
             //前回のtmpファイルが残っていた場合
             if (File.Exists(tmpPath)) {
-                Logger.Warn("MABtmpを削除します");
+                logger.Warn("MABtmpを削除します");
                 Directory.Delete(tmpPath, true);
             }
             FileSystem.CreateDirectory(tmpPath);
@@ -122,43 +117,43 @@ namespace Zipper {
             //0番ならzippingMode
             //try {
             List<string> pasess = backups;
-            Logger.Info("=========DoZipping=========");
-            Logger.Info($"{pasess.Count()}件のバックアップを検討します");
+            logger.Info("=========DoZipping=========");
+            logger.Info($"{pasess.Count()}件のバックアップを検討します");
             foreach (var path in pasess) {
-                Logger.Info($"-------{path} の検討をします-------");
-                Logger.Info($"zipファイル判定:{path.Contains(".zip")}\n({path})");
+                logger.Info($"-------{path} の検討をします-------");
+                logger.Info($"zipファイル判定:{path.Contains(".zip")}\n({path})");
                 if (!path.Contains(".zip")) {
                     // ---Zip---
-                    Logger.Info($"{path} の処理を開始します");
+                    logger.Info($"{path} の処理を開始します");
                     try {
                         ZipFile.CreateFromDirectory(path, $"{path}.zip");
                     }
                     catch (IOException) {
-                        Logger.Error($"{path}: zipping io exception");
+                        logger.Error($"{path}: zipping io exception");
                         errorCount++;
                         continue;
                     }
                     catch (Exception e) {
-                        Logger.Error(e.GetType().ToString());
-                        Logger.Error(e.Message);
-                        Logger.Error(e.StackTrace);
+                        logger.Error(e.GetType().ToString());
+                        logger.Error(e.Message);
+                        logger.Error(e.StackTrace);
                         errorCount++;
                         continue;
                     }
-                    Logger.Info($"{path} zip化完了");
+                    logger.Info($"{path} zip化完了");
 
                     // ---Delete---
                     try {
                         FileSystem.DeleteDirectory(path, UIOption.OnlyErrorDialogs, RecycleOption.DeletePermanently);
                     }
                     catch (Exception e) {
-                        Logger.Error(e.GetType().ToString());
-                        Logger.Error(e.Message);
-                        Logger.Error(e.StackTrace);
+                        logger.Error(e.GetType().ToString());
+                        logger.Error(e.Message);
+                        logger.Error(e.StackTrace);
                         errorCount++;
                         continue;
                     }
-                    Logger.Info($"[{path}]削除完了");
+                    logger.Info($"[{path}]削除完了");
                     successCount++;
                 }
                 else {
@@ -169,31 +164,31 @@ namespace Zipper {
         }
         private static void DecompProcess(List<string> backups) {
             List<string> pasess = backups;
-            Logger.Info("=========Decompression=========");
-            Logger.Info($"{pasess.Count()}件のバックアップを検討します");
+            logger.Info("=========Decompression=========");
+            logger.Info($"{pasess.Count()}件のバックアップを検討します");
             foreach (var path in pasess) {
-                Logger.Info($"-----{path} の検討をします-----");
-                Logger.Info($"zipファイル判定:{path.Contains(".zip")}\n({path})");
-                Logger.Info($"{Directory.Exists(path)}");
+                logger.Info($"-----{path} の検討をします-----");
+                logger.Info($"zipファイル判定:{path.Contains(".zip")}\n({path})");
+                logger.Info($"{Directory.Exists(path)}");
                 if (path.Contains(".zip")) {
                     // ---Decomp---
-                    Logger.Info($"{path}の処理を開始します");
+                    logger.Info($"{path}の処理を開始します");
                     try { ZipFile.ExtractToDirectory($"{path}", path.Substring(0, path.Length - 4)); }
                     catch (IOException) {
-                        Logger.Error($"{path.Substring(0, path.Length - 4)}は既に存在します");
+                        logger.Error($"{path.Substring(0, path.Length - 4)}は既に存在します");
                         //Console.ReadLine();
                         errorCount++;
                         continue;
                     }
                     catch (InvalidDataException) {
-                        Logger.Error($"{path}が破損しているため解凍できません");
+                        logger.Error($"{path}が破損しているため解凍できません");
                         errorCount++;
                         continue;
                     }
                     catch (Exception e) {
-                        Logger.Error(e.GetType().ToString());
-                        Logger.Error(e.Message);
-                        Logger.Error(e.StackTrace);
+                        logger.Error(e.GetType().ToString());
+                        logger.Error(e.Message);
+                        logger.Error(e.StackTrace);
                         //Console.ReadLine();
                         errorCount++;
                         continue;
@@ -202,25 +197,25 @@ namespace Zipper {
                     // ---Delete---
                     try { File.Delete($"{path}"); }
                     catch (IOException) {
-                        Logger.Warn($"{path}が使用中だったため10秒後再試行します");
+                        logger.Warn($"{path}が使用中だったため10秒後再試行します");
                         Task.Delay(10000);
                         try { File.Delete($"{path}"); }
                         catch {
-                            Logger.Error($"{path}が使用中のためスルーします");
+                            logger.Error($"{path}が使用中のためスルーします");
                             errorCount++;
                             continue;
                         }
                         //Console.ReadLine();
                     }
                     catch (Exception e) {
-                        Logger.Error(e.GetType().ToString());
-                        Logger.Error(e.Message);
-                        Logger.Error(e.StackTrace);
+                        logger.Error(e.GetType().ToString());
+                        logger.Error(e.Message);
+                        logger.Error(e.StackTrace);
                         //Console.ReadLine();
                         errorCount++;
                         continue;
                     }
-                    Logger.Info($"[{path}]削除完了");
+                    logger.Info($"[{path}]削除完了");
                     successCount++;
                 }
                 else {
@@ -232,9 +227,9 @@ namespace Zipper {
                 FileSystem.CopyDirectory(tmpPath, AppConfig.BackupPath);
             }
             catch (Exception e) {
-                Logger.Error(e.Message);
-                Logger.Error(e.StackTrace);
-                Logger.Error($"バックアップフォルダ{AppConfig.BackupPath}の削除ができなかったため、処理が完了できませんでした");
+                logger.Error(e.Message);
+                logger.Error(e.StackTrace);
+                logger.Error($"バックアップフォルダ{AppConfig.BackupPath}の削除ができなかったため、処理が完了できませんでした");
                 System.Windows.Forms.MessageBox.Show("圧縮/解凍作業ができませんでした","Minecraft Auto Backup");
                 EndTimeProcess(false);
                 return;
@@ -244,61 +239,64 @@ namespace Zipper {
         }
         public static void EndTimeProcess(bool normalTermination) {
             if (normalTermination) {
-                Logger.Info($"{successCount}件圧縮/解凍済み,{skipCount}件のスルー,{errorCount}件のエラーが発生しました");
+                logger.Info($"{successCount}件圧縮/解凍済み,{skipCount}件のスルー,{errorCount}件のエラーが発生しました");
                 //tmpファイルの内容をMinecraftAutoBackup_tmpに移す
                 try {
-                    if(Directory.Exists(AppConfig.BackupPath + "_tmp")) {
-                        Logger.Info("前回の異常終了時のdoc内tmpファイルを発見したので削除します");
+                    if (Directory.Exists(AppConfig.BackupPath + "_tmp")) {
+                        logger.Info("前回の異常終了時のdoc内tmpファイルを発見したので削除します");
                         FileSystem.DeleteDirectory(AppConfig.BackupPath + "_tmp", UIOption.OnlyErrorDialogs, RecycleOption.DeletePermanently);
                     }
-                    Logger.Info("tmpファイルをdocへ移すためにdoc内tmpファイルを作成します");
+                    logger.Info("tmpファイルをdocへ移すためにdoc内tmpファイルを作成します");
                     Directory.CreateDirectory(AppConfig.BackupPath + "_tmp");
-                    Logger.Info("tmpファイルをdocへ移すためにdoc内tmpファイルへコピーします");
+                    logger.Info("tmpファイルをdocへ移すためにdoc内tmpファイルへコピーします");
                     FileSystem.CopyDirectory(tmpPath, AppConfig.BackupPath + "_tmp");
                 }
-                catch (Exception e){
-                    Logger.Error("_tmpファイルの削除に失敗しました");
-                    Logger.Error(e.Message);
-                    Logger.Error(e.StackTrace);
+                catch (Exception e) {
+                    logger.Error("_tmpファイルの削除に失敗しました");
+                    logger.Error(e.Message);
+                    logger.Error(e.StackTrace);
                     goto NOTERROR;
                 }
                 //tmpファイルのコピーが成功した場合のみMinecraftAutoBackupを削除する
                 try {
-                    Logger.Info("加工前フォルダを削除します");
+                    logger.Info("加工前フォルダを削除します");
                     Directory.Delete(AppConfig.BackupPath, true);
-                }catch(Exception e) {
-                    Logger.Error("加工前フォルダの削除に失敗しました");
-                    Logger.Error(e.Message);
-                    Logger.Error(e.StackTrace);
+                }
+                catch (Exception e) {
+                    logger.Error("加工前フォルダの削除に失敗しました");
+                    logger.Error(e.Message);
+                    logger.Error(e.StackTrace);
                     goto NOTERROR;
                 }
                 //MinecraftAutoBackup_tmpをMinecraftAutoBackupに改名する
                 try {
-                    Logger.Info("tmpファイルをリネームし、バックアップフォルダとする");
+                    logger.Info("tmpファイルをリネームし、バックアップフォルダとする");
                     Directory.Move(AppConfig.BackupPath + "_tmp", AppConfig.BackupPath);
                 }
                 catch (Exception e) {
-                    Logger.Error("tmpファイルのリネームに失敗しました");
-                    Logger.Error(e.Message);
-                    Logger.Error(e.StackTrace);
+                    logger.Error("tmpファイルのリネームに失敗しました");
+                    logger.Error(e.Message);
+                    logger.Error(e.StackTrace);
                     goto NOTERROR;
                 }
             }
 
-            NOTERROR:
-            Logger.Info("Exit Process");
+        NOTERROR:
+            logger.Info("Exit Process");
             try {
                 Directory.Delete(tmpPath,true);
             }
             catch (DirectoryNotFoundException) {
-                Logger.Warn("削除予定のtmpフォルダが見つかりませんでした");
+                logger.Warn("削除予定のtmpフォルダが見つかりませんでした");
             }
             catch (Exception e){
-                Logger.Error("EndTimeProcess内のtmpフォルダ削除で例外が発生しました");
-                Logger.Error(e.Message);
-                Logger.Error(e.StackTrace);
+                logger.Error("EndTimeProcess内のtmpフォルダ削除で例外が発生しました");
+                logger.Error(e.Message);
+                logger.Error(e.StackTrace);
             }
-            Application.Exit();
+            //waitDialogを閉じる
+            wait.Close();
+            wait.Dispose();
         }
     }
 }

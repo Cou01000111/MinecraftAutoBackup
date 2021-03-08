@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinecraftAutoBackup", "Main
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MABProcessAtWait", "MABProcessAtWait\MABProcessAtWait.csproj", "{C975C2FA-8594-4051-8A80-4878BA5D1E7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zipper", "DoZipping\Zipper.csproj", "{0EB2598B-A2CE-45A6-9B68-D633DFB86D8E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zipper", "Zipper\Zipper.csproj", "{01D4D89C-308E-409D-AED4-A11B7D5A2125}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{C975C2FA-8594-4051-8A80-4878BA5D1E7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C975C2FA-8594-4051-8A80-4878BA5D1E7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C975C2FA-8594-4051-8A80-4878BA5D1E7A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0EB2598B-A2CE-45A6-9B68-D633DFB86D8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0EB2598B-A2CE-45A6-9B68-D633DFB86D8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0EB2598B-A2CE-45A6-9B68-D633DFB86D8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0EB2598B-A2CE-45A6-9B68-D633DFB86D8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01D4D89C-308E-409D-AED4-A11B7D5A2125}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01D4D89C-308E-409D-AED4-A11B7D5A2125}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01D4D89C-308E-409D-AED4-A11B7D5A2125}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01D4D89C-308E-409D-AED4-A11B7D5A2125}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -24,6 +24,8 @@ public class AppConfig {
     public static List<string> AddGameDirPath { get; set; }
     public static string AppConfigPath = ".\\Config\\AppConfig.txt";
 
+    private static Logger logger = new Logger("AppConfig",".\\logs\\MainForm.txt",3);
+
     public AppConfig() {
         AddGameDirPath = new List<string>();
         if (!File.Exists(AppConfigPath)) {
@@ -48,17 +50,17 @@ public class AppConfig {
                 AddGameDirPath.Add(datas[i]);
             }
         }
-        Logger.Info("-----loaded appConfig-----");
-        Logger.Info($"backupPath:{BackupPath}");
-        Logger.Info($"font:{Font}");
-        Logger.Info($"dozip:{DoZip}");
-        Logger.Info($"clientSize:{ClientSize.Width},{ClientSize.Height}");
-        Logger.Info($"clientPoint:{ClientPoint.X},{ClientPoint.Y}");
-        Logger.Info($"backupCount:{BackupCount}");
+        logger.Info("-----loaded appConfig-----");
+        logger.Info($"backupPath:{BackupPath}");
+        logger.Info($"font:{Font}");
+        logger.Info($"dozip:{DoZip}");
+        logger.Info($"clientSize:{ClientSize.Width},{ClientSize.Height}");
+        logger.Info($"clientPoint:{ClientPoint.X},{ClientPoint.Y}");
+        logger.Info($"backupCount:{BackupCount}");
         foreach(string path in AddGameDirPath) {
-            Logger.Info($"addGameDirPath:{path}");
+            logger.Info($"addGameDirPath:{path}");
         }
-        Logger.Info("--------------------------");
+        logger.Info("--------------------------");
     }
 
     public static void WriteAppConfig() {
@@ -69,7 +71,7 @@ public class AppConfig {
         foreach(string path in AddGameDirPath) {
             Text += $"\n{path}";
         }
-        Logger.Info(" Writing "+Text);
+        logger.Info(" Writing "+Text);
         File.WriteAllText(AppConfigPath, Text);
     }
 

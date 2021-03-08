@@ -7,6 +7,8 @@ class WorldListView :ListView {
     private ColumnHeader clmnWorldName;  // 'ワールド名' 列ヘッダ
     private ColumnHeader clmnWorldDir;  // '所属ディレクトリ' 列ヘッダ
 
+    private Logger logger = new Logger("MainForm",3);
+
     //コンストラクタ
     public WorldListView() {
         FullRowSelect = true;
@@ -42,7 +44,7 @@ class WorldListView :ListView {
         foreach (var datas in listDatas) {
             if (datas.IsAlive) {
                 Items.Add(new ListViewItem(new string[] { " ", datas.WorldName, datas.WorldDir }));
-                Logger.Debug($"{datas.WorldDoBackup}");
+                logger.Debug($"{datas.WorldDoBackup}");
                 Items[iItemCount].Checked = Convert.ToBoolean(datas.WorldDoBackup);
                 iItemCount++;
             }

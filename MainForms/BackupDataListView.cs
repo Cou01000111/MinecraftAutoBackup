@@ -12,6 +12,8 @@ class BackupDataListView :ListView {
     private ColumnHeader clmnBackupTime; // 'バックアップ日時' 列ヘッダ
     private ColumnHeader clmnAffiliationWorldName;  // '所属ワールド名' 列ヘッダ
     private ColumnHeader clmnWorldAffiliationDir;  // '所属ディレクトリ' 列ヘッダ
+
+    private Logger logger = new Logger("MainForm",3);
     public BackupDataListView(World worldObj) {
         FullRowSelect = true;
         MultiSelect = false;
@@ -62,28 +64,28 @@ class BackupDataListView :ListView {
 
         LoadFromBackupFolder(worldObj);
         if (Items.Count > 0) {
-            Logger.Debug($"{Height}");
+            logger.Debug($"{Height}");
             Height /= 4;
             Height *= Items.Count + 1;
         }
     }
     private void LoadFromBackupFolder(World worldObj) {
-        Logger.Info("" + worldObj.WorldName + "の一覧以下のパスからロードします");
-        Logger.Info($"path:{worldObj.WorldPath}");
+        logger.Info("" + worldObj.WorldName + "の一覧以下のパスからロードします");
+        logger.Info($"path:{worldObj.WorldPath}");
         try {
             List<string> backupFolders = new List<string>(GetBackups(worldObj));
-            Logger.Info($"backupFolderCount[{backupFolders.Count()}]");
+            logger.Info($"backupFolderCount[{backupFolders.Count()}]");
             foreach (string backupFolder in backupFolders) {
                 if (Path.GetExtension(backupFolder) == "zip") {
                     backupFolder.Substring(0, backupFolder.Length - 4);
-                    Logger.Debug("a::::::::::::" + backupFolder);
+                    logger.Debug("a::::::::::::" + backupFolder);
                 }
                 DateTime time = DateTime.ParseExact((Path.GetFileName(backupFolder)).Substring(0, 12), "yyyyMMddHHmm", null);
                 this.Items.Add(new BackupDataListViewItem(new string[] { time.ToString("yyyy-MM-dd HH:mm"), worldObj.WorldName, worldObj.WorldDir }, worldObj));
             }
         }
         catch (DirectoryNotFoundException) {
-            Logger.Warn("バックアップが存在しません");
+            logger.Warn("バックアップが存在しません");
         }
     }
 
@@ -92,7 +94,7 @@ class BackupDataListView :ListView {
     }
 
     private void Menu_Opening(object sender, CancelEventArgs e) {
-        Logger.Info("call:Menu_Opening");
+        logger.Info("call:Menu_Opening");
         Point p = this.PointToClient(Cursor.Position);
         BackupDataListViewItem item = this.HitTest(p).Item as BackupDataListViewItem;
         if (item == null) {
@@ -101,9 +103,9 @@ class BackupDataListView :ListView {
         else if (item.Bounds.Contains(p)) {
             ContextMenuStrip menu = sender as ContextMenuStrip;
             if (menu != null) {
-                Logger.Info($"{item}");
-                Logger.Info(item.World.WorldName);
-                Logger.Info($"{item.World.IsAlive}");
+                logger.Info($"{item}");
+                logger.Info(item.World.WorldName);
+                logger.Info($"{item.World.IsAlive}");
                 selectedItem = item;
             }
         }
@@ -113,13 +115,13 @@ class BackupDataListView :ListView {
     }
 
     private void ReturnBackup_Click(object sender, EventArgs e) {
-        Logger.Info("call:ReturnBackup_Click");
+        logger.Info("call:ReturnBackup_Click");
         ContextMenuStrip menu = sender as ContextMenuStrip;
         if (selectedItem != null) {
-            Logger.Info($"{ selectedItem.World.IsAlive}");
+            logger.Info($"{ selectedItem.World.IsAlive}");
             if (!selectedItem.World.IsAlive) {
                 //バックアップ元ワールドが死んでいる場合messageBox出現
-                Logger.Info(" 死亡済みワールドのバックアップが選択されました");
+                logger.Info(" 死亡済みワールドのバックアップが選択されました");
                 MessageBox.Show("同名の別ワールドがゲームディレクトリ内に存在しています", "Minecraft Auto Backup", buttons: MessageBoxButtons.OK);
             }
             DateTime dt = DateTime.ParseExact(selectedItem.SubItems[0].Text, "yyyy-MM-dd HH:mm", null);

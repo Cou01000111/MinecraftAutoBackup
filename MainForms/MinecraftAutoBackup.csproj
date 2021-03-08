@@ -103,6 +103,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Util.cs" />
+    <Compile Include="WaitDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WaitDialog.Designer.cs">
+      <DependentUpon>WaitDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="World.cs" />
     <Compile Include="WorldForComparison.cs" />
     <Compile Include="WorldListForm.cs">
@@ -111,6 +117,7 @@
     <Compile Include="WorldListView.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ZipperProcess.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

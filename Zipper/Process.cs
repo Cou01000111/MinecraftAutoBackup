@@ -5,7 +5,6 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 
 /*
@@ -28,6 +27,7 @@ namespace Zipper {
         public static int skipCount = 0;
         public static void MainProcess(string[] args) {
             Logger.Info("start Zipper");
+
             if (args.ToList().Count() == 0) {
                 Logger.Error("argsが存在しません");
                 EndTimeProcess(false);
@@ -36,18 +36,22 @@ namespace Zipper {
 
             //tmpファイルを作りそこへバックアップ先を移す
             TmpProcess();
+            Logger.Info($"tmpPath:{tmpPath}");
+            Logger.Info($"tmpPathExits:{Directory.Exists(tmpPath)}");
 
             //圧縮 & 非圧縮するファイルへのパスの配列を作る
             List<string> backups = new List<string>();
             List<string> dirs = new List<string>();
-            try{
-                dirs = Directory.GetDirectories(AppConfig.BackupPath).ToList();
+            try{ 
+                dirs = Directory.GetDirectories(tmpPath).ToList();
             }
-            catch {
+            catch (Exception e){
+                Logger.Error(e.StackTrace);
                 Logger.Error("バックアップが一つもありません");
                 EndTimeProcess(false);
                 return;
             }
+            Logger.Info($"dirs.Count: {dirs.Count()}");
             List<string> worlds = new List<string>();
             foreach (string dir in dirs) {
                 Logger.Debug($"game directory : {dir} , ({Directory.Exists(dir)})");
@@ -78,12 +82,13 @@ namespace Zipper {
             }
 
         }
+
         private static void TmpProcess() {
             //前回のtmpファイルが残っている場合は削除
             tmpPath = $"{Path.GetTempPath()}MABtmp";
             if (Directory.Exists(tmpPath)) {
                 try {
-                    FileSystem.DeleteDirectory(tmpPath, UIOption.OnlyErrorDialogs, RecycleOption.DeletePermanently);
+                    Directory.Delete(tmpPath);
                 }
                 catch {
                     Logger.Error("前回の残存tmpファイルが削除できませんでした");
@@ -108,19 +113,20 @@ namespace Zipper {
             //前回のtmpファイルが残っていた場合
             if (File.Exists(tmpPath)) {
                 Logger.Warn("MABtmpを削除します");
-                Directory.Delete(tmpPath, true);
+                FileSystem.DeleteDirectory(tmpPath, UIOption.OnlyErrorDialogs, RecycleOption.DeletePermanently);
             }
-            FileSystem.CreateDirectory(tmpPath);
             try {
                 FileSystem.CopyDirectory(AppConfig.BackupPath + "\\", tmpPath, UIOption.AllDialogs);
             }
             catch (Exception e) {
                 Console.WriteLine(e.Message);
+                return;
             }
         }
         private static void ZipProcess(List<string> backups) {
             //0番ならzippingMode
             //try {
+            
             List<string> pasess = backups;
             Logger.Info("=========DoZipping=========");
             Logger.Info($"{pasess.Count()}件のバックアップを検討します");
@@ -167,6 +173,7 @@ namespace Zipper {
             }
             EndTimeProcess(true);
         }
+
         private static void DecompProcess(List<string> backups) {
             List<string> pasess = backups;
             Logger.Info("=========Decompression=========");
@@ -298,7 +305,6 @@ namespace Zipper {
                 Logger.Error(e.Message);
                 Logger.Error(e.StackTrace);
             }
-            Application.Exit();
         }
     }
 }

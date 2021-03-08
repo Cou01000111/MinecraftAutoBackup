@@ -10,6 +10,8 @@ class BackupDataPanel :FlowLayoutPanel {
     private AddInfoButton addInfo;
     private FlowLayoutPanel dualPanel;
     private FlowLayoutPanel panel;
+
+    private Logger logger = new Logger("MainForm",3);
     //コンストラクタ
     public BackupDataPanel() {
         Dock = DockStyle.Fill;
@@ -22,7 +24,7 @@ class BackupDataPanel :FlowLayoutPanel {
         List<string> backups = Util.GetBackups();
 
         if (backups.Count() == 0) {
-            Logger.Info("バックアップが存在しません");
+            logger.Info("バックアップが存在しません");
             Label notBackupFile = new Label() {
                 Text = "バックアップが存在しません",
                 Margin = new Padding(10),
@@ -30,7 +32,7 @@ class BackupDataPanel :FlowLayoutPanel {
             Controls.Add(notBackupFile);
         }
         else {
-            Logger.Info($"{Config.Configs.Count()}件のワールドのバックアップを読み込みます");
+            logger.Info($"{Config.Configs.Count()}件のワールドのバックアップを読み込みます");
             foreach (World world in Config.Configs) {
                 if (Util.GetBackup(world).Count() == 0) {
                     //バックアップが一つもない場合continue
@@ -91,7 +93,7 @@ class BackupDataPanel :FlowLayoutPanel {
     private void addListView(object sender, EventArgs e) {
         var button = (AddInfoButton)sender;
         int index = button.id;
-        Logger.Info("call:addListView");
+        logger.Info("call:addListView");
         backupDataList = new BackupDataListView(button.World);
 
         this.Controls[index].Controls.Add(backupDataList);
@@ -100,7 +102,7 @@ class BackupDataPanel :FlowLayoutPanel {
     }
 
     private void removeListView(object sender, EventArgs e) {
-        Logger.Info("call:removeListView");
+        logger.Info("call:removeListView");
         var button = (AddInfoButton)sender;
         int index = button.id;
         this.Controls[index].Controls.Remove(this.Controls[index].Controls[1]);

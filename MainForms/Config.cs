@@ -11,19 +11,21 @@ public class Config {
 
     public static string ConfigPath = @".\Config\config.txt";
 
+    private static Logger logger = new Logger("Config", 3);
+
     public static void MakeConfig() {
-        Logger.Info("call:MakeConfig");
+        logger.Info("call:MakeConfig");
         if (!Directory.Exists(Path.GetDirectoryName(ConfigPath))) {
             Directory.CreateDirectory(Path.GetDirectoryName(ConfigPath));
         }
 
         string value = $"configファイル[{ConfigPath}]生成完了";
-        Logger.Info(value);
+        logger.Info(value);
         List<World> worlds = GetWorldDataFromHDD();
         //List<world> worlds = new List<world>();
         // ゲームディレクトリが見つからなかった場合
         if (worlds.Count <= 0) {
-            Logger.Info("ゲームディレクトリが一つも見つかりませんでした");
+            logger.Info("ゲームディレクトリが一つも見つかりませんでした");
             DialogResult result = MessageBox.Show(
                 "minecraftのゲームディレクトリが見つかりませんでした。手動で設定しますか？",
                 "ゲームディレクトリが見つかりませんでした",
@@ -45,7 +47,7 @@ public class Config {
             }
         }
         foreach (var world in worlds) {
-            Logger.Info($"world[{world.WorldName}]を発見しました");
+            logger.Info($"world[{world.WorldName}]を発見しました");
             Configs.Add(world);
             Write();
         }
@@ -55,7 +57,7 @@ public class Config {
     /// ConfigファイルからAppに読み込む
     /// </summary>
     public static void Load() {
-        Logger.Info("call:LoadConfigToApp");
+        logger.Info("call:LoadConfigToApp");
         List<string> texts = new List<string>();
         using (StreamReader reader = new StreamReader(ConfigPath, Encoding.GetEncoding("utf-8"))) {
             while (reader.Peek() >= 0) {
@@ -63,7 +65,7 @@ public class Config {
                 datas = datas.Select(x => Util.TrimDoubleQuotationMarks(x)).ToList();
                 Configs.Add(new World(datas[2], Convert.ToBoolean(datas[0]), Convert.ToBoolean(datas[4])));
             }
-            Logger.Info($"Configから{Configs.Count()}件のワールドを読み込みました");
+            logger.Info($"Configから{Configs.Count()}件のワールドを読み込みました");
         }
 
     }
@@ -84,30 +86,30 @@ public class Config {
     /// Configファイルを更新する
     /// </summary>
     public static List<World> SyncConfig() {
-        Logger.Info("call:reloadConfig");
+        logger.Info("call:reloadConfig");
         List<World> worldInHdd = GetWorldDataFromHDD();
         foreach (string world in AppConfig.AddGameDirPath) {
             worldInHdd.AddRange(GetWorldDataFromHDD(world));
         }
         List<World> worldInConfig = Config.Configs;
-        Logger.Debug($"config: {worldInConfig.Count()}");
-        Logger.Debug($"HDD   : {worldInHdd.Count()}");
+        logger.Debug($"config: {worldInConfig.Count()}");
+        logger.Debug($"HDD   : {worldInHdd.Count()}");
 
         int i = 0;
         //configに存在しないpathをconfigに追加する
         foreach (World pc in worldInHdd) {
-            Logger.Debug($"pc:{i}回目");
+            logger.Debug($"pc:{i}回目");
             //dobackup以外を比較して判定
             //List<WorldForComparison> _comp = worldInConfig.Select(x => new WorldForComparison(x)).ToList();
             if (!worldInConfig.Select(x => $"{x.WorldPath}_{x.IsAlive}").ToList().Contains($"{pc.WorldPath}_{pc.IsAlive}")) {
-                Logger.Debug($"ADD {pc.WorldName}");
+                logger.Debug($"ADD {pc.WorldName}");
                 Configs.Add(pc);
             }
             i++;
         }
         List<World> removeWorlds = new List<World>();
-        Logger.Debug($"config: {worldInConfig.Count()}");
-        Logger.Debug($"HDD   : {worldInHdd.Count()}");
+        logger.Debug($"config: {worldInConfig.Count()}");
+        logger.Debug($"HDD   : {worldInHdd.Count()}");
 
         i = 0;
         //configに存在するがhddに存在しない(削除されたワールド)pathをconfigで死亡扱いにする
@@ -115,23 +117,23 @@ public class Config {
         int wI = 0;
         foreach (World world in worldInConfig) {
             WorldForComparison cf = new WorldForComparison(world);
-            Logger.Debug($"config:{i}回目");
+            logger.Debug($"config:{i}回目");
             //dobackup以外を比較して判定
             if (!worldInHdd.Select(x => $"{x.WorldPath}_{x.IsAlive}").ToList().Contains($"{world.WorldPath}_{world.IsAlive}")) {
                 //config内のworldがHDDになかった場合
                 if (Util.GetBackup(world).Count() == 0) {
                     // バックアップが一つもない場合はconfigから削除
-                    Logger.Debug($"バックアップが一つもないのでRemoveWorldsに{world.WorldName}を追加");
+                    logger.Debug($"バックアップが一つもないのでRemoveWorldsに{world.WorldName}を追加");
                     removeWorlds.Add(world);
                 }
                 else {
                     if (world.IsAlive) {
                         //バックアップが一つでもある場合は、backup一覧に表示するために殺すだけにする
-                        Logger.Debug($"{world.WorldName}のバックアップが残っているため殺害");
+                        logger.Debug($"{world.WorldName}のバックアップが残っているため殺害");
                         Config.Configs[wI].IsAlive = false;
                         int count = 1;
                         while (Directory.Exists($"{AppConfig.BackupPath}\\{Config.Configs[wI].WorldDir}\\{Config.Configs[wI].WorldName}_(削除済み)_{count}")) {
-                            Logger.Debug($" path[ {AppConfig.BackupPath}\\{Config.Configs[wI].WorldDir}\\{Config.Configs[wI].WorldName}_(削除済み)_{count} ]");
+                            logger.Debug($" path[ {AppConfig.BackupPath}\\{Config.Configs[wI].WorldDir}\\{Config.Configs[wI].WorldName}_(削除済み)_{count} ]");
                             count++;
                         }
 
@@ -146,29 +148,29 @@ public class Config {
             i++;
         }
 
-        Logger.Debug($"config: {worldInConfig.Count()}");
-        Logger.Debug($"HDD   : {worldInHdd.Count()}");
+        logger.Debug($"config: {worldInConfig.Count()}");
+        logger.Debug($"HDD   : {worldInHdd.Count()}");
 
         foreach (World w in removeWorlds) {
             if (Configs.Remove(w)) {
-                Logger.Info($"REMOVE {w.WorldName} suc");
+                logger.Info($"REMOVE {w.WorldName} suc");
             }
             else {
-                Logger.Warn($"REMOVE {w.WorldName} 見つかりませんでした");
+                logger.Warn($"REMOVE {w.WorldName} 見つかりませんでした");
             }
         }
 
         Write();
 
-        Logger.Debug($"config: {worldInConfig.Count()}");
-        Logger.Debug($"HDD   : {worldInHdd.Count()}");
+        logger.Debug($"config: {worldInConfig.Count()}");
+        logger.Debug($"HDD   : {worldInHdd.Count()}");
 
         return removeWorlds;
     }
 
     public static void Change(string worldName, string worldDir, string doBackup) {
-        Logger.Info("call:Change");
-        Logger.Info("GET  worldName: " + worldName + ",  worldDir: " + worldDir + ",  dobackup: " + doBackup);
+        logger.Info("call:Change");
+        logger.Info("GET  worldName: " + worldName + ",  worldDir: " + worldDir + ",  dobackup: " + doBackup);
         List<World> _configs = new List<World>();
         foreach (World config in Configs) {
             if (config.WorldName == worldName && config.WorldDir == worldDir) {
@@ -188,7 +190,7 @@ public class Config {
     /// </summary>
     /// <returns>取得したList<world></returns>
     private static List<World> GetWorldDataFromHDD() {
-        Logger.Info("call:GetWorldDataFromPC");
+        logger.Info("call:GetWorldDataFromPC");
         List<World> worlds = new List<World>();
         List<string> _gameDirectory = Directory.GetDirectories(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)).ToList();
         List<string> gameDirectory = new List<string>();
@@ -196,7 +198,7 @@ public class Config {
             List<string> dirsInDir = Directory.GetDirectories(dir).ToList();
             dirsInDir = dirsInDir.Select(x => Path.GetFileName(x)).Cast<string>().ToList();
             if (dirsInDir.Contains("logs") && dirsInDir.Contains("resourcepacks") && dirsInDir.Contains("saves")) {
-                Logger.Debug($"ゲームディレクトリ[{dir}]を発見しました");
+                logger.Debug($"ゲームディレクトリ[{dir}]を発見しました");
                 gameDirectory.Add(dir);
             }
         }
@@ -207,7 +209,7 @@ public class Config {
             }
         }
         foreach (var a in worlds) {
-            Logger.Debug($"world[{a.WorldName}]");
+            logger.Debug($"world[{a.WorldName}]");
         }
         return worlds;
     }
@@ -219,7 +221,7 @@ public class Config {
     /// <returns>取得したList<world></returns>
     public static List<World> GetWorldDataFromHDD(List<string> gameDirectory) {
         List<World> worlds = new List<World>();
-        Logger.Info("call:GetWorldDataFromPC");
+        logger.Info("call:GetWorldDataFromPC");
         foreach (string dir in gameDirectory) {
             if (Directory.Exists($"{dir}\\saves")) {
                 List<string> _worlds = Directory.GetDirectories($"{dir}\\saves").ToList();
@@ -229,13 +231,13 @@ public class Config {
             }
         }
         //foreach(var a in worlds) {
-        //    Logger.Info($"world[{a.WName}]");
+        //    logger.Info($"world[{a.WName}]");
         //}
         return worlds;
     }
     public static List<World> GetWorldDataFromHDD(string gameDirectory) {
         List<World> worlds = new List<World>();
-        Logger.Info("call:GetWorldDataFromPC");
+        logger.Info("call:GetWorldDataFromPC");
         if (Directory.Exists($"{gameDirectory}\\saves")) {
             List<string> _worlds = Directory.GetDirectories($"{gameDirectory}\\saves").ToList();
             foreach (string worldPath in _worlds) {
@@ -246,11 +248,11 @@ public class Config {
     }
 
     public static void ConsoleConfig() {
-        Logger.Info("----Configs----");
+        logger.Info("----Configs----");
         foreach (World w in Configs) {
-            Logger.Info($"[{w.WorldDoBackup},{w.WorldName},{w.WorldPath},{w.WorldDir},]");
+            logger.Info($"[{w.WorldDoBackup},{w.WorldName},{w.WorldPath},{w.WorldDir},]");
         }
-        Logger.Info("---------------");
+        logger.Info("---------------");
     }
     /// <summary>
     /// ワールドのバックアップソースが生きているかどうか
@@ -259,11 +261,11 @@ public class Config {
     /// <returns></returns>
     public static bool IsBackupAlive(World w) {
         if (w.IsAlive) {
-            Logger.Debug("バックアップは死んでいます");
+            logger.Debug("バックアップは死んでいます");
             return false;
         }
         else {
-            Logger.Debug("バックアップは生きています");
+            logger.Debug("バックアップは生きています");
             return true;
         }
     }
@@ -272,14 +274,14 @@ public class Config {
     public static List<string> GetGameDirInConfigs() {
         List<string> gameDirs = new List<string>();
         foreach (World cfg in Configs) {
-            Logger.Debug($"cfg:{cfg.WorldDir}");
+            logger.Debug($"cfg:{cfg.WorldDir}");
             if (!gameDirs.Contains(cfg.WorldDir)) {
                 gameDirs.Add(cfg.WorldDir);
             }
         }
 
         foreach (string gameDir in gameDirs) {
-            Logger.Debug($"gameDirInConfigs:{gameDir}");
+            logger.Debug($"gameDirInConfigs:{gameDir}");
         }
         return gameDirs;
     }

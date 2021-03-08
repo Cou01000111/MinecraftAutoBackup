@@ -13,20 +13,22 @@ class RestoreFromBackupForm :Form {
     private string pathSrc;
     private string pathTar;
 
+    private static Logger logger = new Logger("MainForm", 3);
+
     /*
     バックアップオプション
     １．バックアップ元を消す
     ２．バックアップ先を上書きしない(別名で新規作成する)
     */
     public RestoreFromBackupForm(string backupSourcePath, World backupTarget) {
-        Logger.Info($"src[{backupSourcePath}]");
-        Logger.Info($"tar[{backupTarget.WorldPath}]");
+        logger.Info($"src[{backupSourcePath}]");
+        logger.Info($"tar[{backupTarget.WorldPath}]");
         pathSrc = backupSourcePath;
         pathTar = backupTarget.WorldPath;
         if (!((Directory.Exists(backupSourcePath) || (File.Exists(backupSourcePath))))) {
-            Logger.Error($"normal {Directory.Exists(backupSourcePath)}");
-            Logger.Error($"zip    {File.Exists(backupSourcePath)}");
-            Logger.Error($"バックアップは存在しません");
+            logger.Error($"normal {Directory.Exists(backupSourcePath)}");
+            logger.Error($"zip    {File.Exists(backupSourcePath)}");
+            logger.Error($"バックアップは存在しません");
             return;
         }
         Text = "バックアップから復元します";
@@ -92,7 +94,7 @@ class RestoreFromBackupForm :Form {
         };
         doRestore.Click += new EventHandler(doRestore_Click);
 
-        Logger.Info($"{pathSrc}を{pathTar}に上書きします");
+        logger.Info($"{pathSrc}を{pathTar}に上書きします");
         panel.Controls.Add(description);
         panel.Controls.Add(removeBackup);
         if (backupTarget.IsAlive) {
@@ -117,11 +119,11 @@ class RestoreFromBackupForm :Form {
         string src = pathSrc;
         string tar = pathTar;
 
-        Logger.Info($" src[{src}]");
-        Logger.Info($" tar[{tar}]");
+        logger.Info($" src[{src}]");
+        logger.Info($" tar[{tar}]");
         if (dontOverwriting.Checked) {
-            Logger.Info("restore from backup");
-            Logger.Info($"option:dont over writing [{dontOverwriting.Checked}],remove backup [{removeBackup.Checked}]");
+            logger.Info("restore from backup");
+            logger.Info($"option:dont over writing [{dontOverwriting.Checked}],remove backup [{removeBackup.Checked}]");
             int i = 0;
             bool ok = false;
             while (!ok) {
@@ -132,12 +134,12 @@ class RestoreFromBackupForm :Form {
             FileSystem.CopyDirectory(src, $"{tar}({i})", true);
         }
         else {
-            Logger.Info($"option:dont over writing [{dontOverwriting.Checked}],remove backup [{removeBackup.Checked}]");
+            logger.Info($"option:dont over writing [{dontOverwriting.Checked}],remove backup [{removeBackup.Checked}]");
             FileSystem.CopyDirectory(src, tar, true);
         }
 
         if (removeBackup.Checked) {
-            Logger.Info("元データを消します");
+            logger.Info("元データを消します");
             Directory.Delete(src);
         }
     }
