@@ -6,9 +6,10 @@ using System.Linq;
 namespace Zipper {
     class Logger {
         public static string logPath = ".\\logs\\Zipper.txt";
-        private static int outputLevel = 3;
+        private static int outputLevel = 2;
 
         private static void Base(string logLevelStr, string message) {
+            Program.logs.Add(message);
             string logMessage = $"{DateTime.Now.ToString($"yyyy/MM/dd-HH:mm:ss")} [{logLevelStr}]:{message}\n";
             Console.WriteLine(logMessage);
             File.AppendAllText(logPath, logMessage);
@@ -35,19 +36,5 @@ namespace Zipper {
             }
         }
 
-        public static List<string> GetLogFromFile() {
-            List<string> logs = new List<string>();
-
-            using (StreamReader s = new StreamReader(Logger.logPath)) {
-                string _logs = s.ReadToEnd();
-                logs = _logs.Split('\n').ToList();
-            }
-            logs.Reverse();
-            return logs;
-        }
-
-        public static string GetNearestLogFromFile() {
-            return GetLogFromFile()[GetLogFromFile().Count - 2];
-        }
     }
 }

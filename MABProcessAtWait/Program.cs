@@ -160,6 +160,10 @@ namespace MABProcessAtWait {
         private void DoBackupProcess() {
             Logger.Info("バックアッププロセスを始めます");
             //zipperが起動している場合はバックアップを保留にする
+            //バックアップがない場合で、_tmpファイルがある場合は前回のZipperがmoveを失敗してるだけの可能性があるから名前変更
+            if (Directory.Exists(AppConfig.BackupPath + "_tmp") && (!Directory.Exists(AppConfig.BackupPath))) {
+                Directory.Move(AppConfig.BackupPath + "_tmp", AppConfig.BackupPath);
+            }
 
 
             int backupCount = 0;
@@ -260,15 +264,6 @@ namespace MABProcessAtWait {
             }
             return worldPasses;
         }
-
-        //private bool isZipperRunning() {
-        //    List<string> logs = new List<string>();
-        //    using (StreamReader s = new StreamReader(".\\logs\\Zipper.txt")) {
-        //        string _logs = s.ReadToEnd();
-        //        logs = _logs.Split('\n').ToList();
-        //    }
-
-        //}
 
         private void DoBackup(string path, string Time) {
             string backupPath = backupDataPath + "\\" + Path.GetFileName(Directory.GetParent(Directory.GetParent(path).ToString()).ToString()) + "\\" + Path.GetFileName(path) + "\\" + Time;

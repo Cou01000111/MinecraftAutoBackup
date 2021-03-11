@@ -11,28 +11,70 @@ using System.Windows.Forms;
 
 namespace Zipper {
     public partial class WaitDialog :Form {
+        int processCount = 0;
+        FlowLayoutPanel basePanel;
         Label processingContentLabel;
         Label processingContent;
-        ProgressBar progressBar;
+        string[] argsProperty;
         public WaitDialog(string[] args) {
-            processingContentLabel = new Label() {
-                Text = "現在の処理内容"
+            argsProperty = args;
+            Console.WriteLine("WaitDialogを表示しました");
+            basePanel = new FlowLayoutPanel() {
+                FlowDirection = FlowDirection.TopDown,
+                Padding = new Padding(10),
             };
-            processingContent = new Label();
-            progressBar = new ProgressBar() { };
-            Controls.AddRange(new Control[] { processingContentLabel,processingContent,progressBar});
+            processingContentLabel = new Label() {
+                Text = "現在の処理内容 ",
+                AutoSize = true,
+            };
+            processingContent = new Label() {
+                Text = "初期化",
+                AutoSize = true,
+                BackColor = Color.Red,
+            };
+            basePanel.Controls.AddRange(new Control[] { processingContentLabel, processingContent });
+            Controls.Add(basePanel);
             Timer timer = new Timer();
-            timer.Interval = 5000;
+            timer.Interval = 100;
             timer.Enabled = true;
             timer.Tick += new EventHandler(timer_Tick);
-            Console.WriteLine("mainProcessを起動します");
-            Task t = Task.Run(() => Process.MainProcess(args));
+            Shown += WaitDialog_Shown;
         }
 
-        public void timer_Tick(object sender,EventArgs e) {
-            Logger.Info("処理中");
-            TextReader textReader = Console.In;
-            processingContent.Text = textReader.ReadLine();
+        public void timer_Tick(object sender, EventArgs e) {
+            processCount++;
+            this.processingContent.Text = Program.logs.Last();
+            string addString;
+            switch ((processCount % 10 < 5 ? processCount % 10 : 4)) {
+                case 0:
+                    addString = "■理中";
+                    break;
+                case 1:
+                    addString = "処■中";
+                    break;
+                case 2:
+                    addString = "処理■";
+                    break;
+                case 3:
+                    addString = "処■中";
+                    break;
+                case 4:
+                    addString = "処理中";
+                    break;
+                default:
+                    addString = " ";
+                    break;
+            }
+            this.processingContentLabel.Text = "現在の処理内容 " + addString;
+            //Logger.Debug($"processingContent text:{this.processingContent.Text}");
+
+        }
+
+        public async void WaitDialog_Shown(object sender, EventArgs e) {
+            string[] args = ((WaitDialog)sender).argsProperty;
+            Task<int> t = await Task.Run(async () => Process.MainProcess(args));
+            Logger.Info("処理が完了しました");
+            this.Close();
         }
     }
 }

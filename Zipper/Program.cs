@@ -6,6 +6,7 @@ using System.Windows.Forms;
 
 namespace Zipper {
     static class Program {
+        public static List<string> logs = new List<string>();
         /// <summary>
         /// アプリケーションのメイン エントリ ポイントです。
         /// </summary>

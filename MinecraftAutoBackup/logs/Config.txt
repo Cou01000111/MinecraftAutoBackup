@@ -2524,3 +2524,177 @@
 2021/03/08-11:29:24 [DEBUG]:[Config]HDD   : 22
 2021/03/08-11:29:24 [DEBUG]:[Config]config: 22
 2021/03/08-11:29:24 [DEBUG]:[Config]HDD   : 22
+2021/03/11-12:51:26 [INFO ]:[Config]call:LoadConfigToApp
+2021/03/11-12:51:26 [INFO ]:[Config]Configから22件のワールドを読み込みました
+2021/03/11-12:51:26 [INFO ]:[Config]call:reloadConfig
+2021/03/11-12:51:26 [INFO ]:[Config]call:GetWorldDataFromPC
+2021/03/11-12:51:26 [DEBUG]:[Config]ゲームディレクトリ[C:\Users\Cou\AppData\Roaming\.minecraft]を発見しました
+2021/03/11-12:51:26 [DEBUG]:[Config]ゲームディレクトリ[C:\Users\Cou\AppData\Roaming\.minecraft-1.14.4-optifine]を発見しました
+2021/03/11-12:51:26 [DEBUG]:[Config]ゲームディレクトリ[C:\Users\Cou\AppData\Roaming\.minecraft_1.10.2]を発見しました
+2021/03/11-12:51:26 [DEBUG]:[Config]ゲームディレクトリ[C:\Users\Cou\AppData\Roaming\.minecraft_1.12.2]を発見しました
+2021/03/11-12:51:26 [DEBUG]:[Config]ゲームディレクトリ[C:\Users\Cou\AppData\Roaming\.minecraft_1.14.4_worldedit]を発見しました
+2021/03/11-12:51:26 [DEBUG]:[Config]ゲームディレクトリ[C:\Users\Cou\AppData\Roaming\.minecraft_1.15.2_worldedit]を発見しました
+2021/03/11-12:51:26 [DEBUG]:[Config]ゲームディレクトリ[C:\Users\Cou\AppData\Roaming\.minecraft_1.9]を発見しました
+2021/03/11-12:51:26 [DEBUG]:[Config]ゲームディレクトリ[C:\Users\Cou\AppData\Roaming\.minecraft_1.9 - コピー]を発見しました
+2021/03/11-12:51:26 [DEBUG]:[Config]ゲームディレクトリ[C:\Users\Cou\AppData\Roaming\.minecraft_forge1.12.2]を発見しました
+2021/03/11-12:51:26 [DEBUG]:[Config]world[buildinng]
+2021/03/11-12:51:26 [DEBUG]:[Config]world[commanding (1)]
+2021/03/11-12:51:26 [DEBUG]:[Config]world[sWorld(1)(1)]
+2021/03/11-12:51:26 [DEBUG]:[Config]world[sWorld(1)(1)(1)]
+2021/03/11-12:51:26 [DEBUG]:[Config]world[The Unusual SkyBlock v9.1.4]
+2021/03/11-12:51:26 [DEBUG]:[Config]world[The Unusual SkyBlock v9.1.4 - コピー]
+2021/03/11-12:51:26 [DEBUG]:[Config]world[The Water SkyBlock ver2.2.3]
+2021/03/11-12:51:26 [DEBUG]:[Config]world[a]
+2021/03/11-12:51:26 [DEBUG]:[Config]world[The Water SkyBlock ver3.1.2]
+2021/03/11-12:51:26 [DEBUG]:[Config]world[The Water SkyBlock ver3.1.3b]
+2021/03/11-12:51:26 [DEBUG]:[Config]world[新規ワールド]
+2021/03/11-12:51:26 [DEBUG]:[Config]world[検証用ワールド]
+2021/03/11-12:51:26 [DEBUG]:[Config]world[適当建築]
+2021/03/11-12:51:26 [DEBUG]:[Config]world[test]
+2021/03/11-12:51:26 [DEBUG]:[Config]world[The Unusual SkyBlock v12.0.9]
+2021/03/11-12:51:26 [DEBUG]:[Config]world[The Unusual SkyBlock v12.0.9 - コピー]
+2021/03/11-12:51:26 [DEBUG]:[Config]world[The Water SkyBlock ver2.2.3]
+2021/03/11-12:51:26 [DEBUG]:[Config]world[Rare Species SkyBlock ii Beta2.2.2 (1)]
+2021/03/11-12:51:26 [DEBUG]:[Config]world[Rare Species SkyBlock ii Beta2.2.2 (1)]
+2021/03/11-12:51:26 [DEBUG]:[Config]world[新規ワールド]
+2021/03/11-12:51:26 [DEBUG]:[Config]world[新規ワールド-]
+2021/03/11-12:51:26 [DEBUG]:[Config]world[新規ワールド--]
+2021/03/11-12:51:26 [DEBUG]:[Config]config: 22
+2021/03/11-12:51:26 [DEBUG]:[Config]HDD   : 22
+2021/03/11-12:51:26 [DEBUG]:[Config]pc:0回目
+2021/03/11-12:51:26 [DEBUG]:[Config]pc:1回目
+2021/03/11-12:51:26 [DEBUG]:[Config]pc:2回目
+2021/03/11-12:51:26 [DEBUG]:[Config]pc:3回目
+2021/03/11-12:51:26 [DEBUG]:[Config]pc:4回目
+2021/03/11-12:51:26 [DEBUG]:[Config]pc:5回目
+2021/03/11-12:51:26 [DEBUG]:[Config]pc:6回目
+2021/03/11-12:51:26 [DEBUG]:[Config]pc:7回目
+2021/03/11-12:51:26 [DEBUG]:[Config]pc:8回目
+2021/03/11-12:51:26 [DEBUG]:[Config]pc:9回目
+2021/03/11-12:51:26 [DEBUG]:[Config]pc:10回目
+2021/03/11-12:51:26 [DEBUG]:[Config]pc:11回目
+2021/03/11-12:51:26 [DEBUG]:[Config]pc:12回目
+2021/03/11-12:51:26 [DEBUG]:[Config]pc:13回目
+2021/03/11-12:51:26 [DEBUG]:[Config]pc:14回目
+2021/03/11-12:51:26 [DEBUG]:[Config]pc:15回目
+2021/03/11-12:51:26 [DEBUG]:[Config]pc:16回目
+2021/03/11-12:51:26 [DEBUG]:[Config]pc:17回目
+2021/03/11-12:51:26 [DEBUG]:[Config]pc:18回目
+2021/03/11-12:51:26 [DEBUG]:[Config]pc:19回目
+2021/03/11-12:51:26 [DEBUG]:[Config]pc:20回目
+2021/03/11-12:51:26 [DEBUG]:[Config]pc:21回目
+2021/03/11-12:51:26 [DEBUG]:[Config]config: 22
+2021/03/11-12:51:26 [DEBUG]:[Config]HDD   : 22
+2021/03/11-12:51:26 [DEBUG]:[Config]config:0回目
+2021/03/11-12:51:26 [DEBUG]:[Config]config:1回目
+2021/03/11-12:51:26 [DEBUG]:[Config]config:2回目
+2021/03/11-12:51:26 [DEBUG]:[Config]config:3回目
+2021/03/11-12:51:26 [DEBUG]:[Config]config:4回目
+2021/03/11-12:51:26 [DEBUG]:[Config]config:5回目
+2021/03/11-12:51:26 [DEBUG]:[Config]config:6回目
+2021/03/11-12:51:26 [DEBUG]:[Config]config:7回目
+2021/03/11-12:51:26 [DEBUG]:[Config]config:8回目
+2021/03/11-12:51:26 [DEBUG]:[Config]config:9回目
+2021/03/11-12:51:26 [DEBUG]:[Config]config:10回目
+2021/03/11-12:51:26 [DEBUG]:[Config]config:11回目
+2021/03/11-12:51:26 [DEBUG]:[Config]config:12回目
+2021/03/11-12:51:26 [DEBUG]:[Config]config:13回目
+2021/03/11-12:51:26 [DEBUG]:[Config]config:14回目
+2021/03/11-12:51:26 [DEBUG]:[Config]config:15回目
+2021/03/11-12:51:26 [DEBUG]:[Config]config:16回目
+2021/03/11-12:51:26 [DEBUG]:[Config]config:17回目
+2021/03/11-12:51:26 [DEBUG]:[Config]config:18回目
+2021/03/11-12:51:26 [DEBUG]:[Config]config:19回目
+2021/03/11-12:51:26 [DEBUG]:[Config]config:20回目
+2021/03/11-12:51:26 [DEBUG]:[Config]config:21回目
+2021/03/11-12:51:26 [DEBUG]:[Config]config: 22
+2021/03/11-12:51:26 [DEBUG]:[Config]HDD   : 22
+2021/03/11-12:51:26 [DEBUG]:[Config]config: 22
+2021/03/11-12:51:26 [DEBUG]:[Config]HDD   : 22
+2021/03/11-18:34:43 [INFO ]:[Config]call:LoadConfigToApp
+2021/03/11-18:34:43 [INFO ]:[Config]Configから22件のワールドを読み込みました
+2021/03/11-18:34:43 [INFO ]:[Config]call:reloadConfig
+2021/03/11-18:34:43 [INFO ]:[Config]call:GetWorldDataFromPC
+2021/03/11-18:34:43 [DEBUG]:[Config]ゲームディレクトリ[C:\Users\Cou\AppData\Roaming\.minecraft]を発見しました
+2021/03/11-18:34:43 [DEBUG]:[Config]ゲームディレクトリ[C:\Users\Cou\AppData\Roaming\.minecraft-1.14.4-optifine]を発見しました
+2021/03/11-18:34:43 [DEBUG]:[Config]ゲームディレクトリ[C:\Users\Cou\AppData\Roaming\.minecraft_1.10.2]を発見しました
+2021/03/11-18:34:44 [DEBUG]:[Config]ゲームディレクトリ[C:\Users\Cou\AppData\Roaming\.minecraft_1.12.2]を発見しました
+2021/03/11-18:34:44 [DEBUG]:[Config]ゲームディレクトリ[C:\Users\Cou\AppData\Roaming\.minecraft_1.14.4_worldedit]を発見しました
+2021/03/11-18:34:44 [DEBUG]:[Config]ゲームディレクトリ[C:\Users\Cou\AppData\Roaming\.minecraft_1.15.2_worldedit]を発見しました
+2021/03/11-18:34:44 [DEBUG]:[Config]ゲームディレクトリ[C:\Users\Cou\AppData\Roaming\.minecraft_1.9]を発見しました
+2021/03/11-18:34:44 [DEBUG]:[Config]ゲームディレクトリ[C:\Users\Cou\AppData\Roaming\.minecraft_1.9 - コピー]を発見しました
+2021/03/11-18:34:44 [DEBUG]:[Config]ゲームディレクトリ[C:\Users\Cou\AppData\Roaming\.minecraft_forge1.12.2]を発見しました
+2021/03/11-18:34:44 [DEBUG]:[Config]world[buildinng]
+2021/03/11-18:34:44 [DEBUG]:[Config]world[commanding (1)]
+2021/03/11-18:34:44 [DEBUG]:[Config]world[sWorld(1)(1)]
+2021/03/11-18:34:44 [DEBUG]:[Config]world[sWorld(1)(1)(1)]
+2021/03/11-18:34:44 [DEBUG]:[Config]world[The Unusual SkyBlock v9.1.4]
+2021/03/11-18:34:44 [DEBUG]:[Config]world[The Unusual SkyBlock v9.1.4 - コピー]
+2021/03/11-18:34:44 [DEBUG]:[Config]world[The Water SkyBlock ver2.2.3]
+2021/03/11-18:34:44 [DEBUG]:[Config]world[a]
+2021/03/11-18:34:44 [DEBUG]:[Config]world[The Water SkyBlock ver3.1.2]
+2021/03/11-18:34:44 [DEBUG]:[Config]world[The Water SkyBlock ver3.1.3b]
+2021/03/11-18:34:44 [DEBUG]:[Config]world[新規ワールド]
+2021/03/11-18:34:44 [DEBUG]:[Config]world[検証用ワールド]
+2021/03/11-18:34:44 [DEBUG]:[Config]world[適当建築]
+2021/03/11-18:34:44 [DEBUG]:[Config]world[test]
+2021/03/11-18:34:44 [DEBUG]:[Config]world[The Unusual SkyBlock v12.0.9]
+2021/03/11-18:34:44 [DEBUG]:[Config]world[The Unusual SkyBlock v12.0.9 - コピー]
+2021/03/11-18:34:44 [DEBUG]:[Config]world[The Water SkyBlock ver2.2.3]
+2021/03/11-18:34:44 [DEBUG]:[Config]world[Rare Species SkyBlock ii Beta2.2.2 (1)]
+2021/03/11-18:34:44 [DEBUG]:[Config]world[Rare Species SkyBlock ii Beta2.2.2 (1)]
+2021/03/11-18:34:44 [DEBUG]:[Config]world[新規ワールド]
+2021/03/11-18:34:44 [DEBUG]:[Config]world[新規ワールド-]
+2021/03/11-18:34:44 [DEBUG]:[Config]world[新規ワールド--]
+2021/03/11-18:34:44 [DEBUG]:[Config]config: 22
+2021/03/11-18:34:44 [DEBUG]:[Config]HDD   : 22
+2021/03/11-18:34:44 [DEBUG]:[Config]pc:0回目
+2021/03/11-18:34:44 [DEBUG]:[Config]pc:1回目
+2021/03/11-18:34:44 [DEBUG]:[Config]pc:2回目
+2021/03/11-18:34:44 [DEBUG]:[Config]pc:3回目
+2021/03/11-18:34:44 [DEBUG]:[Config]pc:4回目
+2021/03/11-18:34:44 [DEBUG]:[Config]pc:5回目
+2021/03/11-18:34:44 [DEBUG]:[Config]pc:6回目
+2021/03/11-18:34:44 [DEBUG]:[Config]pc:7回目
+2021/03/11-18:34:44 [DEBUG]:[Config]pc:8回目
+2021/03/11-18:34:44 [DEBUG]:[Config]pc:9回目
+2021/03/11-18:34:44 [DEBUG]:[Config]pc:10回目
+2021/03/11-18:34:44 [DEBUG]:[Config]pc:11回目
+2021/03/11-18:34:44 [DEBUG]:[Config]pc:12回目
+2021/03/11-18:34:44 [DEBUG]:[Config]pc:13回目
+2021/03/11-18:34:44 [DEBUG]:[Config]pc:14回目
+2021/03/11-18:34:44 [DEBUG]:[Config]pc:15回目
+2021/03/11-18:34:44 [DEBUG]:[Config]pc:16回目
+2021/03/11-18:34:44 [DEBUG]:[Config]pc:17回目
+2021/03/11-18:34:44 [DEBUG]:[Config]pc:18回目
+2021/03/11-18:34:44 [DEBUG]:[Config]pc:19回目
+2021/03/11-18:34:44 [DEBUG]:[Config]pc:20回目
+2021/03/11-18:34:44 [DEBUG]:[Config]pc:21回目
+2021/03/11-18:34:44 [DEBUG]:[Config]config: 22
+2021/03/11-18:34:44 [DEBUG]:[Config]HDD   : 22
+2021/03/11-18:34:44 [DEBUG]:[Config]config:0回目
+2021/03/11-18:34:44 [DEBUG]:[Config]config:1回目
+2021/03/11-18:34:44 [DEBUG]:[Config]config:2回目
+2021/03/11-18:34:44 [DEBUG]:[Config]config:3回目
+2021/03/11-18:34:44 [DEBUG]:[Config]config:4回目
+2021/03/11-18:34:44 [DEBUG]:[Config]config:5回目
+2021/03/11-18:34:44 [DEBUG]:[Config]config:6回目
+2021/03/11-18:34:44 [DEBUG]:[Config]config:7回目
+2021/03/11-18:34:44 [DEBUG]:[Config]config:8回目
+2021/03/11-18:34:44 [DEBUG]:[Config]config:9回目
+2021/03/11-18:34:44 [DEBUG]:[Config]config:10回目
+2021/03/11-18:34:44 [DEBUG]:[Config]config:11回目
+2021/03/11-18:34:44 [DEBUG]:[Config]config:12回目
+2021/03/11-18:34:44 [DEBUG]:[Config]config:13回目
+2021/03/11-18:34:44 [DEBUG]:[Config]config:14回目
+2021/03/11-18:34:44 [DEBUG]:[Config]config:15回目
+2021/03/11-18:34:44 [DEBUG]:[Config]config:16回目
+2021/03/11-18:34:44 [DEBUG]:[Config]config:17回目
+2021/03/11-18:34:44 [DEBUG]:[Config]config:18回目
+2021/03/11-18:34:44 [DEBUG]:[Config]config:19回目
+2021/03/11-18:34:44 [DEBUG]:[Config]config:20回目
+2021/03/11-18:34:44 [DEBUG]:[Config]config:21回目
+2021/03/11-18:34:44 [DEBUG]:[Config]config: 22
+2021/03/11-18:34:44 [DEBUG]:[Config]HDD   : 22
+2021/03/11-18:34:44 [DEBUG]:[Config]config: 22
+2021/03/11-18:34:44 [DEBUG]:[Config]HDD   : 22

@@ -4713,3 +4713,289 @@ ja
 0
 0
 5
+2021/03/11-12:51:26 [INFO ]:[MainForm]-----起動時処理-------
+2021/03/11-12:51:26 [INFO ]:[AppConfig]-----loaded appConfig-----
+2021/03/11-12:51:26 [INFO ]:[AppConfig]backupPath:C:\Users\Cou\Documents\MinecraftAutoBackup
+2021/03/11-12:51:26 [INFO ]:[AppConfig]font:[Font: Name=はれのそら明朝, Size=11, Units=3, GdiCharSet=1, GdiVerticalFont=False]
+2021/03/11-12:51:26 [INFO ]:[AppConfig]dozip:True
+2021/03/11-12:51:26 [INFO ]:[AppConfig]clientSize:600,600
+2021/03/11-12:51:26 [INFO ]:[AppConfig]clientPoint:0,0
+2021/03/11-12:51:26 [INFO ]:[AppConfig]backupCount:5
+2021/03/11-12:51:26 [INFO ]:[AppConfig]--------------------------
+2021/03/11-12:51:26 [INFO ]:[MainForm]----------------------
+2021/03/11-12:51:26 [DEBUG]:[MainForm]はれのそら明朝
+2021/03/11-12:51:26 [DEBUG]:[MainForm]True
+2021/03/11-12:51:26 [DEBUG]:[MainForm]True
+2021/03/11-12:51:26 [DEBUG]:[MainForm]True
+2021/03/11-12:51:26 [DEBUG]:[MainForm]True
+2021/03/11-12:51:26 [DEBUG]:[MainForm]True
+2021/03/11-12:51:26 [DEBUG]:[MainForm]True
+2021/03/11-12:51:26 [DEBUG]:[MainForm]True
+2021/03/11-12:51:26 [DEBUG]:[MainForm]True
+2021/03/11-12:51:26 [DEBUG]:[MainForm]True
+2021/03/11-12:51:26 [DEBUG]:[MainForm]True
+2021/03/11-12:51:26 [DEBUG]:[MainForm]True
+2021/03/11-12:51:26 [DEBUG]:[MainForm]True
+2021/03/11-12:51:26 [DEBUG]:[MainForm]True
+2021/03/11-12:51:26 [DEBUG]:[MainForm]True
+2021/03/11-12:51:26 [DEBUG]:[MainForm]True
+2021/03/11-12:51:26 [DEBUG]:[MainForm]True
+2021/03/11-12:51:26 [DEBUG]:[MainForm]True
+2021/03/11-12:51:26 [DEBUG]:[MainForm]True
+2021/03/11-12:51:26 [DEBUG]:[MainForm]True
+2021/03/11-12:51:26 [DEBUG]:[MainForm]True
+2021/03/11-12:51:26 [DEBUG]:[MainForm]True
+2021/03/11-12:51:26 [DEBUG]:[MainForm]True
+2021/03/11-12:51:26 [INFO ]:[MainForm]call: GetBackups
+2021/03/11-12:51:26 [INFO ]:[MainForm]dir:6, worlds:22, backups:19
+2021/03/11-12:51:26 [DEBUG]:[MainForm]-----GetBackups-----
+2021/03/11-12:51:26 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft\buildinng\202103061634
+2021/03/11-12:51:26 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft\commanding (1)\202103061634
+2021/03/11-12:51:26 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft\sWorld(1)(1)\202103061634
+2021/03/11-12:51:26 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft\sWorld(1)(1)(1)\202103061634
+2021/03/11-12:51:26 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v9.1.4\202103061634
+2021/03/11-12:51:26 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v9.1.4 - コピー\202103061634
+2021/03/11-12:51:26 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft\The Water SkyBlock ver2.2.3\202103061634
+2021/03/11-12:51:26 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\a\202103061634
+2021/03/11-12:51:26 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\The Water SkyBlock ver3.1.2\202103061634
+2021/03/11-12:51:26 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\The Water SkyBlock ver3.1.3b\202103061634
+2021/03/11-12:51:26 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\新規ワールド\202103061634
+2021/03/11-12:51:26 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\検証用ワールド\202103061634
+2021/03/11-12:51:26 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\適当建築\202103061634
+2021/03/11-12:51:26 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft_1.10.2\test\202103061634
+2021/03/11-12:51:26 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft_1.10.2\The Unusual SkyBlock v12.0.9\202103061634
+2021/03/11-12:51:26 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft_1.10.2\The Unusual SkyBlock v12.0.9 - コピー\202103061634
+2021/03/11-12:51:26 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft_1.10.2\The Water SkyBlock ver2.2.3\202103061634
+2021/03/11-12:51:26 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft_1.9\Rare Species SkyBlock ii Beta2.2.2 (1)\202103061634
+2021/03/11-12:51:26 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft_1.9 - コピー\Rare Species SkyBlock ii Beta2.2.2 (1)\202103061634
+2021/03/11-12:51:26 [DEBUG]:[MainForm]--------------------
+2021/03/11-12:51:26 [INFO ]:[MainForm]22件のワールドのバックアップを読み込みます
+2021/03/11-12:51:26 [DEBUG]:[MainForm]C:\Users\Cou\AppData\Roaming\.minecraft\saves\buildinng
+2021/03/11-12:51:26 [DEBUG]:[MainForm]C:\Users\Cou\AppData\Roaming\.minecraft\saves\commanding (1)
+2021/03/11-12:51:26 [DEBUG]:[MainForm]C:\Users\Cou\AppData\Roaming\.minecraft\saves\sWorld(1)(1)
+2021/03/11-12:51:26 [DEBUG]:[MainForm]C:\Users\Cou\AppData\Roaming\.minecraft\saves\sWorld(1)(1)(1)
+2021/03/11-12:51:26 [DEBUG]:[MainForm]C:\Users\Cou\AppData\Roaming\.minecraft\saves\The Unusual SkyBlock v9.1.4
+2021/03/11-12:51:26 [DEBUG]:[MainForm]C:\Users\Cou\AppData\Roaming\.minecraft\saves\The Unusual SkyBlock v9.1.4 - コピー
+2021/03/11-12:51:26 [DEBUG]:[MainForm]C:\Users\Cou\AppData\Roaming\.minecraft\saves\The Water SkyBlock ver2.2.3
+2021/03/11-12:51:26 [DEBUG]:[MainForm]C:\Users\Cou\AppData\Roaming\.minecraft-1.14.4-optifine\saves\a
+2021/03/11-12:51:26 [DEBUG]:[MainForm]C:\Users\Cou\AppData\Roaming\.minecraft-1.14.4-optifine\saves\The Water SkyBlock ver3.1.2
+2021/03/11-12:51:26 [DEBUG]:[MainForm]C:\Users\Cou\AppData\Roaming\.minecraft-1.14.4-optifine\saves\The Water SkyBlock ver3.1.3b
+2021/03/11-12:51:26 [DEBUG]:[MainForm]C:\Users\Cou\AppData\Roaming\.minecraft-1.14.4-optifine\saves\新規ワールド
+2021/03/11-12:51:26 [DEBUG]:[MainForm]C:\Users\Cou\AppData\Roaming\.minecraft-1.14.4-optifine\saves\検証用ワールド
+2021/03/11-12:51:26 [DEBUG]:[MainForm]C:\Users\Cou\AppData\Roaming\.minecraft-1.14.4-optifine\saves\適当建築
+2021/03/11-12:51:26 [DEBUG]:[MainForm]C:\Users\Cou\AppData\Roaming\.minecraft_1.10.2\saves\test
+2021/03/11-12:51:26 [DEBUG]:[MainForm]C:\Users\Cou\AppData\Roaming\.minecraft_1.10.2\saves\The Unusual SkyBlock v12.0.9
+2021/03/11-12:51:26 [DEBUG]:[MainForm]C:\Users\Cou\AppData\Roaming\.minecraft_1.10.2\saves\The Unusual SkyBlock v12.0.9 - コピー
+2021/03/11-12:51:26 [DEBUG]:[MainForm]C:\Users\Cou\AppData\Roaming\.minecraft_1.10.2\saves\The Water SkyBlock ver2.2.3
+2021/03/11-12:51:26 [DEBUG]:[MainForm]C:\Users\Cou\AppData\Roaming\.minecraft_1.9\saves\Rare Species SkyBlock ii Beta2.2.2 (1)
+2021/03/11-12:51:26 [DEBUG]:[MainForm]C:\Users\Cou\AppData\Roaming\.minecraft_1.9 - コピー\saves\Rare Species SkyBlock ii Beta2.2.2 (1)
+2021/03/11-12:51:30 [INFO ]:[MainForm]dozip[True]
+2021/03/11-12:51:34 [INFO ]:[MainForm]call: GetBackups
+2021/03/11-12:51:34 [INFO ]:[MainForm]dir:6, worlds:22, backups:19
+2021/03/11-12:51:34 [DEBUG]:[MainForm]-----GetBackups-----
+2021/03/11-12:51:34 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft\buildinng\202103061634
+2021/03/11-12:51:34 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft\commanding (1)\202103061634
+2021/03/11-12:51:34 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft\sWorld(1)(1)\202103061634
+2021/03/11-12:51:34 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft\sWorld(1)(1)(1)\202103061634
+2021/03/11-12:51:34 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v9.1.4\202103061634
+2021/03/11-12:51:34 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v9.1.4 - コピー\202103061634
+2021/03/11-12:51:34 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft\The Water SkyBlock ver2.2.3\202103061634
+2021/03/11-12:51:34 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\a\202103061634
+2021/03/11-12:51:34 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\The Water SkyBlock ver3.1.2\202103061634
+2021/03/11-12:51:34 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\The Water SkyBlock ver3.1.3b\202103061634
+2021/03/11-12:51:34 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\新規ワールド\202103061634
+2021/03/11-12:51:34 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\検証用ワールド\202103061634
+2021/03/11-12:51:34 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\適当建築\202103061634
+2021/03/11-12:51:34 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft_1.10.2\test\202103061634
+2021/03/11-12:51:34 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft_1.10.2\The Unusual SkyBlock v12.0.9\202103061634
+2021/03/11-12:51:34 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft_1.10.2\The Unusual SkyBlock v12.0.9 - コピー\202103061634
+2021/03/11-12:51:34 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft_1.10.2\The Water SkyBlock ver2.2.3\202103061634
+2021/03/11-12:51:34 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft_1.9\Rare Species SkyBlock ii Beta2.2.2 (1)\202103061634
+2021/03/11-12:51:34 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft_1.9 - コピー\Rare Species SkyBlock ii Beta2.2.2 (1)\202103061634
+2021/03/11-12:51:34 [DEBUG]:[MainForm]--------------------
+2021/03/11-12:51:34 [INFO ]:[MainForm]Zipper .\SubModule\Zipper.exe 1
+2021/03/11-12:51:35 [INFO ]:[MainForm]selectedItem[5]
+2021/03/11-12:51:35 [INFO ]:[AppConfig] Writing C:\Users\Cou\Documents\MinecraftAutoBackup
+はれのそら明朝
+normal
+ja
+600
+600
+0
+0
+5
+2021/03/11-12:51:35 [DEBUG]:[MainForm]True
+2021/03/11-12:51:35 [DEBUG]:[MainForm]True
+2021/03/11-12:51:35 [DEBUG]:[MainForm]True
+2021/03/11-12:51:35 [DEBUG]:[MainForm]True
+2021/03/11-12:51:35 [DEBUG]:[MainForm]True
+2021/03/11-12:51:35 [DEBUG]:[MainForm]True
+2021/03/11-12:51:35 [DEBUG]:[MainForm]True
+2021/03/11-12:51:35 [DEBUG]:[MainForm]True
+2021/03/11-12:51:35 [DEBUG]:[MainForm]True
+2021/03/11-12:51:35 [DEBUG]:[MainForm]True
+2021/03/11-12:51:35 [DEBUG]:[MainForm]True
+2021/03/11-12:51:35 [DEBUG]:[MainForm]True
+2021/03/11-12:51:35 [DEBUG]:[MainForm]True
+2021/03/11-12:51:35 [DEBUG]:[MainForm]True
+2021/03/11-12:51:35 [DEBUG]:[MainForm]True
+2021/03/11-12:51:35 [DEBUG]:[MainForm]True
+2021/03/11-12:51:35 [DEBUG]:[MainForm]True
+2021/03/11-12:51:35 [DEBUG]:[MainForm]True
+2021/03/11-12:51:35 [DEBUG]:[MainForm]True
+2021/03/11-12:51:35 [DEBUG]:[MainForm]True
+2021/03/11-12:51:35 [DEBUG]:[MainForm]True
+2021/03/11-12:51:35 [DEBUG]:[MainForm]True
+2021/03/11-12:51:38 [INFO ]:[MainForm]dozip[False]
+2021/03/11-12:51:39 [INFO ]:[MainForm]call: GetBackups
+2021/03/11-12:51:39 [INFO ]:[MainForm]dir:6, worlds:22, backups:19
+2021/03/11-12:51:39 [DEBUG]:[MainForm]-----GetBackups-----
+2021/03/11-12:51:39 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft\buildinng\202103061634
+2021/03/11-12:51:39 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft\commanding (1)\202103061634
+2021/03/11-12:51:39 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft\sWorld(1)(1)\202103061634
+2021/03/11-12:51:39 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft\sWorld(1)(1)(1)\202103061634
+2021/03/11-12:51:39 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v9.1.4\202103061634
+2021/03/11-12:51:39 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v9.1.4 - コピー\202103061634
+2021/03/11-12:51:39 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft\The Water SkyBlock ver2.2.3\202103061634
+2021/03/11-12:51:39 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\a\202103061634
+2021/03/11-12:51:39 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\The Water SkyBlock ver3.1.2\202103061634
+2021/03/11-12:51:39 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\The Water SkyBlock ver3.1.3b\202103061634
+2021/03/11-12:51:39 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\新規ワールド\202103061634
+2021/03/11-12:51:39 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\検証用ワールド\202103061634
+2021/03/11-12:51:39 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\適当建築\202103061634
+2021/03/11-12:51:39 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft_1.10.2\test\202103061634
+2021/03/11-12:51:39 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft_1.10.2\The Unusual SkyBlock v12.0.9\202103061634
+2021/03/11-12:51:39 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft_1.10.2\The Unusual SkyBlock v12.0.9 - コピー\202103061634
+2021/03/11-12:51:39 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft_1.10.2\The Water SkyBlock ver2.2.3\202103061634
+2021/03/11-12:51:39 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft_1.9\Rare Species SkyBlock ii Beta2.2.2 (1)\202103061634
+2021/03/11-12:51:39 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft_1.9 - コピー\Rare Species SkyBlock ii Beta2.2.2 (1)\202103061634
+2021/03/11-12:51:39 [DEBUG]:[MainForm]--------------------
+2021/03/11-12:51:40 [INFO ]:[MainForm]Zipper .\SubModule\Zipper.exe 0
+2021/03/11-12:51:40 [INFO ]:[MainForm]selectedItem[5]
+2021/03/11-12:51:40 [INFO ]:[AppConfig] Writing C:\Users\Cou\Documents\MinecraftAutoBackup
+はれのそら明朝
+zip
+ja
+600
+600
+0
+0
+5
+2021/03/11-12:51:40 [DEBUG]:[MainForm]True
+2021/03/11-12:51:40 [DEBUG]:[MainForm]True
+2021/03/11-12:51:40 [DEBUG]:[MainForm]True
+2021/03/11-12:51:40 [DEBUG]:[MainForm]True
+2021/03/11-12:51:40 [DEBUG]:[MainForm]True
+2021/03/11-12:51:40 [DEBUG]:[MainForm]True
+2021/03/11-12:51:40 [DEBUG]:[MainForm]True
+2021/03/11-12:51:40 [DEBUG]:[MainForm]True
+2021/03/11-12:51:40 [DEBUG]:[MainForm]True
+2021/03/11-12:51:40 [DEBUG]:[MainForm]True
+2021/03/11-12:51:40 [DEBUG]:[MainForm]True
+2021/03/11-12:51:40 [DEBUG]:[MainForm]True
+2021/03/11-12:51:40 [DEBUG]:[MainForm]True
+2021/03/11-12:51:40 [DEBUG]:[MainForm]True
+2021/03/11-12:51:40 [DEBUG]:[MainForm]True
+2021/03/11-12:51:40 [DEBUG]:[MainForm]True
+2021/03/11-12:51:40 [DEBUG]:[MainForm]True
+2021/03/11-12:51:40 [DEBUG]:[MainForm]True
+2021/03/11-12:51:40 [DEBUG]:[MainForm]True
+2021/03/11-12:51:40 [DEBUG]:[MainForm]True
+2021/03/11-12:51:40 [DEBUG]:[MainForm]True
+2021/03/11-12:51:40 [DEBUG]:[MainForm]True
+2021/03/11-12:51:51 [INFO ]:[MainForm]終了時処理を開始します
+2021/03/11-12:51:51 [INFO ]:[AppConfig] Writing C:\Users\Cou\Documents\MinecraftAutoBackup
+はれのそら明朝
+zip
+ja
+600
+600
+247
+85
+5
+2021/03/11-18:34:43 [INFO ]:[MainForm]-----起動時処理-------
+2021/03/11-18:34:43 [INFO ]:[AppConfig]-----loaded appConfig-----
+2021/03/11-18:34:43 [INFO ]:[AppConfig]backupPath:C:\Users\Cou\Documents\MinecraftAutoBackup
+2021/03/11-18:34:43 [INFO ]:[AppConfig]font:[Font: Name=はれのそら明朝, Size=11, Units=3, GdiCharSet=1, GdiVerticalFont=False]
+2021/03/11-18:34:43 [INFO ]:[AppConfig]dozip:True
+2021/03/11-18:34:43 [INFO ]:[AppConfig]clientSize:600,600
+2021/03/11-18:34:43 [INFO ]:[AppConfig]clientPoint:247,85
+2021/03/11-18:34:43 [INFO ]:[AppConfig]backupCount:5
+2021/03/11-18:34:43 [INFO ]:[AppConfig]--------------------------
+2021/03/11-18:34:44 [INFO ]:[MainForm]----------------------
+2021/03/11-18:34:44 [DEBUG]:[MainForm]はれのそら明朝
+2021/03/11-18:34:44 [DEBUG]:[MainForm]True
+2021/03/11-18:34:44 [DEBUG]:[MainForm]True
+2021/03/11-18:34:44 [DEBUG]:[MainForm]True
+2021/03/11-18:34:44 [DEBUG]:[MainForm]True
+2021/03/11-18:34:44 [DEBUG]:[MainForm]True
+2021/03/11-18:34:44 [DEBUG]:[MainForm]True
+2021/03/11-18:34:44 [DEBUG]:[MainForm]True
+2021/03/11-18:34:44 [DEBUG]:[MainForm]True
+2021/03/11-18:34:44 [DEBUG]:[MainForm]True
+2021/03/11-18:34:44 [DEBUG]:[MainForm]True
+2021/03/11-18:34:44 [DEBUG]:[MainForm]True
+2021/03/11-18:34:44 [DEBUG]:[MainForm]True
+2021/03/11-18:34:44 [DEBUG]:[MainForm]True
+2021/03/11-18:34:44 [DEBUG]:[MainForm]True
+2021/03/11-18:34:44 [DEBUG]:[MainForm]True
+2021/03/11-18:34:44 [DEBUG]:[MainForm]True
+2021/03/11-18:34:44 [DEBUG]:[MainForm]True
+2021/03/11-18:34:44 [DEBUG]:[MainForm]True
+2021/03/11-18:34:44 [DEBUG]:[MainForm]True
+2021/03/11-18:34:44 [DEBUG]:[MainForm]True
+2021/03/11-18:34:44 [DEBUG]:[MainForm]True
+2021/03/11-18:34:44 [DEBUG]:[MainForm]True
+2021/03/11-18:34:44 [INFO ]:[MainForm]call: GetBackups
+2021/03/11-18:34:44 [INFO ]:[MainForm]dir:6, worlds:22, backups:19
+2021/03/11-18:34:44 [DEBUG]:[MainForm]-----GetBackups-----
+2021/03/11-18:34:44 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft\buildinng\202103061634
+2021/03/11-18:34:44 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft\commanding (1)\202103061634
+2021/03/11-18:34:44 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft\sWorld(1)(1)\202103061634
+2021/03/11-18:34:44 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft\sWorld(1)(1)(1)\202103061634
+2021/03/11-18:34:44 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v9.1.4\202103061634
+2021/03/11-18:34:44 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft\The Unusual SkyBlock v9.1.4 - コピー\202103061634
+2021/03/11-18:34:44 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft\The Water SkyBlock ver2.2.3\202103061634
+2021/03/11-18:34:44 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\a\202103061634
+2021/03/11-18:34:44 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\The Water SkyBlock ver3.1.2\202103061634
+2021/03/11-18:34:44 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\The Water SkyBlock ver3.1.3b\202103061634
+2021/03/11-18:34:44 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\新規ワールド\202103061634
+2021/03/11-18:34:44 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\検証用ワールド\202103061634
+2021/03/11-18:34:44 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft-1.14.4-optifine\適当建築\202103061634
+2021/03/11-18:34:44 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft_1.10.2\test\202103061634
+2021/03/11-18:34:44 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft_1.10.2\The Unusual SkyBlock v12.0.9\202103061634
+2021/03/11-18:34:44 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft_1.10.2\The Unusual SkyBlock v12.0.9 - コピー\202103061634
+2021/03/11-18:34:44 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft_1.10.2\The Water SkyBlock ver2.2.3\202103061634
+2021/03/11-18:34:44 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft_1.9\Rare Species SkyBlock ii Beta2.2.2 (1)\202103061634
+2021/03/11-18:34:44 [DEBUG]:[MainForm]C:\Users\Cou\Documents\MinecraftAutoBackup\.minecraft_1.9 - コピー\Rare Species SkyBlock ii Beta2.2.2 (1)\202103061634
+2021/03/11-18:34:44 [DEBUG]:[MainForm]--------------------
+2021/03/11-18:34:44 [INFO ]:[MainForm]22件のワールドのバックアップを読み込みます
+2021/03/11-18:34:44 [DEBUG]:[MainForm]C:\Users\Cou\AppData\Roaming\.minecraft\saves\buildinng
+2021/03/11-18:34:44 [DEBUG]:[MainForm]C:\Users\Cou\AppData\Roaming\.minecraft\saves\commanding (1)
+2021/03/11-18:34:44 [DEBUG]:[MainForm]C:\Users\Cou\AppData\Roaming\.minecraft\saves\sWorld(1)(1)
+2021/03/11-18:34:44 [DEBUG]:[MainForm]C:\Users\Cou\AppData\Roaming\.minecraft\saves\sWorld(1)(1)(1)
+2021/03/11-18:34:44 [DEBUG]:[MainForm]C:\Users\Cou\AppData\Roaming\.minecraft\saves\The Unusual SkyBlock v9.1.4
+2021/03/11-18:34:44 [DEBUG]:[MainForm]C:\Users\Cou\AppData\Roaming\.minecraft\saves\The Unusual SkyBlock v9.1.4 - コピー
+2021/03/11-18:34:44 [DEBUG]:[MainForm]C:\Users\Cou\AppData\Roaming\.minecraft\saves\The Water SkyBlock ver2.2.3
+2021/03/11-18:34:44 [DEBUG]:[MainForm]C:\Users\Cou\AppData\Roaming\.minecraft-1.14.4-optifine\saves\a
+2021/03/11-18:34:44 [DEBUG]:[MainForm]C:\Users\Cou\AppData\Roaming\.minecraft-1.14.4-optifine\saves\The Water SkyBlock ver3.1.2
+2021/03/11-18:34:44 [DEBUG]:[MainForm]C:\Users\Cou\AppData\Roaming\.minecraft-1.14.4-optifine\saves\The Water SkyBlock ver3.1.3b
+2021/03/11-18:34:44 [DEBUG]:[MainForm]C:\Users\Cou\AppData\Roaming\.minecraft-1.14.4-optifine\saves\新規ワールド
+2021/03/11-18:34:44 [DEBUG]:[MainForm]C:\Users\Cou\AppData\Roaming\.minecraft-1.14.4-optifine\saves\検証用ワールド
+2021/03/11-18:34:44 [DEBUG]:[MainForm]C:\Users\Cou\AppData\Roaming\.minecraft-1.14.4-optifine\saves\適当建築
+2021/03/11-18:34:44 [DEBUG]:[MainForm]C:\Users\Cou\AppData\Roaming\.minecraft_1.10.2\saves\test
+2021/03/11-18:34:44 [DEBUG]:[MainForm]C:\Users\Cou\AppData\Roaming\.minecraft_1.10.2\saves\The Unusual SkyBlock v12.0.9
+2021/03/11-18:34:44 [DEBUG]:[MainForm]C:\Users\Cou\AppData\Roaming\.minecraft_1.10.2\saves\The Unusual SkyBlock v12.0.9 - コピー
+2021/03/11-18:34:44 [DEBUG]:[MainForm]C:\Users\Cou\AppData\Roaming\.minecraft_1.10.2\saves\The Water SkyBlock ver2.2.3
+2021/03/11-18:34:44 [DEBUG]:[MainForm]C:\Users\Cou\AppData\Roaming\.minecraft_1.9\saves\Rare Species SkyBlock ii Beta2.2.2 (1)
+2021/03/11-18:34:44 [DEBUG]:[MainForm]C:\Users\Cou\AppData\Roaming\.minecraft_1.9 - コピー\saves\Rare Species SkyBlock ii Beta2.2.2 (1)
+2021/03/11-18:34:48 [INFO ]:[MainForm]終了時処理を開始します
+2021/03/11-18:34:48 [INFO ]:[AppConfig] Writing C:\Users\Cou\Documents\MinecraftAutoBackup
+はれのそら明朝
+zip
+ja
+600
+600
+247
+85
+5
