@@ -9,7 +9,7 @@ namespace Zipper {
         private static int outputLevel = 2;
 
         private static void Base(string logLevelStr, string message) {
-            Program.logs.Add(message);
+            Program.logs.Push(message);
             string logMessage = $"{DateTime.Now.ToString($"yyyy/MM/dd-HH:mm:ss")} [{logLevelStr}]:{message}\n";
             Console.WriteLine(logMessage);
             File.AppendAllText(logPath, logMessage);

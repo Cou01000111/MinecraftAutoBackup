@@ -29,9 +29,6 @@ namespace Zipper {
         public static async Task<int> MainProcess(string[] args) {
             
             Logger.Info("start Zipper");
-            Logger.Info("thread sleep");
-            Thread.Sleep(10000);
-            
             if (args.ToList().Count() == 0) {
                 Logger.Error("argsが存在しません");
                 EndTimeProcess(false);

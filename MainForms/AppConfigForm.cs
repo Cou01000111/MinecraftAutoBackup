@@ -7,7 +7,6 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using System.Threading.Tasks;
-using Zipper;
 using MainForm;
 //ちょっとFormの書き方変えてみたやつ
 //結局メリットはよくわからなかった
@@ -237,7 +236,7 @@ internal class AppConfigForm :Form {
                 //設定上はtrue,formのほうはflaseの場合（falseに変更された場合）
                 if (backups.Count > 0) {
                     //バックアップが存在している場合
-                    DialogResult r = MessageBox.Show("現在保存されているバックアップをすべて解凍しますか？", "保存方式", MessageBoxButtons.YesNo);
+                    DialogResult r = MessageBox.Show("現在保存されているバックアップをすべて解凍しますか？\n(管理者権限が必要になります)", "保存方式", MessageBoxButtons.YesNo);
                     if (r == DialogResult.Yes) {
                         // 既存のバックアップ.zipをすべて解凍する
                         Process p = new Process();
@@ -258,7 +257,7 @@ internal class AppConfigForm :Form {
                 //設定上はfalse,formのほうはtrueの場合（trueに変更された場合）
                 if (backups.Count > 0) {
                     //バックアップが存在している場合
-                    DialogResult r = MessageBox.Show("現在保存されているバックアップをすべて圧縮しますか？", "保存方式", MessageBoxButtons.YesNo);
+                    DialogResult r = MessageBox.Show("現在保存されているバックアップをすべて圧縮しますか？\n(管理者権限が必要になります)", "保存方式", MessageBoxButtons.YesNo);
                     if (r == DialogResult.Yes) {
                         Process p = new Process();
                         string command = ".\\SubModule\\Zipper.exe";

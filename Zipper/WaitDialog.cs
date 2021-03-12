@@ -14,7 +14,7 @@ namespace Zipper {
         int processCount = 0;
         FlowLayoutPanel basePanel;
         Label processingContentLabel;
-        Label processingContent;
+        TextBox processingContent;
         string[] argsProperty;
         public WaitDialog(string[] args) {
             argsProperty = args;
@@ -22,18 +22,24 @@ namespace Zipper {
             basePanel = new FlowLayoutPanel() {
                 FlowDirection = FlowDirection.TopDown,
                 Padding = new Padding(10),
+                Size = new Size(400, 300),
             };
             processingContentLabel = new Label() {
                 Text = "現在の処理内容 ",
                 AutoSize = true,
             };
-            processingContent = new Label() {
-                Text = "初期化",
-                AutoSize = true,
-                BackColor = Color.Red,
+            processingContent = new TextBox() {
+                Multiline = true,
+                Size = new Size(370, 260),
+                Anchor = (AnchorStyles.Right) | (AnchorStyles.Bottom),
+                ScrollBars = ScrollBars.Vertical,
+                BackColor = ColorTranslator.FromHtml("0x090909"),
+                ForeColor = ColorTranslator.FromHtml("0xf3f3f3"),
             };
             basePanel.Controls.AddRange(new Control[] { processingContentLabel, processingContent });
             Controls.Add(basePanel);
+            ClientSize = new Size(400, 300);
+            FormBorderStyle = FormBorderStyle.Fixed3D;
             Timer timer = new Timer();
             timer.Interval = 100;
             timer.Enabled = true;
@@ -43,7 +49,7 @@ namespace Zipper {
 
         public void timer_Tick(object sender, EventArgs e) {
             processCount++;
-            this.processingContent.Text = Program.logs.Last();
+            this.processingContent.Text = string.Join("\r\n", Program.logs);
             string addString;
             switch ((processCount % 10 < 5 ? processCount % 10 : 4)) {
                 case 0:
@@ -74,6 +80,7 @@ namespace Zipper {
             string[] args = ((WaitDialog)sender).argsProperty;
             Task<int> t = await Task.Run(async () => Process.MainProcess(args));
             Logger.Info("処理が完了しました");
+            MessageBox.Show("処理が完了しました","Minecraft Auto Backup",MessageBoxButtons.OK);
             this.Close();
         }
     }
