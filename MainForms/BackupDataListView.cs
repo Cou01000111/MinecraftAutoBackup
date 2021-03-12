@@ -78,18 +78,25 @@ class BackupDataListView :ListView {
             foreach (string backupFolder in backupFolders) {
                 if (Path.GetExtension(backupFolder) == "zip") {
                     backupFolder.Substring(0, backupFolder.Length - 4);
-                    logger.Debug("a::::::::::::" + backupFolder);
+                    logger.Debug("a:" + backupFolder);
                 }
                 DateTime time = DateTime.ParseExact((Path.GetFileName(backupFolder)).Substring(0, 12), "yyyyMMddHHmm", null);
                 this.Items.Add(new BackupDataListViewItem(new string[] { time.ToString("yyyy-MM-dd HH:mm"), worldObj.WorldName, worldObj.WorldDir }, worldObj));
             }
         }
-        catch (DirectoryNotFoundException) {
+        catch (DirectoryNotFoundException e) {
             logger.Warn("バックアップが存在しません");
+            logger.Warn(e.Message);
+            logger.Warn(e.StackTrace);
         }
     }
 
     private List<string> GetBackups(World w) {
+        //バックアップがない場合で、_tmpファイルがある場合は前回のZipperがmoveを失敗してるだけの可能性があるから名前変更
+        if (Directory.Exists(AppConfig.BackupPath + "_tmp") && (!Directory.Exists(AppConfig.BackupPath))) {
+            Directory.Move(AppConfig.BackupPath + "_tmp", AppConfig.BackupPath);
+        }
+
         return Directory.GetFileSystemEntries(AppConfig.BackupPath + "\\" + w.WorldDir + "\\" + w.WorldName).ToList();
     }
 

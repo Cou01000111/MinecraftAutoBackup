@@ -27,18 +27,19 @@ namespace Zipper {
         public static int errorCount = 0;
         public static int skipCount = 0;
         public static async Task<int> MainProcess(string[] args) {
-            
+
+            //バックアップがない場合で、_tmpファイルがある場合は前回のZipperがmoveを失敗してるだけの可能性があるから名前変更
+            if (Directory.Exists(AppConfig.BackupPath + "_tmp") && (!Directory.Exists(AppConfig.BackupPath))) {
+                Directory.Move(AppConfig.BackupPath + "_tmp", AppConfig.BackupPath);
+            }
+
             Logger.Info("start Zipper");
             if (args.ToList().Count() == 0) {
                 Logger.Error("argsが存在しません");
                 EndTimeProcess(false);
                 return 1;
             }
-            //バックアップがない場合で、_tmpファイルがある場合は前回のZipperがmoveを失敗してるだけの可能性があるから名前変更
-            if (Directory.Exists(AppConfig.BackupPath + "_tmp") && (!Directory.Exists(AppConfig.BackupPath))) {
-                Directory.Move(AppConfig.BackupPath + "_tmp", AppConfig.BackupPath);
-            }
-
+            
             //tmpファイルを作りそこへバックアップ先を移す
             TmpProcess();
             Logger.Info($"tmpPath:{tmpPath}");

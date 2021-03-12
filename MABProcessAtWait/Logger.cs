@@ -6,7 +6,7 @@ using System.Linq;
 namespace MABProcessAtWait {
     class Logger {
         public static string logPath = ".\\logs\\MABProcess.txt";
-        private static int outputLevel = 3;
+        private static int outputLevel = 2;
 
         private static void Base(string logLevelStr, string message) {
             string logMessage = $"{DateTime.Now.ToString($"yyyy/MM/dd-HH:mm:ss")} [{logLevelStr}]:{message}\n";
