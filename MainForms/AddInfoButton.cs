@@ -5,7 +5,7 @@ class AddInfoButton :Button {
 
     public World World { get; set; }
 
-    private Logger logger = new Logger("MainForm",3);
+    private Logger logger = new Logger("MainForm");
 
     public AddInfoButton(string path) {
         logger.Debug(path);

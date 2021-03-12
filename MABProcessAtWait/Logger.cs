@@ -9,9 +9,11 @@ namespace MABProcessAtWait {
         private static int outputLevel = 2;
 
         private static void Base(string logLevelStr, string message) {
+            LogRotate();
             string logMessage = $"{DateTime.Now.ToString($"yyyy/MM/dd-HH:mm:ss")} [{logLevelStr}]:{message}\n";
             Console.WriteLine(logMessage);
             File.AppendAllText(logPath, logMessage);
+            
         }
         public static void Debug(string message) {
             if (outputLevel >= 3) {
@@ -44,9 +46,18 @@ namespace MABProcessAtWait {
             logs.Reverse();
             return logs;
         }
-
         public static string GetNearestLogFromFile() {
             return GetLogFromFile()[GetLogFromFile().Count - 2];
+        }
+        private static void LogRotate() {
+            List<string> logs = GetLogFromFile();
+            if (logs.Count >= 1000) {
+                Console.WriteLine($"LogRotate : { logs[logs.Count - 1]} , {logs[logs.Count - 2]}を削除します");
+                logs.Remove(logs[logs.Count - 1]);
+                logs.Remove(logs[logs.Count - 2]);
+            }
+            logs.Reverse();
+            File.WriteAllText(logPath, string.Join("\n", logs.ToArray()));
         }
     }
 }

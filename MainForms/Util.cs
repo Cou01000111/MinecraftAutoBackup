@@ -10,7 +10,7 @@ public class Util {
 
     private static Font fontStyle;
 
-    private static Logger logger = new Logger("MainForm",3);
+    private static Logger logger = new Logger("MainForm");
 
     public static Font FontStyle {
         set { fontStyle = value; }

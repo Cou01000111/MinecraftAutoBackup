@@ -21,7 +21,7 @@ class WorldListForm :Form {
     //バックアップ画面
     private BackupDataPanel backupDataTable;
 
-    private Logger logger = new Logger("MainForm",3);
+    private Logger logger = new Logger("MainForm");
 
     public WorldListForm() {
         //Form設定

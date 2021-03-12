@@ -13,7 +13,7 @@ class RestoreFromBackupForm :Form {
     private string pathSrc;
     private string pathTar;
 
-    private static Logger logger = new Logger("MainForm", 3);
+    private static Logger logger = new Logger("MainForm");
 
     /*
     バックアップオプション

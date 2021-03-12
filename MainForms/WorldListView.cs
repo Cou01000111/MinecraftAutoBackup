@@ -7,7 +7,7 @@ class WorldListView :ListView {
     private ColumnHeader clmnWorldName;  // 'ワールド名' 列ヘッダ
     private ColumnHeader clmnWorldDir;  // '所属ディレクトリ' 列ヘッダ
 
-    private Logger logger = new Logger("MainForm",3);
+    private Logger logger = new Logger("MainForm");
 
     //コンストラクタ
     public WorldListView() {

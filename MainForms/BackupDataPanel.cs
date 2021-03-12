@@ -11,7 +11,7 @@ class BackupDataPanel :FlowLayoutPanel {
     private FlowLayoutPanel dualPanel;
     private FlowLayoutPanel panel;
 
-    private Logger logger = new Logger("MainForm",3);
+    private Logger logger = new Logger("MainForm");
     //コンストラクタ
     public BackupDataPanel() {
         Dock = DockStyle.Fill;

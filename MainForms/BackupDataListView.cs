@@ -13,7 +13,7 @@ class BackupDataListView :ListView {
     private ColumnHeader clmnAffiliationWorldName;  // '所属ワールド名' 列ヘッダ
     private ColumnHeader clmnWorldAffiliationDir;  // '所属ディレクトリ' 列ヘッダ
 
-    private Logger logger = new Logger("MainForm",3);
+    private Logger logger = new Logger("MainForm");
     public BackupDataListView(World worldObj) {
         FullRowSelect = true;
         MultiSelect = false;

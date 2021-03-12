@@ -11,7 +11,7 @@ public class Config {
 
     public static string ConfigPath = @".\Config\config.txt";
 
-    private static Logger logger = new Logger("Config", 3);
+    private static Logger logger = new Logger("Config");
 
     public static void MakeConfig() {
         logger.Info("call:MakeConfig");

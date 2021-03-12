@@ -71,7 +71,7 @@ public class AppConfig {
         foreach(string path in AddGameDirPath) {
             Text += $"\n{path}";
         }
-        logger.Info(" Writing "+Text);
+        logger.Info(" Writing "+string.Join(" , ",Text.Split('\n')));
         File.WriteAllText(AppConfigPath, Text);
     }
 
