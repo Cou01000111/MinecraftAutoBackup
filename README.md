@@ -4,7 +4,7 @@
 - beta版なので未知のバグがある可能性が高いです。バグを発見した際はtwitterのDMまでご連絡ください。
 
 ## ダウンロード
-[最新バージョン(beta)](https://github.com/Cou01000111/MinecraftAutoBackup/releases/download/v0.7.3-beta/MinecraftAutoBackup.zip)
+[最新バージョン(beta)](https://github.com/Cou01000111/MinecraftAutoBackup/releases/download/v0.9.0-beta/MinecraftAutoBackup.zip)
 
 ## 概要
 minecraftで「普段遊んでいるワールドに違うバージョンで入ってしまった！！」という時に役立つバックアップソフトです
