@@ -11,11 +11,12 @@ using System.Windows.Forms;
 
 namespace Zipper {
     public partial class WaitDialog :Form {
-        int processCount = 0;
-        FlowLayoutPanel basePanel;
-        Label processingContentLabel;
-        TextBox processingContent;
-        string[] argsProperty;
+        private static Logger logger = new Logger("Zipper");
+        private int processCount = 0;
+        private FlowLayoutPanel basePanel;
+        private Label processingContentLabel;
+        private TextBox processingContent;
+        private string[] argsProperty;
         public WaitDialog(string[] args) {
             argsProperty = args;
             Console.WriteLine("WaitDialogを表示しました");
@@ -79,7 +80,7 @@ namespace Zipper {
         public async void WaitDialog_Shown(object sender, EventArgs e) {
             string[] args = ((WaitDialog)sender).argsProperty;
             Task<int> t = await Task.Run(async () => Process.MainProcess(args));
-            Logger.Info("処理が完了しました");
+            logger.Info("処理が完了しました");
             MessageBox.Show("処理が完了しました","Minecraft Auto Backup",MessageBoxButtons.OK);
             this.Close();
         }

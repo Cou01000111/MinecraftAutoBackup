@@ -11,7 +11,7 @@ using MainForm;
 //ちょっとFormの書き方変えてみたやつ
 //結局メリットはよくわからなかった
 internal class AppConfigForm :Form {
-    private Logger logger = new Logger("MainForm", ".\\logs\\MainForm.txt", 3);
+    private Logger logger = new Logger("MainForm", ".\\logs\\MainForm.log", 3);
     private TabControl tab = new TabControl();
     private TabPage backupTab = new TabPage();
     private TabPage fontTab = new TabPage();

@@ -44,7 +44,7 @@ class WorldListView :ListView {
         foreach (var datas in listDatas) {
             if (datas.IsAlive) {
                 Items.Add(new ListViewItem(new string[] { " ", datas.WorldName, datas.WorldDir }));
-                logger.Debug($"{datas.WorldDoBackup}");
+                logger.Debug($"dobackup[ItemCount({iItemCount})]:{datas.WorldDoBackup}");
                 Items[iItemCount].Checked = Convert.ToBoolean(datas.WorldDoBackup);
                 iItemCount++;
             }

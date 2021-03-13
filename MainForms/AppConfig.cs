@@ -24,7 +24,7 @@ public class AppConfig {
     public static List<string> AddGameDirPath { get; set; }
     public static string AppConfigPath = ".\\Config\\AppConfig.txt";
 
-    private static Logger logger = new Logger("AppConfig",".\\logs\\MainForm.txt",3);
+    private static Logger logger = new Logger("AppConfig",".\\logs\\MainForm.log",3);
 
     public AppConfig() {
         AddGameDirPath = new List<string>();

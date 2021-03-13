@@ -24,21 +24,19 @@ image
 
 namespace MABProcessAtWait {
     static class Program {
+        private static Logger logger = new Logger("Zipper");
         /// <summary>
         /// アプリケーションのメイン エントリ ポイントです。
         /// </summary>
         [STAThread]
         static void Main() {
-
             // © DOBON!.
             //Mutex関係
             // https://dobon.net/vb/dotnet/process/checkprevinstance.html
             //Mutex名を決める（必ずアプリケーション固有の文字列に変更すること！）
             string mutexName = "MABProcess";
-
             //Mutexオブジェクトを作成する
             System.Threading.Mutex mutex = new System.Threading.Mutex(false, mutexName);
-
             bool hasHandle = false;
             try {
                 try {
@@ -55,7 +53,7 @@ namespace MABProcessAtWait {
                 new AppConfig();
                 Config.Load();
                 if (Directory.Exists(AppConfig.BackupPath) == false) {
-                    Logger.Warn($"バックアップ先フォルダが存在しないため{AppConfig.BackupPath}を作成します");
+                    logger.Warn($"バックアップ先フォルダが存在しないため{AppConfig.BackupPath}を作成します");
                     Directory.CreateDirectory(AppConfig.BackupPath);
                 }
                 Util.NotReadonly(AppConfig.BackupPath);
@@ -71,11 +69,11 @@ namespace MABProcessAtWait {
                 }
                 mutex.Close();
             }
-
         }
     }
 
     public partial class Form1 :Form {
+        private static Logger logger = new Logger("Zipper");
         private System.Windows.Forms.Timer timer;
         private string backupDataPath;
         private NotifyIcon notifyIcon;
@@ -108,10 +106,10 @@ namespace MABProcessAtWait {
 
         private void Close_Click(object sender, EventArgs e) {
             if ((backupTask == null) || (backupTask.IsCompleted)) {
-                Logger.Info("アプリケーションが終了しました");
+                logger.Info("アプリケーションが終了しました");
             }
             else {
-                Logger.Warn("アプリケーションが強制終了しました");
+                logger.Warn("アプリケーションが強制終了しました");
             }
 
             notifyIcon.Visible = false;
@@ -120,7 +118,7 @@ namespace MABProcessAtWait {
         }
 
         void Form1_Closing(object sender, EventArgs e) {
-            Logger.Info("アプリケーションが強制終了しました");
+            logger.Info("アプリケーションが強制終了しました");
             notifyIcon.Visible = false;
             notifyIcon.Dispose();
         }
@@ -135,8 +133,8 @@ namespace MABProcessAtWait {
                     System.Threading.Tasks.Task.Delay(10000);
                 }
                 isRunning = true;
-                Logger.Info("Minecraft Lancherの起動を検知しました");
-                Logger.Info("isRunningがfalseに設定されていました");
+                logger.Info("Minecraft Lancherの起動を検知しました");
+                logger.Info("isRunningがfalseに設定されていました");
 
                 notifyIcon.Icon = new Icon(".\\Image\\app_sub_doing.ico");
                 ContextMenuStrip menu = new ContextMenuStrip();
@@ -151,14 +149,14 @@ namespace MABProcessAtWait {
                 });
             }
             else if (!(Process.GetProcessesByName("MinecraftLauncher").Length > 0) && isRunning) {
-                Logger.Info("ランチャーの停止を検知しました");
-                Logger.Info("isRunningにfalseを設定します");
+                logger.Info("ランチャーの停止を検知しました");
+                logger.Info("isRunningにfalseを設定します");
                 isRunning = false;
             }
         }
 
         private void DoBackupProcess() {
-            Logger.Info("バックアッププロセスを始めます");
+            logger.Info("バックアッププロセスを始めます");
             //zipperが起動している場合はバックアップを保留にする
             //バックアップがない場合で、_tmpファイルがある場合は前回のZipperがmoveを失敗してるだけの可能性があるから名前変更
             if (Directory.Exists(AppConfig.BackupPath + "_tmp") && (!Directory.Exists(AppConfig.BackupPath))) {
@@ -171,7 +169,7 @@ namespace MABProcessAtWait {
             List<string> worldPasses = GetWorldPasses();// バックアップをするワールドへのパス一覧
             string nowTime = DateTime.Now.ToString("yyyyMMddHHmm");
             if (worldPasses.Count == 0) {
-                Logger.Info("どうやらバックアップ予定のデータはないようです");
+                logger.Info("どうやらバックアップ予定のデータはないようです");
             }
 
             notifyIcon.Text = $"{backupCount}/{worldPasses.Count}";
@@ -196,49 +194,49 @@ namespace MABProcessAtWait {
                 //バックアップ超過分削除
                 if (AppConfig.BackupCount != "無制限") {
                     if (Directory.GetFileSystemEntries(worldBackupPath).ToList().Count() > int.Parse(AppConfig.BackupCount)) {
-                        Logger.Info($"{worldBackupPath}のバックアップ数({Directory.GetFileSystemEntries(worldBackupPath).ToList().Count()})が超過している(AppConfig:{int.Parse(AppConfig.BackupCount)})ので削除処理に移ります");
+                        logger.Info($"{worldBackupPath}のバックアップ数({Directory.GetFileSystemEntries(worldBackupPath).ToList().Count()})が超過している(AppConfig:{int.Parse(AppConfig.BackupCount)})ので削除処理に移ります");
                         //バックアップ数がappconfig.backupCountより多い場合超過分を削除する
                         List<string> backups = Directory.GetFileSystemEntries(worldBackupPath)
                             .OrderByDescending(filePath => File.GetLastWriteTime(filePath).Date)
                             .ThenByDescending(filePath => File.GetLastWriteTime(filePath).TimeOfDay).ToList();
-                        Logger.Debug($"buckups count: {backups.Count()}");
+                        logger.Debug($"buckups count: {backups.Count()}");
                         foreach (string s in backups) {
-                            Logger.Debug($"backups:[{s}]");
+                            logger.Debug($"backups:[{s}]");
                         }
                         List<string> deleteBackups = new List<string>();
                         for (int i = int.Parse(AppConfig.BackupCount); i < backups.Count(); i++) {
-                            Logger.Info($"{backups[i]}を削除します");
+                            logger.Info($"{backups[i]}を削除します");
 
                             //zipファイルかどうか判定
                             if (backups[i].Contains(".zip")) {
                                 //zipファイルの場合
                                 try { File.Delete(backups[i]); }
                                 catch (Exception exc) {
-                                    Logger.Error($"{backups[i]}");
-                                    Logger.Error($"{exc.Message}");
-                                    Logger.Error($"{exc.StackTrace}");
+                                    logger.Error($"{backups[i]}");
+                                    logger.Error($"{exc.Message}");
+                                    logger.Error($"{exc.StackTrace}");
                                 }
                             }
                             else {
                                 //ディレクトリの場合
                                 try { Directory.Delete(backups[i], true); }
                                 catch (Exception exc) {
-                                    Logger.Error($"{backups[i]}");
-                                    Logger.Error($"{exc.Message}");
-                                    Logger.Error($"{exc.StackTrace}");
+                                    logger.Error($"{backups[i]}");
+                                    logger.Error($"{exc.Message}");
+                                    logger.Error($"{exc.StackTrace}");
                                 }
                             }
 
                         }
                     }
                     else {
-                        Logger.Info($"{worldBackupPath}({Directory.GetFileSystemEntries(worldBackupPath).ToList().Count()})の超過分(AppConfig:{int.Parse(AppConfig.BackupCount)})は発見されませんでした");
+                        logger.Info($"{worldBackupPath}({Directory.GetFileSystemEntries(worldBackupPath).ToList().Count()})の超過分(AppConfig:{int.Parse(AppConfig.BackupCount)})は発見されませんでした");
                     }
                 }
 
             }
             Config.SyncConfig();
-            Logger.Info("全バックアップが完了しました ");
+            logger.Info("全バックアップが完了しました ");
 
             timer.Enabled = true;
             notifyIcon.Icon = new Icon(".\\Image\\app_sub.ico");
@@ -274,18 +272,15 @@ namespace MABProcessAtWait {
                 Directory.CreateDirectory(worldBackupPath);
             }
             if (AppConfig.DoZip) {
-                Logger.Info(path + " を " + backupPath + " へバックアップ中です");
+                logger.Info(path + " を " + backupPath + " へバックアップ中です");
                 ZipFile.CreateFromDirectory(path, backupPath);
-                Logger.Info(path + " を " + backupPath + "へバックアップしました");
+                logger.Info(path + " を " + backupPath + "へバックアップしました");
             }
             else {
-                Logger.Info(path + " を " + backupPath + "へバックアップ中です");
+                logger.Info(path + " を " + backupPath + "へバックアップ中です");
                 FileSystem.CopyDirectory(path, backupPath);
-                Logger.Info(path + " を " + backupPath + "へバックアップしました");
+                logger.Info(path + " を " + backupPath + "へバックアップしました");
             }
-
-
-
         }
     }
 }

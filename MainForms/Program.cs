@@ -4,10 +4,10 @@ using System.Windows.Forms;
 class Program {
     [STAThread]
     static void Main() {
-        Logger logger = new Logger("MainForm", ".\\logs\\MainForm.txt", 3);
+        Logger logger = new Logger("MainForm", ".\\logs\\MainForm.log", 3);
         try {//起動時処理
             
-            logger.Info("-----起動時処理-------");
+            logger.Info(">-----起動時処理-------<");
 
             new AppConfig();
 
@@ -20,7 +20,7 @@ class Program {
                 Config.SyncConfig();
             }
 
-            logger.Info("----------------------");
+            logger.Info(">----------------------<");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new WorldListForm());

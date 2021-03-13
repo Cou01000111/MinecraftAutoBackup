@@ -15,6 +15,7 @@ public class AppConfig {
     言語(jp,en)
 
     */
+    private static Logger logger = new Logger("Zipper");
     public static string BackupPath { get; set; }
    // public static Font Font { get; set; }
     public static bool DoZip { get; set; }
@@ -49,17 +50,17 @@ public class AppConfig {
                 AddGameDirPath.Add(datas[i]);
             }
         }
-        Logger.Info("-----loaded appConfig-----");
-        Logger.Info($"backupPath:{BackupPath}");
-        //Logger.Info($"font:{Font}");
-        Logger.Info($"dozip:{DoZip}");
-        //Logger.Info($"clientSize:{ClientSize.Width},{ClientSize.Height}");
-        //Logger.Info($"clientPoint:{ClientPoint.X},{ClientPoint.Y}");
-        Logger.Info($"backupCount:{BackupCount}");
+        logger.Info("-----loaded appConfig-----");
+        logger.Info($"backupPath:{BackupPath}");
+        //logger.Info($"font:{Font}");
+        logger.Info($"dozip:{DoZip}");
+        //logger.Info($"clientSize:{ClientSize.Width},{ClientSize.Height}");
+        //logger.Info($"clientPoint:{ClientPoint.X},{ClientPoint.Y}");
+        logger.Info($"backupCount:{BackupCount}");
         foreach (string path in AddGameDirPath) {
-            Logger.Info($"addGameDirPath:{path}");
+            logger.Info($"addGameDirPath:{path}");
         }
-        Logger.Info("--------------------------");
+        logger.Info("--------------------------");
     }
 
 }
