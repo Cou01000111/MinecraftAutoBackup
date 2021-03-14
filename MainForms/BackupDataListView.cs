@@ -129,7 +129,10 @@ class BackupDataListView :ListView {
             if (!selectedItem.World.IsAlive) {
                 //バックアップ元ワールドが死んでいる場合messageBox出現
                 logger.Info(" 死亡済みワールドのバックアップが選択されました");
-                MessageBox.Show("同名の別ワールドがゲームディレクトリ内に存在しています", "Minecraft Auto Backup", buttons: MessageBoxButtons.OK);
+                //同名のワールドがゲームディレクトリ内に存在する場合
+                if (Directory.Exists(selectedItem.World.WorldPath)) {
+                    MessageBox.Show("同名の別ワールドがゲームディレクトリ内に存在しています", "Minecraft Auto Backup", buttons: MessageBoxButtons.OK);
+                }
             }
             DateTime dt = DateTime.ParseExact(selectedItem.SubItems[0].Text, "yyyy-MM-dd HH:mm", null);
             string fileName = dt.ToString("yyyyMMddHHmm");

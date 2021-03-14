@@ -34,16 +34,14 @@ class RestoreFromBackupForm :Form {
         Text = "バックアップから復元します";
         Icon = new Icon(".\\Image\\app.ico");
         Font = Util.FontStyle;
-        Padding = new Padding((int)Util.FontStyle.Size * 2);
-        ClientSize = new Size((int)Util.FontStyle.Size * 30, (int)Util.FontStyle.Size * 35);
+        ClientSize = new Size(500, 220);
         FormBorderStyle = FormBorderStyle.FixedSingle;
 
         panel = new FlowLayoutPanel() {
-            Padding = new Padding((int)Util.FontStyle.Size),
-            BorderStyle = BorderStyle.FixedSingle,
+            Padding = new Padding(20),
             Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right,
             Dock = DockStyle.Fill,
-            BackColor = SystemColors.Window,
+            //BackColor = SystemColors.Window,
             WrapContents = false,
             FlowDirection = FlowDirection.TopDown
         };
@@ -54,43 +52,36 @@ class RestoreFromBackupForm :Form {
         catch (FormatException) {
             //zipファイルの場合FormatExceptionが発生するため
             time = DateTime.ParseExact(Path.GetFileName(pathSrc.Substring(0, pathSrc.Length - 4)), "yyyyMMddHHmm", null);
-
         }
-
-
         Font lFont = (Util.FontStyle);
-
         description = new Label() {
-            Font = new Font(Util.FontStyle.FontFamily, Util.FontStyle.Size + 2),
+            Font = new Font(Util.FontStyle.FontFamily, Util.FontStyle.Size),
             Text = time.ToString("yyyy-MM-dd HH:mm") + " のバックアップから復元します ",
-            Height = (int)Util.FontStyle.Height * 3 + 4,
             //BackColor = Color.Blue,
             Margin = new Padding(0, 0, 0, 20),
-            //AutoSize = true,
+            AutoSize = true,
         };
 
         removeBackup = new CheckBox() {
             Text = $"バックアップ元（{Path.GetFileName(pathSrc)}）を削除する",
-            Width = Width - Padding.Left * 2 - panel.Padding.Left * 2 - 10,
-            Height = (int)Util.FontStyle.Height * 2 + 2,
             //BackColor = Color.Blue,
-            //AutoSize = true,
+            AutoSize = true,
+            Margin = new Padding(0),
         };
 
         dontOverwriting = new CheckBox() {
             Text = $"バックアップ先（{Path.GetFileName(Path.GetDirectoryName(Path.GetDirectoryName(pathTar)))}\\saves\\{Path.GetFileName(pathTar)}）を上書きしない\n(別名で新規作成する)",
-            Width = Width - Padding.Left * 2 - panel.Padding.Left * 2 - 10,
-            Height = (int)Util.FontStyle.Height * 6,
             //BackColor = Color.Blue,
+            AutoSize = true,
+            
         };
 
         doRestore = new Button() {
             Text = "バックアップから復元する",
-            Height = (int)Util.FontStyle.Size * 5,
-            Width = Width - Padding.Left * 2 - panel.Padding.Left * 2 - 10,
-            Margin = new Padding(0, 0, 0, 20),
+            Height = 40,
+            BackColor = SystemColors.Control,
             UseVisualStyleBackColor = true,
-            BackColor = SystemColors.Control
+            Margin = new Padding(0, 30, 0, 0),
         };
         doRestore.Click += new EventHandler(doRestore_Click);
 
@@ -108,7 +99,6 @@ class RestoreFromBackupForm :Form {
         removeBackup.Width = panel.Width - panel.Padding.Left * 2 - 10;
         dontOverwriting.Width = panel.Width - panel.Padding.Left * 2 - 10;
         doRestore.Width = panel.Width - panel.Padding.Left * 2 - 10;
-
     }
 
     private void doRestore_Click(object sender, EventArgs e) {
