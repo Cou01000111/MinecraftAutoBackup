@@ -81,6 +81,7 @@ namespace MABProcessAtWait {
         private Task backupTask;
 
         public Form1() {
+            logger.Info("Current Dir: "+System.Environment.CurrentDirectory);
             backupDataPath = AppConfig.BackupPath;
             this.ShowInTaskbar = false;
             this.Icon = new Icon(".\\Image\\app.ico");
@@ -92,16 +93,7 @@ namespace MABProcessAtWait {
             timer.Interval = 1000;
             timer.Tick += new EventHandler(Timer_Tick);
 
-            notifyIcon = new NotifyIcon();
-            notifyIcon.Icon = new Icon(".\\Image\\app_sub.ico");
-            notifyIcon.Visible = true;
-            notifyIcon.Text = "MAB待機モジュール";
-            ContextMenuStrip menu = new ContextMenuStrip();
-            ToolStripMenuItem exit = new ToolStripMenuItem();
-            exit.Text = "終了";
-            exit.Click += new EventHandler(Close_Click);
-            menu.Items.Add(exit);
-            notifyIcon.ContextMenuStrip = menu;
+            SetNotifyIconWait();
         }
 
         private void Close_Click(object sender, EventArgs e) {
@@ -117,13 +109,13 @@ namespace MABProcessAtWait {
             Application.Exit();
         }
 
-        void Form1_Closing(object sender, EventArgs e) {
+        private void Form1_Closing(object sender, EventArgs e) {
             logger.Info("アプリケーションが強制終了しました");
             notifyIcon.Visible = false;
             notifyIcon.Dispose();
         }
 
-        void Timer_Tick(object sender, EventArgs e) {
+        private void Timer_Tick(object sender, EventArgs e) {
             // lancherが起動してない場合 => 何もしない
             // lancherが起動していてflagがfalse => flagをtrueにしてバックアップ動作
             // lancherが起動していてflagがtrue => 何もしない
@@ -136,14 +128,7 @@ namespace MABProcessAtWait {
                 logger.Info("Minecraft Lancherの起動を検知しました");
                 logger.Info("isRunningがfalseに設定されていました");
 
-                notifyIcon.Icon = new Icon(".\\Image\\app_sub_doing.ico");
-                ContextMenuStrip menu = new ContextMenuStrip();
-                ToolStripMenuItem exit = new ToolStripMenuItem() {
-                    Text = "強制終了",
-                };
-                exit.Click += new EventHandler(Close_Click);
-                menu.Items.Add(exit);
-                notifyIcon.ContextMenuStrip = menu;
+                SetNotifyIconBackuping();
                 backupTask = Task.Run(() => {
                     DoBackupProcess();
                 });
@@ -155,6 +140,16 @@ namespace MABProcessAtWait {
             }
         }
 
+        private void bootMainForm_Click(object sender, EventArgs e) {
+            logger.Info(System.Environment.CurrentDirectory);
+            
+            var mainForm = new ProcessStartInfo();
+            mainForm.FileName = ".\\Minecraft Auto Backup.exe";
+            mainForm.UseShellExecute = true;
+            mainForm.WorkingDirectory = ".\\";
+            Process.Start(mainForm);
+        }
+
         private void DoBackupProcess() {
             logger.Info("バックアッププロセスを始めます");
             //zipperが起動している場合はバックアップを保留にする
@@ -162,10 +157,7 @@ namespace MABProcessAtWait {
             if (Directory.Exists(AppConfig.BackupPath + "_tmp") && (!Directory.Exists(AppConfig.BackupPath))) {
                 Directory.Move(AppConfig.BackupPath + "_tmp", AppConfig.BackupPath);
             }
-
-
             int backupCount = 0;
-
             List<string> worldPasses = GetWorldPasses();// バックアップをするワールドへのパス一覧
             string nowTime = DateTime.Now.ToString("yyyyMMddHHmm");
             if (worldPasses.Count == 0) {
@@ -173,7 +165,6 @@ namespace MABProcessAtWait {
             }
 
             notifyIcon.Text = $"{backupCount}/{worldPasses.Count}";
-
             foreach (string worldPath in worldPasses) {
                 notifyIcon.Text = $"{backupCount++}/{worldPasses.Count}";
                 //前回のリロードとバックアップまでの間にワールドが消された場合
@@ -237,16 +228,8 @@ namespace MABProcessAtWait {
             }
             Config.SyncConfig();
             logger.Info("全バックアップが完了しました ");
-
             timer.Enabled = true;
-            notifyIcon.Icon = new Icon(".\\Image\\app_sub.ico");
-            notifyIcon.Text = "MAB待機モジュール";
-            ContextMenuStrip menu = new ContextMenuStrip();
-            ToolStripMenuItem exit = new ToolStripMenuItem();
-            exit.Text = "終了";
-            exit.Click += new EventHandler(Close_Click);
-            menu.Items.Add(exit);
-            notifyIcon.ContextMenuStrip = menu;
+            SetNotifyIconWait();
         }
 
         //バックアップをするワールドデータのパスを配列にして返す
@@ -281,6 +264,36 @@ namespace MABProcessAtWait {
                 FileSystem.CopyDirectory(path, backupPath);
                 logger.Info(path + " を " + backupPath + "へバックアップしました");
             }
+        }
+
+        private void SetNotifyIconWait() {
+            notifyIcon = new NotifyIcon();
+            notifyIcon.Icon = new Icon(".\\Image\\app_sub.ico");
+            notifyIcon.Text = "MAB待機モジュール";
+            notifyIcon.Visible = true;
+            ContextMenuStrip menu = new ContextMenuStrip();
+            ToolStripMenuItem exit = new ToolStripMenuItem();
+            exit.Text = "終了";
+            exit.Click += new EventHandler(Close_Click);
+            menu.Items.Add(exit);
+            ToolStripMenuItem bootMainForm = new ToolStripMenuItem();
+            bootMainForm.Text = "バックアップの設定を編集する";
+            bootMainForm.Click += new EventHandler(bootMainForm_Click);
+            menu.Items.Add(bootMainForm);
+            notifyIcon.ContextMenuStrip = menu;
+        }
+
+        private void SetNotifyIconBackuping() {
+            notifyIcon = new NotifyIcon();
+            notifyIcon.Icon = new Icon(".\\Image\\app_sub_doing.ico");
+            notifyIcon.Text = "MAB待機モジュール(バックアップ中)";
+            notifyIcon.Visible = true;
+            ContextMenuStrip menu = new ContextMenuStrip();
+            ToolStripMenuItem exit = new ToolStripMenuItem();
+            exit.Text = "強制終了";
+            exit.Click += new EventHandler(Close_Click);
+            menu.Items.Add(exit);
+            notifyIcon.ContextMenuStrip = menu;
         }
     }
 }
