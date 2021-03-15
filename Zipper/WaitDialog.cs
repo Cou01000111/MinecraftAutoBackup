@@ -18,12 +18,13 @@ namespace Zipper {
         private TextBox processingContent;
         private string[] argsProperty;
         public WaitDialog(string[] args) {
+            Icon = new Icon(".\\image\\app.ico");
             argsProperty = args;
             Console.WriteLine("WaitDialogを表示しました");
             basePanel = new FlowLayoutPanel() {
                 FlowDirection = FlowDirection.TopDown,
                 Padding = new Padding(10),
-                Size = new Size(400, 300),
+                Size = new Size(600, 300),
             };
             processingContentLabel = new Label() {
                 Text = "現在の処理内容 ",
@@ -31,7 +32,7 @@ namespace Zipper {
             };
             processingContent = new TextBox() {
                 Multiline = true,
-                Size = new Size(370, 260),
+                Size = new Size(570, 260),
                 Anchor = (AnchorStyles.Right) | (AnchorStyles.Bottom),
                 ScrollBars = ScrollBars.Vertical,
                 BackColor = ColorTranslator.FromHtml("0x090909"),
@@ -39,7 +40,7 @@ namespace Zipper {
             };
             basePanel.Controls.AddRange(new Control[] { processingContentLabel, processingContent });
             Controls.Add(basePanel);
-            ClientSize = new Size(400, 300);
+            ClientSize = new Size(600, 300);
             FormBorderStyle = FormBorderStyle.Fixed3D;
             Timer timer = new Timer();
             timer.Interval = 100;
