@@ -5,9 +5,10 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using Microsoft.VisualBasic.FileIO;
 #region tab backup
 class BackupDataListView :ListView {
-    private ContextMenuStrip cMenu;
+    private ContextMenuStrip clmnMenu;
     private BackupDataListViewItem selectedItem = null;
     private ColumnHeader clmnBackupTime; // 'バックアップ日時' 列ヘッダ
     private ColumnHeader clmnAffiliationWorldName;  // '所属ワールド名' 列ヘッダ
@@ -25,28 +26,32 @@ class BackupDataListView :ListView {
         Dock = DockStyle.Fill;
         Scrollable = false;
         Sorting = SortOrder.Descending;
-
-
-        cMenu = new ContextMenuStrip();
+        clmnMenu = new ContextMenuStrip();
 
         #region contextmenu
 
-        cMenu.Opening += new CancelEventHandler(Menu_Opening);
+        clmnMenu.Opening += new CancelEventHandler(Menu_Opening);
         ToolStripMenuItem returnBackup = new ToolStripMenuItem() {
             Text = "このバックアップから復元する(&B)"
         };
         returnBackup.Click += new EventHandler(ReturnBackup_Click);
-        cMenu.Items.Add(returnBackup);
+        clmnMenu.Items.Add(returnBackup);
 
         ToolStripMenuItem openInExplorer = new ToolStripMenuItem() {
             Text = "エクスプローラーで開く(&X)"
         };
-
         openInExplorer.Click += new EventHandler(OpenInExplorer_Click);
         if (worldObj.IsAlive)
-            cMenu.Items.Add(openInExplorer);
+            clmnMenu.Items.Add(openInExplorer);
 
-        this.ContextMenuStrip = cMenu;
+        ToolStripMenuItem deleteBackup = new ToolStripMenuItem() {
+            Text = "このバックアップを削除する(&B)",
+            ForeColor = Color.Red,
+        };
+        deleteBackup.Click += new EventHandler(DeleteBackup_Click);
+        clmnMenu.Items.Add(deleteBackup);
+
+        this.ContextMenuStrip = clmnMenu;
         #endregion
 
         clmnBackupTime = new ColumnHeader() { Text = "バックアップ日時" };
@@ -153,8 +158,28 @@ class BackupDataListView :ListView {
     }
 
     private void OpenInExplorer_Click(object sender, EventArgs e) {
-        ContextMenuStrip menu = sender as ContextMenuStrip;
-        System.Diagnostics.Process.Start("EXPLORER.EXE", Util.makePathToWorld(selectedItem.SubItems[1].Text, selectedItem.SubItems[2].Text));
+        System.Diagnostics.Process.Start("EXPLORER.EXE", Util.MakePathToWorld(selectedItem.SubItems[1].Text, selectedItem.SubItems[2].Text));
+    }
+
+    private void DeleteBackup_Click(object sender , EventArgs e) {
+        DialogResult result = MessageBox.Show("このバックアップを削除しますか？","Minecraft Auto Backup",MessageBoxButtons.YesNo);
+        if (result == DialogResult.Yes) {
+            DateTime dt = DateTime.ParseExact(selectedItem.SubItems[0].Text, "yyyy-MM-dd HH:mm", null);
+            string fileName = dt.ToString("yyyyMMddHHmm");
+            string backupPath;
+            if (File.Exists($"{AppConfig.BackupPath}\\{selectedItem.SubItems[2].Text}\\{selectedItem.World.WorldName}\\{fileName}.zip")) {
+                // バックアップがzipだった場合
+                backupPath = $"{AppConfig.BackupPath}\\{selectedItem.SubItems[2].Text}\\{selectedItem.World.WorldName}\\{fileName}.zip";
+                FileSystem.DeleteFile(backupPath);
+                
+            }
+            else {
+                // バックアップがzipじゃなかった場合
+                backupPath = $"{AppConfig.BackupPath}\\{selectedItem.SubItems[2].Text}\\{selectedItem.World.WorldName}\\{fileName}";
+                FileSystem.DeleteDirectory(backupPath, UIOption.OnlyErrorDialogs,RecycleOption.DeletePermanently);
+            }
+            this.Items.Remove(selectedItem);
+        }
     }
 
 }

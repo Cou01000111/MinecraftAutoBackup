@@ -21,7 +21,7 @@ public class Util {
         return target.Trim(new char[] { '"' });
     }
 
-    public static string makePathToWorld(string name, string dir) {
+    public static string MakePathToWorld(string name, string dir) {
         return $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\{dir}\\saves\\{name}";
     }
 
