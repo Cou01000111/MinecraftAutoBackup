@@ -24,7 +24,7 @@ image
 
 namespace MABProcessAtWait {
     static class Program {
-        private static Logger logger = new Logger("Zipper");
+        private static Logger logger = new Logger("MABProcess");
         /// <summary>
         /// アプリケーションのメイン エントリ ポイントです。
         /// </summary>
@@ -73,7 +73,7 @@ namespace MABProcessAtWait {
     }
 
     public partial class Form1 :Form {
-        private static Logger logger = new Logger("Zipper");
+        private static Logger logger = new Logger("MABProcess");
         private System.Windows.Forms.Timer timer;
         private string backupDataPath;
         private NotifyIcon notifyIcon;
@@ -92,6 +92,7 @@ namespace MABProcessAtWait {
             };
             timer.Interval = 1000;
             timer.Tick += new EventHandler(Timer_Tick);
+            notifyIcon = new NotifyIcon();
 
             SetNotifyIconWait();
         }
@@ -129,6 +130,7 @@ namespace MABProcessAtWait {
                 logger.Info("isRunningがfalseに設定されていました");
 
                 SetNotifyIconBackuping();
+
                 backupTask = Task.Run(() => {
                     DoBackupProcess();
                 });
@@ -140,14 +142,19 @@ namespace MABProcessAtWait {
             }
         }
 
-        private void bootMainForm_Click(object sender, EventArgs e) {
-            logger.Info(System.Environment.CurrentDirectory);
-            
+        private void BootMainForm_Click(object sender, EventArgs e) {
             var mainForm = new ProcessStartInfo();
             mainForm.FileName = ".\\Minecraft Auto Backup.exe";
             mainForm.UseShellExecute = true;
             mainForm.WorkingDirectory = ".\\";
             Process.Start(mainForm);
+        }
+
+        private void DoBackup_Click (object sender, EventArgs e) {
+            SetNotifyIconBackuping();
+            backupTask = Task.Run(() => {
+                DoBackupProcess();
+            });
         }
 
         private void DoBackupProcess() {
@@ -267,7 +274,6 @@ namespace MABProcessAtWait {
         }
 
         private void SetNotifyIconWait() {
-            notifyIcon = new NotifyIcon();
             notifyIcon.Icon = new Icon(".\\Image\\app_sub.ico");
             notifyIcon.Text = "MAB待機モジュール";
             notifyIcon.Visible = true;
@@ -278,15 +284,17 @@ namespace MABProcessAtWait {
             menu.Items.Add(exit);
             ToolStripMenuItem bootMainForm = new ToolStripMenuItem();
             bootMainForm.Text = "バックアップの設定を編集する";
-            bootMainForm.Click += new EventHandler(bootMainForm_Click);
+            bootMainForm.Click += new EventHandler(BootMainForm_Click);
             menu.Items.Add(bootMainForm);
+            ToolStripMenuItem doBackup = new ToolStripMenuItem();
+            doBackup.Text = "バックアップを手動でする";
+            doBackup.Click += new EventHandler(DoBackup_Click);
+            menu.Items.Add(doBackup);
             notifyIcon.ContextMenuStrip = menu;
         }
 
         private void SetNotifyIconBackuping() {
-            notifyIcon = new NotifyIcon();
             notifyIcon.Icon = new Icon(".\\Image\\app_sub_doing.ico");
-            notifyIcon.Text = "MAB待機モジュール(バックアップ中)";
             notifyIcon.Visible = true;
             ContextMenuStrip menu = new ContextMenuStrip();
             ToolStripMenuItem exit = new ToolStripMenuItem();

@@ -11,6 +11,7 @@ using MainForm;
 //ちょっとFormの書き方変えてみたやつ
 //結局メリットはよくわからなかった
 internal class AppConfigForm :Form {
+    private FormWindowState preWindowState;
     private Logger logger = new Logger("MainForm", ".\\logs\\MainForm.log", 3);
     private TabControl tab = new TabControl();
     private TabPage backupTab = new TabPage();
@@ -41,6 +42,14 @@ internal class AppConfigForm :Form {
     private FlowLayoutPanel startupTabF = new FlowLayoutPanel();
     private CheckBox addStartup = new CheckBox();
     public AppConfigForm() {
+        //初期化
+        if (this.WindowState == FormWindowState.Minimized) {
+            this.preWindowState = FormWindowState.Normal;
+        }
+        else {
+            this.preWindowState = this.WindowState;
+        }
+        this.SizeChanged += new EventHandler(AppConfigForm_SizeChanged);
 
         //controls追加（ほかのフォームと比べ先に追加している。メリットは忘れた）
         backupPathPanel.Controls.AddRange(new Control[] { backupPathInput, refe });
@@ -76,9 +85,9 @@ internal class AppConfigForm :Form {
         okCanselFlowPanel.Height = 40;
         okCanselFlowPanel.FlowDirection = FlowDirection.RightToLeft;
 
-        backupTab.Text =  "バックアップ";
-        fontTab.Text =  "フォント";
-        startupTab.Text =  "スタートアップに追加";
+        backupTab.Text = "バックアップ";
+        fontTab.Text = "フォント";
+        startupTab.Text = "スタートアップに追加";
 
         backupPath.Text = "バックアップの保存先";
         backupPath.AutoSize = true;
@@ -165,7 +174,20 @@ internal class AppConfigForm :Form {
 
 
     }
+    //SizeChangedイベントハンドラ
+    private void AppConfigForm_SizeChanged(object sender, EventArgs e) {
+        //最小化された以外の時に、状態を覚えておく
+        if (this.WindowState != FormWindowState.Minimized) {
+            this.preWindowState = this.WindowState;
+        }
+    }
 
+    //フォームが最小化されている時、元の状態に戻す
+    public void RestoreMinimizedWindow() {
+        if (this.WindowState == FormWindowState.Minimized) {
+            this.WindowState = this.preWindowState;
+        }
+    }
     private void addGameDir_Click(object sender, EventArgs e) {
         List<World> worlds = new List<World>();
         CommonOpenFileDialog copd = new CommonOpenFileDialog();
@@ -249,7 +271,13 @@ internal class AppConfigForm :Form {
                         p.StartInfo = Decompression;
                         logger.Info($"Zipper {command} {_args}");
                         p.Start();
+                        this.Enabled = false;
+                        this.WindowState = FormWindowState.Minimized;
                         p.WaitForExit();
+                        this.Enabled = true;
+                        this.WindowState = FormWindowState.Normal;
+                        RestoreMinimizedWindow();
+                        ((WorldListForm)this.Owner).WindowState = FormWindowState.Normal;
                     }
                 }
             }
@@ -270,8 +298,12 @@ internal class AppConfigForm :Form {
                         logger.Info($"Zipper {command} {_args}");
                         p.Start();
                         this.Enabled = false;
+                        this.WindowState = FormWindowState.Minimized;
                         p.WaitForExit();
                         this.Enabled = true;
+                        this.WindowState = FormWindowState.Normal;
+                        RestoreMinimizedWindow();
+                        ((WorldListForm)this.Owner).WindowState = FormWindowState.Normal;
                     }
                 }
             }

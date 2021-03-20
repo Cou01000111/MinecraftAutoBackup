@@ -171,7 +171,6 @@ class BackupDataListView :ListView {
                 // バックアップがzipだった場合
                 backupPath = $"{AppConfig.BackupPath}\\{selectedItem.SubItems[2].Text}\\{selectedItem.World.WorldName}\\{fileName}.zip";
                 FileSystem.DeleteFile(backupPath);
-                
             }
             else {
                 // バックアップがzipじゃなかった場合
