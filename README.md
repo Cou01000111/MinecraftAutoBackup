@@ -1,10 +1,19 @@
 # MinecraftAutoBackup
 
+https://img.shields.io/twitter/url?url=https%3A%2F%2Fgithub.com%2FCou01000111%2FMinecraftAutoBackup
+https://img.shields.io/github/license/Cou01000111/MinecraftAutoBackup
+
+
 ## 概要
 minecraftで「普段遊んでいるワールドに違うバージョンで入ってしまった！！」という時に役立つバックアップソフトです
 
 minecraft起動時（minecraft lanchar起動時）に指定したワールドを一斉にバックアップします(デフォルトではすべてのワールドをバックアップします)
 ___
+
+## 動作環境
+
+- Windows10 (最新バージョン)
+- 
 
 ## ダウンロード方法
 
