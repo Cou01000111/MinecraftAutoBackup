@@ -67,3 +67,6 @@ Cドライブをお勧めします
 - Visual Studio 2019
 - .NET SDK 5.0.200
 - .NET Framework 4.7.2
+
+## license
+MIT licenseで配布するようにしたはずなんだけどなぁ・・・？
