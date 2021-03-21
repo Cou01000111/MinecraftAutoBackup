@@ -59,7 +59,7 @@ namespace MABProcessAtWait {
                 Util.NotReadonly(AppConfig.BackupPath);
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-                Form1 f = new Form1();
+                Notify f = new Notify();
                 Application.Run();
 
             }
@@ -72,7 +72,7 @@ namespace MABProcessAtWait {
         }
     }
 
-    public partial class Form1 :Form {
+    public partial class Notify :Form {
         private static Logger logger = new Logger("MABProcess");
         private System.Windows.Forms.Timer timer;
         private string backupDataPath;
@@ -80,7 +80,7 @@ namespace MABProcessAtWait {
         private bool isRunning = false;
         private Task backupTask;
 
-        public Form1() {
+        public Notify() {
             logger.Info("Current Dir: "+System.Environment.CurrentDirectory);
             backupDataPath = AppConfig.BackupPath;
             this.ShowInTaskbar = false;

@@ -91,7 +91,7 @@ namespace MABProcessAtWait {
                     //config内のworldがHDDになかった場合
                     if (GetBackups(world).Count() == 0) {
                         // バックアップが一つもない場合はconfigから削除
-                        logger.Info($"バックアップが一つもないのでRemoveWorldsに{world.WorldName}を追加");
+                        logger.Debug($"バックアップが一つもないのでRemoveWorldsに{world.WorldName}を追加");
                         removeWorlds.Add(world);
                     }
                     else {

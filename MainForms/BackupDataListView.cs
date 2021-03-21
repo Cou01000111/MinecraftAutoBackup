@@ -51,6 +51,13 @@ class BackupDataListView :ListView {
         deleteBackup.Click += new EventHandler(DeleteBackup_Click);
         clmnMenu.Items.Add(deleteBackup);
 
+        ToolStripMenuItem deleteAllBackup = new ToolStripMenuItem() {
+            Text = "このワールドのバックアップを全て削除する",
+            ForeColor = Color.Red,
+        };
+        deleteAllBackup.Click += new EventHandler(DeleteAllBackup_Click);
+        clmnMenu.Items.Add(deleteAllBackup);
+
         this.ContextMenuStrip = clmnMenu;
         #endregion
 
@@ -178,6 +185,25 @@ class BackupDataListView :ListView {
                 FileSystem.DeleteDirectory(backupPath, UIOption.OnlyErrorDialogs,RecycleOption.DeletePermanently);
             }
             this.Items.Remove(selectedItem);
+        }
+    }
+
+    private void DeleteAllBackup_Click(object sender, EventArgs e) {
+        DialogResult result = MessageBox.Show("このワールドのバックアップを全て削除しますか？\n（この操作は取り消せません）", "Minecraft Auto Backup", MessageBoxButtons.YesNo);
+        if (result == DialogResult.Yes) {
+            DeleteAllBackup(selectedItem.World);
+            this.Items.Clear();
+        }
+    }
+    private void DeleteAllBackup(World world) {
+        string deleteDirPath = $"{AppConfig.BackupPath}\\{world.WorldDir}\\{world.WorldName}";
+        List<string> deleteWorldFileList = Directory.GetFiles(deleteDirPath).ToList();
+        List<string> deleteWorldDirList = Directory.GetDirectories(deleteDirPath).ToList();
+        foreach (string path in deleteWorldFileList) {
+            File.Delete(path);
+        }
+        foreach(string path in deleteWorldDirList) {
+            FileSystem.DeleteDirectory(path, UIOption.OnlyErrorDialogs, RecycleOption.DeletePermanently);
         }
     }
 
