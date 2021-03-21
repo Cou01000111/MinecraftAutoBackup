@@ -1,6 +1,6 @@
 # MinecraftAutoBackup
 [![GitHub license](https://img.shields.io/github/license/Cou01000111/MinecraftAutoBackup?label=License)](https://github.com/Cou01000111/MinecraftAutoBackup)
-[![Twitter](https://img.shields.io/twitter/url?style=social)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2FCou01000111%2FMinecraftAutoBackup)
+[![Twitter](https://img.shields.io/twitter/url?style=social)](https://twitter.com/intent/tweet?&url=https%3A%2F%2Fgithub.com%2FCou01000111%2FMinecraftAutoBackup)
 
 
 ## 概要
