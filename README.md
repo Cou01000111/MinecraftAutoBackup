@@ -9,8 +9,9 @@ ___
 
 ## 動作環境
 
-- Windows10 (最新バージョン)
-- 
+- Windows 10 April 2018 Update(バージョン 1803)以降のWindows 10 PC
+
+.NET Framework動作環境については[Microsoft Docs](https://docs.microsoft.com/ja-jp/dotnet/framework/get-started/system-requirements)を参照ください
 
 ## ダウンロード方法
 
@@ -56,3 +57,9 @@ Cドライブへをお勧めします
 ## アンインストール方法
 レジストリ等一切いじっていないので、ダウンロードしたフォルダをそのまま削除してください
 一応互換性はありますので、バックアップフォルダは放置していてもアプリを再ダウンロードして、バックアップ先を削除前と同じ物にすれば認識するはずです（たぶん）
+
+## 開発環境
+- Windows10 PC
+- Visual Studio 2019
+- .NET SDK 5.0.200
+- .NET Framework 4.7.2
