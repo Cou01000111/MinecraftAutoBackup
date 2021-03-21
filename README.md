@@ -1,8 +1,5 @@
 # MinecraftAutoBackup
 
-https://img.shields.io/twitter/url?url=https%3A%2F%2Fgithub.com%2FCou01000111%2FMinecraftAutoBackup
-https://img.shields.io/github/license/Cou01000111/MinecraftAutoBackup
-
 
 ## 概要
 minecraftで「普段遊んでいるワールドに違うバージョンで入ってしまった！！」という時に役立つバックアップソフトです
