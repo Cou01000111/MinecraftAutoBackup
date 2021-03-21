@@ -12,12 +12,11 @@ ___
 
 [最新バージョン](https://github.com/Cou01000111/MinecraftAutoBackup/releases/download/v1.0.0/MinecraftAutoBackup.zip)
 
----
 
 注：この際以下のような画像が表示されることがございますが、これはダウンロード数が少ないことに起因するものになります
+
 ![a](https://github.com/Cou01000111/imgs/blob/main/MinecraftAutoBackup/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202021-03-22%20012306.png)
 
----
 
 ### 2. ダウンロードしたzipファイルを解凍後好きな場所に配置
 
